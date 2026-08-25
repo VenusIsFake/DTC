@@ -202,3 +202,9 @@ This log records actions, milestones, scraping sessions, and structural updates 
 **UsersTab : tri par rôle** (Admin → Bureau → Membre, défaut), + récents / nom A→Z (demande de Venus).
 
 **Charge :** tests parallèles invalidés par l'environnement local (le HTTPS parallèle s'effondre vers TOUS les hôtes, y compris Supabase — 23/24 échecs) ; rafale ayant en plus déclenché le rate-limit Vercel de notre IP. Mesuré et valide : latence séquentielle avant/après région (ci-dessus). Plafond documenté Hobby : 12 exécutions concurrentes — suffisant pour le club.
+
+## 2026-08-25 (nuit) — Fil bureau vide + affiches sur les annonces
+
+**Bug « les annonces n'apparaissent pas pour l'admin » (rapport de Venus) : cause racine PGRST201.** Le fil bureau/admin interroge `announcements?select=*,author:profiles(full_name)` ; or `announcements→profiles` est joignable par DEUX chemins (FK `author_id` ET via `rsvps`), donc PostgREST rejette l'embed ambigu (PGRST201, reproduit via curl) ; le code ignorant l'erreur, `setItems([])` vidait le fil **uniquement pour bureau/admin** — invités et membres passent par la vue `announcement_board` (correcte). Fix : embed explicite `author:profiles!announcements_author_id_fkey(full_name)` (vérifié 200 via curl) + `refresh()` ne vide plus le fil en cas d'erreur (notice à la place).
+**Affiches (poster) sur les annonces :** colonne `announcements.poster_url` (migration `announcements_poster_url`), vue `announcement_board` étendue (`announcement_board_poster`), champ + upload club-media (`posters/…`) + aperçu dans le composeur, affichage 16:9 dans le fil, bannière dans l'email Resend. schema.sql synchronisé (v2.1).
+Déployé + vérifié navigateur (annonce visible, pas de squelette bloqué).

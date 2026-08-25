@@ -14,6 +14,7 @@ interface BroadcastEmailRow {
 function emailHtml(input: {
   title: string;
   body: string;
+  posterUrl: string | null;
   dateLine: string | null;
   location: string | null;
 }): string {
@@ -21,6 +22,9 @@ function emailHtml(input: {
     .split(/\n{2,}/)
     .map((p) => `<p style="margin:0 0 12px">${escapeHtml(p).replaceAll("\n", "<br/>")}</p>`)
     .join("");
+  const poster = input.posterUrl
+    ? `<tr><td style="padding:0 28px 16px"><img src="${escapeHtml(input.posterUrl)}" alt="${escapeHtml(input.title)}" style="width:100%;border-radius:12px;border:1px solid #385A75"/></td></tr>`
+    : "";
   return `<!doctype html><html lang="fr"><body style="margin:0;background:#0B132B;font-family:Arial,Helvetica,sans-serif">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0B132B;padding:24px 12px">
     <tr><td align="center">
@@ -31,6 +35,7 @@ function emailHtml(input: {
           ${input.dateLine ? `<p style="margin:0 0 4px;color:#D4AF37;font-size:13px;font-weight:bold">📅 ${escapeHtml(input.dateLine)}</p>` : ""}
           ${input.location ? `<p style="margin:0 0 4px;color:#94A3B8;font-size:13px">📍 ${escapeHtml(input.location)}</p>` : ""}
         </td></tr>
+        ${poster}
         <tr><td style="padding:8px 28px 4px;color:#CBD5E1;font-size:14px;line-height:1.6">${paragraphs}</td></tr>
         <tr><td style="padding:16px 28px 28px" align="center">
           <a href="${SITE_URL}/annonces" style="display:inline-block;padding:12px 28px;border-radius:999px;background:#D4AF37;color:#0B132B;font-size:13px;font-weight:bold;text-decoration:none">Voir sur le site du club</a>
@@ -95,7 +100,7 @@ export async function POST(request: NextRequest) {
 
   const { data: announcement } = await supabase
     .from("announcements")
-    .select("title, body, event_date, location, status")
+    .select("title, body, poster_url, event_date, location, status")
     .eq("id", announcementId)
     .maybeSingle();
   if (!announcement) {
@@ -119,6 +124,7 @@ export async function POST(request: NextRequest) {
   const html = emailHtml({
     title: announcement.title,
     body: announcement.body,
+    posterUrl: announcement.poster_url || null,
     dateLine: announcement.event_date ? formatDateTime(announcement.event_date) : null,
     location: announcement.location || null,
   });

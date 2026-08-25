@@ -35,6 +35,7 @@ export interface Announcement {
   kind: AnnouncementKind;
   title: string;
   body: string;
+  poster_url: string;
   event_date: string | null;
   location: string;
   is_pinned: boolean;

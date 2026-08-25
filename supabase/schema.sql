@@ -895,3 +895,17 @@ create policy "gallery_bureau_write" on public.gallery_images
 drop trigger if exists touch_updated_at on public.gallery_images;
 create trigger touch_updated_at before update on public.gallery_images
   for each row execute procedure public.set_updated_at();
+
+-- v2.1 (2026-08-25, soir) — announcement posters.
+alter table public.announcements add column if not exists poster_url text not null default '';
+create or replace view public.announcement_board
+with (security_invoker = true) as
+select
+  a.id, a.kind, a.title, a.body, a.event_date, a.location, a.is_pinned,
+  a.status, a.author_id, a.created_at, a.updated_at,
+  p.full_name as author_name,
+  a.rsvp_count_cache as rsvp_count,
+  a.poster_url
+from public.announcements a
+left join public.profiles p on p.id = a.author_id
+where a.status = 'published';

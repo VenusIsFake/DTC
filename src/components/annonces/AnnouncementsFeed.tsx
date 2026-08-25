@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import { Pin, PinOff, Pencil, Trash2, Users, X, CalendarDays, MapPin, Plus } from "lucide-react";
 import type { Announcement, AnnouncementBoardItem } from "@/lib/types";
 import { useAuth } from "@/components/auth/AuthProvider";
@@ -131,41 +132,53 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
   const [notice, setNotice] = useState<string | null>(null);
 
   // Public feed: board view (published only). Bureau: full table + RSVP counts.
+  // The embed needs the explicit FK hint: announcements→profiles is reachable
+  // both via author_id AND via rsvps, and PostgREST rejects the ambiguous
+  // short form (PGRST201) — which silently emptied the feed for bureau/admin.
   const refresh = useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    if (!isBureau) {
-      const { data } = await supabase
-        .from("announcement_board")
-        .select("*")
-        .order("is_pinned", { ascending: false })
-        .order("event_date", { ascending: false, nullsFirst: false })
-        .order("created_at", { ascending: false });
-      setItems((data as AnnouncementBoardItem[] | null) ?? []);
-      return;
+    try {
+      if (!isBureau) {
+        const { data, error } = await supabase
+          .from("announcement_board")
+          .select("*")
+          .order("is_pinned", { ascending: false })
+          .order("event_date", { ascending: false, nullsFirst: false })
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        setItems((data as AnnouncementBoardItem[] | null) ?? []);
+        return;
+      }
+      const [annRes, rsvpRes] = await Promise.all([
+        supabase
+          .from("announcements")
+          .select("*, author:profiles!announcements_author_id_fkey(full_name)")
+          .order("is_pinned", { ascending: false })
+          .order("created_at", { ascending: false }),
+        supabase.from("rsvps").select("announcement_id"),
+      ]);
+      if (annRes.error) throw annRes.error;
+      const rows = (annRes.data ?? []) as unknown as (Announcement & {
+        author?: { full_name: string | null };
+      })[];
+      const counts = new Map<string, number>();
+      for (const r of (rsvpRes.data ?? []) as { announcement_id: string }[]) {
+        counts.set(r.announcement_id, (counts.get(r.announcement_id) ?? 0) + 1);
+      }
+      setItems(
+        rows.map((row) => ({
+          ...row,
+          author_name: row.author?.full_name ?? null,
+          rsvp_count: counts.get(row.id) ?? 0,
+        }))
+      );
+    } catch (err) {
+      // A failed refresh must never wipe what the server already rendered.
+      console.error("annonces: refresh failed", err);
+      setNotice(err instanceof Error ? err.message : "Actualisation impossible.");
+      setTimeout(() => setNotice(null), 4000);
     }
-    const [annRes, rsvpRes] = await Promise.all([
-      supabase
-        .from("announcements")
-        .select("*, author:profiles(full_name)")
-        .order("is_pinned", { ascending: false })
-        .order("created_at", { ascending: false }),
-      supabase.from("rsvps").select("announcement_id"),
-    ]);
-    const rows = (annRes.data ?? []) as unknown as (Announcement & {
-      author?: { full_name: string | null };
-    })[];
-    const counts = new Map<string, number>();
-    for (const r of (rsvpRes.data ?? []) as { announcement_id: string }[]) {
-      counts.set(r.announcement_id, (counts.get(r.announcement_id) ?? 0) + 1);
-    }
-    setItems(
-      rows.map((row) => ({
-        ...row,
-        author_name: row.author?.full_name ?? null,
-        rsvp_count: counts.get(row.id) ?? 0,
-      }))
-    );
   }, [isBureau]);
 
   useEffect(() => {
@@ -389,6 +402,18 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 </div>
               )}
             </div>
+
+            {item.poster_url && (
+              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#385A75]/40 bg-black">
+                <Image
+                  src={item.poster_url}
+                  alt={`Affiche — ${item.title}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 700px"
+                  className="object-cover"
+                />
+              </div>
+            )}
 
             <div className="space-y-1.5">
               <h3 className="text-base sm:text-xl font-heading font-bold text-white leading-snug">{item.title}</h3>

@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Pin, X } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ImagePlus, Loader2, Pin, Upload, X } from "lucide-react";
 import type { Announcement } from "@/lib/types";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
-import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { getSupabaseBrowserClient, publicStorageUrl } from "@/lib/supabase/client";
 import { Field, PrimaryButton, GhostButton, inputClass } from "@/components/ui/form";
 
 export interface ComposerForm {
   kind: "atelier" | "annonce";
   title: string;
   body: string;
+  poster_url: string;
   event_date: string; // datetime-local value
   location: string;
   is_pinned: boolean;
@@ -22,6 +23,7 @@ const EMPTY_FORM: ComposerForm = {
   kind: "atelier",
   title: "",
   body: "",
+  poster_url: "",
   event_date: "",
   location: "",
   is_pinned: false,
@@ -53,6 +55,8 @@ export default function AnnouncementComposer({
   const [form, setForm] = useState<ComposerForm>(EMPTY_FORM);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -63,6 +67,7 @@ export default function AnnouncementComposer({
             kind: editing.kind,
             title: editing.title,
             body: editing.body,
+            poster_url: editing.poster_url ?? "",
             event_date: toLocalInputValue(editing.event_date),
             location: editing.location,
             is_pinned: editing.is_pinned,
@@ -74,6 +79,33 @@ export default function AnnouncementComposer({
 
   const update = <K extends keyof ComposerForm>(key: K, value: ComposerForm[K]) =>
     setForm((prev) => ({ ...prev, [key]: value }));
+
+  const uploadPoster = async (file: File) => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) {
+      setError("Stockage non configuré.");
+      return;
+    }
+    setUploading(true);
+    setError(null);
+    try {
+      const safeName = file.name.replace(/[^\w.\-]+/g, "-");
+      const path = `posters/${Date.now()}-${safeName}`;
+      const { error: uploadError } = await supabase.storage
+        .from("club-media")
+        .upload(path, file, { upsert: false });
+      if (uploadError) throw uploadError;
+      update("poster_url", publicStorageUrl("club-media", path));
+    } catch (err) {
+      setError(
+        err instanceof Error && /size|mime|type/i.test(err.message)
+          ? "Image invalide ou trop lourde (max 25 Mo, JPG/PNG/WebP/GIF)."
+          : "Upload impossible."
+      );
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -90,6 +122,7 @@ export default function AnnouncementComposer({
         kind: form.kind,
         title: form.title.trim(),
         body: form.body.trim(),
+        poster_url: form.poster_url.trim(),
         event_date: form.event_date ? new Date(form.event_date).toISOString() : null,
         location: form.location.trim(),
         is_pinned: form.is_pinned,
@@ -184,6 +217,58 @@ export default function AnnouncementComposer({
               placeholder="Décrivez l'atelier ou l'information à annoncer…"
             />
           </Field>
+
+          <Field
+            label="Affiche / poster (optionnel)"
+            htmlFor="ann-poster"
+            hint="Affiche de l'atelier — importez une image (Supabase) ou collez une URL /media/…"
+          >
+            <div className="flex gap-2">
+              <input
+                id="ann-poster"
+                type="text"
+                value={form.poster_url}
+                onChange={(e) => update("poster_url", e.target.value)}
+                className={inputClass}
+                placeholder="https://…supabase.co/storage/v1/object/public/club-media/posters/…"
+              />
+              <GhostButton
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="!px-3 shrink-0"
+              >
+                {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                <span className="hidden sm:inline">Importer</span>
+              </GhostButton>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) uploadPoster(file);
+                  e.target.value = "";
+                }}
+              />
+            </div>
+          </Field>
+
+          {form.poster_url && (
+            <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#385A75]/50">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={form.poster_url} alt="Aperçu de l'affiche" className="w-full h-full object-cover" />
+              <button
+                type="button"
+                onClick={() => update("poster_url", "")}
+                aria-label="Retirer l'affiche"
+                className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-black/70 text-white hover:bg-red-500/80 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Field label="Date & heure" htmlFor="ann-date">
