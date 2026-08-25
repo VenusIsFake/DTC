@@ -52,6 +52,18 @@ This document defines the rules, conventions, and operational standards for AI a
 - **Secrets:** `YOUTUBE_API_KEY` stays server-side (API route only); never prefix it with `NEXT_PUBLIC_`. See `docs/platform/deployment.md` for the full setup checklist.
 - **Images:** keep `images: { unoptimized: true }` (remote Supabase/YouTube posters flow through it unchanged); optimization is roadmap.
 
+### ⚠️ 7a. Next.js 14.2 unpatched CVEs — STOP & notify the dev (added 2026-08-25)
+The project runs `next@14.2.35` — the **last** 14.2 release. npm audit reports 5 high-severity advisories against it (Server Actions SSRF, rewrites SSRF, cache confusion of request bodies, Edge Server Action payloads, internal Server Function disclosure). The fixes exist **only in Next 15.5+**; there will never be a 14.2 patch, and the planned upgrade to 15 has not happened yet.
+
+**Binding rule:** before introducing ANY of the affected features below, the agent MUST stop and warn the dev (Venus) that the feature is in the unpatched CVE surface, and get an explicit go-ahead:
+- `"use server"` / Server Actions / form actions (any server mutation pattern that is not a plain `route.ts` handler);
+- `rewrites()` or `redirects()` in `next.config.mjs` — especially with dynamic/attacker-influenced destination hostnames;
+- cached route handlers or `fetch(..., { cache: ... })` in combination with request bodies (cache-confusion CVEs);
+- moving middleware or handlers to the Edge runtime with Server Actions;
+- any `next` version bump (must jump to ≥15.5, never another 14.2.x).
+
+Current mitigations that keep us safe today: the app uses none of the features above (plain route handlers, no rewrites, Vercel serverless runtime) — keep it that way until the Next 15 upgrade lands.
+
 ---
 
 ## 8. Media Player & Interactive Lifecycle Rules
