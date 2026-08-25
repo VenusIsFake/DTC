@@ -184,3 +184,21 @@ This log records actions, milestones, scraping sessions, and structural updates 
 
 **DB migrations applied live (5):** `perf_fk_indexes`, `rls_initplan_auth_uid`, `rsvp_count_cache_realtime`, `realtime_publication`, `gallery_images_table` + `gallery_seed_static_items` — `supabase/schema.sql` (v2 section) + `seed.sql` synced for fresh installs.
 **Quality:** tsc/lint/vitest/build green. graphify updated. Docs: deployment.md §6, rules.md §10, .env.example, overview.md.
+
+## 2026-08-25 (soir) — Audit "perfection" pass + announcement mystery solved
+
+**Annonce invisible (rapport de Venus) — racine trouvée :** l'annonce était bien publiée en base et présente dans la réponse serveur, mais rendue dans un `<div hidden>` (streaming React) ; le swap client n'arrivait qu'après un rendu serveur parfois très lent — jusqu'à **8,7 s** mesurés, car les fonctions Vercel tournaient en **iad1 (US Est)** : trafique Maroc → edge Paris → fonction US → base Supabase Irlande → retour. Au refresh (fonction chaude) tout apparaissait. Fixes :
+- **`vercel.json → regions: ["dub1"]`** — fonctions à Dublin, même région que Supabase eu-west-1 ; latence mesurée 0,35–1,3 s (froid inclus) vs 8,7 s avant.
+- **`withFallback` timeout 4 s** (`src/lib/data.ts`) : une base lente bascule sur le contenu statique au lieu de bloquer le rendu.
+- **SW v2026-08-25.2 :** plus aucun caching HTML (risque de swap streamé cassé/mobile Safari tee backpressure) — navigations 100 % réseau, fallback hors-ligne statique ; rules.md §10 mis à jour en conséquence.
+- UX console : bouton **« Publier »** pour les brouillons (avant : « Archiver » sur un brouillon = piège) dans la console + le fil.
+
+**Audit sécurité (sondes REST réelles, clé anon) : tout passe.** Insertions anon (annonces/votes) 401 ; brouillons invisibles ; `profiles` → permission denied (colonnes) ; RPC admin/member_directory 401 ; uploads storage anon 403 (les deux buckets) ; rsvps vides pour anon.
+
+**Realtime E2E : PASS** (`scripts/realtime-e2e-test.mjs` — abonné anon reçoit INSERT + UPDATE < 2 s après écriture SQL réelle).
+
+**Audit statique : propre** — pas de XSS (JSON-LD échappé), attributs vidéo iOS ✓, `rel=noopener` ✓, pas de secrets/console.log.
+
+**UsersTab : tri par rôle** (Admin → Bureau → Membre, défaut), + récents / nom A→Z (demande de Venus).
+
+**Charge :** tests parallèles invalidés par l'environnement local (le HTTPS parallèle s'effondre vers TOUS les hôtes, y compris Supabase — 23/24 échecs) ; rafale ayant en plus déclenché le rate-limit Vercel de notre IP. Mesuré et valide : latence séquentielle avant/après région (ci-dessus). Plafond documenté Hobby : 12 exécutions concurrentes — suffisant pour le club.

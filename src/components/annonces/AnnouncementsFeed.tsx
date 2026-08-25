@@ -450,10 +450,10 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 )}
                 {isBureau && item.status !== "archived" && (
                   <button
-                    onClick={() => setStatus(item, "archived")}
+                    onClick={() => setStatus(item, item.status === "published" ? "archived" : "published")}
                     className="text-[11px] font-medium text-[#64748B] hover:text-[#94A3B8] transition-colors"
                   >
-                    Archiver
+                    {item.status === "published" ? "Archiver" : "Publier"}
                   </button>
                 )}
                 {isBureau && item.status === "archived" && (

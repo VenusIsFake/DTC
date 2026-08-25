@@ -171,10 +171,19 @@ export default function AnnouncementsTab() {
                 </button>
               </div>
               <GhostButton
-                onClick={() => setStatus(item, item.status === "archived" ? "published" : "archived")}
+                onClick={() =>
+                  setStatus(
+                    item,
+                    item.status === "published" ? "archived" : "published"
+                  )
+                }
                 className="!py-1 !px-2.5 !text-[10px]"
               >
-                {item.status === "archived" ? "Republier" : "Archiver"}
+                {item.status === "published"
+                  ? "Archiver"
+                  : item.status === "draft"
+                    ? "Publier"
+                    : "Republier"}
               </GhostButton>
             </div>
           );

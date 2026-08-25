@@ -2,8 +2,11 @@
  * DTC service worker — client-side caching for repeat visitors.
  *
  * Bandwidth rules (Hobby plan):
- *  - Navigations (HTML) are NETWORK-FIRST: a new production deploy is picked
- *    up on the very next page load. The cached copy is only an offline fallback.
+ *  - Pages are NEVER intercepted or cached: every navigation goes straight
+ *    to the network, so a new production deploy is visible on the very next
+ *    page load. (HTML is small and streamed by Next.js — caching streamed
+ *    responses risks serving broken/partial swaps, so we only provide a
+ *    static offline fallback page.)
  *  - Hashed build assets (/_next/static) are cache-first: a new deploy ships
  *    new hashes, so stale entries are never served.
  *  - Media (site /media files, YouTube posters, Supabase storage images) use
@@ -17,15 +20,18 @@
  * Bump VERSION whenever this logic changes — old caches are dropped on
  * activate (see rules.md §10).
  */
-const VERSION = "2026-08-25.1";
+const VERSION = "2026-08-25.2";
 const STATIC_CACHE = `dtc-static-${VERSION}`; // _next/static, fonts
-const PAGE_CACHE = `dtc-pages-${VERSION}`; // HTML navigations (offline fallback)
 const MEDIA_CACHE = `dtc-media-${VERSION}`; // images, posters, local media
 
-const PAGE_CACHE_MAX = 12;
 const MEDIA_CACHE_MAX = 120;
 
 const MEDIA_EXTENSIONS = /\.(?:png|jpe?g|gif|webp|avif|svg|ico|mp4|webm|mov|woff2?)$/i;
+
+const OFFLINE_HTML =
+  "<!doctype html><html lang=fr><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>" +
+  "<body style='background:#0B132B;color:#CBD5E1;font-family:sans-serif;text-align:center;padding-top:40vh'>" +
+  "<h1 style='color:#D4AF37'>Hors ligne</h1><p>Reconnectez-vous pour recharger le site du Dentalk Club.</p></body></html>";
 
 self.addEventListener("install", () => {
   self.skipWaiting();
@@ -82,32 +88,18 @@ async function cacheFirst(request, cacheName, maxEntries) {
   return response;
 }
 
-/** HTML navigations: always try the network first (fresh deploys win). */
-async function networkFirstNavigation(request) {
-  const cache = await caches.open(PAGE_CACHE);
-  try {
-    const response = await fetch(request);
-    if (response && response.status === 200) {
-      cache.put(request, response.clone()).then(() => trimCache(PAGE_CACHE, PAGE_CACHE_MAX));
-    }
-    return response;
-  } catch {
-    const cached = await cache.match(request);
-    if (cached) return cached;
-    return new Response(
-      "<!doctype html><html lang=fr><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>" +
-        "<body style='background:#0B132B;color:#CBD5E1;font-family:sans-serif;text-align:center;padding-top:40vh'>" +
-        "<h1 style='color:#D4AF37'>Hors ligne</h1><p>Reconnectez-vous pour recharger le site du Dentalk Club.</p></body></html>",
-      { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } }
-    );
-  }
-}
-
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
 
   const url = new URL(request.url);
+
+  // Navigations: never intercepted — always the live network (fresh deploys),
+  // with a static offline page when the network is unreachable.
+  if (request.mode === "navigate") {
+    event.respondWith(fetch(request).catch(() => new Response(OFFLINE_HTML, { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } })));
+    return;
+  }
 
   // Never intercept: app API routes, Supabase auth/REST/realtime.
   if (url.origin === self.location.origin && url.pathname.startsWith("/api/")) return;
@@ -119,11 +111,6 @@ self.addEventListener("fetch", (event) => {
 
   // Video streaming/seeks use Range requests — pass through untouched.
   if (request.headers.has("range")) return;
-
-  if (request.mode === "navigate") {
-    event.respondWith(networkFirstNavigation(request));
-    return;
-  }
 
   if (url.origin === self.location.origin) {
     if (url.pathname.startsWith("/_next/static/")) {

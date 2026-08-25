@@ -78,9 +78,10 @@ Current policy:
 
 ## 10. Client-Side Caching (service worker) Invariants
 The app ships a hand-rolled service worker (`public/sw.js`, registered by `src/components/ServiceWorkerRegister.tsx`, production only) to keep repeat-visitor bandwidth low on the Vercel Hobby plan. It is deliberately **freshness-first**:
-- **Navigations are network-first** — a new production deploy is visible on the very next page load; cached HTML is an offline fallback only. Never change this to cache-first.
+- **Navigations are never intercepted or cached** — every page load hits the network directly, so a new production deploy is visible immediately; the SW only serves a static offline page when the network is unreachable. Never cache HTML: Next streams responses, and caching streamed HTML risks broken content swaps.
 - **Never cache:** `/api/*` routes, Supabase auth/REST/realtime traffic, non-GET requests, and HTTP `Range` requests (video streaming). Votes, RSVPs and sessions must always be live.
 - **Cache-first only for immutable things:** `/_next/static` (content-hashed) and opaque YouTube thumbnails.
 - **Stale-while-revalidate** for site `/media` files, icons, and Supabase storage images (served instantly, refreshed in background — a replaced file shows on the second load).
 - **Any change to `sw.js` logic requires bumping `VERSION`** in that file so old caches are dropped on activate.
 - `next.config.mjs` also sets `Cache-Control: public, max-age=86400, stale-while-revalidate=604800` on `/media/*` and icon files — keep server headers and SW strategy aligned when tuning.
+- Serverless functions run in `dub1` (`vercel.json → regions`) to sit in the same region as Supabase (eu-west-1) and close to Moroccan visitors — don't remove this.

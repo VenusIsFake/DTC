@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Loader2, ShieldOff, ShieldCheck, Search } from "lucide-react";
 import type { AdminProfileRow, Role } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -14,10 +14,15 @@ const ROLE_LABELS: Record<Role, string> = {
   admin: "Administrateur",
 };
 
+const ROLE_RANK: Record<Role, number> = { admin: 0, bureau: 1, member: 2 };
+
+type SortMode = "role" | "recent" | "name";
+
 export default function UsersTab() {
   const [users, setUsers] = useState<AdminProfileRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortMode>("role");
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const load = async () => {
@@ -52,6 +57,29 @@ export default function UsersTab() {
     setBusyId(null);
   };
 
+  const filtered = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    const list = needle
+      ? users
+          ?.filter(
+              (u) =>
+                u.full_name.toLowerCase().includes(needle) || u.email.toLowerCase().includes(needle)
+            ) ?? []
+      : (users ?? []);
+    const sorted = [...list];
+    if (sort === "role") {
+      sorted.sort(
+        (a, b) =>
+          ROLE_RANK[a.role] - ROLE_RANK[b.role] || a.full_name.localeCompare(b.full_name, "fr")
+      );
+    } else if (sort === "name") {
+      sorted.sort((a, b) => a.full_name.localeCompare(b.full_name, "fr"));
+    } else {
+      sorted.sort((a, b) => b.created_at.localeCompare(a.created_at));
+    }
+    return sorted;
+  }, [users, query, sort]);
+
   if (users === null) {
     return (
       <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 text-center">
@@ -61,31 +89,36 @@ export default function UsersTab() {
     );
   }
 
-  const filtered = query.trim()
-    ? users.filter(
-        (u) =>
-          u.full_name.toLowerCase().includes(query.toLowerCase()) ||
-          u.email.toLowerCase().includes(query.toLowerCase())
-      )
-    : users;
-
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
         <p className="text-xs text-[#94A3B8]">
           {users.length} compte{users.length > 1 ? "s" : ""} — rôles, bannissements et coordonnées.
         </p>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#64748B]" aria-hidden="true" />
-          <label htmlFor="users-search" className="sr-only">Rechercher un compte</label>
-          <input
-            id="users-search"
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Nom ou email…"
-            className={`${inputClass} pl-9 !py-1.5 !text-xs w-52`}
-          />
+        <div className="flex items-center gap-2">
+          <label htmlFor="users-sort" className="sr-only">Trier les comptes</label>
+          <select
+            id="users-sort"
+            value={sort}
+            onChange={(e) => setSort(e.target.value as SortMode)}
+            className={`${inputClass} !py-1.5 !px-2 !text-[11px] w-auto`}
+          >
+            <option value="role">Tri : Rôle (Admin → Bureau → Membre)</option>
+            <option value="recent">Tri : Récents</option>
+            <option value="name">Tri : Nom A→Z</option>
+          </select>
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#64748B]" aria-hidden="true" />
+            <label htmlFor="users-search" className="sr-only">Rechercher un compte</label>
+            <input
+              id="users-search"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Nom ou email…"
+              className={`${inputClass} pl-9 !py-1.5 !text-xs w-52`}
+            />
+          </div>
         </div>
       </div>
 

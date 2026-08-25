@@ -28,12 +28,21 @@ import { youtubeWatchUrl } from "@/lib/format";
 /**
  * Server-side data layer. Public pages try the database first and fall back
  * to the static `src/data` seeds when Supabase is unreachable or not
- * configured, so the public site can never blank out.
+ * configured, so the public site can never blank out. A slow database (not
+ * just a failing one) also falls back after the timeout below — visitors get
+ * the static content fast instead of a multi-second streaming skeleton.
  */
+const DB_TIMEOUT_MS = 4000;
+
 async function withFallback<T>(fetcher: () => Promise<T>, fallback: T): Promise<T> {
   if (!isSupabaseConfigured()) return fallback;
   try {
-    return await fetcher();
+    return await Promise.race([
+      fetcher(),
+      new Promise<T>((_, reject) =>
+        setTimeout(() => reject(new Error("db-timeout")), DB_TIMEOUT_MS)
+      ),
+    ]);
   } catch {
     return fallback;
   }
