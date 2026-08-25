@@ -131,7 +131,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           <div className="hidden lg:flex items-center gap-3">
             {dbReady && !user && !loading && (
               <button
-                onClick={openAuth}
+                onClick={() => openAuth()}
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all"
               >
                 <LogIn className="w-3.5 h-3.5" />
@@ -209,7 +209,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           {/* Mobile: compact auth button */}
           {dbReady && !user && !loading && (
             <button
-              onClick={openAuth}
+              onClick={() => openAuth()}
               aria-label="Se connecter"
               className="lg:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[11px] font-semibold border border-[#D4AF37]/50 text-[#D4AF37] active:scale-95"
             >

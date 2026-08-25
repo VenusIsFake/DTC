@@ -11,7 +11,7 @@ import React, {
 import type { User } from "@supabase/supabase-js";
 import type { Profile } from "@/lib/types";
 import { getSupabaseBrowserClient, isSupabaseConfigured } from "@/lib/supabase/client";
-import AuthModal from "@/components/auth/AuthModal";
+import AuthModal, { type AuthMode } from "@/components/auth/AuthModal";
 
 interface AuthContextValue {
   /** Supabase auth user (null = signed out / db not configured). */
@@ -25,7 +25,7 @@ interface AuthContextValue {
   isBureau: boolean;
   isAdmin: boolean;
   isBanned: boolean;
-  openAuth: () => void;
+  openAuth: (mode?: AuthMode) => void;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
@@ -43,6 +43,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authInitialMode, setAuthInitialMode] = useState<AuthMode>("signin");
 
   const dbReady = isSupabaseConfigured();
 
@@ -77,6 +78,12 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
         setProfile(null);
         setLoading(false);
       }
+      // Recovery link click: the user arrives signed-in on /espace with a
+      // one-time session — open the new-password form immediately.
+      if (event === "PASSWORD_RECOVERY") {
+        setAuthInitialMode("newpassword");
+        setAuthModalOpen(true);
+      }
     });
 
     return () => {
@@ -96,7 +103,10 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     };
   }, [user, refreshProfile]);
 
-  const openAuth = useCallback(() => setAuthModalOpen(true), []);
+  const openAuth = useCallback((mode?: AuthMode) => {
+    if (mode) setAuthInitialMode(mode);
+    setAuthModalOpen(true);
+  }, []);
 
   const signOut = useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
@@ -124,7 +134,14 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   return (
     <AuthContext.Provider value={value}>
       {children}
-      <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
+      <AuthModal
+        isOpen={authModalOpen}
+        initialMode={authInitialMode}
+        onClose={() => {
+          setAuthModalOpen(false);
+          setAuthInitialMode("signin");
+        }}
+      />
     </AuthContext.Provider>
   );
 }

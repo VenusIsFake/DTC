@@ -18,7 +18,7 @@ export default function SignInPrompt({ title, description }: { title: string; de
         <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed max-w-sm mx-auto">{description}</p>
         {dbReady ? (
           <button
-            onClick={openAuth}
+            onClick={() => openAuth()}
             className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full font-bold text-sm bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-lg shadow-[#D4AF37]/20 transition-all active:scale-95"
           >
             <LogIn className="w-4 h-4" />

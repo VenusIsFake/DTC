@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import type {
@@ -8,6 +9,7 @@ import type {
   CommentBoardItem,
   EventPage,
   EventPageItem,
+  GalleryImageRow,
   IdeaBoardItem,
   MandateWithMembers,
   Profile,
@@ -19,6 +21,8 @@ import type { PodcastEpisode } from "@/data/podcastData";
 import { podcastEpisodesData } from "@/data/podcastData";
 import type { TedxTalk } from "@/data/tedxData";
 import { tedxTalksData } from "@/data/tedxData";
+import type { GalleryItem } from "@/data/galleryData";
+import { galleryItemsData } from "@/data/galleryData";
 import { youtubeWatchUrl } from "@/lib/format";
 
 /**
@@ -44,9 +48,9 @@ const FALLBACK_SETTINGS: SiteSettings = {
   promo_years: [2024, 2025, 2026],
 };
 
-export async function getSiteSettings(): Promise<SiteSettings> {
+async function fetchSiteSettings(): Promise<SiteSettings> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return FALLBACK_SETTINGS;
     const { data, error } = await supabase.from("site_settings").select("key, value");
     if (error) throw error;
@@ -75,6 +79,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   }, FALLBACK_SETTINGS);
 }
 
+// Memoized per request: the layout and several pages need the settings on
+// every render — this collapses them into a single Supabase round-trip.
+export const getSiteSettings = cache(fetchSiteSettings);
+
 // ---------------------------------------------------------------------------
 // Session (server components / route handlers)
 // ---------------------------------------------------------------------------
@@ -82,7 +90,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 export async function getServerProfile(): Promise<Profile | null> {
   if (!isSupabaseConfigured()) return null;
   try {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return null;
     const {
       data: { user },
@@ -101,7 +109,7 @@ export async function getServerProfile(): Promise<Profile | null> {
 
 export async function getPublishedAnnouncements(): Promise<AnnouncementBoardItem[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return [];
     const { data, error } = await supabase
       .from("announcement_board")
@@ -120,7 +128,7 @@ export async function getPublishedAnnouncements(): Promise<AnnouncementBoardItem
 
 export async function getIdeaBoard(): Promise<IdeaBoardItem[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return [];
     const { data, error } = await supabase
       .from("idea_board")
@@ -156,7 +164,7 @@ export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
 
 export async function getPodcastEpisodes(): Promise<PodcastEpisode[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return podcastEpisodesData;
     const { data, error } = await supabase
       .from("podcast_episodes")
@@ -189,7 +197,7 @@ export function mapTedxRow(row: TedxTalkRow): TedxTalk {
 
 export async function getTedxTalks(): Promise<TedxTalk[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return tedxTalksData;
     const { data, error } = await supabase
       .from("tedx_talks")
@@ -209,7 +217,7 @@ export async function getEventPage(
   slug: string
 ): Promise<{ page: EventPage; items: EventPageItem[] } | null> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return null;
     const { data, error } = await supabase
       .from("event_pages")
@@ -231,7 +239,7 @@ export async function getEventPage(
 
 export async function getPublishedEventSlugs(): Promise<string[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return [];
     const { data, error } = await supabase
       .from("event_pages")
@@ -281,7 +289,7 @@ const FALLBACK_ABOUT_SECTIONS: AboutSection[] = [
 
 export async function getAboutSections(): Promise<AboutSection[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return FALLBACK_ABOUT_SECTIONS;
     const { data, error } = await supabase
       .from("about_sections")
@@ -324,26 +332,23 @@ const FALLBACK_MANDATE: MandateWithMembers = {
 
 export async function getMandates(): Promise<MandateWithMembers[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return [FALLBACK_MANDATE];
+    // Single round-trip: members are fetched as an embedded collection.
     const { data: mandates, error } = await supabase
       .from("mandates")
-      .select("*")
+      .select("*, mandate_members(*)")
       .order("is_current", { ascending: false })
       .order("created_at", { ascending: false });
     if (error) throw error;
     if (!mandates || mandates.length === 0) return [FALLBACK_MANDATE];
-    const result: MandateWithMembers[] = [];
-    for (const raw of mandates) {
-      const mandate = raw as MandateWithMembers;
-      const { data: members } = await supabase
-        .from("mandate_members")
-        .select("*")
-        .eq("mandate_id", mandate.id)
-        .order("sort", { ascending: true });
-      result.push({ ...mandate, members: (members ?? []) as MandateWithMembers["members"] });
-    }
-    return result;
+    return mandates.map((raw) => {
+      const mandate = raw as MandateWithMembers & { mandate_members?: MandateWithMembers["members"] };
+      return {
+        ...mandate,
+        members: [...(mandate.mandate_members ?? [])].sort((a, b) => a.sort - b.sort),
+      };
+    });
   }, [FALLBACK_MANDATE]);
 }
 
@@ -361,7 +366,7 @@ const FALLBACK_COMMITTEES: Committee[] = [
 
 export async function getCommittees(): Promise<Committee[]> {
   return withFallback(async () => {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (!supabase) return FALLBACK_COMMITTEES;
     const { data, error } = await supabase
       .from("committees")
@@ -370,6 +375,35 @@ export async function getCommittees(): Promise<Committee[]> {
     if (error) throw error;
     return data && data.length > 0 ? (data as Committee[]) : FALLBACK_COMMITTEES;
   }, FALLBACK_COMMITTEES);
+}
+
+// ---------------------------------------------------------------------------
+// Gallery
+// ---------------------------------------------------------------------------
+
+export async function getGalleryImages(): Promise<GalleryItem[]> {
+  return withFallback(async () => {
+    const supabase = await createSupabaseServerClient();
+    if (!supabase) return galleryItemsData;
+    const { data, error } = await supabase
+      .from("gallery_images")
+      .select("*")
+      .eq("is_published", true)
+      .order("sort", { ascending: true })
+      .order("created_at", { ascending: true });
+    if (error) throw error;
+    const rows = (data ?? []) as GalleryImageRow[];
+    if (rows.length === 0) return galleryItemsData;
+    return rows.map((row) => ({
+      id: row.id,
+      title: row.title,
+      category: row.category,
+      categoryLabel: row.category_label,
+      imageUrl: row.image_url,
+      description: row.description,
+      date: row.date_label || undefined,
+    }));
+  }, galleryItemsData);
 }
 
 export type { CommentBoardItem };

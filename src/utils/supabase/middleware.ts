@@ -9,15 +9,18 @@ import { isSupabaseConfigured } from '@/lib/supabase/client'
 function securityContext(request: NextRequest) {
   const nonce = btoa(crypto.randomUUID())
   const isDev = process.env.NODE_ENV !== 'production'
+  // Cloudflare Turnstile origins are allowlisted up front so enabling the
+  // captcha later only requires the dashboard secret + site key env var
+  // (docs/platform/deployment.md § Captcha) — no CSP edit needed.
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}'${isDev ? " 'unsafe-eval'" : ''}`,
+    `script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com${isDev ? " 'unsafe-eval'" : ''}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https://i.ytimg.com https://*.supabase.co",
     "media-src 'self'",
     "font-src 'self'",
-    "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
-    "frame-src https://www.youtube.com",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://challenges.cloudflare.com",
+    "frame-src https://www.youtube.com https://challenges.cloudflare.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

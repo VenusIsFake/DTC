@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/auth/AuthProvider";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { siteConfig } from "@/data/siteConfig";
 import { getSiteSettings } from "@/lib/data";
 
@@ -101,6 +102,7 @@ export default async function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer navItems={navItems} />
         </AuthProvider>
+        <ServiceWorkerRegister />
       </body>
     </html>
   );
