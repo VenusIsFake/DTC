@@ -1,0 +1,13 @@
+# Python media pipeline for the DTC scraper/download scripts (see docs/media/scraper_pipeline.md).
+# NOTE: the local virtual environment (.venv) is managed with uv.
+# `instaloader` is only imported by the retired legacy scraper kept in scripts/legacy/.
+[project]
+name = "dtc-media-pipeline"
+version = "0.1.0"
+description = "Media scraping & processing pipeline for the Dentalk Club FMDC (DTC) web platform"
+requires-python = ">=3.9"
+dependencies = [
+    "instaloader",
+    "browser_cookie3",
+    "Pillow",
+]

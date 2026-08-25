@@ -1,0 +1,65 @@
+# AI Agent Operational Rules & Guidelines for DTC Website
+
+This document defines the rules, conventions, and operational standards for AI agents contributing to the **DTC (Club Website)** repository.
+
+---
+
+## 1. Core Principles & Philosophy
+1. **Modularity & Maintainability:** Write clean, modular, and well-documented code. Avoid monolith files.
+2. **Design & UX First:** Maintain responsive, mobile-first design with high accessibility standards (WCAG compliant) and modern UI aesthetics.
+3. **Documentation Driven:** Keep the `/docs` directory updated whenever new architectural decisions, APIs, or features are implemented.
+4. **Security & Privacy:** Never hardcode credentials, session cookies, API keys, or private tokens. Always use `.env` files and environment variables.
+
+---
+
+## 2. Environment & Tooling Conventions
+- **Python Package Management:** Use `uv` for Python virtual environments and package installations (located in `.venv`).
+- **Dependencies:** Document all Python dependencies in `pyproject.toml` or `requirements.txt`. For Node.js / frontend dependencies (when established), use `package.json` with strict lockfiles.
+- **Git Hygiene:** Maintain clean commit messages and ensure `.gitignore` excludes temporary artifacts, media downloads, session data, and `.venv`.
+
+---
+
+## 3. Instagram & Media Scraping Rules
+- **Respect Rate Limits:** When using `instaloader` or social scrapers, incorporate rate-limiting, caching, and fallback states to prevent IP throttling or account blocks.
+- **Session Data Protection:** Do not commit Instagram session files (`.session` files or cached cookies) to git.
+- **Media Optimization:** Compress or resize fetched media assets before serving on the public website to maintain fast load times.
+
+---
+
+## 4. Documentation & Knowledge Graph Conventions
+- **Continuous Documentation:** ALWAYS document every significant change, feature implementation, data scraping session, or architectural decision inside `/docs/`. Maintain an activity log in `/docs/audit/activity_log.md`.
+- **Knowledge Graph (graphify):** ALWAYS run and update graphify (`graphify` / `--update`) whenever code, documentation, or structural data changes are made to keep the repository knowledge graph current (`graphify-out/`).
+- Keep `overview.md` updated as the high-level summary of the club website's status, features, and roadmap.
+
+---
+
+## 5. WebKit & iOS Safari Compatibility Invariants
+- **Zero SSR Opacity Traps:** Never use `framer-motion` initial inline styles (`initial={{ opacity: 0 }}`) for above-the-fold or critical hero content. Always use pure hardware-accelerated CSS keyframe animations (`@keyframes fadeInSlideUp`) with default `opacity: 1` so content is immediately visible on the first paint before hydration.
+- **WebKit Scrolling Stability:** Do not place `scroll-smooth` on the root `<html>` tag, as it triggers WebKit momentum scrolling viewport rendering freezes on iOS Safari.
+- **Mobile Video Autoplay Policies:** Always equip `<video>` tags with explicit `muted`, `playsInline`, `webkit-playsinline="true"`, and native iOS `webkitEnterFullscreen()` fallback handling to prevent unhandled promise rejections.
+
+---
+
+## 6. Mobile Space-Efficiency Standards
+- **No Artificial Viewport Height on Mobile:** Never apply `min-h-[...vh]` (e.g. `min-h-[75vh]`, `min-h-[90vh]`) to mobile hero containers. Allow above-the-fold content to hug naturally (`pt-12 pb-2`) so action buttons and live stats cards stack tightly with zero dead space.
+- **Compact Padding Scales:** Use `px-3.5 sm:px-6` and `p-2.5 sm:p-5` on mobile cards to maximize content density on narrow viewports (320px–414px).
+
+---
+
+## 7. Next.js Static Export & Fast-Deploy Workflows
+- **Static HTML Export:** For static media and marketing sites, always configure `output: "export"` and `images: { unoptimized: true }` in `next.config.mjs`.
+- **Sub-7s Prebuilt Deployments:** Always use `npm run fast-deploy` (`vercel build --prod && vercel deploy --prebuilt --prod --yes`) to deploy precompiled static deltas (~580 KB) rather than re-uploading multi-megabyte media libraries.
+
+---
+
+## 8. Media Player & Interactive Lifecycle Rules
+- **Iframe History Stack Safety:** Always assign `key={item.id}` to dynamic media `<iframe>` embeds (such as YouTube players) to prevent mutating `iframe.src` from hijacking the browser's Back/Forward navigation stack.
+- **Modal Scroll Locking:** Always lock the background page scroll (`document.body.style.overflow = "hidden"`) and attach `Escape` key listeners with cleanup inside modal, lightbox, and fullscreen viewer components.
+- **Interactive Pan/Drag:** When implementing zoomable visual assets (> 1x zoom), provide smooth mouse (`onMouseDown`/`onMouseMove`) and single-finger touch (`onTouchStart`/`onTouchMove`) drag handlers with boundary reset controls.
+
+---
+
+## 9. Coding Standards
+- **File Structure:** Keep logic, components, styles, and utilities separated into designated folders.
+- **Type Safety:** Prefer TypeScript for frontend development and type hints for Python scripts.
+- **Error Handling:** Always implement graceful degradation and user-friendly error fallbacks (e.g. placeholder UI when live Instagram feeds are unavailable).

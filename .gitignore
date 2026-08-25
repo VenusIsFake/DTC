@@ -1,0 +1,33 @@
+# Python virtual environments & bytecode
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Instagram scraper session files & downloads
+*.session
+/downloads/
+/instagram_data/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node / Frontend build artifacts (when added)
+node_modules/
+dist/
+.next/
+.astro/
+out/
+.DS_Store
+.vercel
+.env*
+graphify-out/cache/
+.graphify_python
+
+# Large media files, scraped archives & raw videos
+*.mp4
+*.mov
+/public/media/
+/instagram/

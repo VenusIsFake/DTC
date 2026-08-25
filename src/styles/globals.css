@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0b132b;
+    --foreground: #f8fafc;
+  }
+
+  html {
+    background-color: #0b132b;
+    color: #f8fafc;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0b132b;
+    color: #f8fafc;
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Prevents double-tap zoom on rapid taps of controls (iOS Safari). */
+  a,
+  button,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #070c1b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1b2e4b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+  }
+}
+
+/* Glassmorphic utilities with strict WebKit fallbacks */
+.glass-card {
+  background-color: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 90, 117, 0.35);
+}
+
+.glass-card-hover {
+  transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  -webkit-transition: -webkit-transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.glass-card-hover:hover {
+  background-color: rgba(27, 46, 75, 0.9);
+  border-color: rgba(212, 175, 55, 0.5);
+  transform: translateY(-4px);
+  -webkit-transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(212, 175, 55, 0.15);
+}
+
+/* Gradient typography with WebKit fallbacks */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fde047 0%, #d4af37 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #d4af37; /* Fallback for browsers without background-clip text */
+}
+
+/* Smooth keyframe animations with hardware acceleration */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out both;
+  -webkit-animation: fadeIn 0.2s ease-out both;
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    -webkit-transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  -webkit-animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animation-delay-100 {
+  animation-delay: 0.1s;
+  -webkit-animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+  -webkit-animation-delay: 0.3s;
+}

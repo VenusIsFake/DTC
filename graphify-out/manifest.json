@@ -1,0 +1,1022 @@
+{
+  "overview.md": {
+    "mtime": 1787624640.7982116,
+    "seen": 1787625434.7823977,
+    "ast_hash": "67a53b7f830ae6e56a68b47ba9b8d5c4",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/catalog.json": {
+    "mtime": 1787612112.723969,
+    "seen": 1787625434.7813637,
+    "ast_hash": "b2d706fdda058ff80c212d16f476d7af",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/embed_data.json": {
+    "mtime": 1787611427.43943,
+    "seen": 1787625434.7813814,
+    "ast_hash": "ea743c95fb9d6a205c7ef792de5338f4",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/podcasts_catalog.json": {
+    "mtime": 1787612749.1845505,
+    "seen": 1787625434.7813873,
+    "ast_hash": "c7dbb8deb6f7e78012d603afcb3e72e9",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/posts_catalog.json": {
+    "mtime": 1787611489.4765632,
+    "seen": 1787625434.7813911,
+    "ast_hash": "d822313c5954229c51fcb89dfb4a5c89",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/posts_summary.json": {
+    "mtime": 1787612708.3359032,
+    "seen": 1787625434.7813957,
+    "ast_hash": "286ec63a7797e88df7753cfc797a052d",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/team_members_2025_2026.json": {
+    "mtime": 1787612917.812222,
+    "seen": 1787625434.7814,
+    "ast_hash": "cf8a56b1f974b01e206996cfeb178e33",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/tedx_talks.json": {
+    "mtime": 1787613111.7324533,
+    "seen": 1787625434.7814026,
+    "ast_hash": "e6dae68cd3361bd46165059c7e9fc4dc",
+    "semantic_hash": ""
+  },
+  "next-env.d.ts": {
+    "mtime": 1787613560.9387727,
+    "seen": 1787625434.7814052,
+    "ast_hash": "b5ed9dd8b4c5ba8e5ab8e6a379c15838",
+    "semantic_hash": ""
+  },
+  "next.config.mjs": {
+    "mtime": 1787614911.0530138,
+    "seen": 1787625434.7814083,
+    "ast_hash": "ce957a5a0009b8135d9bd3932570bcc0",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1787624940.4649765,
+    "seen": 1787625434.7814121,
+    "ast_hash": "f634927e4db8fc684a120d2ca44aec04",
+    "semantic_hash": ""
+  },
+  "postcss.config.js": {
+    "mtime": 1787613359.9819899,
+    "seen": 1787625434.781416,
+    "ast_hash": "8640f9b2e6475cc3f5b1ff4548925765",
+    "semantic_hash": ""
+  },
+  "pyproject.toml": {
+    "mtime": 1787624926.901829,
+    "seen": 1787625434.7814193,
+    "ast_hash": "87ca307bf63ab624cc5546938d82c87f",
+    "semantic_hash": ""
+  },
+  "scripts/crop_team_members.py": {
+    "mtime": 1787612912.8861887,
+    "seen": 1787625434.7814229,
+    "ast_hash": "8c34efcbb26f25e8732705a42261bcad",
+    "semantic_hash": ""
+  },
+  "scripts/download_all_media.py": {
+    "mtime": 1787612742.0940366,
+    "seen": 1787625434.7814262,
+    "ast_hash": "95bad028b465ebff9ba01eb892d9dba1",
+    "semantic_hash": ""
+  },
+  "scripts/download_tedx_videos.py": {
+    "mtime": 1787613043.173029,
+    "seen": 1787625434.7814298,
+    "ast_hash": "fb1b3eab9ea83df862e28c237049d4f7",
+    "semantic_hash": ""
+  },
+  "scripts/extract_original_logo.py": {
+    "mtime": 1787612987.4686842,
+    "seen": 1787625434.7814329,
+    "ast_hash": "7b29ce6ca7683bbe0a7c2a920b70abf0",
+    "semantic_hash": ""
+  },
+  "scripts/fetch_all_posts.py": {
+    "mtime": 1787612663.4085057,
+    "seen": 1787625434.781436,
+    "ast_hash": "ad07cdd89c9b81961ed096bda663897f",
+    "semantic_hash": ""
+  },
+  "scripts/generate_favicons.py": {
+    "mtime": 1787613657.3698716,
+    "seen": 1787625434.781439,
+    "ast_hash": "0246792a58f36b7acf8a52d30367e219",
+    "semantic_hash": ""
+  },
+  "scripts/legacy/download_and_organize.py": {
+    "mtime": 1787611475.659739,
+    "seen": 1787625434.7814417,
+    "ast_hash": "e24277f8f850a121f7d2000304345171",
+    "semantic_hash": ""
+  },
+  "scripts/legacy/extract_instagram.py": {
+    "mtime": 1787611311.540529,
+    "seen": 1787625434.781445,
+    "ast_hash": "984c234c2560be744a579530dee1f833",
+    "semantic_hash": ""
+  },
+  "scripts/legacy/label_all_images.py": {
+    "mtime": 1787611729.6663668,
+    "seen": 1787625434.7814486,
+    "ast_hash": "3fc1eca21fd641975bd300f840897e3b",
+    "semantic_hash": ""
+  },
+  "scripts/legacy/parse_embed.py": {
+    "mtime": 1787611424.2414095,
+    "seen": 1787625434.7814531,
+    "ast_hash": "edd757d68d4bb9df7f90f4fcc44b35d7",
+    "semantic_hash": ""
+  },
+  "scripts/legacy/reorganize_instagram.py": {
+    "mtime": 1787612108.3148274,
+    "seen": 1787625434.7814565,
+    "ast_hash": "783083d1da20a116fac254b25449096d",
+    "semantic_hash": ""
+  },
+  "scripts/setup_public_assets.py": {
+    "mtime": 1787613368.9660456,
+    "seen": 1787625434.781459,
+    "ast_hash": "e08b430481524bb2bcb553f49a353635",
+    "semantic_hash": ""
+  },
+  "src/app/about/page.tsx": {
+    "mtime": 1787624883.530641,
+    "seen": 1787625434.7822587,
+    "ast_hash": "295ad1766f200e7f7b0c1acf45981a39",
+    "semantic_hash": ""
+  },
+  "src/app/events/layout.tsx": {
+    "mtime": 1787624865.0163894,
+    "seen": 1787625434.7822657,
+    "ast_hash": "cc0038cb5e0c539d4730c3c635d93851",
+    "semantic_hash": ""
+  },
+  "src/app/events/page.tsx": {
+    "mtime": 1787624890.7286835,
+    "seen": 1787625434.78227,
+    "ast_hash": "c8c1d08cfa13b2266d3ecc9004ffd6b7",
+    "semantic_hash": ""
+  },
+  "src/app/gallery/layout.tsx": {
+    "mtime": 1787624865.0487666,
+    "seen": 1787625434.7822742,
+    "ast_hash": "2807a99f27db1fed9373081bbebed68e",
+    "semantic_hash": ""
+  },
+  "src/app/gallery/page.tsx": {
+    "mtime": 1787624788.6260822,
+    "seen": 1787625434.7822783,
+    "ast_hash": "ea37d97f0611f489fc40c6e7dab37196",
+    "semantic_hash": ""
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1787624830.3274708,
+    "seen": 1787625434.7822828,
+    "ast_hash": "4f868d4505eaecaf9f9b8b36931fe95c",
+    "semantic_hash": ""
+  },
+  "src/app/not-found.tsx": {
+    "mtime": 1787624864.9856231,
+    "seen": 1787625434.782287,
+    "ast_hash": "2a60a4541f5aa877b1fdb7c542920653",
+    "semantic_hash": ""
+  },
+  "src/app/page.tsx": {
+    "mtime": 1787624788.5134716,
+    "seen": 1787625434.7822907,
+    "ast_hash": "e5127eb4fc94fba26bc5b040f4275770",
+    "semantic_hash": ""
+  },
+  "src/app/podcast/page.tsx": {
+    "mtime": 1787624890.6640575,
+    "seen": 1787625434.7822948,
+    "ast_hash": "b0bc4d2938e1dd059bf8fd980c4545e3",
+    "semantic_hash": ""
+  },
+  "src/app/robots.ts": {
+    "mtime": 1787624874.832691,
+    "seen": 1787625434.7822986,
+    "ast_hash": "c95972b1dfea6d8e83710f36e24ec730",
+    "semantic_hash": ""
+  },
+  "src/app/sitemap.ts": {
+    "mtime": 1787624874.8615901,
+    "seen": 1787625434.7823021,
+    "ast_hash": "0c6254a5c2c2b483b5356039cff9c6e8",
+    "semantic_hash": ""
+  },
+  "src/components/Footer.tsx": {
+    "mtime": 1787624926.9950476,
+    "seen": 1787625434.7823055,
+    "ast_hash": "bab84c2b7bc8c4363849d64a46074b4d",
+    "semantic_hash": ""
+  },
+  "src/components/Hero.tsx": {
+    "mtime": 1787624800.5467672,
+    "seen": 1787625434.7823093,
+    "ast_hash": "11db4d8194be00cdc7ad5088fb240101",
+    "semantic_hash": ""
+  },
+  "src/components/ImageLightbox.tsx": {
+    "mtime": 1787624665.5913575,
+    "seen": 1787625434.7823138,
+    "ast_hash": "bb62bec05b12823ed2da049657684ab9",
+    "semantic_hash": ""
+  },
+  "src/components/InfographicViewer.tsx": {
+    "mtime": 1787624724.7501106,
+    "seen": 1787625434.7823179,
+    "ast_hash": "7a10958d05eeabfec120612d38482ed0",
+    "semantic_hash": ""
+  },
+  "src/components/Navbar.tsx": {
+    "mtime": 1787624759.4235148,
+    "seen": 1787625434.7823217,
+    "ast_hash": "9406427e69f621dee90d0e4095d1f896",
+    "semantic_hash": ""
+  },
+  "src/components/PodcastPlayer.tsx": {
+    "mtime": 1787615411.6612768,
+    "seen": 1787625434.7823257,
+    "ast_hash": "433cc340c1cb480bd2c9aa9eccb81de2",
+    "semantic_hash": ""
+  },
+  "src/components/StatsCounter.tsx": {
+    "mtime": 1787615386.6401138,
+    "seen": 1787625434.7823293,
+    "ast_hash": "f9ae7ea32c683824a415a9a974d86e01",
+    "semantic_hash": ""
+  },
+  "src/components/VideoPlayerModal.tsx": {
+    "mtime": 1787624650.39173,
+    "seen": 1787625434.7823384,
+    "ast_hash": "2bebe131abb41f712a203dc9d4597e8f",
+    "semantic_hash": ""
+  },
+  "src/data/galleryData.ts": {
+    "mtime": 1787624901.7351215,
+    "seen": 1787625434.7823415,
+    "ast_hash": "18c4e3b6a12cc567cbdf80d1fb88a518",
+    "semantic_hash": ""
+  },
+  "src/data/podcastData.ts": {
+    "mtime": 1787624883.5578964,
+    "seen": 1787625434.7823443,
+    "ast_hash": "a97fc51b28f575a58d60462233e49341",
+    "semantic_hash": ""
+  },
+  "src/data/siteConfig.ts": {
+    "mtime": 1787624813.2462273,
+    "seen": 1787625434.7823474,
+    "ast_hash": "ce761291fd112e210a749524a24adfff",
+    "semantic_hash": ""
+  },
+  "src/data/tedxData.ts": {
+    "mtime": 1787613407.2382824,
+    "seen": 1787625434.7823508,
+    "ast_hash": "dd43d2eaee4784e327eba3ce79696cb1",
+    "semantic_hash": ""
+  },
+  "src/hooks/useOverlayDialog.ts": {
+    "mtime": 1787624610.3090298,
+    "seen": 1787625434.782354,
+    "ast_hash": "27946da751d9d2f10de7fd312fa171a8",
+    "semantic_hash": ""
+  },
+  "tailwind.config.ts": {
+    "mtime": 1787624927.02197,
+    "seen": 1787625434.7823572,
+    "ast_hash": "195643871fa45691dc21a813a2ad943e",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1787613351.436937,
+    "seen": 1787625434.7823615,
+    "ast_hash": "492fe1df794fccc27c69bfa6dc017b80",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1787624874.8865902,
+    "seen": 1787625434.7823646,
+    "ast_hash": "c5c39edc4a20a4e86ba1d9cb4a75e3f3",
+    "semantic_hash": ""
+  },
+  "docs/README.md": {
+    "mtime": 1787624975.2341812,
+    "seen": 1787625434.7823677,
+    "ast_hash": "417555970f5c8011f82ad29d9c1757e0",
+    "semantic_hash": ""
+  },
+  "docs/audit/activity_log.md": {
+    "mtime": 1787624978.9817822,
+    "seen": 1787625434.7823708,
+    "ast_hash": "72b2d2fb386eeae186008328377df6a5",
+    "semantic_hash": ""
+  },
+  "docs/club/concept.md": {
+    "mtime": 1787625019.0934396,
+    "seen": 1787625434.7823741,
+    "ast_hash": "dc58c1b30258d33057dc4360a7c0a76c",
+    "semantic_hash": ""
+  },
+  "docs/media/gallery.md": {
+    "mtime": 1787624730.3727024,
+    "seen": 1787625434.782377,
+    "ast_hash": "4e78798aa712e2143a293f39fe55afad",
+    "semantic_hash": ""
+  },
+  "docs/media/instagram_data.md": {
+    "mtime": 1787624781.2882884,
+    "seen": 1787625434.7823799,
+    "ast_hash": "e2c8671222e4681142bd4c93cba9c66c",
+    "semantic_hash": ""
+  },
+  "docs/media/scraper_pipeline.md": {
+    "mtime": 1787624886.3436577,
+    "seen": 1787625434.7823834,
+    "ast_hash": "9acfef3e5b6cffa75b640ceafac1ae6d",
+    "semantic_hash": ""
+  },
+  "docs/platform/architecture.md": {
+    "mtime": 1787625011.0998042,
+    "seen": 1787625434.7823865,
+    "ast_hash": "ecba2970e7b53d0f50099e76f1863727",
+    "semantic_hash": ""
+  },
+  "docs/platform/deployment.md": {
+    "mtime": 1787625011.0693922,
+    "seen": 1787625434.7823892,
+    "ast_hash": "68a2f972876180c6bde995872468934b",
+    "semantic_hash": ""
+  },
+  "rules.md": {
+    "mtime": 1787617221.6282334,
+    "seen": 1787625434.7824018,
+    "ast_hash": "a9ce7879c9d6f5797c71bfd0bb567108",
+    "semantic_hash": ""
+  },
+  "instagram/awards/grand_finale_group.jpg": {
+    "mtime": 1787611485.7451143,
+    "seen": 1787625434.7824051,
+    "ast_hash": "4843790699133b0025acee670ab2123e",
+    "semantic_hash": ""
+  },
+  "instagram/awards/trophy_aya_zizi.jpg": {
+    "mtime": 1787611481.0360239,
+    "seen": 1787625434.7824082,
+    "ast_hash": "da5b9fe864988498a7a2967ca3682f15",
+    "semantic_hash": ""
+  },
+  "instagram/awards/trophy_chafik_khalifi.jpg": {
+    "mtime": 1787611481.7678735,
+    "seen": 1787625434.7824113,
+    "ast_hash": "d251014bd13c6e4c7f613cbee276a865",
+    "semantic_hash": ""
+  },
+  "instagram/awards/trophy_fahd_rahim.jpg": {
+    "mtime": 1787611480.4729335,
+    "seen": 1787625434.7824142,
+    "ast_hash": "089abc2d1d5591128219c2b3f910d333",
+    "semantic_hash": ""
+  },
+  "instagram/awards/trophy_hatim_elguerraoui.jpg": {
+    "mtime": 1787611480.212119,
+    "seen": 1787625434.782417,
+    "ast_hash": "0d7fa6395ff1907830cd362390497086",
+    "semantic_hash": ""
+  },
+  "instagram/awards/trophy_reda_rimaoui.jpg": {
+    "mtime": 1787611482.699065,
+    "seen": 1787625434.7824206,
+    "ast_hash": "556215952157ca5ce244ab1cd286a666",
+    "semantic_hash": ""
+  },
+  "instagram/awards/trophy_wassim_ezzahoum.jpg": {
+    "mtime": 1787611482.2827733,
+    "seen": 1787625434.7824237,
+    "ast_hash": "145fdf52d3abd97de446354b627a60ff",
+    "semantic_hash": ""
+  },
+  "instagram/events/debate_roundtable.jpg": {
+    "mtime": 1787611478.2393339,
+    "seen": 1787625434.7824285,
+    "ast_hash": "0414763f08e80e64b36635ac41ea11b5",
+    "semantic_hash": ""
+  },
+  "instagram/events/debate_table_session.jpg": {
+    "mtime": 1787611477.713942,
+    "seen": 1787625434.7824316,
+    "ast_hash": "2aad598a8729dada54c9ea9aec49d439",
+    "semantic_hash": ""
+  },
+  "instagram/events/eloquence_keynote_stage.jpg": {
+    "mtime": 1787611478.0727668,
+    "seen": 1787625434.7824345,
+    "ast_hash": "3e7726bffec435b3f0c28d708426e033",
+    "semantic_hash": ""
+  },
+  "instagram/events/eloquence_workshop.jpg": {
+    "mtime": 1787611479.2280264,
+    "seen": 1787625434.7824376,
+    "ast_hash": "780c6cb22f10d840b8131ad6ce934362",
+    "semantic_hash": ""
+  },
+  "instagram/events/mandate_handover_gala.jpg": {
+    "mtime": 1787611479.4935596,
+    "seen": 1787625434.7824404,
+    "ast_hash": "21c8003d1842a2df1c19eea54d874631",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_01_yahia_chemsi.jpg": {
+    "mtime": 1787612747.7570746,
+    "seen": 1787625434.7824438,
+    "ast_hash": "a60dab0a5469e596fc7e7593763eb4a6",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_02_aya_jei.jpg": {
+    "mtime": 1787612747.8870757,
+    "seen": 1787625434.7824473,
+    "ast_hash": "e6caead26c2a437944705e365c283763",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_03_ines_ben_salah.jpg": {
+    "mtime": 1787612748.0080764,
+    "seen": 1787625434.7824512,
+    "ast_hash": "7979a3135bd554117648b317e0f268d6",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_04_aya_talbi.jpg": {
+    "mtime": 1787612748.1300771,
+    "seen": 1787625434.7824547,
+    "ast_hash": "67a288eb0c1050121839f092bab18e2d",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_05_baha_eddine_achaach.jpg": {
+    "mtime": 1787612748.247078,
+    "seen": 1787625434.7824585,
+    "ast_hash": "4213311dc1f5fdc188c70b7370e8a6c5",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_06_hiba_birouki.jpg": {
+    "mtime": 1787612748.374079,
+    "seen": 1787625434.7824628,
+    "ast_hash": "c8ff0719f0d59e846e11cc8d7f8c3488",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_07_george_pupwe.jpg": {
+    "mtime": 1787612748.5040798,
+    "seen": 1787625434.7824664,
+    "ast_hash": "0619f3ff36e876659be85b12806b3d0d",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_08_fahd_rahim.jpg": {
+    "mtime": 1787612748.6230805,
+    "seen": 1787625434.78247,
+    "ast_hash": "e1e413560392168ca05234f4435cfd80",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_fmdc_auditorium.jpg": {
+    "mtime": 1787611477.315339,
+    "seen": 1787625434.7824743,
+    "ast_hash": "08f865e1c675e6b14a3583a0a28ddf49",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/banner_2026.jpg": {
+    "mtime": 1787611485.9091632,
+    "seen": 1787625434.7824798,
+    "ast_hash": "8d17aaf12f9ae0930625a64bbe346c1a",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/keynote_president.jpg": {
+    "mtime": 1787611483.0191085,
+    "seen": 1787625434.7824845,
+    "ast_hash": "6df832e53f7f4342bb03ec303836f3b0",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/lecture_01_hatim_elguerraoui.jpg": {
+    "mtime": 1787611483.3474677,
+    "seen": 1787625434.7824879,
+    "ast_hash": "093e6fb87e715238166c6292ce97b3b5",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/lecture_02_chafik_khalifi.jpg": {
+    "mtime": 1787611484.567833,
+    "seen": 1787625434.7824912,
+    "ast_hash": "7eb0c06bcf73b265cd88b2b9370204ef",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/lecture_03_wassim_ezzahoum.jpg": {
+    "mtime": 1787611484.9297607,
+    "seen": 1787625434.7825003,
+    "ast_hash": "22a1afdf355306456ccab16adf39e1aa",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/lecture_04_fahd_rahim.jpg": {
+    "mtime": 1787611483.725719,
+    "seen": 1787625434.7825038,
+    "ast_hash": "1743fbf54aab7addccb163dcfe556d52",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/lecture_05_aya_zizi.jpg": {
+    "mtime": 1787611484.1795626,
+    "seen": 1787625434.7825084,
+    "ast_hash": "e6f28364d68e7f86b5e134a5bf07de77",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/lecture_06_reda_rimaoui.jpg": {
+    "mtime": 1787611485.4017224,
+    "seen": 1787625434.7825117,
+    "ast_hash": "99310a730eee3a73b0fa1db88a004d65",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/reel_forensic_odontology.jpg": {
+    "mtime": 1787611479.638252,
+    "seen": 1787625434.7825146,
+    "ast_hash": "f117d4a7f8f50f2d67a2e945f3ce351d",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/speaker_01_hatim_elguerraoui.jpg": {
+    "mtime": 1787611486.4223158,
+    "seen": 1787625434.782518,
+    "ast_hash": "0d4246c8601cfab8587e736a61d392fb",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/speaker_02_chafik_khalifi.jpg": {
+    "mtime": 1787611487.0003502,
+    "seen": 1787625434.7825215,
+    "ast_hash": "f8c0c4c641fb57785807174c038ae9ae",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/speaker_03_wassim_ezzahoum.jpg": {
+    "mtime": 1787611487.5369983,
+    "seen": 1787625434.7825253,
+    "ast_hash": "e38a8bfe4acf2cc9f2c8b431591f62e5",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/speaker_04_fahd_rahim.jpg": {
+    "mtime": 1787611488.1177356,
+    "seen": 1787625434.7825289,
+    "ast_hash": "e3d7731d9185f3036dfbb6154ddda1d1",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/speaker_05_aya_zizi.jpg": {
+    "mtime": 1787611488.6035619,
+    "seen": 1787625434.7825325,
+    "ast_hash": "dfdd0dab286e1575359e01beb89030f0",
+    "semantic_hash": ""
+  },
+  "instagram/magisterium/speaker_06_reda_rimaoui.jpg": {
+    "mtime": 1787611489.3438103,
+    "seen": 1787625434.7825353,
+    "ast_hash": "e342d545c46b86080f3e32a2a916dc2d",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/dtc_badge_original.png": {
+    "mtime": 1787612990.193701,
+    "seen": 1787625434.7825384,
+    "ast_hash": "00ff4153ff916a3530366c28766f03b1",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/dtc_logo.png": {
+    "mtime": 1787613002.2767758,
+    "seen": 1787625434.782542,
+    "ast_hash": "f3d2d06b5b577e1e9ddc5a8321d30eac",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/dtc_profile_avatar.jpg": {
+    "mtime": 1787612925.714812,
+    "seen": 1787625434.7825463,
+    "ast_hash": "9e4229a7b2ce8c5a2a0c1236b09a83b7",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/original_DB7Xj88CXtY.jpg": {
+    "mtime": 1787612979.7596364,
+    "seen": 1787625434.7825499,
+    "ast_hash": "957859fbd5244ae8a2557964e263760c",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/original_DBMRjqrAGlM.jpg": {
+    "mtime": 1787612979.390634,
+    "seen": 1787625434.7825527,
+    "ast_hash": "132fa7b06c50f81181c97dc822f7f8d6",
+    "semantic_hash": ""
+  },
+  "instagram/metadata/original_DBn9lzFOO5t.jpg": {
+    "mtime": 1787612979.6136355,
+    "seen": 1787625434.782556,
+    "ast_hash": "32601e5ab8b6ed2481be83d04b0c0cdf",
+    "semantic_hash": ""
+  },
+  "instagram/podcasts/ep4_teaser_cover.jpg": {
+    "mtime": 1787611489.4740002,
+    "seen": 1787625434.78256,
+    "ast_hash": "02febf7f207654a676755d3f6ee43707",
+    "semantic_hash": ""
+  },
+  "instagram/podcasts/ep4_youtube_poster.jpg": {
+    "mtime": 1787611479.8652568,
+    "seen": 1787625434.782564,
+    "ast_hash": "0bc903e0c97605eb938de1185c61f658",
+    "semantic_hash": ""
+  },
+  "instagram/podcasts/podcast_ep1_launch.jpg": {
+    "mtime": 1787612749.1830842,
+    "seen": 1787625434.7825677,
+    "ast_hash": "ecc6e2ea7be76fa48dff4dfb1e01ca4f",
+    "semantic_hash": ""
+  },
+  "instagram/podcasts/podcast_ep3_prof_haitam.jpg": {
+    "mtime": 1787612748.9070826,
+    "seen": 1787625434.782571,
+    "ast_hash": "5dc0563b7d6835f3bb8dbafd4e149ef0",
+    "semantic_hash": ""
+  },
+  "instagram/podcasts/podcast_ep4_prof_bouzoubaa.jpg": {
+    "mtime": 1787612748.7500813,
+    "seen": 1787625434.782575,
+    "ast_hash": "0bc903e0c97605eb938de1185c61f658",
+    "semantic_hash": ""
+  },
+  "instagram/podcasts/studio_bts_viewfinder.jpg": {
+    "mtime": 1787611478.6141582,
+    "seen": 1787625434.782578,
+    "ast_hash": "2bd3d4d964d6664bf85412d3f97f2f23",
+    "semantic_hash": ""
+  },
+  "instagram/team/advisor_flower_tribute.jpg": {
+    "mtime": 1787611477.5098002,
+    "seen": 1787625434.782581,
+    "ast_hash": "9de7c9e13f614e63a2b264a8b0d6ca93",
+    "semantic_hash": ""
+  },
+  "instagram/team/bureau_executif_2025_2026.jpg": {
+    "mtime": 1787612898.1690896,
+    "seen": 1787625434.7825837,
+    "ast_hash": "72d08e3383b988088c55d255dea208fc",
+    "semantic_hash": ""
+  },
+  "instagram/team/leadership_meeting.jpg": {
+    "mtime": 1787611478.40936,
+    "seen": 1787625434.7825873,
+    "ast_hash": "ba55237480eaf8239a537ec9913b2f4a",
+    "semantic_hash": ""
+  },
+  "instagram/team/organizing_committee_stage.jpg": {
+    "mtime": 1787611479.0452666,
+    "seen": 1787625434.7825916,
+    "ast_hash": "227c0f14520c07e24a86a2530a3f4508",
+    "semantic_hash": ""
+  },
+  "instagram/team/outdoor_celebration.jpg": {
+    "mtime": 1787611478.7783287,
+    "seen": 1787625434.782595,
+    "ast_hash": "816e91d0dedfec7d86462748d7df2bd4",
+    "semantic_hash": ""
+  },
+  "instagram/team/outdoor_retreat.jpg": {
+    "mtime": 1787611477.9047434,
+    "seen": 1787625434.7825987,
+    "ast_hash": "e34d8fcfdcded524c0e9f0b9905a5708",
+    "semantic_hash": ""
+  },
+  "public/apple-touch-icon.png": {
+    "mtime": 1787613662.3359036,
+    "seen": 1787625434.7826025,
+    "ast_hash": "80cd6369cf2cef1b6d5c4a8eeced45b0",
+    "semantic_hash": ""
+  },
+  "public/favicon.png": {
+    "mtime": 1787613662.2019026,
+    "seen": 1787625434.7826056,
+    "ast_hash": "adfdf3aee945f500a4d4bf2eca6b8ade",
+    "semantic_hash": ""
+  },
+  "public/icon-512.png": {
+    "mtime": 1787613662.534905,
+    "seen": 1787625434.7826083,
+    "ast_hash": "7d8ffc00dfef83bd29ed172eda80312c",
+    "semantic_hash": ""
+  },
+  "public/logo.png": {
+    "mtime": 1787613002.2767758,
+    "seen": 1787625434.782612,
+    "ast_hash": "f3d2d06b5b577e1e9ddc5a8321d30eac",
+    "semantic_hash": ""
+  },
+  "public/media/awards/grand_finale_group.jpg": {
+    "mtime": 1787611485.7451143,
+    "seen": 1787625434.7826157,
+    "ast_hash": "4843790699133b0025acee670ab2123e",
+    "semantic_hash": ""
+  },
+  "public/media/awards/trophy_aya_zizi.jpg": {
+    "mtime": 1787611481.0360239,
+    "seen": 1787625434.7826185,
+    "ast_hash": "da5b9fe864988498a7a2967ca3682f15",
+    "semantic_hash": ""
+  },
+  "public/media/awards/trophy_chafik_khalifi.jpg": {
+    "mtime": 1787611481.7678735,
+    "seen": 1787625434.7826226,
+    "ast_hash": "d251014bd13c6e4c7f613cbee276a865",
+    "semantic_hash": ""
+  },
+  "public/media/awards/trophy_fahd_rahim.jpg": {
+    "mtime": 1787611480.4729335,
+    "seen": 1787625434.7826254,
+    "ast_hash": "089abc2d1d5591128219c2b3f910d333",
+    "semantic_hash": ""
+  },
+  "public/media/awards/trophy_hatim_elguerraoui.jpg": {
+    "mtime": 1787611480.212119,
+    "seen": 1787625434.782629,
+    "ast_hash": "0d7fa6395ff1907830cd362390497086",
+    "semantic_hash": ""
+  },
+  "public/media/awards/trophy_reda_rimaoui.jpg": {
+    "mtime": 1787611482.699065,
+    "seen": 1787625434.7826324,
+    "ast_hash": "556215952157ca5ce244ab1cd286a666",
+    "semantic_hash": ""
+  },
+  "public/media/awards/trophy_wassim_ezzahoum.jpg": {
+    "mtime": 1787611482.2827733,
+    "seen": 1787625434.7826366,
+    "ast_hash": "145fdf52d3abd97de446354b627a60ff",
+    "semantic_hash": ""
+  },
+  "public/media/events/debate_roundtable.jpg": {
+    "mtime": 1787611478.2393339,
+    "seen": 1787625434.78264,
+    "ast_hash": "0414763f08e80e64b36635ac41ea11b5",
+    "semantic_hash": ""
+  },
+  "public/media/events/debate_table_session.jpg": {
+    "mtime": 1787611477.713942,
+    "seen": 1787625434.7826438,
+    "ast_hash": "2aad598a8729dada54c9ea9aec49d439",
+    "semantic_hash": ""
+  },
+  "public/media/events/eloquence_keynote_stage.jpg": {
+    "mtime": 1787611478.0727668,
+    "seen": 1787625434.7826474,
+    "ast_hash": "3e7726bffec435b3f0c28d708426e033",
+    "semantic_hash": ""
+  },
+  "public/media/events/eloquence_workshop.jpg": {
+    "mtime": 1787611479.2280264,
+    "seen": 1787625434.7826507,
+    "ast_hash": "780c6cb22f10d840b8131ad6ce934362",
+    "semantic_hash": ""
+  },
+  "public/media/events/mandate_handover_gala.jpg": {
+    "mtime": 1787611479.4935596,
+    "seen": 1787625434.782654,
+    "ast_hash": "21c8003d1842a2df1c19eea54d874631",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_01_yahia_chemsi.jpg": {
+    "mtime": 1787612747.7570746,
+    "seen": 1787625434.7826574,
+    "ast_hash": "a60dab0a5469e596fc7e7593763eb4a6",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_02_aya_jei.jpg": {
+    "mtime": 1787612747.8870757,
+    "seen": 1787625434.7826626,
+    "ast_hash": "e6caead26c2a437944705e365c283763",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_03_ines_ben_salah.jpg": {
+    "mtime": 1787612748.0080764,
+    "seen": 1787625434.7826664,
+    "ast_hash": "7979a3135bd554117648b317e0f268d6",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_04_aya_talbi.jpg": {
+    "mtime": 1787612748.1300771,
+    "seen": 1787625434.7826698,
+    "ast_hash": "67a288eb0c1050121839f092bab18e2d",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_05_baha_eddine_achaach.jpg": {
+    "mtime": 1787612748.247078,
+    "seen": 1787625434.7826731,
+    "ast_hash": "4213311dc1f5fdc188c70b7370e8a6c5",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_06_hiba_birouki.jpg": {
+    "mtime": 1787612748.374079,
+    "seen": 1787625434.7826762,
+    "ast_hash": "c8ff0719f0d59e846e11cc8d7f8c3488",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_07_george_pupwe.jpg": {
+    "mtime": 1787612748.5040798,
+    "seen": 1787625434.782679,
+    "ast_hash": "0619f3ff36e876659be85b12806b3d0d",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_08_fahd_rahim.jpg": {
+    "mtime": 1787612748.6230805,
+    "seen": 1787625434.7826822,
+    "ast_hash": "e1e413560392168ca05234f4435cfd80",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_fmdc_auditorium.jpg": {
+    "mtime": 1787611477.315339,
+    "seen": 1787625434.7826855,
+    "ast_hash": "08f865e1c675e6b14a3583a0a28ddf49",
+    "semantic_hash": ""
+  },
+  "public/media/podcasts/ep4_teaser_cover.jpg": {
+    "mtime": 1787611489.4740002,
+    "seen": 1787625434.7826889,
+    "ast_hash": "02febf7f207654a676755d3f6ee43707",
+    "semantic_hash": ""
+  },
+  "public/media/podcasts/ep4_youtube_poster.jpg": {
+    "mtime": 1787611479.8652568,
+    "seen": 1787625434.782692,
+    "ast_hash": "0bc903e0c97605eb938de1185c61f658",
+    "semantic_hash": ""
+  },
+  "public/media/podcasts/podcast_ep1_launch.jpg": {
+    "mtime": 1787612749.1830842,
+    "seen": 1787625434.7826958,
+    "ast_hash": "ecc6e2ea7be76fa48dff4dfb1e01ca4f",
+    "semantic_hash": ""
+  },
+  "public/media/podcasts/podcast_ep3_prof_haitam.jpg": {
+    "mtime": 1787612748.9070826,
+    "seen": 1787625434.782699,
+    "ast_hash": "5dc0563b7d6835f3bb8dbafd4e149ef0",
+    "semantic_hash": ""
+  },
+  "public/media/podcasts/podcast_ep4_prof_bouzoubaa.jpg": {
+    "mtime": 1787612748.7500813,
+    "seen": 1787625434.7827034,
+    "ast_hash": "0bc903e0c97605eb938de1185c61f658",
+    "semantic_hash": ""
+  },
+  "public/media/podcasts/studio_bts_viewfinder.jpg": {
+    "mtime": 1787611478.6141582,
+    "seen": 1787625434.7827077,
+    "ast_hash": "2bd3d4d964d6664bf85412d3f97f2f23",
+    "semantic_hash": ""
+  },
+  "public/media/team/advisor_flower_tribute.jpg": {
+    "mtime": 1787611477.5098002,
+    "seen": 1787625434.782711,
+    "ast_hash": "9de7c9e13f614e63a2b264a8b0d6ca93",
+    "semantic_hash": ""
+  },
+  "public/media/team/bureau_executif_2025_2026.jpg": {
+    "mtime": 1787612898.1690896,
+    "seen": 1787625434.7827144,
+    "ast_hash": "72d08e3383b988088c55d255dea208fc",
+    "semantic_hash": ""
+  },
+  "public/media/team/leadership_meeting.jpg": {
+    "mtime": 1787611478.40936,
+    "seen": 1787625434.7827177,
+    "ast_hash": "ba55237480eaf8239a537ec9913b2f4a",
+    "semantic_hash": ""
+  },
+  "public/media/team/organizing_committee_stage.jpg": {
+    "mtime": 1787611479.0452666,
+    "seen": 1787625434.782721,
+    "ast_hash": "227c0f14520c07e24a86a2530a3f4508",
+    "semantic_hash": ""
+  },
+  "public/media/team/outdoor_celebration.jpg": {
+    "mtime": 1787611478.7783287,
+    "seen": 1787625434.7827241,
+    "ast_hash": "816e91d0dedfec7d86462748d7df2bd4",
+    "semantic_hash": ""
+  },
+  "public/media/team/outdoor_retreat.jpg": {
+    "mtime": 1787611477.9047434,
+    "seen": 1787625434.782727,
+    "ast_hash": "e34d8fcfdcded524c0e9f0b9905a5708",
+    "semantic_hash": ""
+  },
+  "src/app/apple-icon.png": {
+    "mtime": 1787613662.3479037,
+    "seen": 1787625434.78273,
+    "ast_hash": "80cd6369cf2cef1b6d5c4a8eeced45b0",
+    "semantic_hash": ""
+  },
+  "src/app/icon.png": {
+    "mtime": 1787613662.4579043,
+    "seen": 1787625434.7827342,
+    "ast_hash": "7d8ffc00dfef83bd29ed172eda80312c",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_01_yahia_chemsi.mp4": {
+    "mtime": 1787613062.0471458,
+    "seen": 1787625434.7827375,
+    "ast_hash": "36417c7fae8758b92e1f4124d91dbcb4",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_02_aya_jei.mp4": {
+    "mtime": 1787613071.8202062,
+    "seen": 1787625434.7827413,
+    "ast_hash": "6a58eac06e2f18155ec16528d2a4140d",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_03_ines_ben_salah.mp4": {
+    "mtime": 1787613080.5512602,
+    "seen": 1787625434.7827451,
+    "ast_hash": "fe7c8a8b8055a48bbc145641bac44c5e",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_04_aya_talbi.mp4": {
+    "mtime": 1787613088.090307,
+    "seen": 1787625434.7827485,
+    "ast_hash": "b8b759f93d17819922101eb89d5f54a9",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_05_baha_eddine_achaach.mp4": {
+    "mtime": 1787613092.131332,
+    "seen": 1787625434.782751,
+    "ast_hash": "fcd09209600a10f29b931bad5f911d95",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_06_hiba_birouki.mp4": {
+    "mtime": 1787613100.040381,
+    "seen": 1787625434.782754,
+    "ast_hash": "656d71b34af98b90c70991fe36c2eb12",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_07_george_pupwe.mp4": {
+    "mtime": 1787613106.2514193,
+    "seen": 1787625434.782757,
+    "ast_hash": "579052eb94f68ea9baf2b315d8d72534",
+    "semantic_hash": ""
+  },
+  "instagram/events/tedx_08_fahd_rahim.mp4": {
+    "mtime": 1787613111.7274532,
+    "seen": 1787625434.7827601,
+    "ast_hash": "3106019276c35fd0c30ff6a23bc494c0",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_01_yahia_chemsi.mp4": {
+    "mtime": 1787613062.0471458,
+    "seen": 1787625434.782764,
+    "ast_hash": "36417c7fae8758b92e1f4124d91dbcb4",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_02_aya_jei.mp4": {
+    "mtime": 1787613071.8202062,
+    "seen": 1787625434.7827678,
+    "ast_hash": "6a58eac06e2f18155ec16528d2a4140d",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_03_ines_ben_salah.mp4": {
+    "mtime": 1787613080.5512602,
+    "seen": 1787625434.782771,
+    "ast_hash": "fe7c8a8b8055a48bbc145641bac44c5e",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_04_aya_talbi.mp4": {
+    "mtime": 1787613088.090307,
+    "seen": 1787625434.782775,
+    "ast_hash": "b8b759f93d17819922101eb89d5f54a9",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_05_baha_eddine_achaach.mp4": {
+    "mtime": 1787613092.131332,
+    "seen": 1787625434.782778,
+    "ast_hash": "fcd09209600a10f29b931bad5f911d95",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_06_hiba_birouki.mp4": {
+    "mtime": 1787613100.040381,
+    "seen": 1787625434.7827826,
+    "ast_hash": "656d71b34af98b90c70991fe36c2eb12",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_07_george_pupwe.mp4": {
+    "mtime": 1787613106.2514193,
+    "seen": 1787625434.7827857,
+    "ast_hash": "579052eb94f68ea9baf2b315d8d72534",
+    "semantic_hash": ""
+  },
+  "public/media/events/tedx_08_fahd_rahim.mp4": {
+    "mtime": 1787613111.7274532,
+    "seen": 1787625434.782788,
+    "ast_hash": "3106019276c35fd0c30ff6a23bc494c0",
+    "semantic_hash": ""
+  }
+}
