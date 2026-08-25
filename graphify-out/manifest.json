@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
-    "mtime": 1787665934.3125226,
-    "seen": 1787667951.702417,
-    "ast_hash": "22e0cb731e7a2578079c443e60adc506",
+    "mtime": 1787671251.6437275,
+    "seen": 1787671962.0445957,
+    "ast_hash": "1caf2f8a88c9120ab82d503c884f16bd",
     "semantic_hash": ""
   },
   "src/app/not-found.tsx": {
@@ -264,9 +264,9 @@
     "semantic_hash": ""
   },
   "vercel.json": {
-    "mtime": 1787665934.319013,
-    "seen": 1787667951.70248,
-    "ast_hash": "abb76919cd5ec5142b1438998517b64a",
+    "mtime": 1787671259.9258642,
+    "seen": 1787671962.0458944,
+    "ast_hash": "5db9da9d0c4f0107d358b18ad3502595",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -276,9 +276,9 @@
     "semantic_hash": ""
   },
   "docs/audit/activity_log.md": {
-    "mtime": 1787668344.4426017,
-    "seen": 1787668346.4899933,
-    "ast_hash": "dc3e29255513f27fdd97a9fa1029b558",
+    "mtime": 1787671909.3875868,
+    "seen": 1787671962.0459383,
+    "ast_hash": "3dfb9a6a63ee44c176f46e3a047e22c6",
     "semantic_hash": ""
   },
   "docs/club/concept.md": {
@@ -312,9 +312,9 @@
     "semantic_hash": ""
   },
   "docs/platform/deployment.md": {
-    "mtime": 1787668152.905604,
-    "seen": 1787668346.4901369,
-    "ast_hash": "b7ff5c2d83a363e01ab01754f979f405",
+    "mtime": 1787671886.4413824,
+    "seen": 1787671962.0460792,
+    "ast_hash": "4b8b78fa0966c8690ffad6443362efaf",
     "semantic_hash": ""
   },
   "rules.md": {
@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "src/utils/supabase/middleware.ts": {
-    "mtime": 1787665934.3184474,
-    "seen": 1787667951.7024765,
-    "ast_hash": "bd6d6a5a09615775dfefb31d2204cc7b",
+    "mtime": 1787671285.3060274,
+    "seen": 1787671962.0458517,
+    "ast_hash": "eb1f92ac6f23e672bd588019e56317f8",
     "semantic_hash": ""
   },
   "src/components/espace/AvatarCropModal.tsx": {

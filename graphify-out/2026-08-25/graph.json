@@ -4,32 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "id": "src_components_videoplayermodal_iosvideo",
-      "label": "IOSVideo",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "iosvideo",
-      "source_file": "src/components/VideoPlayerModal.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_components_videoplayermodal_videoplayermodalprops",
-      "label": "VideoPlayerModalProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "videoplayermodalprops",
-      "source_file": "src/components/VideoPlayerModal.tsx",
-      "source_location": "L8"
-    },
-    {
       "id": "src_data_siteconfig_navitem",
       "label": "NavItem",
       "_callable": true,
@@ -40,19 +14,6 @@
       "file_type": "code",
       "norm_label": "navitem",
       "source_file": "src/data/siteConfig.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_data_tedxdata_tedxtalk",
-      "label": "TedxTalk",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "tedxtalk",
-      "source_file": "src/data/tedxData.ts",
       "source_location": "L1"
     },
     {
@@ -114,24 +75,24 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "directoryentry",
       "source_file": "src/lib/types.ts",
       "source_location": "L183"
     },
     {
-      "id": "src_app_api_admin_youtube_import_route_youtubevideoresponse",
-      "label": "YouTubeVideoResponse",
+      "id": "src_components_annonces_announcementsfeed_attendee",
+      "label": "Attendee",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "youtubevideoresponse",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L8"
+      "norm_label": "attendee",
+      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
+      "source_location": "L18"
     },
     {
       "id": "src_components_auth_authprovider_authcontextvalue",
@@ -212,6 +173,19 @@
       "source_location": "L191"
     },
     {
+      "id": "src_lib_types_announcement",
+      "label": "Announcement",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "types.ts",
+      "file_type": "code",
+      "norm_label": "announcement",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L33"
+    },
+    {
       "id": "src_lib_types_announcementboarditem",
       "label": "AnnouncementBoardItem",
       "_callable": true,
@@ -236,19 +210,6 @@
       "norm_label": "announcementkind",
       "source_file": "src/lib/types.ts",
       "source_location": "L30"
-    },
-    {
-      "id": "src_lib_types_committee",
-      "label": "Committee",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "committee",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L22"
     },
     {
       "id": "src_lib_types_contentstatus",
@@ -290,43 +251,17 @@
       "source_location": "L64"
     },
     {
-      "id": "src_lib_types_mandate",
-      "label": "Mandate",
+      "id": "src_lib_types_ideastatus",
+      "label": "IdeaStatus",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "mandate",
+      "norm_label": "ideastatus",
       "source_file": "src/lib/types.ts",
-      "source_location": "L151"
-    },
-    {
-      "id": "src_lib_types_mandatemember",
-      "label": "MandateMember",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "mandatemember",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L159"
-    },
-    {
-      "id": "src_lib_types_mandatewithmembers",
-      "label": "MandateWithMembers",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "mandatewithmembers",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L168"
+      "source_location": "L52"
     },
     {
       "id": "src_lib_types_profile",
@@ -368,6 +303,32 @@
       "source_location": "L145"
     },
     {
+      "id": "src_app_api_admin_youtube_import_route_youtubevideoresponse",
+      "label": "YouTubeVideoResponse",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "youtubevideoresponse",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_lib_types_eventpageitem",
+      "label": "EventPageItem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "eventpageitem",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L128"
+    },
+    {
       "id": "src_app_events_slug_page_params",
       "label": "Params",
       "_callable": true,
@@ -381,6 +342,32 @@
       "source_location": "L10"
     },
     {
+      "id": "src_components_videoplayermodal_iosvideo",
+      "label": "IOSVideo",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "iosvideo",
+      "source_file": "src/components/VideoPlayerModal.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_components_videoplayermodal_videoplayermodalprops",
+      "label": "VideoPlayerModalProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "videoplayermodalprops",
+      "source_file": "src/components/VideoPlayerModal.tsx",
+      "source_location": "L8"
+    },
+    {
       "id": "src_data_podcastdata_podcastepisode",
       "label": "PodcastEpisode",
       "_callable": true,
@@ -391,6 +378,19 @@
       "file_type": "code",
       "norm_label": "podcastepisode",
       "source_file": "src/data/podcastData.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_data_tedxdata_tedxtalk",
+      "label": "TedxTalk",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "tedxtalk",
+      "source_file": "src/data/tedxData.ts",
       "source_location": "L1"
     },
     {
@@ -433,43 +433,30 @@
       "source_location": "L116"
     },
     {
-      "id": "src_lib_types_eventpageitem",
-      "label": "EventPageItem",
+      "id": "src_lib_types_mandate",
+      "label": "Mandate",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "eventpageitem",
+      "norm_label": "mandate",
       "source_file": "src/lib/types.ts",
-      "source_location": "L128"
+      "source_location": "L151"
     },
     {
-      "id": "src_lib_types_podcastepisoderow",
-      "label": "PodcastEpisodeRow",
+      "id": "src_lib_types_mandatewithmembers",
+      "label": "MandateWithMembers",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "podcastepisoderow",
+      "norm_label": "mandatewithmembers",
       "source_file": "src/lib/types.ts",
-      "source_location": "L81"
-    },
-    {
-      "id": "src_lib_types_tedxtalkrow",
-      "label": "TedxTalkRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "tedxtalkrow",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L100"
+      "source_location": "L168"
     },
     {
       "id": "src_components_admin_adminconsole_tabid",
@@ -524,19 +511,6 @@
       "source_location": "L11"
     },
     {
-      "id": "src_components_annonces_announcementsfeed_attendee",
-      "label": "Attendee",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "attendee",
-      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L18"
-    },
-    {
       "id": "src_components_auth_authmodal_mode",
       "label": "Mode",
       "_callable": true,
@@ -563,30 +537,56 @@
       "source_location": "L8"
     },
     {
-      "id": "src_lib_types_announcement",
-      "label": "Announcement",
+      "id": "src_lib_types_committee",
+      "label": "Committee",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 7,
       "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "announcement",
+      "norm_label": "committee",
       "source_file": "src/lib/types.ts",
-      "source_location": "L33"
+      "source_location": "L22"
     },
     {
-      "id": "src_lib_types_ideastatus",
-      "label": "IdeaStatus",
+      "id": "src_lib_types_mandatemember",
+      "label": "MandateMember",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 7,
       "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "ideastatus",
+      "norm_label": "mandatemember",
       "source_file": "src/lib/types.ts",
-      "source_location": "L52"
+      "source_location": "L159"
+    },
+    {
+      "id": "src_lib_types_podcastepisoderow",
+      "label": "PodcastEpisodeRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "podcastepisoderow",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L81"
+    },
+    {
+      "id": "src_lib_types_tedxtalkrow",
+      "label": "TedxTalkRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "tedxtalkrow",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L100"
     },
     {
       "id": "src_app_events_layout_eventslayout",
@@ -721,18 +721,6 @@
       "source_location": "L41"
     },
     {
-      "id": "src_components_events_tedxgrid_tedxgrid",
-      "label": "TedxGrid()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "tedxgrid()",
-      "source_file": "src/components/events/TedxGrid.tsx",
-      "source_location": "L10"
-    },
-    {
       "id": "src_components_footer_footer",
       "label": "Footer()",
       "_callable": true,
@@ -791,18 +779,6 @@
       "norm_label": "statscounter()",
       "source_file": "src/components/StatsCounter.tsx",
       "source_location": "L7"
-    },
-    {
-      "id": "src_components_videoplayermodal_videoplayermodal",
-      "label": "VideoPlayerModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "videoplayermodal()",
-      "source_file": "src/components/VideoPlayerModal.tsx",
-      "source_location": "L18"
     },
     {
       "id": "scripts_legacy_extract_instagram_scrape_dentalkclub",
@@ -918,7 +894,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "accessdenied()",
       "source_file": "src/app/admin/page.tsx",
@@ -930,7 +906,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "adminpage()",
       "source_file": "src/app/admin/page.tsx",
@@ -942,7 +918,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "annuairepage()",
       "source_file": "src/app/espace/annuaire/page.tsx",
@@ -954,7 +930,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "espacepage()",
       "source_file": "src/app/espace/page.tsx",
@@ -966,7 +942,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "adminconsole()",
       "source_file": "src/components/admin/AdminConsole.tsx",
@@ -978,7 +954,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "signinprompt()",
       "source_file": "src/components/auth/SignInPrompt.tsx",
@@ -990,7 +966,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "annuairegrid()",
       "source_file": "src/components/espace/AnnuaireGrid.tsx",
@@ -1002,7 +978,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "getcommittees()",
       "source_file": "src/lib/data.ts",
@@ -1014,7 +990,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "getserverprofile()",
       "source_file": "src/lib/data.ts",
@@ -1026,7 +1002,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "issupabaseconfigured()",
       "source_file": "src/lib/supabase/client.ts",
@@ -1038,7 +1014,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "createsupabaseserverclient()",
       "source_file": "src/lib/supabase/server.ts",
@@ -1050,7 +1026,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "middleware()",
       "source_file": "src/middleware.ts",
@@ -1062,7 +1038,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "updatesession()",
       "source_file": "src/utils/supabase/middleware.ts",
@@ -1081,28 +1057,16 @@
       "source_location": "L21"
     },
     {
-      "id": "src_app_api_admin_youtube_import_route_isodurationtoclock",
-      "label": "isoDurationToClock()",
+      "id": "src_components_admin_ideastab_ideastab",
+      "label": "IdeasTab()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "isodurationtoclock()",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "src_app_api_admin_youtube_import_route_post",
-      "label": "POST()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "post()",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L38"
+      "norm_label": "ideastab()",
+      "source_file": "src/components/admin/IdeasTab.tsx",
+      "source_location": "L17"
     },
     {
       "id": "src_components_admin_userstab_userstab",
@@ -1127,6 +1091,18 @@
       "norm_label": "announcementsfeed()",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
       "source_location": "L123"
+    },
+    {
+      "id": "src_components_annonces_announcementsfeed_attendeesmodal",
+      "label": "AttendeesModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "types.ts",
+      "file_type": "code",
+      "norm_label": "attendeesmodal()",
+      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
+      "source_location": "L25"
     },
     {
       "id": "src_components_auth_authprovider_useauth",
@@ -1201,6 +1177,18 @@
       "source_location": "L25"
     },
     {
+      "id": "src_components_idees_pitchmodal_pitchmodal",
+      "label": "PitchModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "types.ts",
+      "file_type": "code",
+      "norm_label": "pitchmodal()",
+      "source_file": "src/components/idees/PitchModal.tsx",
+      "source_location": "L10"
+    },
+    {
       "id": "src_components_useravatar_useravatar",
       "label": "UserAvatar()",
       "_callable": true,
@@ -1261,28 +1249,52 @@
       "source_location": "L45"
     },
     {
+      "id": "src_app_api_admin_youtube_import_route_isodurationtoclock",
+      "label": "isoDurationToClock()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "isodurationtoclock()",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_app_api_admin_youtube_import_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L38"
+    },
+    {
+      "id": "src_components_events_eventitemsgrid_eventitemsgrid",
+      "label": "EventItemsGrid()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "eventitemsgrid()",
+      "source_file": "src/components/events/EventItemsGrid.tsx",
+      "source_location": "L11"
+    },
+    {
       "id": "src_lib_format_parseyoutubeid",
       "label": "parseYouTubeId()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
+      "community": 44,
+      "community_name": "route.ts",
       "file_type": "code",
       "norm_label": "parseyoutubeid()",
       "source_file": "src/lib/format.ts",
       "source_location": "L56"
-    },
-    {
-      "id": "audit_tmp_check",
-      "label": "check()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "audit-tmp.mjs",
-      "file_type": "code",
-      "norm_label": "check()",
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L16"
     },
     {
       "id": "src_app_about_page_aboutpage",
@@ -1405,28 +1417,16 @@
       "source_location": "L7"
     },
     {
-      "id": "src_components_events_eventitemsgrid_eventitemsgrid",
-      "label": "EventItemsGrid()",
+      "id": "src_components_events_tedxgrid_tedxgrid",
+      "label": "TedxGrid()",
       "_callable": true,
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "eventitemsgrid()",
-      "source_file": "src/components/events/EventItemsGrid.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_components_infographicviewer_infographicviewer",
-      "label": "InfographicViewer()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "infographicviewer()",
-      "source_file": "src/components/InfographicViewer.tsx",
-      "source_location": "L8"
+      "norm_label": "tedxgrid()",
+      "source_file": "src/components/events/TedxGrid.tsx",
+      "source_location": "L10"
     },
     {
       "id": "src_components_podcastplayer_podcastplayer",
@@ -1439,6 +1439,18 @@
       "norm_label": "podcastplayer()",
       "source_file": "src/components/PodcastPlayer.tsx",
       "source_location": "L8"
+    },
+    {
+      "id": "src_components_videoplayermodal_videoplayermodal",
+      "label": "VideoPlayerModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "videoplayermodal()",
+      "source_file": "src/components/VideoPlayerModal.tsx",
+      "source_location": "L18"
     },
     {
       "id": "src_lib_data_getaboutsections",
@@ -1741,18 +1753,6 @@
       "source_location": "L14"
     },
     {
-      "id": "src_components_admin_ideastab_ideastab",
-      "label": "IdeasTab()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "ideastab()",
-      "source_file": "src/components/admin/IdeasTab.tsx",
-      "source_location": "L17"
-    },
-    {
       "id": "src_components_admin_podcasttab_editormodal",
       "label": "EditorModal()",
       "_callable": true,
@@ -1813,18 +1813,6 @@
       "source_location": "L31"
     },
     {
-      "id": "src_components_annonces_announcementsfeed_attendeesmodal",
-      "label": "AttendeesModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "attendeesmodal()",
-      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L25"
-    },
-    {
       "id": "src_components_auth_authmodal_authmodal",
       "label": "AuthModal()",
       "_callable": true,
@@ -1834,7 +1822,7 @@
       "file_type": "code",
       "norm_label": "authmodal()",
       "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L21"
+      "source_location": "L22"
     },
     {
       "id": "src_components_auth_authmodal_translateerror",
@@ -1873,16 +1861,16 @@
       "source_location": "L12"
     },
     {
-      "id": "src_components_idees_pitchmodal_pitchmodal",
-      "label": "PitchModal()",
+      "id": "src_components_infographicviewer_infographicviewer",
+      "label": "InfographicViewer()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
       "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "pitchmodal()",
-      "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L10"
+      "norm_label": "infographicviewer()",
+      "source_file": "src/components/InfographicViewer.tsx",
+      "source_location": "L8"
     },
     {
       "id": "src_components_ui_form_badge",
@@ -1997,7 +1985,7 @@
       "label": "package.json",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "package.json",
       "source_file": "package.json",
@@ -2008,7 +1996,7 @@
       "label": "dependencies",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "dependencies",
       "source_file": "package.json",
@@ -2019,7 +2007,7 @@
       "label": "lucide-react",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "lucide-react",
       "source_file": "package.json",
@@ -2030,7 +2018,7 @@
       "label": "next",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "next",
       "source_file": "package.json",
@@ -2041,7 +2029,7 @@
       "label": "react",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "react",
       "source_file": "package.json",
@@ -2052,7 +2040,7 @@
       "label": "react-dom",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "react-dom",
       "source_file": "package.json",
@@ -2063,7 +2051,7 @@
       "label": "@supabase/ssr",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "@supabase/ssr",
       "source_file": "package.json",
@@ -2074,139 +2062,18 @@
       "label": "@supabase/supabase-js",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "@supabase/supabase-js",
       "source_file": "package.json",
       "source_location": "L14"
     },
     {
-      "id": "package_devdependencies",
-      "label": "devDependencies",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "devdependencies",
-      "source_file": "package.json",
-      "source_location": "L20"
-    },
-    {
-      "id": "package_devdependencies_autoprefixer",
-      "label": "autoprefixer",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "autoprefixer",
-      "source_file": "package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "package_devdependencies_eslint",
-      "label": "eslint",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "eslint",
-      "source_file": "package.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "package_devdependencies_eslint_config_next",
-      "label": "eslint-config-next",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "eslint-config-next",
-      "source_file": "package.json",
-      "source_location": "L26"
-    },
-    {
-      "id": "package_devdependencies_postcss",
-      "label": "postcss",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "postcss",
-      "source_file": "package.json",
-      "source_location": "L27"
-    },
-    {
-      "id": "package_devdependencies_supabase",
-      "label": "supabase",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "supabase",
-      "source_file": "package.json",
-      "source_location": "L28"
-    },
-    {
-      "id": "package_devdependencies_tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "tailwindcss",
-      "source_file": "package.json",
-      "source_location": "L29"
-    },
-    {
-      "id": "package_devdependencies_types_node",
-      "label": "@types/node",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@types/node",
-      "source_file": "package.json",
-      "source_location": "L21"
-    },
-    {
-      "id": "package_devdependencies_types_react",
-      "label": "@types/react",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@types/react",
-      "source_file": "package.json",
-      "source_location": "L22"
-    },
-    {
-      "id": "package_devdependencies_types_react_dom",
-      "label": "@types/react-dom",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@types/react-dom",
-      "source_file": "package.json",
-      "source_location": "L23"
-    },
-    {
-      "id": "package_devdependencies_typescript",
-      "label": "typescript",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "typescript",
-      "source_file": "package.json",
-      "source_location": "L30"
-    },
-    {
       "id": "package_name",
       "label": "name",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "name",
       "source_file": "package.json",
@@ -2217,7 +2084,7 @@
       "label": "private",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "private",
       "source_file": "package.json",
@@ -2228,7 +2095,7 @@
       "label": "scripts",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "scripts",
       "source_file": "package.json",
@@ -2239,7 +2106,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "package.json",
@@ -2250,7 +2117,7 @@
       "label": "deploy",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "deploy",
       "source_file": "package.json",
@@ -2261,7 +2128,7 @@
       "label": "dev",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "dev",
       "source_file": "package.json",
@@ -2272,7 +2139,7 @@
       "label": "lint",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "lint",
       "source_file": "package.json",
@@ -2283,7 +2150,7 @@
       "label": "start",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "start",
       "source_file": "package.json",
@@ -2294,51 +2161,18 @@
       "label": "version",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "version",
       "source_file": "package.json",
       "source_location": "L3"
     },
     {
-      "id": "autoprefixer",
-      "label": "autoprefixer",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "autoprefixer",
-      "source_file": "package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "eslint",
-      "label": "eslint",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "eslint",
-      "source_file": "package.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "eslint_config_next",
-      "label": "eslint-config-next",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "eslint-config-next",
-      "source_file": "package.json",
-      "source_location": "L26"
-    },
-    {
       "id": "lucide_react",
       "label": "lucide-react",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "concept",
       "norm_label": "lucide-react",
       "source_file": "package.json",
@@ -2349,29 +2183,18 @@
       "label": "next",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "concept",
       "norm_label": "next",
       "source_file": "package.json",
       "source_location": "L16"
     },
     {
-      "id": "postcss",
-      "label": "postcss",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "postcss",
-      "source_file": "package.json",
-      "source_location": "L27"
-    },
-    {
       "id": "react",
       "label": "react",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "concept",
       "norm_label": "react",
       "source_file": "package.json",
@@ -2382,29 +2205,18 @@
       "label": "react-dom",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "concept",
       "norm_label": "react-dom",
       "source_file": "package.json",
       "source_location": "L18"
     },
     {
-      "id": "supabase",
-      "label": "supabase",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "supabase",
-      "source_file": "package.json",
-      "source_location": "L28"
-    },
-    {
       "id": "supabase_ssr",
       "label": "@supabase/ssr",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "concept",
       "norm_label": "@supabase/ssr",
       "source_file": "package.json",
@@ -2415,66 +2227,11 @@
       "label": "@supabase/supabase-js",
       "_origin": "ast",
       "community": 0,
-      "community_name": "devDependencies",
+      "community_name": "dependencies",
       "file_type": "concept",
       "norm_label": "@supabase/supabase-js",
       "source_file": "package.json",
       "source_location": "L14"
-    },
-    {
-      "id": "tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "tailwindcss",
-      "source_file": "package.json",
-      "source_location": "L29"
-    },
-    {
-      "id": "types_node",
-      "label": "@types/node",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "@types/node",
-      "source_file": "package.json",
-      "source_location": "L21"
-    },
-    {
-      "id": "types_react",
-      "label": "@types/react",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "@types/react",
-      "source_file": "package.json",
-      "source_location": "L22"
-    },
-    {
-      "id": "types_react_dom",
-      "label": "@types/react-dom",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "@types/react-dom",
-      "source_file": "package.json",
-      "source_location": "L23"
-    },
-    {
-      "id": "typescript",
-      "label": "typescript",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "devDependencies",
-      "file_type": "concept",
-      "norm_label": "typescript",
-      "source_file": "package.json",
-      "source_location": "L30"
     },
     {
       "id": "tsconfig",
@@ -3016,17 +2773,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_components_events_tedxgrid",
-      "label": "TedxGrid.tsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "tedxgrid.tsx",
-      "source_file": "src/components/events/TedxGrid.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "src_components_footer",
       "label": "Footer.tsx",
       "_origin": "ast",
@@ -3082,17 +2828,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_components_videoplayermodal",
-      "label": "VideoPlayerModal.tsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "videoplayermodal.tsx",
-      "source_file": "src/components/VideoPlayerModal.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "src_data_siteconfig",
       "label": "siteConfig.ts",
       "_origin": "ast",
@@ -3113,28 +2848,6 @@
       "norm_label": "siteconfig",
       "source_file": "src/data/siteConfig.ts",
       "source_location": "L6"
-    },
-    {
-      "id": "src_data_tedxdata",
-      "label": "tedxData.ts",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "tedxdata.ts",
-      "source_file": "src/data/tedxData.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_data_tedxdata_tedxtalksdata",
-      "label": "tedxTalksData",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "tedxtalksdata",
-      "source_file": "src/data/tedxData.ts",
-      "source_location": "L14"
     },
     {
       "id": "scripts_legacy_extract_instagram",
@@ -3783,7 +3496,7 @@
       "label": "admin/page.tsx",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "admin/page.tsx",
       "source_file": "src/app/admin/page.tsx",
@@ -3794,7 +3507,7 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/admin/page.tsx",
@@ -3805,7 +3518,7 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "src/app/admin/page.tsx",
@@ -3816,7 +3529,7 @@
       "label": "annuaire/page.tsx",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "annuaire/page.tsx",
       "source_file": "src/app/espace/annuaire/page.tsx",
@@ -3827,7 +3540,7 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/espace/annuaire/page.tsx",
@@ -3838,7 +3551,7 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "src/app/espace/annuaire/page.tsx",
@@ -3849,7 +3562,7 @@
       "label": "espace/page.tsx",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "espace/page.tsx",
       "source_file": "src/app/espace/page.tsx",
@@ -3860,7 +3573,7 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/espace/page.tsx",
@@ -3871,7 +3584,7 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "src/app/espace/page.tsx",
@@ -3882,7 +3595,7 @@
       "label": "SignInPrompt.tsx",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "signinprompt.tsx",
       "source_file": "src/components/auth/SignInPrompt.tsx",
@@ -3893,10 +3606,21 @@
       "label": "AnnuaireGrid.tsx",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "annuairegrid.tsx",
       "source_file": "src/components/espace/AnnuaireGrid.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_client",
+      "label": "client.ts",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "client.ts",
+      "file_type": "code",
+      "norm_label": "client.ts",
+      "source_file": "src/lib/supabase/client.ts",
       "source_location": "L1"
     },
     {
@@ -3904,7 +3628,7 @@
       "label": "SUPABASE_ANON_KEY",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "supabase_anon_key",
       "source_file": "src/lib/supabase/client.ts",
@@ -3915,7 +3639,7 @@
       "label": "SUPABASE_URL",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "supabase_url",
       "source_file": "src/lib/supabase/client.ts",
@@ -3926,7 +3650,7 @@
       "label": "server.ts",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "server.ts",
       "source_file": "src/lib/supabase/server.ts",
@@ -3937,7 +3661,7 @@
       "label": "src/middleware.ts",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "src/middleware.ts",
       "source_file": "src/middleware.ts",
@@ -3948,7 +3672,7 @@
       "label": "config",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "config",
       "source_file": "src/middleware.ts",
@@ -3959,7 +3683,7 @@
       "label": "supabase/middleware.ts",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "code",
       "norm_label": "supabase/middleware.ts",
       "source_file": "src/utils/supabase/middleware.ts",
@@ -3970,7 +3694,7 @@
       "label": "IMPORTANT: DO NOT REMOVE auth.getUser()",
       "_origin": "ast",
       "community": 36,
-      "community_name": "createSupabaseServerClient",
+      "community_name": "client.ts",
       "file_type": "rationale",
       "norm_label": "important: do not remove auth.getuser()",
       "source_file": "src/utils/supabase/middleware.ts",
@@ -4199,26 +3923,26 @@
       "source_location": "L7"
     },
     {
-      "id": "src_app_api_admin_youtube_import_route",
-      "label": "route.ts",
+      "id": "src_components_admin_ideastab",
+      "label": "IdeasTab.tsx",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "route.ts",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "norm_label": "ideastab.tsx",
+      "source_file": "src/components/admin/IdeasTab.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_api_admin_youtube_import_route_dynamic",
-      "label": "dynamic",
+      "id": "src_components_admin_ideastab_status_labels",
+      "label": "STATUS_LABELS",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L6"
+      "norm_label": "status_labels",
+      "source_file": "src/components/admin/IdeasTab.tsx",
+      "source_location": "L10"
     },
     {
       "id": "src_components_admin_userstab",
@@ -4241,6 +3965,39 @@
       "norm_label": "role_labels",
       "source_file": "src/components/admin/UsersTab.tsx",
       "source_location": "L11"
+    },
+    {
+      "id": "src_components_annonces_announcementsfeed",
+      "label": "AnnouncementsFeed.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "types.ts",
+      "file_type": "code",
+      "norm_label": "announcementsfeed.tsx",
+      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_annonces_announcementsfeed_status_labels",
+      "label": "STATUS_LABELS",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "types.ts",
+      "file_type": "code",
+      "norm_label": "status_labels",
+      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
+      "source_location": "L117"
+    },
+    {
+      "id": "src_components_annonces_announcementsfeed_status_tones",
+      "label": "STATUS_TONES",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "types.ts",
+      "file_type": "code",
+      "norm_label": "status_tones",
+      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
+      "source_location": "L111"
     },
     {
       "id": "src_components_auth_authprovider",
@@ -4433,6 +4190,18 @@
       "source_location": "L95"
     },
     {
+      "id": "docs_audit_activity_log_2026_08_25_full_security_audit_vercel_live_supabase_code_hardening",
+      "label": "2026-08-25 \u2014 Full security audit (Vercel + live Supabase + code) & hardening",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "DTC Project Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-08-25 \u2014 full security audit (vercel + live supabase + code) & hardening",
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L123"
+    },
+    {
       "id": "docs_audit_activity_log_2026_08_25_independent_judge_audit_remediation",
       "label": "2026-08-25 \u2014 Independent judge audit + remediation",
       "_origin": "ast",
@@ -4529,59 +4298,235 @@
       "source_location": "L32"
     },
     {
-      "id": "audit_tmp",
-      "label": "audit-tmp.mjs",
+      "id": "package_devdependencies",
+      "label": "devDependencies",
       "_origin": "ast",
       "community": 42,
-      "community_name": "audit-tmp.mjs",
+      "community_name": "devDependencies",
       "file_type": "code",
-      "norm_label": "audit-tmp.mjs",
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L1"
+      "norm_label": "devdependencies",
+      "source_file": "package.json",
+      "source_location": "L20"
     },
     {
-      "id": "audit_tmp_anon",
-      "label": "anon",
+      "id": "package_devdependencies_autoprefixer",
+      "label": "autoprefixer",
       "_origin": "ast",
       "community": 42,
-      "community_name": "audit-tmp.mjs",
+      "community_name": "devDependencies",
       "file_type": "code",
-      "norm_label": "anon",
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L13"
+      "norm_label": "autoprefixer",
+      "source_file": "package.json",
+      "source_location": "L24"
     },
     {
-      "id": "audit_tmp_denies",
-      "label": "denies",
+      "id": "package_devdependencies_eslint",
+      "label": "eslint",
       "_origin": "ast",
       "community": 42,
-      "community_name": "audit-tmp.mjs",
+      "community_name": "devDependencies",
       "file_type": "code",
-      "norm_label": "denies",
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L45"
+      "norm_label": "eslint",
+      "source_file": "package.json",
+      "source_location": "L25"
     },
     {
-      "id": "audit_tmp_env",
-      "label": "env",
+      "id": "package_devdependencies_eslint_config_next",
+      "label": "eslint-config-next",
       "_origin": "ast",
       "community": 42,
-      "community_name": "audit-tmp.mjs",
+      "community_name": "devDependencies",
       "file_type": "code",
-      "norm_label": "env",
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L6"
+      "norm_label": "eslint-config-next",
+      "source_file": "package.json",
+      "source_location": "L26"
     },
     {
-      "id": "audit_tmp_results",
-      "label": "results",
+      "id": "package_devdependencies_postcss",
+      "label": "postcss",
       "_origin": "ast",
       "community": 42,
-      "community_name": "audit-tmp.mjs",
+      "community_name": "devDependencies",
       "file_type": "code",
-      "norm_label": "results",
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L15"
+      "norm_label": "postcss",
+      "source_file": "package.json",
+      "source_location": "L27"
+    },
+    {
+      "id": "package_devdependencies_supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "supabase",
+      "source_file": "package.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "package_devdependencies_tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "package.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "package_devdependencies_types_node",
+      "label": "@types/node",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@types/node",
+      "source_file": "package.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "package_devdependencies_types_react",
+      "label": "@types/react",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@types/react",
+      "source_file": "package.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "package_devdependencies_types_react_dom",
+      "label": "@types/react-dom",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@types/react-dom",
+      "source_file": "package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "package_devdependencies_typescript",
+      "label": "typescript",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "typescript",
+      "source_file": "package.json",
+      "source_location": "L30"
+    },
+    {
+      "id": "autoprefixer",
+      "label": "autoprefixer",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "autoprefixer",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
+      "id": "eslint",
+      "label": "eslint",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "eslint",
+      "source_file": "package.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "eslint_config_next",
+      "label": "eslint-config-next",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "eslint-config-next",
+      "source_file": "package.json",
+      "source_location": "L26"
+    },
+    {
+      "id": "postcss",
+      "label": "postcss",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "postcss",
+      "source_file": "package.json",
+      "source_location": "L27"
+    },
+    {
+      "id": "supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "supabase",
+      "source_file": "package.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "tailwindcss",
+      "source_file": "package.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "types_node",
+      "label": "@types/node",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "@types/node",
+      "source_file": "package.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "types_react",
+      "label": "@types/react",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "@types/react",
+      "source_file": "package.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "types_react_dom",
+      "label": "@types/react-dom",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "@types/react-dom",
+      "source_file": "package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "typescript",
+      "label": "typescript",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "typescript",
+      "source_file": "package.json",
+      "source_location": "L30"
     },
     {
       "id": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he",
@@ -4650,6 +4595,39 @@
       "norm_label": "source nodes",
       "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
       "source_location": "L20"
+    },
+    {
+      "id": "src_app_api_admin_youtube_import_route",
+      "label": "route.ts",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "route.ts",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_admin_youtube_import_route_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_components_events_eventitemsgrid",
+      "label": "EventItemsGrid.tsx",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "route.ts",
+      "file_type": "code",
+      "norm_label": "eventitemsgrid.tsx",
+      "source_file": "src/components/events/EventItemsGrid.tsx",
+      "source_location": "L1"
     },
     {
       "id": "src_app_about_page",
@@ -4784,25 +4762,14 @@
       "source_location": "L5"
     },
     {
-      "id": "src_components_events_eventitemsgrid",
-      "label": "EventItemsGrid.tsx",
+      "id": "src_components_events_tedxgrid",
+      "label": "TedxGrid.tsx",
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "eventitemsgrid.tsx",
-      "source_file": "src/components/events/EventItemsGrid.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_infographicviewer",
-      "label": "InfographicViewer.tsx",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "infographicviewer.tsx",
-      "source_file": "src/components/InfographicViewer.tsx",
+      "norm_label": "tedxgrid.tsx",
+      "source_file": "src/components/events/TedxGrid.tsx",
       "source_location": "L1"
     },
     {
@@ -4814,6 +4781,17 @@
       "file_type": "code",
       "norm_label": "podcastplayer.tsx",
       "source_file": "src/components/PodcastPlayer.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_videoplayermodal",
+      "label": "VideoPlayerModal.tsx",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "videoplayermodal.tsx",
+      "source_file": "src/components/VideoPlayerModal.tsx",
       "source_location": "L1"
     },
     {
@@ -4837,6 +4815,28 @@
       "norm_label": "podcastepisodesdata",
       "source_file": "src/data/podcastData.ts",
       "source_location": "L18"
+    },
+    {
+      "id": "src_data_tedxdata",
+      "label": "tedxData.ts",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "tedxdata.ts",
+      "source_file": "src/data/tedxData.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_data_tedxdata_tedxtalksdata",
+      "label": "tedxTalksData",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "tedxtalksdata",
+      "source_file": "src/data/tedxData.ts",
+      "source_location": "L14"
     },
     {
       "id": "src_lib_data",
@@ -4982,28 +4982,6 @@
       "source_location": "L95"
     },
     {
-      "id": "src_components_admin_ideastab",
-      "label": "IdeasTab.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "ideastab.tsx",
-      "source_file": "src/components/admin/IdeasTab.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_admin_ideastab_status_labels",
-      "label": "STATUS_LABELS",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "status_labels",
-      "source_file": "src/components/admin/IdeasTab.tsx",
-      "source_location": "L10"
-    },
-    {
       "id": "src_components_admin_podcasttab",
       "label": "PodcastTab.tsx",
       "_origin": "ast",
@@ -5046,39 +5024,6 @@
       "norm_label": "empty_form",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
       "source_location": "L21"
-    },
-    {
-      "id": "src_components_annonces_announcementsfeed",
-      "label": "AnnouncementsFeed.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "announcementsfeed.tsx",
-      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_annonces_announcementsfeed_status_labels",
-      "label": "STATUS_LABELS",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "status_labels",
-      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L117"
-    },
-    {
-      "id": "src_components_annonces_announcementsfeed_status_tones",
-      "label": "STATUS_TONES",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "status_tones",
-      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L111"
     },
     {
       "id": "src_components_auth_authmodal",
@@ -5125,6 +5070,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_components_infographicviewer",
+      "label": "InfographicViewer.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "infographicviewer.tsx",
+      "source_file": "src/components/InfographicViewer.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_components_ui_form",
       "label": "form.tsx",
       "_origin": "ast",
@@ -5166,17 +5122,6 @@
       "file_type": "code",
       "norm_label": "useoverlaydialog.ts",
       "source_file": "src/hooks/useOverlayDialog.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_supabase_client",
-      "label": "client.ts",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "getSupabaseBrowserClient",
-      "file_type": "code",
-      "norm_label": "client.ts",
-      "source_file": "src/lib/supabase/client.ts",
       "source_location": "L1"
     },
     {
@@ -5465,7 +5410,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L111",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -5489,7 +5434,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L64",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -6173,7 +6118,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -6185,7 +6130,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -6197,7 +6142,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L64",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -12297,61 +12242,6 @@
       "weight": 1.0
     },
     {
-      "source": "audit_tmp",
-      "target": "audit_tmp_anon",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L13",
-      "weight": 1.0
-    },
-    {
-      "source": "audit_tmp",
-      "target": "audit_tmp_results",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L15",
-      "weight": 1.0
-    },
-    {
-      "source": "audit_tmp",
-      "target": "audit_tmp_check",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "audit_tmp",
-      "target": "audit_tmp_denies",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "audit_tmp",
-      "target": "audit_tmp_env",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "audit-tmp.mjs",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
       "source": "docs_audit_activity_log",
       "target": "docs_audit_activity_log_dtc_project_activity_log",
       "relation": "contains",
@@ -12382,6 +12272,17 @@
       "confidence_score": 1.0,
       "source_file": "docs/audit/activity_log.md",
       "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_audit_activity_log_dtc_project_activity_log",
+      "target": "docs_audit_activity_log_2026_08_25_full_security_audit_vercel_live_supabase_code_hardening",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -14438,7 +14339,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "weight": 1.0
     },
     {

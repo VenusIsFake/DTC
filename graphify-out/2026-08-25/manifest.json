@@ -276,9 +276,9 @@
     "semantic_hash": ""
   },
   "docs/audit/activity_log.md": {
-    "mtime": 1787665934.302998,
-    "seen": 1787667951.7024837,
-    "ast_hash": "ade118e4b43c128250bad4d57f943afe",
+    "mtime": 1787668344.4426017,
+    "seen": 1787668346.4899933,
+    "ast_hash": "dc3e29255513f27fdd97a9fa1029b558",
     "semantic_hash": ""
   },
   "docs/club/concept.md": {
@@ -312,9 +312,9 @@
     "semantic_hash": ""
   },
   "docs/platform/deployment.md": {
-    "mtime": 1787665934.303998,
-    "seen": 1787667951.702491,
-    "ast_hash": "a906703a718affbd83e3d04866ae4009",
+    "mtime": 1787668152.905604,
+    "seen": 1787668346.4901369,
+    "ast_hash": "b7ff5c2d83a363e01ab01754f979f405",
     "semantic_hash": ""
   },
   "rules.md": {
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "src/app/api/admin/youtube-import/route.ts": {
-    "mtime": 1787665934.3120863,
-    "seen": 1787667951.7024062,
-    "ast_hash": "e367f4dceb172dc9ff892ed0ab57a7b4",
+    "mtime": 1787668141.6795454,
+    "seen": 1787668346.488398,
+    "ast_hash": "e501a69cce7e414e011c2435d5f032e2",
     "semantic_hash": ""
   },
   "src/app/espace/annuaire/page.tsx": {
@@ -486,9 +486,9 @@
     "semantic_hash": ""
   },
   "src/components/auth/AuthModal.tsx": {
-    "mtime": 1787665934.3154993,
-    "seen": 1787667951.7024453,
-    "ast_hash": "2831b4a23925864a68d26dba030b1c16",
+    "mtime": 1787668141.7245457,
+    "seen": 1787668346.4892266,
+    "ast_hash": "bed0bbf833f2bcb3bc195b9ac91a67df",
     "semantic_hash": ""
   },
   "src/components/auth/AuthProvider.tsx": {
@@ -615,12 +615,6 @@
     "mtime": 1787665934.3184474,
     "seen": 1787667951.7024765,
     "ast_hash": "bd6d6a5a09615775dfefb31d2204cc7b",
-    "semantic_hash": ""
-  },
-  "audit-tmp.mjs": {
-    "mtime": 1787667873.4962034,
-    "seen": 1787667951.7023754,
-    "ast_hash": "169b33e458970a3e2758ba021f21d844",
     "semantic_hash": ""
   },
   "src/components/espace/AvatarCropModal.tsx": {

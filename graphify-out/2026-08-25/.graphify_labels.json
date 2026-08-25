@@ -1,5 +1,5 @@
 {
-  "0": "devDependencies",
+  "0": "dependencies",
   "1": "compilerOptions",
   "2": "app/layout.tsx",
   "3": "gallery/page.tsx",
@@ -35,12 +35,13 @@
   "33": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
   "34": "AI Agent Operational Rules & Guidelines for DTC Website",
   "35": "extends",
-  "36": "createSupabaseServerClient",
+  "36": "client.ts",
   "37": "Dentalk Club FMDC (DTC) — Project Overview",
   "38": "verify-tmp.mjs",
   "39": "README.md",
   "40": "DTC Project Activity Log",
   "41": "📋 Comprehensive Category Index",
-  "42": "audit-tmp.mjs",
-  "43": "Q: check out the profile section, use graphify for help"
+  "42": "devDependencies",
+  "43": "Q: check out the profile section, use graphify for help",
+  "44": "route.ts"
 }

@@ -91,7 +91,10 @@ export default async function RootLayout({
       <body className="bg-[#0B132B] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#D4AF37]/30 selection:text-white">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            // Escape "<" so no value can ever close the script tag early.
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+          }}
         />
         <AuthProvider>
           <Navbar navItems={navItems} />

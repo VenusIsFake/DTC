@@ -221,7 +221,7 @@ $$;
 
 create or replace function public.set_updated_at()
 returns trigger
-language plpgsql
+language plpgsql set search_path = ''
 as $$
 begin
   new.updated_at = now();
@@ -428,6 +428,15 @@ revoke execute on function public.admin_list_profiles() from public, anon;
 revoke execute on function public.admin_set_role(uuid, text) from public, anon;
 revoke execute on function public.admin_set_banned(uuid, boolean) from public, anon;
 revoke execute on function public.announcement_attendees(uuid) from public, anon;
+
+-- Trigger-only functions must never be callable via RPC (trigger invocation
+-- does not require EXECUTE, so revoking is safe for the triggers themselves).
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
+revoke execute on function public.handle_user_email_update() from public, anon, authenticated;
+revoke execute on function public.enforce_single_current_mandate() from public, anon, authenticated;
+grant execute on function public.handle_new_user() to service_role;
+grant execute on function public.handle_user_email_update() to service_role;
+grant execute on function public.enforce_single_current_mandate() to service_role;
 grant execute on function public.my_profile() to authenticated;
 grant execute on function public.member_directory() to authenticated;
 grant execute on function public.bureau_list_profiles() to authenticated;
@@ -437,11 +446,12 @@ grant execute on function public.admin_set_banned(uuid, boolean) to authenticate
 grant execute on function public.announcement_attendees(uuid) to authenticated;
 
 -- ----------------------------------------------------------------------------
--- PUBLIC VIEWS (owned by postgres => definer semantics; they hard-code the
--- public-safe projection so guests get author names without profiles access)
+-- PUBLIC VIEWS (security_invoker: they execute with the querying role's
+-- privileges, so table RLS and column grants stay the enforcement layer)
 -- ----------------------------------------------------------------------------
 
-create or replace view public.announcement_board as
+create or replace view public.announcement_board
+with (security_invoker = true) as
 select
   a.id, a.kind, a.title, a.body, a.event_date, a.location, a.is_pinned,
   a.status, a.author_id, a.created_at, a.updated_at,
@@ -451,7 +461,8 @@ from public.announcements a
 left join public.profiles p on p.id = a.author_id
 where a.status = 'published';
 
-create or replace view public.idea_board as
+create or replace view public.idea_board
+with (security_invoker = true) as
 select
   i.id, i.title, i.description, i.status, i.author_id, i.created_at, i.updated_at,
   p.full_name as author_name,
@@ -461,7 +472,8 @@ select
 from public.ideas i
 left join public.profiles p on p.id = i.author_id;
 
-create or replace view public.comment_board as
+create or replace view public.comment_board
+with (security_invoker = true) as
 select
   c.id, c.idea_id, c.author_id, c.body, c.created_at,
   p.full_name as author_name,
@@ -678,6 +690,8 @@ create policy "about_bureau_write" on public.about_sections
 -- ----------------------------------------------------------------------------
 
 revoke all on public.profiles from anon, authenticated;
+-- anon reads only the columns the public views join on (author display).
+grant select (id, full_name, avatar_url) on public.profiles to anon;
 grant select (id, full_name, avatar_url, promo, committee_id, created_at)
   on public.profiles to authenticated;
 grant update (full_name, promo, committee_id, avatar_url, bio, phone)

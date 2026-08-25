@@ -36,9 +36,9 @@ A template lives in `.env.example`. Never commit `.env*` (git-ignored).
 2. **Apply the schema:** SQL Editor → paste & run `supabase/schema.sql` (tables, RLS policies, security-definer RPCs, views, storage buckets, default settings).
 3. **Seed content:** SQL Editor → paste & run `supabase/seed.sql` (5 commissions, Mandat 2025–2026 + 12 members, 4 podcast episodes, 8 TEDx talks, 3 "À propos" sections). Mirrors the static `src/data` files so the DB-driven site renders identically to the old static site on day one.
 4. **Auth settings:** Authentication → Providers → Email: **disable "Confirm email"**. Authentication → URL Configuration → Site URL: `https://dentalkclub-fmdc.vercel.app`.
-   **Recommended security toggles** (Authentication → Sign In / Up — these two are dashboard-only, the Management API ignores them):
-   - **Leaked password protection: ON** (rejects passwords found in known breaches)
-   - **Minimum password length: 8** (the signup form already enforces 8 client-side; the server default is 6 until this is flipped)
+   Security toggles status (verified live 2026-08-25):
+   - **Leaked password protection: PRO PLAN ONLY** — Supabase returns `HTTP 402 "available on Pro Plans and up"` on the free tier (API, CLI and dashboard alike). Compensating control: **minimum password length 8 is enforced server-side and verified functionally**; the signup UI also warns against reused passwords.
+   - **Minimum password length: 8** — already live server-side (verified: 6-char signup rejected with `weak_password`).
 5. **Bootstrap the first admin:** sign up in the app, then in the SQL editor run:
    ```sql
    update profiles set role = 'admin' where email = 'your-email@example.com';
@@ -56,6 +56,9 @@ A template lives in `.env.example`. Never commit `.env*` (git-ignored).
 | **Direct Project URL** | https://dtc-lilac.vercel.app |
 
 * **Project:** `dtc` (team `venus55`), Next.js preset, no SSO protection.
+* **Domains `dentalkclub-fmdc.vercel.app` + `dtc-fmdc.vercel.app` are project-level domains** (2026-08-25): every `vercel --prod` deploy auto-aliases to them. Previously they were pinned to one deployment via a manual alias and silently stopped following new deploys.
+* **Environment variables are PRODUCTION-ONLY** (2026-08-25). Preview deployments build without Supabase/YouTube keys and serve the static-fallback content — by design, so no unreviewed preview URL can ever talk to the production database. ⚠️ Vercel CLI gotcha: `vercel env rm <name> <environment>` deletes the whole variable (all environments), not just one target — remove/re-add carefully.
+* **Security headers:** static headers (nosniff, XFO DENY, COOP/CORP, Referrer-Policy, Permissions-Policy) come from `vercel.json`; the **Content-Security-Policy is built per-request in `src/utils/supabase/middleware.ts` with a nonce** (no `unsafe-inline` in `script-src`). Keep both in sync if origins change.
 * **`.vercelignore`** still excludes `.venv/`, `scripts/`, `docs/`, `graphify-out/`, `instagram/`, `rules.md`, `overview.md`, and now `supabase/`.
 * **Security headers + CSP** come from `vercel.json`; `connect-src` allows `https://*.supabase.co wss://*.supabase.co`, `img-src` allows `i.ytimg.com` + Supabase storage.
 
