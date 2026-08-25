@@ -55,6 +55,11 @@ export async function POST(request: NextRequest) {
 
   let url = "";
   try {
+    // Defense in depth against cross-site form posts: only accept real JSON.
+    const contentType = request.headers.get("content-type") ?? "";
+    if (!contentType.includes("application/json")) {
+      return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
+    }
     const body = (await request.json()) as { url?: string };
     url = body.url ?? "";
   } catch {

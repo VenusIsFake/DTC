@@ -36,6 +36,9 @@ A template lives in `.env.example`. Never commit `.env*` (git-ignored).
 2. **Apply the schema:** SQL Editor → paste & run `supabase/schema.sql` (tables, RLS policies, security-definer RPCs, views, storage buckets, default settings).
 3. **Seed content:** SQL Editor → paste & run `supabase/seed.sql` (5 commissions, Mandat 2025–2026 + 12 members, 4 podcast episodes, 8 TEDx talks, 3 "À propos" sections). Mirrors the static `src/data` files so the DB-driven site renders identically to the old static site on day one.
 4. **Auth settings:** Authentication → Providers → Email: **disable "Confirm email"**. Authentication → URL Configuration → Site URL: `https://dentalkclub-fmdc.vercel.app`.
+   **Recommended security toggles** (Authentication → Sign In / Up — these two are dashboard-only, the Management API ignores them):
+   - **Leaked password protection: ON** (rejects passwords found in known breaches)
+   - **Minimum password length: 8** (the signup form already enforces 8 client-side; the server default is 6 until this is flipped)
 5. **Bootstrap the first admin:** sign up in the app, then in the SQL editor run:
    ```sql
    update profiles set role = 'admin' where email = 'your-email@example.com';

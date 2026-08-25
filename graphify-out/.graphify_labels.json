@@ -1,12 +1,12 @@
 {
-  "0": "devDependencies",
+  "0": "dependencies",
   "1": "compilerOptions",
   "2": "app/layout.tsx",
-  "3": "useOverlayDialog",
+  "3": "gallery/page.tsx",
   "4": "types.ts",
   "5": "data.ts",
   "6": "DTC Website Platform (Next.js 14)",
-  "7": "EventsTab.tsx",
+  "7": "getSupabaseBrowserClient",
   "8": "🎤 3. Key Milestone Archive",
   "9": "fetch_all_posts.py",
   "10": "events/layout.tsx",
@@ -35,10 +35,13 @@
   "33": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
   "34": "AI Agent Operational Rules & Guidelines for DTC Website",
   "35": "extends",
-  "36": "utils/supabase/client.ts",
+  "36": "client.ts",
   "37": "Dentalk Club FMDC (DTC) — Project Overview",
-  "38": "utils/supabase/server.ts",
+  "38": "verify-tmp.mjs",
   "39": "README.md",
   "40": "DTC Project Activity Log",
-  "41": "📋 Comprehensive Category Index"
+  "41": "📋 Comprehensive Category Index",
+  "42": "devDependencies",
+  "43": "Q: check out the profile section, use graphify for help",
+  "44": "route.ts"
 }

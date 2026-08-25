@@ -11,7 +11,8 @@ type Mode = "signin" | "signup";
 function translateError(message: string): string {
   if (message.includes("Invalid login credentials")) return "Email ou mot de passe incorrect.";
   if (message.includes("already registered")) return "Un compte existe déjà avec cet email.";
-  if (message.includes("Password should be at least")) return "Le mot de passe doit contenir au moins 6 caractères.";
+  if (message.includes("Password should be at least")) return "Le mot de passe doit contenir au moins 8 caractères.";
+  if (message.includes("too simple") || message.includes("breach")) return "Ce mot de passe est trop faible ou déjà compromis — choisissez-en un autre.";
   if (message.includes("Email name is invalid")) return "Adresse email invalide.";
   if (message.includes("Failed to fetch") || message.includes("fetch failed"))
     return "Connexion à la base impossible. Réessayez dans un instant.";
@@ -170,13 +171,16 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
               id="auth-password"
               type="password"
               required
-              minLength={6}
+              minLength={mode === "signup" ? 8 : undefined}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete={mode === "signin" ? "current-password" : "new-password"}
               className="w-full px-3.5 py-2.5 rounded-xl bg-[#0F172A] border border-[#385A75]/50 text-sm text-white placeholder:text-[#64748B] focus:outline-none focus:border-[#D4AF37]/60 focus:ring-2 focus:ring-[#D4AF37]/20"
               placeholder="••••••••"
             />
+            {mode === "signup" && (
+              <p className="text-[10px] text-[#64748B]">8 caractères minimum, évitez les mots de passe déjà utilisés ailleurs.</p>
+            )}
           </div>
 
           {error && (

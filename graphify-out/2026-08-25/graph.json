@@ -4,6 +4,32 @@
   "graph": {},
   "nodes": [
     {
+      "id": "src_components_videoplayermodal_iosvideo",
+      "label": "IOSVideo",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "iosvideo",
+      "source_file": "src/components/VideoPlayerModal.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_components_videoplayermodal_videoplayermodalprops",
+      "label": "VideoPlayerModalProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "videoplayermodalprops",
+      "source_file": "src/components/VideoPlayerModal.tsx",
+      "source_location": "L8"
+    },
+    {
       "id": "src_data_siteconfig_navitem",
       "label": "NavItem",
       "_callable": true,
@@ -17,30 +43,30 @@
       "source_location": "L1"
     },
     {
-      "id": "src_app_api_admin_youtube_import_route_youtubevideoresponse",
-      "label": "YouTubeVideoResponse",
+      "id": "src_data_tedxdata_tedxtalk",
+      "label": "TedxTalk",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
+      "community": 2,
+      "community_name": "app/layout.tsx",
       "file_type": "code",
-      "norm_label": "youtubevideoresponse",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L8"
+      "norm_label": "tedxtalk",
+      "source_file": "src/data/tedxData.ts",
+      "source_location": "L1"
     },
     {
-      "id": "src_app_events_slug_page_params",
-      "label": "Params",
+      "id": "src_lib_types_homestat",
+      "label": "HomeStat",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
+      "community": 2,
+      "community_name": "app/layout.tsx",
       "file_type": "code",
-      "norm_label": "params",
-      "source_file": "src/app/events/[slug]/page.tsx",
-      "source_location": "L10"
+      "norm_label": "homestat",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L140"
     },
     {
       "id": "src_app_gallery_page_categoryfilter",
@@ -49,23 +75,10 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "categoryfilter",
       "source_file": "src/app/gallery/page.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_components_auth_authmodal_mode",
-      "label": "Mode",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "mode",
-      "source_file": "src/components/auth/AuthModal.tsx",
       "source_location": "L9"
     },
     {
@@ -75,7 +88,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "imagelightboxprops",
       "source_file": "src/components/ImageLightbox.tsx",
@@ -88,63 +101,37 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "galleryitem",
       "source_file": "src/data/galleryData.ts",
       "source_location": "L1"
     },
     {
-      "id": "src_components_admin_adminconsole_tabid",
-      "label": "TabId",
+      "id": "src_lib_types_directoryentry",
+      "label": "DirectoryEntry",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
       "file_type": "code",
-      "norm_label": "tabid",
-      "source_file": "src/components/admin/AdminConsole.tsx",
-      "source_location": "L32"
+      "norm_label": "directoryentry",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L183"
     },
     {
-      "id": "src_components_admin_eventstab_tedxform",
-      "label": "TedxForm",
+      "id": "src_app_api_admin_youtube_import_route_youtubevideoresponse",
+      "label": "YouTubeVideoResponse",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "tedxform",
-      "source_file": "src/components/admin/EventsTab.tsx",
-      "source_location": "L81"
-    },
-    {
-      "id": "src_components_admin_podcasttab_episodeform",
-      "label": "EpisodeForm",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "episodeform",
-      "source_file": "src/components/admin/PodcastTab.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_components_annonces_announcementcomposer_composerform",
-      "label": "ComposerForm",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "composerform",
-      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L10"
+      "norm_label": "youtubevideoresponse",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L8"
     },
     {
       "id": "src_components_auth_authprovider_authcontextvalue",
@@ -199,17 +186,17 @@
       "source_location": "L23"
     },
     {
-      "id": "src_lib_types_aboutsection",
-      "label": "AboutSection",
+      "id": "src_components_useravatar_useravatarprops",
+      "label": "UserAvatarProps",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "aboutsection",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L172"
+      "norm_label": "useravatarprops",
+      "source_file": "src/components/UserAvatar.tsx",
+      "source_location": "L5"
     },
     {
       "id": "src_lib_types_adminprofilerow",
@@ -225,17 +212,17 @@
       "source_location": "L191"
     },
     {
-      "id": "src_lib_types_announcement",
-      "label": "Announcement",
+      "id": "src_lib_types_announcementboarditem",
+      "label": "AnnouncementBoardItem",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "announcement",
+      "norm_label": "announcementboarditem",
       "source_file": "src/lib/types.ts",
-      "source_location": "L33"
+      "source_location": "L47"
     },
     {
       "id": "src_lib_types_announcementkind",
@@ -249,19 +236,6 @@
       "norm_label": "announcementkind",
       "source_file": "src/lib/types.ts",
       "source_location": "L30"
-    },
-    {
-      "id": "src_lib_types_commentboarditem",
-      "label": "CommentBoardItem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "commentboarditem",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L71"
     },
     {
       "id": "src_lib_types_committee",
@@ -290,19 +264,6 @@
       "source_location": "L31"
     },
     {
-      "id": "src_lib_types_homestat",
-      "label": "HomeStat",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "homestat",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L140"
-    },
-    {
       "id": "src_lib_types_idea",
       "label": "Idea",
       "_callable": true,
@@ -327,19 +288,6 @@
       "norm_label": "ideaboarditem",
       "source_file": "src/lib/types.ts",
       "source_location": "L64"
-    },
-    {
-      "id": "src_lib_types_ideastatus",
-      "label": "IdeaStatus",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "ideastatus",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L52"
     },
     {
       "id": "src_lib_types_mandate",
@@ -381,19 +329,6 @@
       "source_location": "L168"
     },
     {
-      "id": "src_lib_types_podcastepisoderow",
-      "label": "PodcastEpisodeRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "podcastepisoderow",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L81"
-    },
-    {
       "id": "src_lib_types_profile",
       "label": "Profile",
       "_callable": true,
@@ -433,43 +368,17 @@
       "source_location": "L145"
     },
     {
-      "id": "src_lib_types_tedxtalkrow",
-      "label": "TedxTalkRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "tedxtalkrow",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L100"
-    },
-    {
-      "id": "src_components_videoplayermodal_iosvideo",
-      "label": "IOSVideo",
+      "id": "src_app_events_slug_page_params",
+      "label": "Params",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "iosvideo",
-      "source_file": "src/components/VideoPlayerModal.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_components_videoplayermodal_videoplayermodalprops",
-      "label": "VideoPlayerModalProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "videoplayermodalprops",
-      "source_file": "src/components/VideoPlayerModal.tsx",
-      "source_location": "L8"
+      "norm_label": "params",
+      "source_file": "src/app/events/[slug]/page.tsx",
+      "source_location": "L10"
     },
     {
       "id": "src_data_podcastdata_podcastepisode",
@@ -485,17 +394,30 @@
       "source_location": "L1"
     },
     {
-      "id": "src_data_tedxdata_tedxtalk",
-      "label": "TedxTalk",
+      "id": "src_lib_types_aboutsection",
+      "label": "AboutSection",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "tedxtalk",
-      "source_file": "src/data/tedxData.ts",
-      "source_location": "L1"
+      "norm_label": "aboutsection",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L172"
+    },
+    {
+      "id": "src_lib_types_commentboarditem",
+      "label": "CommentBoardItem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "commentboarditem",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L71"
     },
     {
       "id": "src_lib_types_eventpage",
@@ -524,17 +446,82 @@
       "source_location": "L128"
     },
     {
-      "id": "src_lib_types_directoryentry",
-      "label": "DirectoryEntry",
+      "id": "src_lib_types_podcastepisoderow",
+      "label": "PodcastEpisodeRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "podcastepisoderow",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L81"
+    },
+    {
+      "id": "src_lib_types_tedxtalkrow",
+      "label": "TedxTalkRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "tedxtalkrow",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L100"
+    },
+    {
+      "id": "src_components_admin_adminconsole_tabid",
+      "label": "TabId",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "directoryentry",
-      "source_file": "src/lib/types.ts",
-      "source_location": "L183"
+      "norm_label": "tabid",
+      "source_file": "src/components/admin/AdminConsole.tsx",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_components_admin_eventstab_tedxform",
+      "label": "TedxForm",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "tedxform",
+      "source_file": "src/components/admin/EventsTab.tsx",
+      "source_location": "L81"
+    },
+    {
+      "id": "src_components_admin_podcasttab_episodeform",
+      "label": "EpisodeForm",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "episodeform",
+      "source_file": "src/components/admin/PodcastTab.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_components_annonces_announcementcomposer_composerform",
+      "label": "ComposerForm",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "composerform",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L11"
     },
     {
       "id": "src_components_annonces_announcementsfeed_attendee",
@@ -542,38 +529,64 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
       "norm_label": "attendee",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
       "source_location": "L18"
     },
     {
-      "id": "src_components_useravatar_useravatarprops",
-      "label": "UserAvatarProps",
+      "id": "src_components_auth_authmodal_mode",
+      "label": "Mode",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "useravatarprops",
-      "source_file": "src/components/UserAvatar.tsx",
-      "source_location": "L5"
+      "norm_label": "mode",
+      "source_file": "src/components/auth/AuthModal.tsx",
+      "source_location": "L9"
     },
     {
-      "id": "src_lib_types_announcementboarditem",
-      "label": "AnnouncementBoardItem",
+      "id": "src_components_espace_avatarcropmodal_avatarcropmodalprops",
+      "label": "AvatarCropModalProps",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "announcementboarditem",
+      "norm_label": "avatarcropmodalprops",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_lib_types_announcement",
+      "label": "Announcement",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "announcement",
       "source_file": "src/lib/types.ts",
-      "source_location": "L47"
+      "source_location": "L33"
+    },
+    {
+      "id": "src_lib_types_ideastatus",
+      "label": "IdeaStatus",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "ideastatus",
+      "source_file": "src/lib/types.ts",
+      "source_location": "L52"
     },
     {
       "id": "src_app_events_layout_eventslayout",
@@ -708,6 +721,18 @@
       "source_location": "L41"
     },
     {
+      "id": "src_components_events_tedxgrid_tedxgrid",
+      "label": "TedxGrid()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "tedxgrid()",
+      "source_file": "src/components/events/TedxGrid.tsx",
+      "source_location": "L10"
+    },
+    {
       "id": "src_components_footer_footer",
       "label": "Footer()",
       "_callable": true,
@@ -730,6 +755,54 @@
       "norm_label": "hero()",
       "source_file": "src/components/Hero.tsx",
       "source_location": "L9"
+    },
+    {
+      "id": "src_components_home_homecontent_homecontent",
+      "label": "HomeContent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "homecontent()",
+      "source_file": "src/components/home/HomeContent.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_components_navbar_navbar",
+      "label": "Navbar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "navbar()",
+      "source_file": "src/components/Navbar.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_components_statscounter_statscounter",
+      "label": "StatsCounter()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "statscounter()",
+      "source_file": "src/components/StatsCounter.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_components_videoplayermodal_videoplayermodal",
+      "label": "VideoPlayerModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "videoplayermodal()",
+      "source_file": "src/components/VideoPlayerModal.tsx",
+      "source_location": "L18"
     },
     {
       "id": "scripts_legacy_extract_instagram_scrape_dentalkclub",
@@ -816,99 +889,15 @@
       "source_location": "L3"
     },
     {
-      "id": "src_app_api_admin_youtube_import_route_isodurationtoclock",
-      "label": "isoDurationToClock()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "isodurationtoclock()",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "src_app_api_admin_youtube_import_route_post",
-      "label": "POST()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "post()",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L38"
-    },
-    {
-      "id": "src_app_events_slug_page_generatemetadata",
-      "label": "generateMetadata()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "generatemetadata()",
-      "source_file": "src/app/events/[slug]/page.tsx",
-      "source_location": "L12"
-    },
-    {
       "id": "src_app_gallery_page_gallerypage",
       "label": "GalleryPage()",
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "gallerypage()",
       "source_file": "src/app/gallery/page.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_components_admin_podcasttab_editormodal",
-      "label": "EditorModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "editormodal()",
-      "source_file": "src/components/admin/PodcastTab.tsx",
-      "source_location": "L64"
-    },
-    {
-      "id": "src_components_auth_authmodal_authmodal",
-      "label": "AuthModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "authmodal()",
-      "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L21"
-    },
-    {
-      "id": "src_components_auth_authmodal_translateerror",
-      "label": "translateError()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "translateerror()",
-      "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_components_events_eventitemsgrid_eventitemsgrid",
-      "label": "EventItemsGrid()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "eventitemsgrid()",
-      "source_file": "src/components/events/EventItemsGrid.tsx",
       "source_location": "L11"
     },
     {
@@ -917,55 +906,151 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "imagelightbox()",
       "source_file": "src/components/ImageLightbox.tsx",
       "source_location": "L14"
     },
     {
-      "id": "src_components_infographicviewer_infographicviewer",
-      "label": "InfographicViewer()",
+      "id": "src_app_admin_page_accessdenied",
+      "label": "AccessDenied()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
       "file_type": "code",
-      "norm_label": "infographicviewer()",
-      "source_file": "src/components/InfographicViewer.tsx",
-      "source_location": "L8"
+      "norm_label": "accessdenied()",
+      "source_file": "src/app/admin/page.tsx",
+      "source_location": "L16"
     },
     {
-      "id": "src_hooks_useoverlaydialog_useoverlaydialog",
-      "label": "useOverlayDialog()",
+      "id": "src_app_admin_page_adminpage",
+      "label": "AdminPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
       "file_type": "code",
-      "norm_label": "useoverlaydialog()",
-      "source_file": "src/hooks/useOverlayDialog.ts",
+      "norm_label": "adminpage()",
+      "source_file": "src/app/admin/page.tsx",
+      "source_location": "L39"
+    },
+    {
+      "id": "src_app_espace_annuaire_page_annuairepage",
+      "label": "AnnuairePage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "annuairepage()",
+      "source_file": "src/app/espace/annuaire/page.tsx",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_app_espace_page_espacepage",
+      "label": "EspacePage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "espacepage()",
+      "source_file": "src/app/espace/page.tsx",
       "source_location": "L15"
     },
     {
-      "id": "src_lib_format_parseyoutubeid",
-      "label": "parseYouTubeId()",
+      "id": "src_components_admin_adminconsole_adminconsole",
+      "label": "AdminConsole()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
       "file_type": "code",
-      "norm_label": "parseyoutubeid()",
-      "source_file": "src/lib/format.ts",
-      "source_location": "L56"
+      "norm_label": "adminconsole()",
+      "source_file": "src/components/admin/AdminConsole.tsx",
+      "source_location": "L34"
+    },
+    {
+      "id": "src_components_auth_signinprompt_signinprompt",
+      "label": "SignInPrompt()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "signinprompt()",
+      "source_file": "src/components/auth/SignInPrompt.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_components_espace_annuairegrid_annuairegrid",
+      "label": "AnnuaireGrid()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "annuairegrid()",
+      "source_file": "src/components/espace/AnnuaireGrid.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_lib_data_getcommittees",
+      "label": "getCommittees()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "getcommittees()",
+      "source_file": "src/lib/data.ts",
+      "source_location": "L362"
+    },
+    {
+      "id": "src_lib_data_getserverprofile",
+      "label": "getServerProfile()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "getserverprofile()",
+      "source_file": "src/lib/data.ts",
+      "source_location": "L82"
+    },
+    {
+      "id": "src_lib_supabase_client_issupabaseconfigured",
+      "label": "isSupabaseConfigured()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "issupabaseconfigured()",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_lib_supabase_server_createsupabaseserverclient",
+      "label": "createSupabaseServerClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "createsupabaseserverclient()",
+      "source_file": "src/lib/supabase/server.ts",
+      "source_location": "L10"
     },
     {
       "id": "src_middleware_middleware",
       "label": "middleware()",
       "_callable": true,
       "_origin": "ast",
-      "community": 33,
-      "community_name": "src/middleware.ts",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
       "file_type": "code",
       "norm_label": "middleware()",
       "source_file": "src/middleware.ts",
@@ -976,216 +1061,48 @@
       "label": "updateSession()",
       "_callable": true,
       "_origin": "ast",
-      "community": 33,
-      "community_name": "src/middleware.ts",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
       "file_type": "code",
       "norm_label": "updatesession()",
       "source_file": "src/utils/supabase/middleware.ts",
-      "source_location": "L4"
+      "source_location": "L5"
     },
     {
-      "id": "src_utils_supabase_client_createclient",
-      "label": "createClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "utils/supabase/client.ts",
-      "file_type": "code",
-      "norm_label": "createclient()",
-      "source_file": "src/utils/supabase/client.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_utils_supabase_server_createclient",
-      "label": "createClient()",
+      "id": "verify_tmp_check",
+      "label": "check()",
       "_callable": true,
       "_origin": "ast",
       "community": 38,
-      "community_name": "utils/supabase/server.ts",
+      "community_name": "verify-tmp.mjs",
       "file_type": "code",
-      "norm_label": "createclient()",
-      "source_file": "src/utils/supabase/server.ts",
-      "source_location": "L4"
+      "norm_label": "check()",
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L21"
     },
     {
-      "id": "src_components_admin_abouttab_abouttab",
-      "label": "AboutTab()",
+      "id": "src_app_api_admin_youtube_import_route_isodurationtoclock",
+      "label": "isoDurationToClock()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "abouttab()",
-      "source_file": "src/components/admin/AboutTab.tsx",
-      "source_location": "L439"
+      "norm_label": "isodurationtoclock()",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L21"
     },
     {
-      "id": "src_components_admin_abouttab_mandateseditor",
-      "label": "MandatesEditor()",
+      "id": "src_app_api_admin_youtube_import_route_post",
+      "label": "POST()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "mandateseditor()",
-      "source_file": "src/components/admin/AboutTab.tsx",
-      "source_location": "L222"
-    },
-    {
-      "id": "src_components_admin_abouttab_sectionseditor",
-      "label": "SectionsEditor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "sectionseditor()",
-      "source_file": "src/components/admin/AboutTab.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_components_admin_abouttab_statseditor",
-      "label": "StatsEditor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "statseditor()",
-      "source_file": "src/components/admin/AboutTab.tsx",
-      "source_location": "L147"
-    },
-    {
-      "id": "src_components_admin_announcementstab_announcementstab",
-      "label": "AnnouncementsTab()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "announcementstab()",
-      "source_file": "src/components/admin/AnnouncementsTab.tsx",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_components_admin_committeestab_committeeseditor",
-      "label": "CommitteesEditor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "committeeseditor()",
-      "source_file": "src/components/admin/CommitteesTab.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_components_admin_committeestab_committeestab",
-      "label": "CommitteesTab()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "committeestab()",
-      "source_file": "src/components/admin/CommitteesTab.tsx",
-      "source_location": "L172"
-    },
-    {
-      "id": "src_components_admin_committeestab_promoyearseditor",
-      "label": "PromoYearsEditor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "promoyearseditor()",
-      "source_file": "src/components/admin/CommitteesTab.tsx",
-      "source_location": "L115"
-    },
-    {
-      "id": "src_components_admin_eventstab_eventpagescard",
-      "label": "EventPagesCard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "eventpagescard()",
-      "source_file": "src/components/admin/EventsTab.tsx",
-      "source_location": "L296"
-    },
-    {
-      "id": "src_components_admin_eventstab_eventstab",
-      "label": "EventsTab()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "eventstab()",
-      "source_file": "src/components/admin/EventsTab.tsx",
-      "source_location": "L545"
-    },
-    {
-      "id": "src_components_admin_eventstab_tedxcard",
-      "label": "TedxCard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "tedxcard()",
-      "source_file": "src/components/admin/EventsTab.tsx",
-      "source_location": "L109"
-    },
-    {
-      "id": "src_components_admin_eventstab_visibilitycard",
-      "label": "VisibilityCard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "visibilitycard()",
-      "source_file": "src/components/admin/EventsTab.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_components_admin_ideastab_ideastab",
-      "label": "IdeasTab()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "ideastab()",
-      "source_file": "src/components/admin/IdeasTab.tsx",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_components_admin_podcasttab_podcasttab",
-      "label": "PodcastTab()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "podcasttab()",
-      "source_file": "src/components/admin/PodcastTab.tsx",
-      "source_location": "L314"
-    },
-    {
-      "id": "src_components_admin_podcasttab_toform",
-      "label": "toForm()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "toform()",
-      "source_file": "src/components/admin/PodcastTab.tsx",
-      "source_location": "L45"
+      "norm_label": "post()",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L38"
     },
     {
       "id": "src_components_admin_userstab_userstab",
@@ -1200,28 +1117,28 @@
       "source_location": "L17"
     },
     {
-      "id": "src_components_annonces_announcementcomposer_announcementcomposer",
-      "label": "AnnouncementComposer()",
+      "id": "src_components_annonces_announcementsfeed_announcementsfeed",
+      "label": "AnnouncementsFeed()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "announcementcomposer()",
-      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L39"
+      "norm_label": "announcementsfeed()",
+      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
+      "source_location": "L123"
     },
     {
-      "id": "src_components_annonces_announcementcomposer_tolocalinputvalue",
-      "label": "toLocalInputValue()",
+      "id": "src_components_auth_authprovider_useauth",
+      "label": "useAuth()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "tolocalinputvalue()",
-      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L30"
+      "norm_label": "useauth()",
+      "source_file": "src/components/auth/AuthProvider.tsx",
+      "source_location": "L35"
     },
     {
       "id": "src_components_espace_activitiespanel_activitiespanel",
@@ -1236,28 +1153,28 @@
       "source_location": "L20"
     },
     {
-      "id": "src_components_espace_profileeditor_profileeditor",
-      "label": "ProfileEditor()",
+      "id": "src_components_espace_espaceclient_espaceclient",
+      "label": "EspaceClient()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "profileeditor()",
-      "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L33"
+      "norm_label": "espaceclient()",
+      "source_file": "src/components/espace/EspaceClient.tsx",
+      "source_location": "L13"
     },
     {
-      "id": "src_components_espace_profileeditor_resizeavatar",
-      "label": "resizeAvatar()",
+      "id": "src_components_home_nextatelierteaser_nextatelierteaser",
+      "label": "NextAtelierTeaser()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "resizeavatar()",
-      "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L12"
+      "norm_label": "nextatelierteaser()",
+      "source_file": "src/components/home/NextAtelierTeaser.tsx",
+      "source_location": "L11"
     },
     {
       "id": "src_components_idees_ideacomments_ideacomments",
@@ -1272,76 +1189,52 @@
       "source_location": "L12"
     },
     {
-      "id": "src_components_idees_pitchmodal_pitchmodal",
-      "label": "PitchModal()",
+      "id": "src_components_idees_ideasboard_ideasboard",
+      "label": "IdeasBoard()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "pitchmodal()",
-      "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L9"
+      "norm_label": "ideasboard()",
+      "source_file": "src/components/idees/IdeasBoard.tsx",
+      "source_location": "L25"
     },
     {
-      "id": "src_components_statscounter_statscounter",
-      "label": "StatsCounter()",
+      "id": "src_components_useravatar_useravatar",
+      "label": "UserAvatar()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "statscounter()",
-      "source_file": "src/components/StatsCounter.tsx",
-      "source_location": "L7"
+      "norm_label": "useravatar()",
+      "source_file": "src/components/UserAvatar.tsx",
+      "source_location": "L13"
     },
     {
-      "id": "src_components_ui_form_badge",
-      "label": "Badge()",
+      "id": "src_lib_format_formatdate",
+      "label": "formatDate()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "badge()",
-      "source_file": "src/components/ui/form.tsx",
-      "source_location": "L68"
+      "norm_label": "formatdate()",
+      "source_file": "src/lib/format.ts",
+      "source_location": "L18"
     },
     {
-      "id": "src_components_ui_form_field",
-      "label": "Field()",
+      "id": "src_lib_format_formatdatetime",
+      "label": "formatDateTime()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "field()",
-      "source_file": "src/components/ui/form.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "src_components_ui_form_ghostbutton",
-      "label": "GhostButton()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "ghostbutton()",
-      "source_file": "src/components/ui/form.tsx",
-      "source_location": "L46"
-    },
-    {
-      "id": "src_components_ui_form_primarybutton",
-      "label": "PrimaryButton()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "primarybutton()",
-      "source_file": "src/components/ui/form.tsx",
-      "source_location": "L32"
+      "norm_label": "formatdatetime()",
+      "source_file": "src/lib/format.ts",
+      "source_location": "L25"
     },
     {
       "id": "src_lib_format_formatrelative",
@@ -1356,28 +1249,40 @@
       "source_location": "L32"
     },
     {
-      "id": "src_lib_supabase_client_getsupabasebrowserclient",
-      "label": "getSupabaseBrowserClient()",
+      "id": "src_lib_format_initials",
+      "label": "initials()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "getsupabasebrowserclient()",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L22"
+      "norm_label": "initials()",
+      "source_file": "src/lib/format.ts",
+      "source_location": "L45"
     },
     {
-      "id": "src_lib_supabase_client_publicstorageurl",
-      "label": "publicStorageUrl()",
+      "id": "src_lib_format_parseyoutubeid",
+      "label": "parseYouTubeId()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "publicstorageurl()",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L31"
+      "norm_label": "parseyoutubeid()",
+      "source_file": "src/lib/format.ts",
+      "source_location": "L56"
+    },
+    {
+      "id": "audit_tmp_check",
+      "label": "check()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "audit-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "check()",
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L16"
     },
     {
       "id": "src_app_about_page_aboutpage",
@@ -1404,6 +1309,18 @@
       "source_location": "L198"
     },
     {
+      "id": "src_app_annonces_page_annoncespage",
+      "label": "AnnoncesPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "annoncespage()",
+      "source_file": "src/app/annonces/page.tsx",
+      "source_location": "L15"
+    },
+    {
       "id": "src_app_events_page_eventspage",
       "label": "EventsPage()",
       "_callable": true,
@@ -1426,6 +1343,18 @@
       "norm_label": "eventlandingpage()",
       "source_file": "src/app/events/[slug]/page.tsx",
       "source_location": "L32"
+    },
+    {
+      "id": "src_app_events_slug_page_generatemetadata",
+      "label": "generateMetadata()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "generatemetadata()",
+      "source_file": "src/app/events/[slug]/page.tsx",
+      "source_location": "L12"
     },
     {
       "id": "src_app_idees_page_ideespage",
@@ -1476,40 +1405,28 @@
       "source_location": "L7"
     },
     {
-      "id": "src_components_events_tedxgrid_tedxgrid",
-      "label": "TedxGrid()",
+      "id": "src_components_events_eventitemsgrid_eventitemsgrid",
+      "label": "EventItemsGrid()",
       "_callable": true,
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "tedxgrid()",
-      "source_file": "src/components/events/TedxGrid.tsx",
-      "source_location": "L10"
+      "norm_label": "eventitemsgrid()",
+      "source_file": "src/components/events/EventItemsGrid.tsx",
+      "source_location": "L11"
     },
     {
-      "id": "src_components_home_homecontent_homecontent",
-      "label": "HomeContent()",
+      "id": "src_components_infographicviewer_infographicviewer",
+      "label": "InfographicViewer()",
       "_callable": true,
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "homecontent()",
-      "source_file": "src/components/home/HomeContent.tsx",
-      "source_location": "L16"
-    },
-    {
-      "id": "src_components_idees_ideasboard_ideasboard",
-      "label": "IdeasBoard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "ideasboard()",
-      "source_file": "src/components/idees/IdeasBoard.tsx",
-      "source_location": "L25"
+      "norm_label": "infographicviewer()",
+      "source_file": "src/components/InfographicViewer.tsx",
+      "source_location": "L8"
     },
     {
       "id": "src_components_podcastplayer_podcastplayer",
@@ -1524,18 +1441,6 @@
       "source_location": "L8"
     },
     {
-      "id": "src_components_videoplayermodal_videoplayermodal",
-      "label": "VideoPlayerModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "videoplayermodal()",
-      "source_file": "src/components/VideoPlayerModal.tsx",
-      "source_location": "L18"
-    },
-    {
       "id": "src_lib_data_getaboutsections",
       "label": "getAboutSections()",
       "_callable": true,
@@ -1546,18 +1451,6 @@
       "norm_label": "getaboutsections()",
       "source_file": "src/lib/data.ts",
       "source_location": "L282"
-    },
-    {
-      "id": "src_lib_data_getcommittees",
-      "label": "getCommittees()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "getcommittees()",
-      "source_file": "src/lib/data.ts",
-      "source_location": "L362"
     },
     {
       "id": "src_lib_data_geteventpage",
@@ -1704,256 +1597,376 @@
       "source_location": "L73"
     },
     {
-      "id": "src_lib_supabase_server_createsupabaseserverclient",
-      "label": "createSupabaseServerClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "createsupabaseserverclient()",
-      "source_file": "src/lib/supabase/server.ts",
-      "source_location": "L10"
-    },
-    {
-      "id": "src_app_admin_page_accessdenied",
-      "label": "AccessDenied()",
+      "id": "src_components_admin_abouttab_abouttab",
+      "label": "AboutTab()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "accessdenied()",
-      "source_file": "src/app/admin/page.tsx",
-      "source_location": "L16"
+      "norm_label": "abouttab()",
+      "source_file": "src/components/admin/AboutTab.tsx",
+      "source_location": "L441"
     },
     {
-      "id": "src_app_admin_page_adminpage",
-      "label": "AdminPage()",
+      "id": "src_components_admin_abouttab_mandateseditor",
+      "label": "MandatesEditor()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "adminpage()",
-      "source_file": "src/app/admin/page.tsx",
-      "source_location": "L39"
+      "norm_label": "mandateseditor()",
+      "source_file": "src/components/admin/AboutTab.tsx",
+      "source_location": "L222"
     },
     {
-      "id": "src_app_espace_annuaire_page_annuairepage",
-      "label": "AnnuairePage()",
+      "id": "src_components_admin_abouttab_sectionseditor",
+      "label": "SectionsEditor()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "annuairepage()",
-      "source_file": "src/app/espace/annuaire/page.tsx",
+      "norm_label": "sectionseditor()",
+      "source_file": "src/components/admin/AboutTab.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_components_admin_abouttab_statseditor",
+      "label": "StatsEditor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "statseditor()",
+      "source_file": "src/components/admin/AboutTab.tsx",
+      "source_location": "L147"
+    },
+    {
+      "id": "src_components_admin_announcementstab_announcementstab",
+      "label": "AnnouncementsTab()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "announcementstab()",
+      "source_file": "src/components/admin/AnnouncementsTab.tsx",
       "source_location": "L17"
     },
     {
-      "id": "src_app_espace_page_espacepage",
-      "label": "EspacePage()",
+      "id": "src_components_admin_committeestab_committeeseditor",
+      "label": "CommitteesEditor()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "espacepage()",
-      "source_file": "src/app/espace/page.tsx",
-      "source_location": "L15"
-    },
-    {
-      "id": "src_components_admin_adminconsole_adminconsole",
-      "label": "AdminConsole()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "adminconsole()",
-      "source_file": "src/components/admin/AdminConsole.tsx",
-      "source_location": "L34"
-    },
-    {
-      "id": "src_components_auth_authprovider_useauth",
-      "label": "useAuth()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "useauth()",
-      "source_file": "src/components/auth/AuthProvider.tsx",
-      "source_location": "L35"
-    },
-    {
-      "id": "src_components_auth_signinprompt_signinprompt",
-      "label": "SignInPrompt()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "signinprompt()",
-      "source_file": "src/components/auth/SignInPrompt.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_components_espace_annuairegrid_annuairegrid",
-      "label": "AnnuaireGrid()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "annuairegrid()",
-      "source_file": "src/components/espace/AnnuaireGrid.tsx",
+      "norm_label": "committeeseditor()",
+      "source_file": "src/components/admin/CommitteesTab.tsx",
       "source_location": "L9"
     },
     {
-      "id": "src_components_espace_espaceclient_espaceclient",
-      "label": "EspaceClient()",
+      "id": "src_components_admin_committeestab_committeestab",
+      "label": "CommitteesTab()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "espaceclient()",
-      "source_file": "src/components/espace/EspaceClient.tsx",
-      "source_location": "L13"
+      "norm_label": "committeestab()",
+      "source_file": "src/components/admin/CommitteesTab.tsx",
+      "source_location": "L172"
     },
     {
-      "id": "src_components_navbar_navbar",
-      "label": "Navbar()",
+      "id": "src_components_admin_committeestab_promoyearseditor",
+      "label": "PromoYearsEditor()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "navbar()",
-      "source_file": "src/components/Navbar.tsx",
-      "source_location": "L13"
+      "norm_label": "promoyearseditor()",
+      "source_file": "src/components/admin/CommitteesTab.tsx",
+      "source_location": "L115"
     },
     {
-      "id": "src_lib_data_getserverprofile",
-      "label": "getServerProfile()",
+      "id": "src_components_admin_eventstab_eventpagescard",
+      "label": "EventPagesCard()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "getserverprofile()",
-      "source_file": "src/lib/data.ts",
-      "source_location": "L82"
+      "norm_label": "eventpagescard()",
+      "source_file": "src/components/admin/EventsTab.tsx",
+      "source_location": "L296"
     },
     {
-      "id": "src_lib_supabase_client_issupabaseconfigured",
-      "label": "isSupabaseConfigured()",
+      "id": "src_components_admin_eventstab_eventstab",
+      "label": "EventsTab()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "issupabaseconfigured()",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L16"
+      "norm_label": "eventstab()",
+      "source_file": "src/components/admin/EventsTab.tsx",
+      "source_location": "L545"
     },
     {
-      "id": "src_app_annonces_page_annoncespage",
-      "label": "AnnoncesPage()",
+      "id": "src_components_admin_eventstab_tedxcard",
+      "label": "TedxCard()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "annoncespage()",
-      "source_file": "src/app/annonces/page.tsx",
-      "source_location": "L15"
+      "norm_label": "tedxcard()",
+      "source_file": "src/components/admin/EventsTab.tsx",
+      "source_location": "L109"
     },
     {
-      "id": "src_components_annonces_announcementsfeed_announcementsfeed",
-      "label": "AnnouncementsFeed()",
+      "id": "src_components_admin_eventstab_visibilitycard",
+      "label": "VisibilityCard()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "announcementsfeed()",
-      "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L123"
+      "norm_label": "visibilitycard()",
+      "source_file": "src/components/admin/EventsTab.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_components_admin_ideastab_ideastab",
+      "label": "IdeasTab()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "ideastab()",
+      "source_file": "src/components/admin/IdeasTab.tsx",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_components_admin_podcasttab_editormodal",
+      "label": "EditorModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "editormodal()",
+      "source_file": "src/components/admin/PodcastTab.tsx",
+      "source_location": "L64"
+    },
+    {
+      "id": "src_components_admin_podcasttab_podcasttab",
+      "label": "PodcastTab()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "podcasttab()",
+      "source_file": "src/components/admin/PodcastTab.tsx",
+      "source_location": "L314"
+    },
+    {
+      "id": "src_components_admin_podcasttab_toform",
+      "label": "toForm()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "toform()",
+      "source_file": "src/components/admin/PodcastTab.tsx",
+      "source_location": "L45"
+    },
+    {
+      "id": "src_components_annonces_announcementcomposer_announcementcomposer",
+      "label": "AnnouncementComposer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "announcementcomposer()",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L40"
+    },
+    {
+      "id": "src_components_annonces_announcementcomposer_tolocalinputvalue",
+      "label": "toLocalInputValue()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "tolocalinputvalue()",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L31"
     },
     {
       "id": "src_components_annonces_announcementsfeed_attendeesmodal",
       "label": "AttendeesModal()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
       "norm_label": "attendeesmodal()",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
       "source_location": "L25"
     },
     {
-      "id": "src_components_home_nextatelierteaser_nextatelierteaser",
-      "label": "NextAtelierTeaser()",
+      "id": "src_components_auth_authmodal_authmodal",
+      "label": "AuthModal()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "nextatelierteaser()",
-      "source_file": "src/components/home/NextAtelierTeaser.tsx",
+      "norm_label": "authmodal()",
+      "source_file": "src/components/auth/AuthModal.tsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_components_auth_authmodal_translateerror",
+      "label": "translateError()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "translateerror()",
+      "source_file": "src/components/auth/AuthModal.tsx",
       "source_location": "L11"
     },
     {
-      "id": "src_components_useravatar_useravatar",
-      "label": "UserAvatar()",
+      "id": "src_components_espace_avatarcropmodal_avatarcropmodal",
+      "label": "AvatarCropModal()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "useravatar()",
-      "source_file": "src/components/UserAvatar.tsx",
-      "source_location": "L13"
+      "norm_label": "avatarcropmodal()",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L20"
     },
     {
-      "id": "src_lib_format_formatdate",
-      "label": "formatDate()",
+      "id": "src_components_espace_profileeditor_profileeditor",
+      "label": "ProfileEditor()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "formatdate()",
-      "source_file": "src/lib/format.ts",
-      "source_location": "L18"
+      "norm_label": "profileeditor()",
+      "source_file": "src/components/espace/ProfileEditor.tsx",
+      "source_location": "L12"
     },
     {
-      "id": "src_lib_format_formatdatetime",
-      "label": "formatDateTime()",
+      "id": "src_components_idees_pitchmodal_pitchmodal",
+      "label": "PitchModal()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "formatdatetime()",
-      "source_file": "src/lib/format.ts",
-      "source_location": "L25"
+      "norm_label": "pitchmodal()",
+      "source_file": "src/components/idees/PitchModal.tsx",
+      "source_location": "L10"
     },
     {
-      "id": "src_lib_format_initials",
-      "label": "initials()",
+      "id": "src_components_ui_form_badge",
+      "label": "Badge()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "initials()",
-      "source_file": "src/lib/format.ts",
-      "source_location": "L45"
+      "norm_label": "badge()",
+      "source_file": "src/components/ui/form.tsx",
+      "source_location": "L68"
+    },
+    {
+      "id": "src_components_ui_form_field",
+      "label": "Field()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "field()",
+      "source_file": "src/components/ui/form.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "src_components_ui_form_ghostbutton",
+      "label": "GhostButton()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "ghostbutton()",
+      "source_file": "src/components/ui/form.tsx",
+      "source_location": "L46"
+    },
+    {
+      "id": "src_components_ui_form_primarybutton",
+      "label": "PrimaryButton()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "primarybutton()",
+      "source_file": "src/components/ui/form.tsx",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_hooks_useoverlaydialog_useoverlaydialog",
+      "label": "useOverlayDialog()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "useoverlaydialog()",
+      "source_file": "src/hooks/useOverlayDialog.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_lib_supabase_client_getsupabasebrowserclient",
+      "label": "getSupabaseBrowserClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "getsupabasebrowserclient()",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "src_lib_supabase_client_publicstorageurl",
+      "label": "publicStorageUrl()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "publicstorageurl()",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L31"
     },
     {
       "id": "scripts_fetch_all_posts_fetch_all_posts",
@@ -2123,6 +2136,17 @@
       "source_location": "L27"
     },
     {
+      "id": "package_devdependencies_supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "supabase",
+      "source_file": "package.json",
+      "source_location": "L28"
+    },
+    {
       "id": "package_devdependencies_tailwindcss",
       "label": "tailwindcss",
       "_origin": "ast",
@@ -2131,7 +2155,7 @@
       "file_type": "code",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
-      "source_location": "L28"
+      "source_location": "L29"
     },
     {
       "id": "package_devdependencies_types_node",
@@ -2175,7 +2199,7 @@
       "file_type": "code",
       "norm_label": "typescript",
       "source_file": "package.json",
-      "source_location": "L29"
+      "source_location": "L30"
     },
     {
       "id": "package_name",
@@ -2365,6 +2389,17 @@
       "source_location": "L18"
     },
     {
+      "id": "supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "devDependencies",
+      "file_type": "concept",
+      "norm_label": "supabase",
+      "source_file": "package.json",
+      "source_location": "L28"
+    },
+    {
       "id": "supabase_ssr",
       "label": "@supabase/ssr",
       "_origin": "ast",
@@ -2395,7 +2430,7 @@
       "file_type": "concept",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
-      "source_location": "L28"
+      "source_location": "L29"
     },
     {
       "id": "types_node",
@@ -2439,7 +2474,7 @@
       "file_type": "concept",
       "norm_label": "typescript",
       "source_file": "package.json",
-      "source_location": "L29"
+      "source_location": "L30"
     },
     {
       "id": "tsconfig",
@@ -2959,6 +2994,17 @@
       "source_location": "L75"
     },
     {
+      "id": "src_app_page",
+      "label": "app/page.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "app/page.tsx",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_app_robots",
       "label": "robots.ts",
       "_origin": "ast",
@@ -2967,6 +3013,17 @@
       "file_type": "code",
       "norm_label": "robots.ts",
       "source_file": "src/app/robots.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_events_tedxgrid",
+      "label": "TedxGrid.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "tedxgrid.tsx",
+      "source_file": "src/components/events/TedxGrid.tsx",
       "source_location": "L1"
     },
     {
@@ -2992,6 +3049,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_components_home_homecontent",
+      "label": "HomeContent.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "homecontent.tsx",
+      "source_file": "src/components/home/HomeContent.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_components_navbar",
       "label": "Navbar.tsx",
       "_origin": "ast",
@@ -3000,6 +3068,28 @@
       "file_type": "code",
       "norm_label": "navbar.tsx",
       "source_file": "src/components/Navbar.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_statscounter",
+      "label": "StatsCounter.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "statscounter.tsx",
+      "source_file": "src/components/StatsCounter.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_videoplayermodal",
+      "label": "VideoPlayerModal.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "videoplayermodal.tsx",
+      "source_file": "src/components/VideoPlayerModal.tsx",
       "source_location": "L1"
     },
     {
@@ -3023,6 +3113,28 @@
       "norm_label": "siteconfig",
       "source_file": "src/data/siteConfig.ts",
       "source_location": "L6"
+    },
+    {
+      "id": "src_data_tedxdata",
+      "label": "tedxData.ts",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "tedxdata.ts",
+      "source_file": "src/data/tedxData.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_data_tedxdata_tedxtalksdata",
+      "label": "tedxTalksData",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "app/layout.tsx",
+      "file_type": "code",
+      "norm_label": "tedxtalksdata",
+      "source_file": "src/data/tedxData.ts",
+      "source_location": "L14"
     },
     {
       "id": "scripts_legacy_extract_instagram",
@@ -3157,69 +3269,14 @@
       "source_file": "next"
     },
     {
-      "id": "src_app_api_admin_youtube_import_route",
-      "label": "route.ts",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "route.ts",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_api_admin_youtube_import_route_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/admin/youtube-import/route.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_app_events_slug_page",
-      "label": "[slug]/page.tsx",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "[slug]/page.tsx",
-      "source_file": "src/app/events/[slug]/page.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "src_app_gallery_page",
       "label": "gallery/page.tsx",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "gallery/page.tsx",
       "source_file": "src/app/gallery/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_auth_authmodal",
-      "label": "AuthModal.tsx",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "authmodal.tsx",
-      "source_file": "src/components/auth/AuthModal.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_events_eventitemsgrid",
-      "label": "EventItemsGrid.tsx",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "eventitemsgrid.tsx",
-      "source_file": "src/components/events/EventItemsGrid.tsx",
       "source_location": "L1"
     },
     {
@@ -3227,21 +3284,10 @@
       "label": "ImageLightbox.tsx",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "imagelightbox.tsx",
       "source_file": "src/components/ImageLightbox.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_infographicviewer",
-      "label": "InfographicViewer.tsx",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "infographicviewer.tsx",
-      "source_file": "src/components/InfographicViewer.tsx",
       "source_location": "L1"
     },
     {
@@ -3249,7 +3295,7 @@
       "label": "galleryData.ts",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "gallerydata.ts",
       "source_file": "src/data/galleryData.ts",
@@ -3260,22 +3306,11 @@
       "label": "galleryItemsData",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useOverlayDialog",
+      "community_name": "gallery/page.tsx",
       "file_type": "code",
       "norm_label": "galleryitemsdata",
       "source_file": "src/data/galleryData.ts",
       "source_location": "L11"
-    },
-    {
-      "id": "src_hooks_useoverlaydialog",
-      "label": "useOverlayDialog.ts",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useOverlayDialog",
-      "file_type": "code",
-      "norm_label": "useoverlaydialog.ts",
-      "source_file": "src/hooks/useOverlayDialog.ts",
-      "source_location": "L1"
     },
     {
       "id": "pkg_dtc_media_pipeline",
@@ -3300,330 +3335,6 @@
       "file_type": "code",
       "norm_label": "postcss.config.js",
       "source_file": "postcss.config.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_audit_activity_log",
-      "label": "activity_log.md",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "activity_log.md",
-      "source_file": "docs/audit/activity_log.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_audit_activity_log_2026_08_24",
-      "label": "2026-08-24",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2026-08-24",
-      "source_file": "docs/audit/activity_log.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_audit_activity_log_2026_08_25_club_platform_implementation_phases_a_d_full_build",
-      "label": "2026-08-25 \u2014 Club platform implementation (phases A\u2013D, full build)",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2026-08-25 \u2014 club platform implementation (phases a\u2013d, full build)",
-      "source_file": "docs/audit/activity_log.md",
-      "source_location": "L102"
-    },
-    {
-      "id": "docs_audit_activity_log_2026_08_25_club_platform_planning_session_no_code_changes",
-      "label": "2026-08-25 \u2014 Club platform planning session (no code changes)",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2026-08-25 \u2014 club platform planning session (no code changes)",
-      "source_file": "docs/audit/activity_log.md",
-      "source_location": "L95"
-    },
-    {
-      "id": "docs_audit_activity_log_2026_08_25_production_readiness_audit_remediation",
-      "label": "2026-08-25 \u2014 Production-readiness audit & remediation",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2026-08-25 \u2014 production-readiness audit & remediation",
-      "source_file": "docs/audit/activity_log.md",
-      "source_location": "L64"
-    },
-    {
-      "id": "docs_audit_activity_log_dtc_project_activity_log",
-      "label": "DTC Project Activity Log",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "dtc project activity log",
-      "source_file": "docs/audit/activity_log.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_media_instagram_data",
-      "label": "instagram_data.md",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "instagram_data.md",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_media_instagram_data_1_account_timeline_overview",
-      "label": "\ud83d\udcca 1. Account & Timeline Overview",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udcca 1. account & timeline overview",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_media_instagram_data_2_category_event_breakdown_across_97_posts",
-      "label": "\ud83d\udcc8 2. Category & Event Breakdown across 97 Posts",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udcc8 2. category & event breakdown across 97 posts",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L18"
-    },
-    {
-      "id": "docs_media_instagram_data_3_key_milestone_archive",
-      "label": "\ud83c\udfa4 3. Key Milestone Archive",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83c\udfa4 3. key milestone archive",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L40"
-    },
-    {
-      "id": "docs_media_instagram_data_instagram_data_content_analysis_dentalk_club_fmdc",
-      "label": "Instagram Data & Content Analysis: Dentalk Club FMDC",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "instagram data & content analysis: dentalk club fmdc",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_media_instagram_data_master_metadata_location",
-      "label": "\ud83d\udcc2 Master Metadata Location",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udcc2 master metadata location",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L73"
-    },
-    {
-      "id": "docs_media_instagram_data_milestone_1_founding_inception_october_november_2024",
-      "label": "Milestone 1: Founding & Inception (October \u2013 November 2024)",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "milestone 1: founding & inception (october \u2013 november 2024)",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L42"
-    },
-    {
-      "id": "docs_media_instagram_data_milestone_2_tedxfmdc_first_edition_november_22_2025",
-      "label": "Milestone 2: TEDxFMDC First Edition (November 22, 2025)",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "milestone 2: tedxfmdc first edition (november 22, 2025)",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L47"
-    },
-    {
-      "id": "docs_media_instagram_data_milestone_3_let_s_talk_podcast_series_2025_2026",
-      "label": "Milestone 3: Let's Talk Podcast Series (2025\u20132026)",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "milestone 3: let's talk podcast series (2025\u20132026)",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L59"
-    },
-    {
-      "id": "docs_media_instagram_data_milestone_4_executive_governance_2025_2026_june_2025",
-      "label": "Milestone 4: Executive Governance 2025\u20132026 (June 2025)",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "milestone 4: executive governance 2025\u20132026 (june 2025)",
-      "source_file": "docs/media/instagram_data.md",
-      "source_location": "L67"
-    },
-    {
-      "id": "docs_media_scraper_pipeline",
-      "label": "scraper_pipeline.md",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "scraper_pipeline.md",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_1_architecture_overview",
-      "label": "\ud83d\udee0\ufe0f 1. Architecture Overview",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udee0\ufe0f 1. architecture overview",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_2_authentication_rate_limit_bypassing",
-      "label": "\ud83d\udd11 2. Authentication & Rate-Limit Bypassing",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udd11 2. authentication & rate-limit bypassing",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L30"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_3_utility_scripts_roster",
-      "label": "\ud83d\udcc2 3. Utility Scripts Roster",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udcc2 3. utility scripts roster",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_4_json_data_schemas",
-      "label": "\ud83d\udccb 4. JSON Data Schemas",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udccb 4. json data schemas",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L73"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_active_scripts_scripts",
-      "label": "Active scripts (`scripts/`)",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "active scripts (`scripts/`)",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L49"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_instagram_scraper_synchronization_pipeline_dentalk_club_fmdc",
-      "label": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "instagram scraper & synchronization pipeline: dentalk club fmdc",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_podcast_episode_object_podcasts_catalog_json",
-      "label": "Podcast Episode Object (`podcasts_catalog.json`):",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "podcast episode object (`podcasts_catalog.json`):",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L90"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_retired_legacy_scripts_scripts_legacy_target_the_deleted_data_tree",
-      "label": "Retired legacy scripts (`scripts/legacy/`) \u2014 target the deleted `data/` tree",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "retired legacy scripts (`scripts/legacy/`) \u2014 target the deleted `data/` tree",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L61"
-    },
-    {
-      "id": "docs_media_scraper_pipeline_tedx_talk_object_tedx_talks_json",
-      "label": "TEDx Talk Object (`tedx_talks.json`):",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "tedx talk object (`tedx_talks.json`):",
-      "source_file": "docs/media/scraper_pipeline.md",
-      "source_location": "L75"
-    },
-    {
-      "id": "docs_platform_club_platform_plan",
-      "label": "club-platform-plan.md",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "club-platform-plan.md",
-      "source_file": "docs/platform/club-platform-plan.md",
       "source_location": "L1"
     },
     {
@@ -3783,156 +3494,124 @@
       "source_location": "L43"
     },
     {
-      "id": "docs_readme",
-      "label": "README.md",
+      "id": "docs_media_scraper_pipeline",
+      "label": "scraper_pipeline.md",
       "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
+      "community": 33,
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "readme.md",
-      "source_file": "docs/README.md",
+      "norm_label": "scraper_pipeline.md",
+      "source_file": "docs/media/scraper_pipeline.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_readme_1_club_governance_identity",
-      "label": "1. \ud83c\udfdb\ufe0f Club Governance & Identity",
+      "id": "docs_media_scraper_pipeline_1_architecture_overview",
+      "label": "\ud83d\udee0\ufe0f 1. Architecture Overview",
       "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
+      "community": 33,
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. \ud83c\udfdb\ufe0f club governance & identity",
-      "source_file": "docs/README.md",
-      "source_location": "L34"
-    },
-    {
-      "id": "docs_readme_2_web_platform_engineering",
-      "label": "2. \ud83d\udcbb Web Platform Engineering",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. \ud83d\udcbb web platform engineering",
-      "source_file": "docs/README.md",
-      "source_location": "L44"
-    },
-    {
-      "id": "docs_readme_3_media_archives_data_pipeline",
-      "label": "3. \ud83d\udcf8 Media Archives & Data Pipeline",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. \ud83d\udcf8 media archives & data pipeline",
-      "source_file": "docs/README.md",
-      "source_location": "L60"
-    },
-    {
-      "id": "docs_readme_4_audit_history_tracking",
-      "label": "4. \ud83d\udcdc Audit & History Tracking",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. \ud83d\udcdc audit & history tracking",
-      "source_file": "docs/README.md",
-      "source_location": "L72"
-    },
-    {
-      "id": "docs_readme_comprehensive_category_index",
-      "label": "\ud83d\udccb Comprehensive Category Index",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udccb comprehensive category index",
-      "source_file": "docs/README.md",
-      "source_location": "L32"
-    },
-    {
-      "id": "docs_readme_dtc_dentalk_club_fmdc_master_documentation_hub",
-      "label": "\ud83c\udfdb\ufe0f DTC (Dentalk Club FMDC) \u2014 Master Documentation Hub",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83c\udfdb\ufe0f dtc (dentalk club fmdc) \u2014 master documentation hub",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_live_production_links",
-      "label": "\ud83c\udf10 Live Production Links",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83c\udf10 live production links",
-      "source_file": "docs/README.md",
-      "source_location": "L78"
-    },
-    {
-      "id": "docs_readme_organized_documentation_structure",
-      "label": "\ud83d\udcc2 Organized Documentation Structure",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "\ud83d\ude80 DTC Club Platform \u2014 Approved Implementation Plan & Session Handoff",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udcc2 organized documentation structure",
-      "source_file": "docs/README.md",
+      "norm_label": "\ud83d\udee0\ufe0f 1. architecture overview",
+      "source_file": "docs/media/scraper_pipeline.md",
       "source_location": "L7"
     },
     {
-      "id": "src_middleware",
-      "label": "src/middleware.ts",
+      "id": "docs_media_scraper_pipeline_2_authentication_rate_limit_bypassing",
+      "label": "\ud83d\udd11 2. Authentication & Rate-Limit Bypassing",
       "_origin": "ast",
       "community": 33,
-      "community_name": "src/middleware.ts",
-      "file_type": "code",
-      "norm_label": "src/middleware.ts",
-      "source_file": "src/middleware.ts",
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udd11 2. authentication & rate-limit bypassing",
+      "source_file": "docs/media/scraper_pipeline.md",
+      "source_location": "L30"
+    },
+    {
+      "id": "docs_media_scraper_pipeline_3_utility_scripts_roster",
+      "label": "\ud83d\udcc2 3. Utility Scripts Roster",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udcc2 3. utility scripts roster",
+      "source_file": "docs/media/scraper_pipeline.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "docs_media_scraper_pipeline_4_json_data_schemas",
+      "label": "\ud83d\udccb 4. JSON Data Schemas",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udccb 4. json data schemas",
+      "source_file": "docs/media/scraper_pipeline.md",
+      "source_location": "L73"
+    },
+    {
+      "id": "docs_media_scraper_pipeline_active_scripts_scripts",
+      "label": "Active scripts (`scripts/`)",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "active scripts (`scripts/`)",
+      "source_file": "docs/media/scraper_pipeline.md",
+      "source_location": "L49"
+    },
+    {
+      "id": "docs_media_scraper_pipeline_instagram_scraper_synchronization_pipeline_dentalk_club_fmdc",
+      "label": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "instagram scraper & synchronization pipeline: dentalk club fmdc",
+      "source_file": "docs/media/scraper_pipeline.md",
       "source_location": "L1"
     },
     {
-      "id": "src_middleware_config",
-      "label": "config",
+      "id": "docs_media_scraper_pipeline_podcast_episode_object_podcasts_catalog_json",
+      "label": "Podcast Episode Object (`podcasts_catalog.json`):",
       "_origin": "ast",
       "community": 33,
-      "community_name": "src/middleware.ts",
-      "file_type": "code",
-      "norm_label": "config",
-      "source_file": "src/middleware.ts",
-      "source_location": "L8"
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "podcast episode object (`podcasts_catalog.json`):",
+      "source_file": "docs/media/scraper_pipeline.md",
+      "source_location": "L90"
     },
     {
-      "id": "src_utils_supabase_middleware",
-      "label": "supabase/middleware.ts",
+      "id": "docs_media_scraper_pipeline_retired_legacy_scripts_scripts_legacy_target_the_deleted_data_tree",
+      "label": "Retired legacy scripts (`scripts/legacy/`) \u2014 target the deleted `data/` tree",
       "_origin": "ast",
       "community": 33,
-      "community_name": "src/middleware.ts",
-      "file_type": "code",
-      "norm_label": "supabase/middleware.ts",
-      "source_file": "src/utils/supabase/middleware.ts",
-      "source_location": "L1"
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "retired legacy scripts (`scripts/legacy/`) \u2014 target the deleted `data/` tree",
+      "source_file": "docs/media/scraper_pipeline.md",
+      "source_location": "L61"
     },
     {
-      "id": "src_utils_supabase_middleware_rationale_31",
-      "label": "IMPORTANT: DO NOT REMOVE auth.getUser()",
+      "id": "docs_media_scraper_pipeline_tedx_talk_object_tedx_talks_json",
+      "label": "TEDx Talk Object (`tedx_talks.json`):",
       "_origin": "ast",
       "community": 33,
-      "community_name": "src/middleware.ts",
-      "file_type": "rationale",
-      "norm_label": "important: do not remove auth.getuser()",
-      "source_file": "src/utils/supabase/middleware.ts",
-      "source_location": "L31"
+      "community_name": "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "tedx talk object (`tedx_talks.json`):",
+      "source_file": "docs/media/scraper_pipeline.md",
+      "source_location": "L75"
     },
     {
       "id": "rules",
@@ -4100,15 +3779,202 @@
       "source_location": "L2"
     },
     {
-      "id": "src_utils_supabase_client",
-      "label": "utils/supabase/client.ts",
+      "id": "src_app_admin_page",
+      "label": "admin/page.tsx",
       "_origin": "ast",
       "community": 36,
-      "community_name": "utils/supabase/client.ts",
+      "community_name": "createSupabaseServerClient",
       "file_type": "code",
-      "norm_label": "utils/supabase/client.ts",
-      "source_file": "src/utils/supabase/client.ts",
+      "norm_label": "admin/page.tsx",
+      "source_file": "src/app/admin/page.tsx",
       "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/admin/page.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_app_admin_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/admin/page.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_app_espace_annuaire_page",
+      "label": "annuaire/page.tsx",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "annuaire/page.tsx",
+      "source_file": "src/app/espace/annuaire/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_espace_annuaire_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/espace/annuaire/page.tsx",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_app_espace_annuaire_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/espace/annuaire/page.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_app_espace_page",
+      "label": "espace/page.tsx",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "espace/page.tsx",
+      "source_file": "src/app/espace/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_espace_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/espace/page.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_app_espace_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/espace/page.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_components_auth_signinprompt",
+      "label": "SignInPrompt.tsx",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "signinprompt.tsx",
+      "source_file": "src/components/auth/SignInPrompt.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_espace_annuairegrid",
+      "label": "AnnuaireGrid.tsx",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "annuairegrid.tsx",
+      "source_file": "src/components/espace/AnnuaireGrid.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_client_supabase_anon_key",
+      "label": "SUPABASE_ANON_KEY",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "supabase_anon_key",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_lib_supabase_client_supabase_url",
+      "label": "SUPABASE_URL",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "supabase_url",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_lib_supabase_server",
+      "label": "server.ts",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "server.ts",
+      "source_file": "src/lib/supabase/server.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_middleware",
+      "label": "src/middleware.ts",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "src/middleware.ts",
+      "source_file": "src/middleware.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_middleware_config",
+      "label": "config",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "config",
+      "source_file": "src/middleware.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_utils_supabase_middleware",
+      "label": "supabase/middleware.ts",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "code",
+      "norm_label": "supabase/middleware.ts",
+      "source_file": "src/utils/supabase/middleware.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_utils_supabase_middleware_rationale_38",
+      "label": "IMPORTANT: DO NOT REMOVE auth.getUser()",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "createSupabaseServerClient",
+      "file_type": "rationale",
+      "norm_label": "important: do not remove auth.getuser()",
+      "source_file": "src/utils/supabase/middleware.ts",
+      "source_location": "L38"
     },
     {
       "id": "overview",
@@ -4195,147 +4061,164 @@
       "source_location": "L38"
     },
     {
-      "id": "src_utils_supabase_server",
-      "label": "utils/supabase/server.ts",
+      "id": "verify_tmp",
+      "label": "verify-tmp.mjs",
       "_origin": "ast",
       "community": 38,
-      "community_name": "utils/supabase/server.ts",
+      "community_name": "verify-tmp.mjs",
       "file_type": "code",
-      "norm_label": "utils/supabase/server.ts",
-      "source_file": "src/utils/supabase/server.ts",
+      "norm_label": "verify-tmp.mjs",
+      "source_file": "verify-tmp.mjs",
       "source_location": "L1"
     },
     {
-      "id": "src_components_admin_abouttab",
-      "label": "AboutTab.tsx",
+      "id": "verify_tmp_anon",
+      "label": "anon",
       "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
+      "community": 38,
+      "community_name": "verify-tmp.mjs",
       "file_type": "code",
-      "norm_label": "abouttab.tsx",
-      "source_file": "src/components/admin/AboutTab.tsx",
+      "norm_label": "anon",
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L23"
+    },
+    {
+      "id": "verify_tmp_data",
+      "label": "data",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "verify-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "data",
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L37"
+    },
+    {
+      "id": "verify_tmp_env",
+      "label": "env",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "verify-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "env",
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L6"
+    },
+    {
+      "id": "verify_tmp_results",
+      "label": "results",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "verify-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "results",
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L20"
+    },
+    {
+      "id": "verify_tmp_runs",
+      "label": "runs",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "verify-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "runs",
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L26"
+    },
+    {
+      "id": "docs_audit_activity_log",
+      "label": "activity_log.md",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "activity_log.md",
+      "source_file": "docs/audit/activity_log.md",
       "source_location": "L1"
     },
     {
-      "id": "src_components_admin_adminconsole",
-      "label": "AdminConsole.tsx",
+      "id": "docs_platform_club_platform_plan",
+      "label": "club-platform-plan.md",
       "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "adminconsole.tsx",
-      "source_file": "src/components/admin/AdminConsole.tsx",
+      "community": 39,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "club-platform-plan.md",
+      "source_file": "docs/platform/club-platform-plan.md",
       "source_location": "L1"
     },
     {
-      "id": "src_components_admin_adminconsole_tabs",
-      "label": "TABS",
+      "id": "docs_readme",
+      "label": "README.md",
       "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "tabs",
-      "source_file": "src/components/admin/AdminConsole.tsx",
-      "source_location": "L22"
-    },
-    {
-      "id": "src_components_admin_announcementstab",
-      "label": "AnnouncementsTab.tsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "announcementstab.tsx",
-      "source_file": "src/components/admin/AnnouncementsTab.tsx",
+      "community": 39,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "readme.md",
+      "source_file": "docs/README.md",
       "source_location": "L1"
     },
     {
-      "id": "src_components_admin_announcementstab_status_labels",
-      "label": "STATUS_LABELS",
+      "id": "docs_readme_dtc_dentalk_club_fmdc_master_documentation_hub",
+      "label": "\ud83c\udfdb\ufe0f DTC (Dentalk Club FMDC) \u2014 Master Documentation Hub",
       "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "status_labels",
-      "source_file": "src/components/admin/AnnouncementsTab.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_components_admin_committeestab",
-      "label": "CommitteesTab.tsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "committeestab.tsx",
-      "source_file": "src/components/admin/CommitteesTab.tsx",
+      "community": 39,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83c\udfdb\ufe0f dtc (dentalk club fmdc) \u2014 master documentation hub",
+      "source_file": "docs/README.md",
       "source_location": "L1"
     },
     {
-      "id": "src_components_admin_eventstab",
-      "label": "EventsTab.tsx",
+      "id": "docs_readme_live_production_links",
+      "label": "\ud83c\udf10 Live Production Links",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83c\udf10 live production links",
+      "source_file": "docs/README.md",
+      "source_location": "L78"
+    },
+    {
+      "id": "docs_readme_organized_documentation_structure",
+      "label": "\ud83d\udcc2 Organized Documentation Structure",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udcc2 organized documentation structure",
+      "source_file": "docs/README.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_app_api_admin_youtube_import_route",
+      "label": "route.ts",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "eventstab.tsx",
-      "source_file": "src/components/admin/EventsTab.tsx",
+      "norm_label": "route.ts",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
       "source_location": "L1"
     },
     {
-      "id": "src_components_admin_eventstab_empty_tedx",
-      "label": "EMPTY_TEDX",
+      "id": "src_app_api_admin_youtube_import_route_dynamic",
+      "label": "dynamic",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "empty_tedx",
-      "source_file": "src/components/admin/EventsTab.tsx",
-      "source_location": "L95"
-    },
-    {
-      "id": "src_components_admin_ideastab",
-      "label": "IdeasTab.tsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "ideastab.tsx",
-      "source_file": "src/components/admin/IdeasTab.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_admin_ideastab_status_labels",
-      "label": "STATUS_LABELS",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "status_labels",
-      "source_file": "src/components/admin/IdeasTab.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "src_components_admin_podcasttab",
-      "label": "PodcastTab.tsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "podcasttab.tsx",
-      "source_file": "src/components/admin/PodcastTab.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_admin_podcasttab_empty_form",
-      "label": "EMPTY_FORM",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "empty_form",
-      "source_file": "src/components/admin/PodcastTab.tsx",
-      "source_location": "L28"
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/admin/youtube-import/route.ts",
+      "source_location": "L6"
     },
     {
       "id": "src_components_admin_userstab",
@@ -4358,28 +4241,6 @@
       "norm_label": "role_labels",
       "source_file": "src/components/admin/UsersTab.tsx",
       "source_location": "L11"
-    },
-    {
-      "id": "src_components_annonces_announcementcomposer",
-      "label": "AnnouncementComposer.tsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "announcementcomposer.tsx",
-      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_annonces_announcementcomposer_empty_form",
-      "label": "EMPTY_FORM",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "empty_form",
-      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L20"
     },
     {
       "id": "src_components_auth_authprovider",
@@ -4437,14 +4298,14 @@
       "source_location": "L1"
     },
     {
-      "id": "src_components_espace_profileeditor",
-      "label": "ProfileEditor.tsx",
+      "id": "src_components_home_nextatelierteaser",
+      "label": "NextAtelierTeaser.tsx",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "profileeditor.tsx",
-      "source_file": "src/components/espace/ProfileEditor.tsx",
+      "norm_label": "nextatelierteaser.tsx",
+      "source_file": "src/components/home/NextAtelierTeaser.tsx",
       "source_location": "L1"
     },
     {
@@ -4481,70 +4342,48 @@
       "source_location": "L14"
     },
     {
-      "id": "src_components_idees_pitchmodal",
-      "label": "PitchModal.tsx",
+      "id": "src_components_useravatar",
+      "label": "UserAvatar.tsx",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "pitchmodal.tsx",
-      "source_file": "src/components/idees/PitchModal.tsx",
+      "norm_label": "useravatar.tsx",
+      "source_file": "src/components/UserAvatar.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_components_statscounter",
-      "label": "StatsCounter.tsx",
+      "id": "src_lib_format",
+      "label": "format.ts",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "statscounter.tsx",
-      "source_file": "src/components/StatsCounter.tsx",
+      "norm_label": "format.ts",
+      "source_file": "src/lib/format.ts",
       "source_location": "L1"
     },
     {
-      "id": "src_components_ui_form",
-      "label": "form.tsx",
+      "id": "src_lib_format_dateformatter",
+      "label": "dateFormatter",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "form.tsx",
-      "source_file": "src/components/ui/form.tsx",
-      "source_location": "L1"
+      "norm_label": "dateformatter",
+      "source_file": "src/lib/format.ts",
+      "source_location": "L3"
     },
     {
-      "id": "src_components_ui_form_badgestyles",
-      "label": "badgeStyles",
+      "id": "src_lib_format_datetimeformatter",
+      "label": "dateTimeFormatter",
       "_origin": "ast",
       "community": 4,
       "community_name": "types.ts",
       "file_type": "code",
-      "norm_label": "badgestyles",
-      "source_file": "src/components/ui/form.tsx",
-      "source_location": "L60"
-    },
-    {
-      "id": "src_components_ui_form_inputclass",
-      "label": "inputClass",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "inputclass",
-      "source_file": "src/components/ui/form.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_lib_supabase_client",
-      "label": "lib/supabase/client.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "types.ts",
-      "file_type": "code",
-      "norm_label": "lib/supabase/client.ts",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L1"
+      "norm_label": "datetimeformatter",
+      "source_file": "src/lib/format.ts",
+      "source_location": "L10"
     },
     {
       "id": "src_lib_types",
@@ -4556,6 +4395,261 @@
       "norm_label": "types.ts",
       "source_file": "src/lib/types.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "docs_audit_activity_log_2026_08_24",
+      "label": "2026-08-24",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "DTC Project Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-08-24",
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_audit_activity_log_2026_08_25_club_platform_implementation_phases_a_d_full_build",
+      "label": "2026-08-25 \u2014 Club platform implementation (phases A\u2013D, full build)",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "DTC Project Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-08-25 \u2014 club platform implementation (phases a\u2013d, full build)",
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L102"
+    },
+    {
+      "id": "docs_audit_activity_log_2026_08_25_club_platform_planning_session_no_code_changes",
+      "label": "2026-08-25 \u2014 Club platform planning session (no code changes)",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "DTC Project Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-08-25 \u2014 club platform planning session (no code changes)",
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L95"
+    },
+    {
+      "id": "docs_audit_activity_log_2026_08_25_independent_judge_audit_remediation",
+      "label": "2026-08-25 \u2014 Independent judge audit + remediation",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "DTC Project Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-08-25 \u2014 independent judge audit + remediation",
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L115"
+    },
+    {
+      "id": "docs_audit_activity_log_2026_08_25_production_readiness_audit_remediation",
+      "label": "2026-08-25 \u2014 Production-readiness audit & remediation",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "DTC Project Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-08-25 \u2014 production-readiness audit & remediation",
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L64"
+    },
+    {
+      "id": "docs_audit_activity_log_dtc_project_activity_log",
+      "label": "DTC Project Activity Log",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "DTC Project Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "dtc project activity log",
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_1_club_governance_identity",
+      "label": "1. \ud83c\udfdb\ufe0f Club Governance & Identity",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "\ud83d\udccb Comprehensive Category Index",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. \ud83c\udfdb\ufe0f club governance & identity",
+      "source_file": "docs/README.md",
+      "source_location": "L34"
+    },
+    {
+      "id": "docs_readme_2_web_platform_engineering",
+      "label": "2. \ud83d\udcbb Web Platform Engineering",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "\ud83d\udccb Comprehensive Category Index",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. \ud83d\udcbb web platform engineering",
+      "source_file": "docs/README.md",
+      "source_location": "L44"
+    },
+    {
+      "id": "docs_readme_3_media_archives_data_pipeline",
+      "label": "3. \ud83d\udcf8 Media Archives & Data Pipeline",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "\ud83d\udccb Comprehensive Category Index",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. \ud83d\udcf8 media archives & data pipeline",
+      "source_file": "docs/README.md",
+      "source_location": "L60"
+    },
+    {
+      "id": "docs_readme_4_audit_history_tracking",
+      "label": "4. \ud83d\udcdc Audit & History Tracking",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "\ud83d\udccb Comprehensive Category Index",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. \ud83d\udcdc audit & history tracking",
+      "source_file": "docs/README.md",
+      "source_location": "L72"
+    },
+    {
+      "id": "docs_readme_comprehensive_category_index",
+      "label": "\ud83d\udccb Comprehensive Category Index",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "\ud83d\udccb Comprehensive Category Index",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udccb comprehensive category index",
+      "source_file": "docs/README.md",
+      "source_location": "L32"
+    },
+    {
+      "id": "audit_tmp",
+      "label": "audit-tmp.mjs",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "audit-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "audit-tmp.mjs",
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "audit_tmp_anon",
+      "label": "anon",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "audit-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "anon",
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L13"
+    },
+    {
+      "id": "audit_tmp_denies",
+      "label": "denies",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "audit-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "denies",
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L45"
+    },
+    {
+      "id": "audit_tmp_env",
+      "label": "env",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "audit-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "env",
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L6"
+    },
+    {
+      "id": "audit_tmp_results",
+      "label": "results",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "audit-tmp.mjs",
+      "file_type": "code",
+      "norm_label": "results",
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L15"
+    },
+    {
+      "id": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he",
+      "label": "query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "Q: check out the profile section, use graphify for help",
+      "file_type": "document",
+      "frontmatter": {
+        "type": "query",
+        "date": "2026-08-25T14:22:32.336764+00:00",
+        "question": "check out the profile section, use graphify for help",
+        "contributor": "graphify",
+        "outcome": "useful",
+        "source_nodes": "[&quot;Profile&quot;, &quot;ProfileEditor()&quot;, &quot;getServerProfile()&quot;, &quot;UserAvatar()&quot;]"
+      },
+      "node_kind": "page",
+      "norm_label": "query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_answer",
+      "label": "Answer",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "Q: check out the profile section, use graphify for help",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "answer",
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L12"
+    },
+    {
+      "id": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_outcome",
+      "label": "Outcome",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "Q: check out the profile section, use graphify for help",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "outcome",
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L16"
+    },
+    {
+      "id": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_q_check_out_the_profile_section_use_graphify_for_help",
+      "label": "Q: check out the profile section, use graphify for help",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "Q: check out the profile section, use graphify for help",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "q: check out the profile section, use graphify for help",
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L10"
+    },
+    {
+      "id": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_source_nodes",
+      "label": "Source Nodes",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "Q: check out the profile section, use graphify for help",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "source nodes",
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L20"
     },
     {
       "id": "src_app_about_page",
@@ -4580,6 +4674,28 @@
       "source_location": "L9"
     },
     {
+      "id": "src_app_annonces_page",
+      "label": "annonces/page.tsx",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "annonces/page.tsx",
+      "source_file": "src/app/annonces/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_annonces_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/annonces/page.tsx",
+      "source_location": "L6"
+    },
+    {
       "id": "src_app_events_page",
       "label": "events/page.tsx",
       "_origin": "ast",
@@ -4588,6 +4704,17 @@
       "file_type": "code",
       "norm_label": "events/page.tsx",
       "source_file": "src/app/events/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_events_slug_page",
+      "label": "[slug]/page.tsx",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "data.ts",
+      "file_type": "code",
+      "norm_label": "[slug]/page.tsx",
+      "source_file": "src/app/events/[slug]/page.tsx",
       "source_location": "L1"
     },
     {
@@ -4611,17 +4738,6 @@
       "norm_label": "metadata",
       "source_file": "src/app/idees/page.tsx",
       "source_location": "L6"
-    },
-    {
-      "id": "src_app_page",
-      "label": "app/page.tsx",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "app/page.tsx",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L1"
     },
     {
       "id": "src_app_podcast_page",
@@ -4668,25 +4784,25 @@
       "source_location": "L5"
     },
     {
-      "id": "src_components_events_tedxgrid",
-      "label": "TedxGrid.tsx",
+      "id": "src_components_events_eventitemsgrid",
+      "label": "EventItemsGrid.tsx",
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "tedxgrid.tsx",
-      "source_file": "src/components/events/TedxGrid.tsx",
+      "norm_label": "eventitemsgrid.tsx",
+      "source_file": "src/components/events/EventItemsGrid.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_components_home_homecontent",
-      "label": "HomeContent.tsx",
+      "id": "src_components_infographicviewer",
+      "label": "InfographicViewer.tsx",
       "_origin": "ast",
       "community": 5,
       "community_name": "data.ts",
       "file_type": "code",
-      "norm_label": "homecontent.tsx",
-      "source_file": "src/components/home/HomeContent.tsx",
+      "norm_label": "infographicviewer.tsx",
+      "source_file": "src/components/InfographicViewer.tsx",
       "source_location": "L1"
     },
     {
@@ -4698,17 +4814,6 @@
       "file_type": "code",
       "norm_label": "podcastplayer.tsx",
       "source_file": "src/components/PodcastPlayer.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_videoplayermodal",
-      "label": "VideoPlayerModal.tsx",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "videoplayermodal.tsx",
-      "source_file": "src/components/VideoPlayerModal.tsx",
       "source_location": "L1"
     },
     {
@@ -4732,28 +4837,6 @@
       "norm_label": "podcastepisodesdata",
       "source_file": "src/data/podcastData.ts",
       "source_location": "L18"
-    },
-    {
-      "id": "src_data_tedxdata",
-      "label": "tedxData.ts",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "tedxdata.ts",
-      "source_file": "src/data/tedxData.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_data_tedxdata_tedxtalksdata",
-      "label": "tedxTalksData",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data.ts",
-      "file_type": "code",
-      "norm_label": "tedxtalksdata",
-      "source_file": "src/data/tedxData.ts",
-      "source_location": "L14"
     },
     {
       "id": "src_lib_data",
@@ -4811,187 +4894,165 @@
       "source_location": "L42"
     },
     {
-      "id": "src_app_admin_page",
-      "label": "admin/page.tsx",
+      "id": "src_components_admin_abouttab",
+      "label": "AboutTab.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "admin/page.tsx",
-      "source_file": "src/app/admin/page.tsx",
+      "norm_label": "abouttab.tsx",
+      "source_file": "src/components/admin/AboutTab.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_admin_page_dynamic",
-      "label": "dynamic",
+      "id": "src_components_admin_adminconsole",
+      "label": "AdminConsole.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/admin/page.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_app_admin_page_metadata",
-      "label": "metadata",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/admin/page.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_app_espace_annuaire_page",
-      "label": "annuaire/page.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "annuaire/page.tsx",
-      "source_file": "src/app/espace/annuaire/page.tsx",
+      "norm_label": "adminconsole.tsx",
+      "source_file": "src/components/admin/AdminConsole.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_espace_annuaire_page_dynamic",
-      "label": "dynamic",
+      "id": "src_components_admin_adminconsole_tabs",
+      "label": "TABS",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/espace/annuaire/page.tsx",
-      "source_location": "L15"
+      "norm_label": "tabs",
+      "source_file": "src/components/admin/AdminConsole.tsx",
+      "source_location": "L22"
     },
     {
-      "id": "src_app_espace_annuaire_page_metadata",
-      "label": "metadata",
+      "id": "src_components_admin_announcementstab",
+      "label": "AnnouncementsTab.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/espace/annuaire/page.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_app_espace_page",
-      "label": "espace/page.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "espace/page.tsx",
-      "source_file": "src/app/espace/page.tsx",
+      "norm_label": "announcementstab.tsx",
+      "source_file": "src/components/admin/AnnouncementsTab.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_espace_page_dynamic",
-      "label": "dynamic",
+      "id": "src_components_admin_announcementstab_status_labels",
+      "label": "STATUS_LABELS",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/espace/page.tsx",
-      "source_location": "L13"
+      "norm_label": "status_labels",
+      "source_file": "src/components/admin/AnnouncementsTab.tsx",
+      "source_location": "L11"
     },
     {
-      "id": "src_app_espace_page_metadata",
-      "label": "metadata",
+      "id": "src_components_admin_committeestab",
+      "label": "CommitteesTab.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/espace/page.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_components_auth_signinprompt",
-      "label": "SignInPrompt.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "signinprompt.tsx",
-      "source_file": "src/components/auth/SignInPrompt.tsx",
+      "norm_label": "committeestab.tsx",
+      "source_file": "src/components/admin/CommitteesTab.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_components_espace_annuairegrid",
-      "label": "AnnuaireGrid.tsx",
+      "id": "src_components_admin_eventstab",
+      "label": "EventsTab.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "annuairegrid.tsx",
-      "source_file": "src/components/espace/AnnuaireGrid.tsx",
+      "norm_label": "eventstab.tsx",
+      "source_file": "src/components/admin/EventsTab.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_lib_supabase_client_supabase_anon_key",
-      "label": "SUPABASE_ANON_KEY",
+      "id": "src_components_admin_eventstab_empty_tedx",
+      "label": "EMPTY_TEDX",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "supabase_anon_key",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L6"
+      "norm_label": "empty_tedx",
+      "source_file": "src/components/admin/EventsTab.tsx",
+      "source_location": "L95"
     },
     {
-      "id": "src_lib_supabase_client_supabase_url",
-      "label": "SUPABASE_URL",
+      "id": "src_components_admin_ideastab",
+      "label": "IdeasTab.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "useAuth",
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "supabase_url",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_lib_supabase_server",
-      "label": "lib/supabase/server.ts",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "lib/supabase/server.ts",
-      "source_file": "src/lib/supabase/server.ts",
+      "norm_label": "ideastab.tsx",
+      "source_file": "src/components/admin/IdeasTab.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_annonces_page",
-      "label": "annonces/page.tsx",
+      "id": "src_components_admin_ideastab_status_labels",
+      "label": "STATUS_LABELS",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "annonces/page.tsx",
-      "source_file": "src/app/annonces/page.tsx",
+      "norm_label": "status_labels",
+      "source_file": "src/components/admin/IdeasTab.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "src_components_admin_podcasttab",
+      "label": "PodcastTab.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "podcasttab.tsx",
+      "source_file": "src/components/admin/PodcastTab.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_annonces_page_metadata",
-      "label": "metadata",
+      "id": "src_components_admin_podcasttab_empty_form",
+      "label": "EMPTY_FORM",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/annonces/page.tsx",
-      "source_location": "L6"
+      "norm_label": "empty_form",
+      "source_file": "src/components/admin/PodcastTab.tsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_components_annonces_announcementcomposer",
+      "label": "AnnouncementComposer.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "announcementcomposer.tsx",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_annonces_announcementcomposer_empty_form",
+      "label": "EMPTY_FORM",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "empty_form",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L21"
     },
     {
       "id": "src_components_annonces_announcementsfeed",
       "label": "AnnouncementsFeed.tsx",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
       "norm_label": "announcementsfeed.tsx",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
@@ -5001,8 +5062,8 @@
       "id": "src_components_annonces_announcementsfeed_status_labels",
       "label": "STATUS_LABELS",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
       "norm_label": "status_labels",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
@@ -5012,67 +5073,231 @@
       "id": "src_components_annonces_announcementsfeed_status_tones",
       "label": "STATUS_TONES",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
       "norm_label": "status_tones",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
       "source_location": "L111"
     },
     {
-      "id": "src_components_home_nextatelierteaser",
-      "label": "NextAtelierTeaser.tsx",
+      "id": "src_components_auth_authmodal",
+      "label": "AuthModal.tsx",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "nextatelierteaser.tsx",
-      "source_file": "src/components/home/NextAtelierTeaser.tsx",
+      "norm_label": "authmodal.tsx",
+      "source_file": "src/components/auth/AuthModal.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_components_useravatar",
-      "label": "UserAvatar.tsx",
+      "id": "src_components_espace_avatarcropmodal",
+      "label": "AvatarCropModal.tsx",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "useravatar.tsx",
-      "source_file": "src/components/UserAvatar.tsx",
+      "norm_label": "avatarcropmodal.tsx",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_lib_format",
-      "label": "format.ts",
+      "id": "src_components_espace_profileeditor",
+      "label": "ProfileEditor.tsx",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "format.ts",
-      "source_file": "src/lib/format.ts",
+      "norm_label": "profileeditor.tsx",
+      "source_file": "src/components/espace/ProfileEditor.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_lib_format_dateformatter",
-      "label": "dateFormatter",
+      "id": "src_components_idees_pitchmodal",
+      "label": "PitchModal.tsx",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
       "file_type": "code",
-      "norm_label": "dateformatter",
-      "source_file": "src/lib/format.ts",
-      "source_location": "L3"
+      "norm_label": "pitchmodal.tsx",
+      "source_file": "src/components/idees/PitchModal.tsx",
+      "source_location": "L1"
     },
     {
-      "id": "src_lib_format_datetimeformatter",
-      "label": "dateTimeFormatter",
+      "id": "src_components_ui_form",
+      "label": "form.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "form.tsx",
+      "source_file": "src/components/ui/form.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_ui_form_badgestyles",
+      "label": "badgeStyles",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "badgestyles",
+      "source_file": "src/components/ui/form.tsx",
+      "source_location": "L60"
+    },
+    {
+      "id": "src_components_ui_form_inputclass",
+      "label": "inputClass",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "inputclass",
+      "source_file": "src/components/ui/form.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_hooks_useoverlaydialog",
+      "label": "useOverlayDialog.ts",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "useoverlaydialog.ts",
+      "source_file": "src/hooks/useOverlayDialog.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_client",
+      "label": "client.ts",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "getSupabaseBrowserClient",
+      "file_type": "code",
+      "norm_label": "client.ts",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_media_instagram_data",
+      "label": "instagram_data.md",
       "_origin": "ast",
       "community": 8,
-      "community_name": "AnnouncementsFeed.tsx",
-      "file_type": "code",
-      "norm_label": "datetimeformatter",
-      "source_file": "src/lib/format.ts",
-      "source_location": "L10"
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "instagram_data.md",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_media_instagram_data_1_account_timeline_overview",
+      "label": "\ud83d\udcca 1. Account & Timeline Overview",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udcca 1. account & timeline overview",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_media_instagram_data_2_category_event_breakdown_across_97_posts",
+      "label": "\ud83d\udcc8 2. Category & Event Breakdown across 97 Posts",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udcc8 2. category & event breakdown across 97 posts",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L18"
+    },
+    {
+      "id": "docs_media_instagram_data_3_key_milestone_archive",
+      "label": "\ud83c\udfa4 3. Key Milestone Archive",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83c\udfa4 3. key milestone archive",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L40"
+    },
+    {
+      "id": "docs_media_instagram_data_instagram_data_content_analysis_dentalk_club_fmdc",
+      "label": "Instagram Data & Content Analysis: Dentalk Club FMDC",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "instagram data & content analysis: dentalk club fmdc",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_media_instagram_data_master_metadata_location",
+      "label": "\ud83d\udcc2 Master Metadata Location",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udcc2 master metadata location",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L73"
+    },
+    {
+      "id": "docs_media_instagram_data_milestone_1_founding_inception_october_november_2024",
+      "label": "Milestone 1: Founding & Inception (October \u2013 November 2024)",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "milestone 1: founding & inception (october \u2013 november 2024)",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L42"
+    },
+    {
+      "id": "docs_media_instagram_data_milestone_2_tedxfmdc_first_edition_november_22_2025",
+      "label": "Milestone 2: TEDxFMDC First Edition (November 22, 2025)",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "milestone 2: tedxfmdc first edition (november 22, 2025)",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L47"
+    },
+    {
+      "id": "docs_media_instagram_data_milestone_3_let_s_talk_podcast_series_2025_2026",
+      "label": "Milestone 3: Let's Talk Podcast Series (2025\u20132026)",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "milestone 3: let's talk podcast series (2025\u20132026)",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L59"
+    },
+    {
+      "id": "docs_media_instagram_data_milestone_4_executive_governance_2025_2026_june_2025",
+      "label": "Milestone 4: Executive Governance 2025\u20132026 (June 2025)",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\ud83c\udfa4 3. Key Milestone Archive",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "milestone 4: executive governance 2025\u20132026 (june 2025)",
+      "source_file": "docs/media/instagram_data.md",
+      "source_location": "L67"
     },
     {
       "id": "scripts_fetch_all_posts",
@@ -5816,7 +6041,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L50",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_annonces_announcementcomposer_announcementcomposer",
+      "target": "src_components_auth_authprovider_useauth",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -5828,7 +6065,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L64",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -5840,7 +6077,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L83",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -5876,7 +6113,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L364",
+      "source_location": "L384",
       "weight": 1.0
     },
     {
@@ -5888,7 +6125,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L375",
+      "source_location": "L395",
       "weight": 1.0
     },
     {
@@ -5900,7 +6137,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/annonces/AnnouncementsFeed.tsx",
-      "source_location": "L377",
+      "source_location": "L397",
       "weight": 1.0
     },
     {
@@ -6008,19 +6245,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/espace/ActivitiesPanel.tsx",
-      "source_location": "L159",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_espace_activitiespanel_activitiespanel",
-      "target": "src_lib_format_formatdatetime",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/components/espace/ActivitiesPanel.tsx",
-      "source_location": "L208",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -6037,6 +6262,18 @@
     },
     {
       "source": "src_components_espace_activitiespanel_activitiespanel",
+      "target": "src_lib_format_formatdatetime",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/espace/ActivitiesPanel.tsx",
+      "source_location": "L213",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_activitiespanel_activitiespanel",
       "target": "src_lib_supabase_client_getsupabasebrowserclient",
       "relation": "calls",
       "_origin": "ast",
@@ -6045,6 +6282,18 @@
       "context": "call",
       "source_file": "src/components/espace/ActivitiesPanel.tsx",
       "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_avatarcropmodal_avatarcropmodal",
+      "target": "src_hooks_useoverlaydialog_useoverlaydialog",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -6068,7 +6317,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L42",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -6080,19 +6329,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L57",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_espace_profileeditor_profileeditor",
-      "target": "src_components_espace_profileeditor_resizeavatar",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L62",
+      "source_location": "L56",
       "weight": 1.0
     },
     {
@@ -6104,7 +6341,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L68",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -6176,7 +6413,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/idees/IdeaComments.tsx",
-      "source_location": "L87",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -6188,7 +6425,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/idees/IdeasBoard.tsx",
-      "source_location": "L234",
+      "source_location": "L246",
       "weight": 1.0
     },
     {
@@ -6224,7 +6461,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_idees_pitchmodal_pitchmodal",
+      "target": "src_components_auth_authprovider_useauth",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/idees/PitchModal.tsx",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -6236,7 +6485,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -6660,6 +6909,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_utils_supabase_middleware_updatesession",
+      "target": "src_lib_supabase_client_issupabaseconfigured",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/utils/supabase/middleware.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
       "source": "src_lib_data",
       "target": "src_lib_types",
       "relation": "re_exports",
@@ -6948,6 +7209,18 @@
       "weight": 1.0
     },
     {
+      "source": "package_devdependencies_supabase",
+      "target": "supabase",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
       "source": "package_devdependencies_tailwindcss",
       "target": "tailwindcss",
       "relation": "imports",
@@ -6956,7 +7229,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -7004,7 +7277,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -8401,7 +8674,7 @@
     },
     {
       "source": "src_components_annonces_announcementcomposer",
-      "target": "src_hooks_useoverlaydialog_useoverlaydialog",
+      "target": "src_components_auth_authprovider_useauth",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -8413,7 +8686,7 @@
     },
     {
       "source": "src_components_annonces_announcementcomposer",
-      "target": "src_lib_supabase_client_getsupabasebrowserclient",
+      "target": "src_hooks_useoverlaydialog_useoverlaydialog",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -8425,7 +8698,7 @@
     },
     {
       "source": "src_components_annonces_announcementcomposer",
-      "target": "src_components_ui_form_field",
+      "target": "src_lib_supabase_client_getsupabasebrowserclient",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -8433,6 +8706,18 @@
       "context": "import",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_annonces_announcementcomposer",
+      "target": "src_components_ui_form_field",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -8444,7 +8729,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -8456,7 +8741,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -8468,7 +8753,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -8808,6 +9093,42 @@
       "weight": 1.0
     },
     {
+      "source": "src_components_espace_avatarcropmodal",
+      "target": "src_hooks_useoverlaydialog_useoverlaydialog",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_avatarcropmodal",
+      "target": "src_components_ui_form_ghostbutton",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_avatarcropmodal",
+      "target": "src_components_ui_form_primarybutton",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "src_components_espace_espaceclient",
       "target": "src_lib_types_committee",
       "relation": "imports",
@@ -8877,6 +9198,18 @@
       "context": "import",
       "source_file": "src/components/espace/EspaceClient.tsx",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_profileeditor",
+      "target": "src_components_useravatar_useravatar",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/ProfileEditor.tsx",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -8953,7 +9286,7 @@
     },
     {
       "source": "src_components_espace_profileeditor",
-      "target": "src_components_ui_form_field",
+      "target": "src_components_espace_avatarcropmodal_avatarcropmodal",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -8961,6 +9294,18 @@
       "context": "import",
       "source_file": "src/components/espace/ProfileEditor.tsx",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_profileeditor",
+      "target": "src_components_ui_form_field",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/ProfileEditor.tsx",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -8972,24 +9317,12 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
       "source": "src_components_espace_profileeditor",
       "target": "src_components_ui_form_primarybutton",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_espace_profileeditor",
-      "target": "src_components_useravatar_useravatar",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -9373,7 +9706,7 @@
     },
     {
       "source": "src_components_idees_pitchmodal",
-      "target": "src_components_ui_form_field",
+      "target": "src_components_auth_authprovider_useauth",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -9381,6 +9714,18 @@
       "context": "import",
       "source_file": "src/components/idees/PitchModal.tsx",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_idees_pitchmodal",
+      "target": "src_components_ui_form_field",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/idees/PitchModal.tsx",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -9392,7 +9737,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -9404,7 +9749,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -9416,7 +9761,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -9837,6 +10182,18 @@
       "context": "import",
       "source_file": "src/middleware.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_utils_supabase_middleware",
+      "target": "src_lib_supabase_client_issupabaseconfigured",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/utils/supabase/middleware.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -10861,7 +11218,7 @@
     },
     {
       "source": "src_components_annonces_announcementcomposer",
-      "target": "src_hooks_useoverlaydialog",
+      "target": "src_components_auth_authprovider",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -10873,7 +11230,7 @@
     },
     {
       "source": "src_components_annonces_announcementcomposer",
-      "target": "src_lib_supabase_client",
+      "target": "src_hooks_useoverlaydialog",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -10885,7 +11242,7 @@
     },
     {
       "source": "src_components_annonces_announcementcomposer",
-      "target": "src_components_ui_form",
+      "target": "src_lib_supabase_client",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -10893,6 +11250,18 @@
       "context": "import",
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_annonces_announcementcomposer",
+      "target": "src_components_ui_form",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/annonces/AnnouncementComposer.tsx",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -11160,6 +11529,30 @@
       "weight": 1.0
     },
     {
+      "source": "src_components_espace_avatarcropmodal",
+      "target": "src_hooks_useoverlaydialog",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_avatarcropmodal",
+      "target": "src_components_ui_form",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "src_components_espace_espaceclient",
       "target": "src_lib_types",
       "relation": "imports_from",
@@ -11209,6 +11602,18 @@
     },
     {
       "source": "src_components_espace_profileeditor",
+      "target": "src_components_useravatar",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/espace/ProfileEditor.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_profileeditor",
       "target": "src_lib_types",
       "relation": "imports_from",
       "_origin": "ast",
@@ -11245,7 +11650,7 @@
     },
     {
       "source": "src_components_espace_profileeditor",
-      "target": "src_components_ui_form",
+      "target": "src_components_espace_avatarcropmodal",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -11257,7 +11662,7 @@
     },
     {
       "source": "src_components_espace_profileeditor",
-      "target": "src_components_useravatar",
+      "target": "src_components_ui_form",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -11605,7 +12010,7 @@
     },
     {
       "source": "src_components_idees_pitchmodal",
-      "target": "src_components_ui_form",
+      "target": "src_components_auth_authprovider",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -11613,6 +12018,18 @@
       "context": "import",
       "source_file": "src/components/idees/PitchModal.tsx",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_idees_pitchmodal",
+      "target": "src_components_ui_form",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/idees/PitchModal.tsx",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -11832,6 +12249,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_utils_supabase_middleware",
+      "target": "src_lib_supabase_client",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/utils/supabase/middleware.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "src_lib_types_announcementboarditem",
       "target": "src_lib_types_announcement",
       "relation": "inherits",
@@ -11868,6 +12297,61 @@
       "weight": 1.0
     },
     {
+      "source": "audit_tmp",
+      "target": "audit_tmp_anon",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "audit_tmp",
+      "target": "audit_tmp_results",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "audit_tmp",
+      "target": "audit_tmp_check",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "audit_tmp",
+      "target": "audit_tmp_denies",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "audit_tmp",
+      "target": "audit_tmp_env",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "audit-tmp.mjs",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "docs_audit_activity_log",
       "target": "docs_audit_activity_log_dtc_project_activity_log",
       "relation": "contains",
@@ -11887,6 +12371,17 @@
       "confidence_score": 1.0,
       "source_file": "docs/audit/activity_log.md",
       "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_audit_activity_log_dtc_project_activity_log",
+      "target": "docs_audit_activity_log_2026_08_25_independent_judge_audit_remediation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/audit/activity_log.md",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -12363,6 +12858,50 @@
       "weight": 1.0
     },
     {
+      "source": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he",
+      "target": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_q_check_out_the_profile_section_use_graphify_for_help",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_q_check_out_the_profile_section_use_graphify_for_help",
+      "target": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_answer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_q_check_out_the_profile_section_use_graphify_for_help",
+      "target": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_outcome",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_q_check_out_the_profile_section_use_graphify_for_help",
+      "target": "graphify_out_memory_query_20260825_142232_check_out_the_profile_section_use_graphify_for_he_source_nodes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260825_142232_check_out_the_profile_section__use_graphify_for_he.md",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
       "source": "next_config",
       "target": "next_config_nextconfig",
       "relation": "contains",
@@ -12650,7 +13189,7 @@
     },
     {
       "source": "package_devdependencies",
-      "target": "package_devdependencies_tailwindcss",
+      "target": "package_devdependencies_supabase",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12661,13 +13200,24 @@
     },
     {
       "source": "package_devdependencies",
-      "target": "package_devdependencies_typescript",
+      "target": "package_devdependencies_tailwindcss",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
       "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_typescript",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -13514,7 +14064,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/admin/AboutTab.tsx",
-      "source_location": "L439",
+      "source_location": "L441",
       "weight": 1.0
     },
     {
@@ -13778,7 +14328,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0
     },
     {
@@ -13789,7 +14339,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -13800,7 +14350,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -13811,7 +14361,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/annonces/AnnouncementComposer.tsx",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -14002,6 +14552,28 @@
       "weight": 1.0
     },
     {
+      "source": "src_components_espace_avatarcropmodal",
+      "target": "src_components_espace_avatarcropmodal_avatarcropmodal",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_espace_avatarcropmodal",
+      "target": "src_components_espace_avatarcropmodal_avatarcropmodalprops",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/espace/AvatarCropModal.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
       "source": "src_components_espace_espaceclient",
       "target": "src_components_espace_espaceclient_tab",
       "relation": "contains",
@@ -14025,24 +14597,13 @@
     },
     {
       "source": "src_components_espace_profileeditor",
-      "target": "src_components_espace_profileeditor_resizeavatar",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_espace_profileeditor",
       "target": "src_components_espace_profileeditor_profileeditor",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/espace/ProfileEditor.tsx",
-      "source_location": "L33",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -14163,7 +14724,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/idees/PitchModal.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -15080,17 +15641,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_utils_supabase_client",
-      "target": "src_utils_supabase_client_createclient",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/utils/supabase/client.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
       "source": "src_utils_supabase_middleware",
       "target": "src_utils_supabase_middleware_updatesession",
       "relation": "contains",
@@ -15098,18 +15648,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/utils/supabase/middleware.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_utils_supabase_server",
-      "target": "src_utils_supabase_server_createclient",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/utils/supabase/server.ts",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -15333,6 +15872,72 @@
       "weight": 1.0
     },
     {
+      "source": "verify_tmp",
+      "target": "verify_tmp_results",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_tmp",
+      "target": "verify_tmp_check",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_tmp",
+      "target": "verify_tmp_anon",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_tmp",
+      "target": "verify_tmp_runs",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_tmp",
+      "target": "verify_tmp_data",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_tmp",
+      "target": "verify_tmp_env",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "verify-tmp.mjs",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "next_env_d_rationale_4",
       "target": "next_env_d",
       "relation": "rationale_for",
@@ -15344,14 +15949,14 @@
       "weight": 1.0
     },
     {
-      "source": "src_utils_supabase_middleware_rationale_31",
+      "source": "src_utils_supabase_middleware_rationale_38",
       "target": "src_utils_supabase_middleware",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/utils/supabase/middleware.ts",
-      "source_location": "L31",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -15529,5 +16134,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4893c0951c86017c1f606b16d6312103dbe3a07c"
+  "built_at_commit": "79df2c2119cab99a9cee7849c74fcb81909f772e"
 }

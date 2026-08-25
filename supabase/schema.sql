@@ -85,7 +85,7 @@ create table if not exists public.podcast_episodes (
   guest text not null,
   role text not null default '',
   release_date text not null default '',
-  youtube_id text not null,
+  youtube_id text not null check (youtube_id ~ '^[\w-]{11}$'),
   duration text not null default '',
   synopsis text not null default '',
   takeaways text[] not null default '{}',
@@ -703,7 +703,12 @@ create policy "avatars_public_read" on storage.objects
 drop policy if exists "avatars_self_write" on storage.objects;
 create policy "avatars_self_write" on storage.objects
   for insert to authenticated
-  with check (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+  with check (
+    bucket_id = 'avatars'
+    and (storage.foldername(name))[1] = auth.uid()::text
+    and coalesce((metadata->>'size')::bigint, 0) <= 5242880 -- 5 MB
+    and coalesce(metadata->>'mimetype', '') in ('image/jpeg', 'image/png', 'image/webp', 'image/gif')
+  );
 
 drop policy if exists "avatars_self_update" on storage.objects;
 create policy "avatars_self_update" on storage.objects
@@ -723,7 +728,12 @@ create policy "club_media_public_read" on storage.objects
 drop policy if exists "club_media_bureau_write" on storage.objects;
 create policy "club_media_bureau_write" on storage.objects
   for insert to authenticated
-  with check (bucket_id = 'club-media' and public.is_bureau_or_admin());
+  with check (
+    bucket_id = 'club-media'
+    and public.is_bureau_or_admin()
+    and coalesce((metadata->>'size')::bigint, 0) <= 26214400 -- 25 MB
+    and coalesce(metadata->>'mimetype', '') like 'image/%'
+  );
 
 drop policy if exists "club_media_bureau_update" on storage.objects;
 create policy "club_media_bureau_update" on storage.objects

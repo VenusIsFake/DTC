@@ -1,28 +1,28 @@
 # Graph Report - DTC  (2026-08-25)
 
 ## Corpus Check
-- 101 files · ~87,913 words
+- 102 files · ~90,825 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 444 nodes · 902 edges · 42 communities (33 shown, 9 thin omitted)
+- 457 nodes · 921 edges · 45 communities (36 shown, 9 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4893c095`
+- Built from commit: `79df2c21`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- devDependencies
+- dependencies
 - compilerOptions
 - app/layout.tsx
-- useOverlayDialog
+- gallery/page.tsx
 - types.ts
 - data.ts
 - DTC Website Platform (Next.js 14)
-- EventsTab.tsx
+- getSupabaseBrowserClient
 - 🎤 3. Key Milestone Archive
 - fetch_all_posts.py
 - events/layout.tsx
@@ -36,14 +36,19 @@
 - Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC
 - AI Agent Operational Rules & Guidelines for DTC Website
 - extends
+- client.ts
 - Dentalk Club FMDC (DTC) — Project Overview
+- verify-tmp.mjs
 - README.md
 - DTC Project Activity Log
 - 📋 Comprehensive Category Index
+- devDependencies
+- Q: check out the profile section, use graphify for help
+- route.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `getSupabaseBrowserClient()` - 41 edges
-2. `useOverlayDialog()` - 22 edges
+2. `useOverlayDialog()` - 24 edges
 3. `useAuth()` - 21 edges
 4. `createSupabaseServerClient()` - 18 edges
 5. `isSupabaseConfigured()` - 17 edges
@@ -58,49 +63,49 @@
   docs/platform/architecture.md → src/data/podcastData.ts
 - `RootLayout()` --calls--> `getSiteSettings()`  [EXTRACTED]
   src/app/layout.tsx → src/lib/data.ts
-- `SectionsEditor()` --calls--> `getSupabaseBrowserClient()`  [EXTRACTED]
-  src/components/admin/AboutTab.tsx → src/lib/supabase/client.ts
-- `StatsEditor()` --calls--> `getSupabaseBrowserClient()`  [EXTRACTED]
-  src/components/admin/AboutTab.tsx → src/lib/supabase/client.ts
-- `CommitteesEditor()` --calls--> `getSupabaseBrowserClient()`  [EXTRACTED]
-  src/components/admin/CommitteesTab.tsx → src/lib/supabase/client.ts
+- `AnnoncesPage()` --calls--> `getPublishedAnnouncements()`  [EXTRACTED]
+  src/app/annonces/page.tsx → src/lib/data.ts
+- `POST()` --calls--> `createSupabaseServerClient()`  [EXTRACTED]
+  src/app/api/admin/youtube-import/route.ts → src/lib/supabase/server.ts
+- `EspacePage()` --calls--> `getSiteSettings()`  [EXTRACTED]
+  src/app/espace/page.tsx → src/lib/data.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (42 total, 9 thin omitted)
+## Communities (45 total, 9 thin omitted)
 
-### Community 0 - "devDependencies"
-Cohesion: 0.05
-Nodes (41): autoprefixer, eslint, eslint-config-next, lucide-react, dependencies, lucide-react, next, react (+33 more)
+### Community 0 - "dependencies"
+Cohesion: 0.09
+Nodes (22): lucide-react, dependencies, lucide-react, next, react, react-dom, @supabase/ssr, @supabase/supabase-js (+14 more)
 
 ### Community 1 - "compilerOptions"
 Cohesion: 0.07
 Nodes (26): dom, dom.iterable, esnext, next-env.d.ts, .next/types/**/*.ts, node_modules, **/*.ts, **/*.tsx (+18 more)
 
 ### Community 2 - "app/layout.tsx"
-Cohesion: 0.07
-Nodes (31): AnnoncesPage(), metadata, inter, jakarta, metadata, organizationJsonLd, RootLayout(), viewport (+23 more)
+Cohesion: 0.14
+Nodes (15): inter, jakarta, metadata, organizationJsonLd, RootLayout(), viewport, AuthProvider(), Footer() (+7 more)
 
-### Community 3 - "useOverlayDialog"
-Cohesion: 0.13
-Nodes (17): dynamic, isoDurationToClock(), POST(), YouTubeVideoResponse, CategoryFilter, EditorModal(), AuthModal(), Mode (+9 more)
+### Community 3 - "gallery/page.tsx"
+Cohesion: 0.39
+Nodes (5): CategoryFilter, ImageLightbox(), ImageLightboxProps, GalleryItem, galleryItemsData
 
 ### Community 4 - "types.ts"
-Cohesion: 0.08
-Nodes (55): MandatesEditor(), AnnouncementsTab(), IdeasTab(), STATUS_LABELS, ROLE_LABELS, UsersTab(), AnnouncementsFeed(), Attendee (+47 more)
+Cohesion: 0.09
+Nodes (42): IdeasTab(), STATUS_LABELS, ROLE_LABELS, UsersTab(), AnnouncementsFeed(), Attendee, AttendeesModal(), STATUS_LABELS (+34 more)
 
 ### Community 5 - "data.ts"
-Cohesion: 0.08
-Nodes (43): AboutPage(), metadata, AdminPage(), dynamic, metadata, AnnuairePage(), dynamic, metadata (+35 more)
+Cohesion: 0.07
+Nodes (46): AboutPage(), metadata, AnnoncesPage(), metadata, EventsPage(), EventLandingPage(), generateMetadata(), Params (+38 more)
 
 ### Community 6 - "DTC Website Platform (Next.js 14)"
 Cohesion: 0.33
 Nodes (6): Full 97-Post Media Library, Dentalk Club FMDC, Faculté de Médecine Dentaire de Casablanca, Let's Talk Podcast Series, Live Deployment (dentalkclub-fmdc.vercel.app), DTC Website Platform (Next.js 14)
 
-### Community 7 - "EventsTab.tsx"
+### Community 7 - "getSupabaseBrowserClient"
 Cohesion: 0.09
-Nodes (36): AboutTab(), SectionsEditor(), StatsEditor(), AdminConsole(), TabId, TABS, STATUS_LABELS, CommitteesEditor() (+28 more)
+Nodes (46): AboutTab(), MandatesEditor(), SectionsEditor(), StatsEditor(), TabId, TABS, AnnouncementsTab(), STATUS_LABELS (+38 more)
 
 ### Community 8 - "🎤 3. Key Milestone Archive"
 Cohesion: 0.20
@@ -118,41 +123,61 @@ Nodes (9): 🛠️ 1. Architecture Overview, 🔑 2. Authentication & Rate-Limit
 Cohesion: 0.18
 Nodes (10): 1. Core Principles & Philosophy, 2. Environment & Tooling Conventions, 3. Instagram & Media Scraping Rules, 4. Documentation & Knowledge Graph Conventions, 5. WebKit & iOS Safari Compatibility Invariants, 6. Mobile Space-Efficiency Standards, 7. Next.js Deployment Mode & Server Platform, 8. Media Player & Interactive Lifecycle Rules (+2 more)
 
+### Community 36 - "client.ts"
+Cohesion: 0.12
+Nodes (22): AdminPage(), dynamic, metadata, AnnuairePage(), dynamic, metadata, dynamic, EspacePage() (+14 more)
+
 ### Community 37 - "Dentalk Club FMDC (DTC) — Project Overview"
 Cohesion: 0.29
 Nodes (6): 🎯 About Dentalk Club FMDC, 🏛️ Club Platform Layer (2026-08-25), Dentalk Club FMDC (DTC) — Project Overview, 🚀 Key Assets & Data Ready for Web Development, 🌐 Live Production Platform & DNS, 📂 Repository Structure
+
+### Community 38 - "verify-tmp.mjs"
+Cohesion: 0.29
+Nodes (5): anon, data, env, results, runs
 
 ### Community 39 - "README.md"
 Cohesion: 0.33
 Nodes (3): 🏛️ DTC (Dentalk Club FMDC) — Master Documentation Hub, 🌐 Live Production Links, 📂 Organized Documentation Structure
 
 ### Community 40 - "DTC Project Activity Log"
-Cohesion: 0.33
-Nodes (6): 2026-08-24, 2026-08-25 — Club platform implementation (phases A–D, full build), 2026-08-25 — Club platform planning session (no code changes), 2026-08-25 — Independent judge audit + remediation, 2026-08-25 — Production-readiness audit & remediation, DTC Project Activity Log
+Cohesion: 0.29
+Nodes (7): 2026-08-24, 2026-08-25 — Club platform implementation (phases A–D, full build), 2026-08-25 — Club platform planning session (no code changes), 2026-08-25 — Full security audit (Vercel + live Supabase + code) & hardening, 2026-08-25 — Independent judge audit + remediation, 2026-08-25 — Production-readiness audit & remediation, DTC Project Activity Log
 
 ### Community 41 - "📋 Comprehensive Category Index"
 Cohesion: 0.40
 Nodes (5): 1. 🏛️ Club Governance & Identity, 2. 💻 Web Platform Engineering, 3. 📸 Media Archives & Data Pipeline, 4. 📜 Audit & History Tracking, 📋 Comprehensive Category Index
 
+### Community 42 - "devDependencies"
+Cohesion: 0.10
+Nodes (21): autoprefixer, eslint, eslint-config-next, devDependencies, autoprefixer, eslint, eslint-config-next, postcss (+13 more)
+
+### Community 43 - "Q: check out the profile section, use graphify for help"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: check out the profile section, use graphify for help, Source Nodes
+
+### Community 44 - "route.ts"
+Cohesion: 0.31
+Nodes (7): dynamic, isoDurationToClock(), POST(), YouTubeVideoResponse, EventItemsGrid(), parseYouTubeId(), EventPageItem
+
 ## Knowledge Gaps
-- **157 isolated node(s):** `next/core-web-vitals`, `nextConfig`, `name`, `version`, `private` (+152 more)
+- **168 isolated node(s):** `next/core-web-vitals`, `nextConfig`, `name`, `version`, `private` (+163 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `getSupabaseBrowserClient()` connect `types.ts` to `useOverlayDialog`, `data.ts`, `EventsTab.tsx`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
-- **Why does `useOverlayDialog()` connect `useOverlayDialog` to `app/layout.tsx`, `types.ts`, `EventsTab.tsx`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Why does `isSupabaseConfigured()` connect `data.ts` to `types.ts`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Why does `getSupabaseBrowserClient()` connect `getSupabaseBrowserClient` to `app/layout.tsx`, `types.ts`, `client.ts`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+- **Why does `useOverlayDialog()` connect `getSupabaseBrowserClient` to `gallery/page.tsx`, `types.ts`, `data.ts`, `route.ts`?**
+  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **Why does `isSupabaseConfigured()` connect `client.ts` to `app/layout.tsx`, `types.ts`, `data.ts`, `getSupabaseBrowserClient`?**
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
 - **What connects `next/core-web-vitals`, `nextConfig`, `name` to the rest of the system?**
-  _157 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `devDependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
+  _168 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
 - **Should `compilerOptions` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `app/layout.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.0726950354609929 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14 - nodes in this community are weakly interconnected._
