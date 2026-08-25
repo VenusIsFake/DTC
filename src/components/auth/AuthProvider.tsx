@@ -112,7 +112,8 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     await supabase.auth.signOut();
-    setProfile(null);
+    // Hard reload so server components refetch without the session cookie.
+    window.location.reload();
   }, []);
 
   const value = useMemo<AuthContextValue>(

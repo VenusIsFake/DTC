@@ -221,7 +221,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
             <Link
               href="/espace"
               aria-label="Mon espace"
-              className="lg:hidden active:scale-95"
+              className="lg:hidden flex items-center active:scale-95"
               onClick={() => setIsOpen(false)}
             >
               <UserAvatar name={profile?.full_name} src={profile?.avatar_url} size={32} />

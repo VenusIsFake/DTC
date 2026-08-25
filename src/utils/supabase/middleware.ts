@@ -16,7 +16,8 @@ function securityContext(request: NextRequest) {
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com${isDev ? " 'unsafe-eval'" : ''}`,
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https://i.ytimg.com https://*.supabase.co",
+    // blob: — local previews of user-picked files (avatar crop modal) before upload.
+    "img-src 'self' data: blob: https://i.ytimg.com https://*.supabase.co",
     "media-src 'self'",
     "font-src 'self'",
     "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://challenges.cloudflare.com",

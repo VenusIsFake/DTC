@@ -105,6 +105,7 @@ export default function AuthModal({
     setError(null);
     setSubmitting(true);
     try {
+      let reloadAfter = false;
       if (mode === "signin") {
         const { error: authError } = await supabase.auth.signInWithPassword({
           email,
@@ -112,17 +113,25 @@ export default function AuthModal({
           options: { captchaToken: captchaToken ?? undefined },
         });
         if (authError) throw authError;
+        reloadAfter = true;
       } else if (mode === "signup") {
         if (fullName.trim().length < 2) {
           setError("Merci d'indiquer votre nom complet.");
           return;
         }
-        const { error: authError } = await supabase.auth.signUp({
+        const { data: signUpData, error: authError } = await supabase.auth.signUp({
           email,
           password,
           options: { data: { full_name: fullName.trim() }, captchaToken: captchaToken ?? undefined },
         });
         if (authError) throw authError;
+        if (signUpData.session) {
+          // Email confirmation disabled — the session is already live.
+          reloadAfter = true;
+        } else {
+          setSent(true);
+          return;
+        }
       } else if (mode === "forgot") {
         const { error: authError } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: `${window.location.origin}/espace`,
@@ -142,6 +151,12 @@ export default function AuthModal({
         }
         const { error: authError } = await supabase.auth.updateUser({ password });
         if (authError) throw authError;
+        reloadAfter = true;
+      }
+      if (reloadAfter) {
+        // Hard reload so every server component refetches with the new session.
+        window.location.reload();
+        return;
       }
       onClose();
     } catch (err) {
@@ -224,16 +239,24 @@ export default function AuthModal({
           </div>
         )}
 
-        {mode === "forgot" && sent ? (
+        {(mode === "forgot" || mode === "signup") && sent ? (
           <div className="space-y-4 text-center py-2">
             <div className="mx-auto w-12 h-12 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center">
               <MailCheck className="w-5 h-5 text-[#D4AF37]" />
             </div>
-            <p className="text-sm text-[#CBD5E1]">
-              Si un compte existe pour <span className="text-white font-semibold">{email}</span>, un
-              email de réinitialisation vient de partir. Ouvrez-le et cliquez sur le lien pour
-              choisir un nouveau mot de passe.
-            </p>
+            {mode === "signup" ? (
+              <p className="text-sm text-[#CBD5E1]">
+                Compte créé pour <span className="text-white font-semibold">{email}</span> ! Un
+                email de confirmation vient de partir&nbsp;: ouvrez-le, cliquez sur le lien pour
+                activer votre compte, puis connectez-vous.
+              </p>
+            ) : (
+              <p className="text-sm text-[#CBD5E1]">
+                Si un compte existe pour <span className="text-white font-semibold">{email}</span>, un
+                email de réinitialisation vient de partir. Ouvrez-le et cliquez sur le lien pour
+                choisir un nouveau mot de passe.
+              </p>
+            )}
             <button
               onClick={() => {
                 setMode("signin");
