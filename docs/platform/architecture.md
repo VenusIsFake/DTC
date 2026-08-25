@@ -4,9 +4,28 @@ This document details the full production architecture, routing schema, componen
 
 ---
 
+## 🏛️ 0. Club Platform Layer (added 2026-08-25)
+
+The site is now a **two-layer platform** (see `docs/platform/club-platform-plan.md` for the approved plan):
+
+1. **Public site** — home, annonces, idées, events/TEDx, podcast, gallery, about — same designs, but content is served from **Supabase** with a static `src/data` fallback when the DB is unreachable.
+2. **Backoffice** — Supabase email+password auth (open signup, confirmation off, default role `member`), roles `member → bureau → admin`, and a hidden `/admin` console (7 tabs: Utilisateurs, Annonces, Idées, Podcast Studio, Événements, À propos, Commissions & listes).
+
+Key architecture points:
+
+* **Next.js server mode** (App Router server components; `output: 'export'` removed) — unlocks dynamic `/events/[slug]`, server-side YouTube import (`POST /api/admin/youtube-import`, bureau+ only), settings-aware nav/sitemap.
+* **RLS is the enforcement layer** (`supabase/schema.sql`): public read for published content, login-to-interact; votes 1/person by PK; contact info only via `bureau_list_profiles()`/`admin_list_profiles()` RPCs; role/ban changes only via `admin_set_role()`/`admin_set_banned()` security-definer functions; column-level GRANTs keep `profiles` contact fields out of the base table.
+* **Data layer:** `src/lib/data.ts` (server fetchers with fallback), `src/lib/supabase/client.ts` (browser) + `server.ts` (cookies) + session refresh in `src/middleware.ts`.
+* **Member surfaces:** `/annonces` (RSVP + headcount + bureau attendee list), `/idees` (pitch/vote/comment + bureau status badges), `/espace` (profile: promo/commission/avatar/bio/phone + "Mes activités" + admin quick panel), `/espace/annuaire` (members-only directory).
+* **Content ops:** Podcast Studio (paste-URL YouTube import → auto-filled editor), TEDx CRUD, section visibility (`events_visible` = redirect + nav removal + sitemap exclusion), editable About sections, mandates with auto-archive, home stats — all bureau/admin-managed.
+* **Storage buckets:** `avatars` (self-write under `<uid>/`, public read), `club-media` (bureau+ write: organigrammes/posters).
+
+---
+
 ## 🎯 1. Tech Stack & Engineering Decisions
 
-* **Framework:** **Next.js 14+ (App Router)** with Static HTML Export (`output: 'export'`) for sub-50ms Edge delivery
+* **Framework:** **Next.js 14+ (App Router, server mode)** — server components + client islands; dynamic routes & server-side API calls
+* **Backend:** **Supabase** (Postgres + RLS + Auth + Storage) — see §0
 * **Language:** **TypeScript** (Strict mode)
 * **Styling & Design System:** **Tailwind CSS** + Custom CSS Variables & Glassmorphism with WebKit fallbacks
 * **Animations:** Hardware-accelerated CSS Keyframes (`animate-fade-in-up`) for instantaneous initial paint on iOS/Safari without hydration latency
@@ -15,7 +34,7 @@ This document details the full production architecture, routing schema, componen
   * Native HTML5 `<video>` player with custom controls, iOS `webkitEnterFullscreen`, and muted autoplay policy compliance for the 8 TEDx video reels
   * Responsive YouTube iframe embed with `playsinline=1` for *Let's Talk Podcast* (`@LetsTalkPodcast-00`)
 * **Image Optimization:** Next.js `<Image unoptimized>` for static edge delivery from `/public/media/`
-* **Deployment Pipeline:** Vercel Prebuilt Deployments (`npm run fast-deploy`) delivering sub-7s delta updates
+* **Deployment Pipeline:** Standard Vercel server deployment (`npm run deploy`); Supabase backend (see §0)
 
 ---
 
@@ -36,7 +55,7 @@ DTC/
 │   │   └── concept.md              # Club identity, hierarchy, poles, TEDx & podcasts
 │   ├── platform/
 │   │   ├── architecture.md         # Technical architecture (this file)
-│   │   └── deployment.md           # Fast-push optimizations (<7s), prebuilt workflows, DNS
+│   │   └── deployment.md           # Server deployment, env vars, Supabase setup, DNS
 │   ├── media/
 │   │   ├── gallery.md              # Complete media catalog & video specifications
 │   │   ├── instagram_data.md       # 97-post timeline analysis & category breakdown
@@ -81,7 +100,7 @@ DTC/
 ├── scripts/                        # Media pipeline utilities (legacy retired scrapers in scripts/legacy/)
 ├── pyproject.toml                  # Python pipeline dependencies (uv-managed venv)
 ├── graphify-out/                   # Knowledge-graph artifacts (GRAPH_REPORT.md, graph.json)
-├── package.json                    # Dependencies & fast-deploy scripts
+├── package.json                    # Dependencies & deploy scripts
 ├── tailwind.config.ts
 └── tsconfig.json
 ```
@@ -188,15 +207,18 @@ export const colors = {
 
 ---
 
-## ⚡ 5. Deployment & Fast-Push CLI Commands
+## ⚡ 5. Build & Deploy Commands
 
 ```bash
 # 1. Local development server
 npm run dev
 
-# 2. Local typecheck & static build verification
+# 2. Local typecheck, lint & production build verification
 npm run build
+npm run lint
 
-# 3. Instant Prebuilt Production Deployment (< 7s)
-npm run fast-deploy
+# 3. Production deployment (standard server build)
+npm run deploy
 ```
+
+Supabase setup (schema + seed + auth + admin bootstrap) is documented in `docs/platform/deployment.md`.

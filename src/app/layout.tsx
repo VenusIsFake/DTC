@@ -3,7 +3,9 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AuthProvider from "@/components/auth/AuthProvider";
 import { siteConfig } from "@/data/siteConfig";
+import { getSiteSettings } from "@/lib/data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -74,11 +76,16 @@ export const viewport: Viewport = {
   themeColor: "#0B132B",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Nav is settings-aware: a hidden section disappears from the navigation
+  // entirely (redirect + de-index happen in the page itself).
+  const settings = await getSiteSettings();
+  const navItems = siteConfig.getNavItems(settings.events_visible);
+
   return (
     <html lang="fr" className={`${inter.variable} ${jakarta.variable}`}>
       <body className="bg-[#0B132B] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#D4AF37]/30 selection:text-white">
@@ -86,9 +93,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Navbar navItems={navItems} />
+          <main className="flex-grow">{children}</main>
+          <Footer navItems={navItems} />
+        </AuthProvider>
       </body>
     </html>
   );

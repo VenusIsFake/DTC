@@ -1,0 +1,147 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { Loader2, Pencil, Pin, PinOff, Plus, Trash2 } from "lucide-react";
+import type { Announcement } from "@/lib/types";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { formatRelative } from "@/lib/format";
+import { Badge, GhostButton } from "@/components/ui/form";
+import AnnouncementComposer from "@/components/annonces/AnnouncementComposer";
+
+const STATUS_LABELS: Record<string, { label: string; tone: "green" | "gold" | "gray" }> = {
+  published: { label: "Publiée", tone: "green" },
+  draft: { label: "Brouillon", tone: "gold" },
+  archived: { label: "Archivée", tone: "gray" },
+};
+
+export default function AnnouncementsTab() {
+  const [items, setItems] = useState<Announcement[] | null>(null);
+  const [composerOpen, setComposerOpen] = useState(false);
+  const [editing, setEditing] = useState<Announcement | null>(null);
+
+  const load = async () => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    const { data } = await supabase
+      .from("announcements")
+      .select("*")
+      .order("is_pinned", { ascending: false })
+      .order("created_at", { ascending: false });
+    setItems((data as Announcement[] | null) ?? []);
+  };
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  const togglePin = async (item: Announcement) => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    await supabase.from("announcements").update({ is_pinned: !item.is_pinned }).eq("id", item.id);
+    load();
+  };
+
+  const setStatus = async (item: Announcement, status: Announcement["status"]) => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    await supabase.from("announcements").update({ status }).eq("id", item.id);
+    load();
+  };
+
+  const remove = async (item: Announcement) => {
+    if (!window.confirm(`Supprimer « ${item.title} » ?`)) return;
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    await supabase.from("announcements").delete().eq("id", item.id);
+    load();
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between gap-2.5">
+        <p className="text-xs text-[#94A3B8]">Cycle de vie : brouillon → publiée → archivée.</p>
+        <button
+          onClick={() => {
+            setEditing(null);
+            setComposerOpen(true);
+          }}
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-md shadow-[#D4AF37]/20 transition-all active:scale-95"
+        >
+          <Plus className="w-3.5 h-3.5" />
+          <span>Nouvelle</span>
+        </button>
+      </div>
+
+      {items === null && (
+        <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 text-center">
+          <Loader2 className="w-5 h-5 text-[#D4AF37] animate-spin mx-auto" />
+        </div>
+      )}
+
+      <div className="space-y-2">
+        {items?.map((item) => {
+          const status = STATUS_LABELS[item.status];
+          return (
+            <div
+              key={item.id}
+              className="glass-card rounded-xl border border-[#385A75]/40 p-3 flex flex-wrap items-center gap-2.5"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm font-bold text-white truncate flex items-center gap-2">
+                  {item.is_pinned && <Pin className="w-3 h-3 text-[#D4AF37] shrink-0" />}
+                  {item.title}
+                </p>
+                <p className="text-[10px] text-[#94A3B8]">
+                  {item.kind === "atelier" ? "Atelier" : "Annonce"} · {formatRelative(item.created_at)}
+                </p>
+              </div>
+              <Badge tone={status.tone}>{status.label}</Badge>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => togglePin(item)}
+                  aria-label={item.is_pinned ? "Désépingler" : "Épingler"}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#1B2E4B] transition-colors"
+                >
+                  {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
+                </button>
+                <button
+                  onClick={() => {
+                    setEditing(item);
+                    setComposerOpen(true);
+                  }}
+                  aria-label="Modifier"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#1B2E4B] transition-colors"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => remove(item)}
+                  aria-label="Supprimer"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+              <GhostButton
+                onClick={() => setStatus(item, item.status === "archived" ? "published" : "archived")}
+                className="!py-1 !px-2.5 !text-[10px]"
+              >
+                {item.status === "archived" ? "Republier" : "Archiver"}
+              </GhostButton>
+            </div>
+          );
+        })}
+        {items?.length === 0 && (
+          <p className="text-xs text-[#94A3B8] text-center py-6">Aucune annonce — créez la première !</p>
+        )}
+      </div>
+
+      <AnnouncementComposer
+        isOpen={composerOpen}
+        editing={editing}
+        onClose={() => setComposerOpen(false)}
+        onSaved={load}
+      />
+    </div>
+  );
+}

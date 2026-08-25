@@ -24,6 +24,17 @@ Founded in **November 2024**, Dentalk Club FMDC is the premier student organizat
 
 ---
 
+## 🏛️ Club Platform Layer (2026-08-25)
+
+The site evolved from a static brochure into a **two-layer platform** on a **standard Vercel server deployment** with **Supabase** (Postgres + RLS + Auth + Storage):
+
+* **Member features:** email/password auth (open signup), roles `member → bureau → admin`; `/annonces` (atelier feed + RSVP + live headcount), `/idees` (pitch + 1-vote-per-person + comments + bureau status badges), `/espace` (profil : promo, commission, avatar, bio, téléphone + « Mes activités » + panneau admin), `/espace/annuaire` (annuaire membres uniquement).
+* **Backoffice:** hidden `/admin` console — Utilisateurs (rôles/bannissements), Annonces, Idées (modération), **Podcast Studio** (import YouTube par URL), Événements (visibilité de section, CRUD TEDx, pages `/events/[slug]`), À propos (sections éditables, stats, mandats + infographies, archivage automatique), Commissions & listes.
+* **Resilience & security:** every public page falls back to the static `src/data` seeds when the DB is unreachable; RLS is the enforcement layer (contact info bureau-only via security-definer RPCs); `events_visible` masque réellement la section (redirect + nav + sitemap).
+* **Status:** code implemented & building; **schema/seed to be applied to Supabase** by the dev (`supabase/schema.sql` + `seed.sql` — see `docs/platform/deployment.md`), then admin bootstrap. Plan: `docs/platform/club-platform-plan.md`.
+
+---
+
 ## 📂 Repository Structure
 
 ```text
@@ -34,7 +45,7 @@ DTC/
 │   │   └── concept.md          # Master club concept, governance hierarchy & events
 │   ├── platform/
 │   │   ├── architecture.md     # Website technical architecture & component specs
-│   │   └── deployment.md       # Fast-push optimizations (<7s), prebuilt workflows, DNS
+│   │   └── deployment.md       # Server deployment, Supabase setup checklist, DNS
 │   ├── media/
 │   │   ├── gallery.md          # Complete catalog of 8 TEDx video reels & photos
 │   │   ├── instagram_data.md   # Deep analytical breakdown of all 97 posts (Oct 2024–present)
@@ -66,7 +77,7 @@ DTC/
 │   ├── GRAPH_REPORT.md         # Generated knowledge-graph report
 │   └── graph.json              # Structured knowledge-graph data
 ├── rules.md                    # AI agent guidelines & mandatory update protocols
-└── package.json                # Dependencies & fast-deploy scripts (npm run fast-deploy)
+└── package.json                # Dependencies & deploy scripts (npm run deploy)
 ```
 
 ---
@@ -77,5 +88,5 @@ DTC/
 2. **TEDxFMDC 8-Video Reel Archive:** Complete MP4 video reels in [`public/media/events/`](./public/media/events) with speaker topics and poster thumbnails (talks 1–4 and 6–8 captured at 720x1280; talk 5 at 360x640).
 3. **Official Mandat 2025–2026 Executive Bureau Infographic:** Preserved in high resolution at [`public/media/team/bureau_executif_2025_2026.jpg`](./public/media/team/bureau_executif_2025_2026.jpg).
 4. **Let's Talk Podcast Catalog:** Full dataset of 4 episodes with official stream IDs on [`@LetsTalkPodcast-00`](https://www.youtube.com/@LetsTalkPodcast-00).
-5. **Instant Deployment Workflow:** Run `npm run fast-deploy` for sub-7s delta deployments to Vercel.
+5. **Deployment Workflow:** Run `npm run deploy` (`vercel --prod`) — standard server build; Supabase setup once per project (see `docs/platform/deployment.md`).
 6. **Knowledge Graph Artifacts:** Generated report and structured data at [`graphify-out/GRAPH_REPORT.md`](./graphify-out/GRAPH_REPORT.md) and [`graphify-out/graph.json`](./graphify-out/graph.json).

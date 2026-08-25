@@ -30,6 +30,28 @@ export const siteConfig = {
     { label: "Galerie Média", href: "/gallery" },
     { label: "À Propos", href: "/about" },
   ] as NavItem[],
+
+  /**
+   * Club-platform navigation (server components call this with the live
+   * `events_visible` setting so a hidden section disappears from the nav
+   * entirely instead of being CSS-hidden).
+   */
+  getNavItems(eventsVisible: boolean): NavItem[] {
+    const items: NavItem[] = [
+      { label: "Accueil", href: "/" },
+      { label: "Annonces", href: "/annonces" },
+      { label: "Idées", href: "/idees" },
+    ];
+    if (eventsVisible) {
+      items.push({ label: "TEDx & Débats", href: "/events" });
+    }
+    items.push(
+      { label: "Let's Talk Podcast", href: "/podcast" },
+      { label: "Galerie Média", href: "/gallery" },
+      { label: "À Propos", href: "/about" }
+    );
+    return items;
+  },
   stats: [
     { value: "1,500+", label: "Étudiants & Communauté" },
     { value: "97+", label: "Activités & Publications" },

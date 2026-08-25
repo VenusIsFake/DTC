@@ -14,8 +14,9 @@ docs/
 │   └── concept.md                 # Mission, 2025/2026 Executive Bureau hierarchy, 5 poles, TEDx & podcasts
 │
 ├── platform/                      # 💻 Web Platform Engineering & Deployment
-│   ├── architecture.md            # Next.js 14+ App Router, component specs, mobile layout tokens
-│   └── deployment.md              # Fast-push optimizations (<7s), prebuilt builds, DNS & Vercel
+│   ├── architecture.md            # Next.js 14+ App Router, club platform layer (Supabase/RLS), component specs
+│   ├── club-platform-plan.md      # 🚀 Approved plan & handoff: auth/roles, backoffice, Supabase (IMPLEMENTED 2026-08-25)
+│   └── deployment.md              # Server deployment, env vars, Supabase setup checklist, DNS
 │
 ├── media/                         # 📸 Digital Media Archives & Scraper Engine
 │   ├── gallery.md                 # Complete catalog of 8 TEDx video reels, podcast posters, team visuals
@@ -46,8 +47,11 @@ docs/
   * **iOS / Safari Compatibility Remediation:** Hardware-accelerated CSS animations (`@keyframes fadeInSlideUp`) resolving initial SSR opacity-0 glitches, WebKit scrolling stability, and native iOS `webkitEnterFullscreen()`.
   * **Mobile Space-Efficiency:** Compact hero headers, elimination of vertical empty spaces, and 2-column mobile layouts.
   * **Component Breakdown:** `Navbar`, `Footer`, `Hero`, `StatsCounter`, `VideoPlayerModal`, `PodcastPlayer`, `InfographicViewer`, `ImageLightbox`.
+* **[docs/platform/club-platform-plan.md](platform/club-platform-plan.md)**
+  * **Approved 2026-08-25, not yet implemented:** full club-platform plan — Supabase auth/roles (member/bureau/admin), announcements + RSVP, idea pitching/votes/comments, member space & annuaire, Podcast Studio (paste-URL YouTube import), events visibility & `/events/[slug]` creator, fully-editable About with mandate archives.
+  * **Architecture switch:** static export → standard Vercel server deployment (`vercel --prod`); RLS is the enforcement layer; static fallback for resilience. Includes the settled-decisions log, execution order, and Supabase MCP status/quirks for the implementing session.
 * **[docs/platform/deployment.md](platform/deployment.md)**
-  * **Fast-Push Deployment Guide:** How `npm run fast-deploy` completes delta pushes (unchanged media) in **under 7 seconds** with ~580 KB uploads; full prebuilt output ≈87 MB including 82 MB of TEDx MP4s.
+  * **Deployment & Supabase Setup:** Server deployment (`npm run deploy` = `vercel --prod`), env vars (`NEXT_PUBLIC_SUPABASE_URL`/key, server-only `YOUTUBE_API_KEY`), Supabase schema/seed application, auth settings, admin bootstrap, domains.
   * **Production Domains & DNS:** `https://dentalkclub-fmdc.vercel.app` & `https://dtc-fmdc.vercel.app`.
   * **Vercel Settings & SSO Configuration:** Public access enabled with zero login walls.
 

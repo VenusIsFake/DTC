@@ -5,7 +5,13 @@ import Image from "next/image";
 import { Maximize2, X, ZoomIn, ZoomOut, RotateCcw, Sparkles } from "lucide-react";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 
-export default function InfographicViewer() {
+export default function InfographicViewer({
+  imageUrl = "/media/team/bureau_executif_2025_2026.jpg",
+  label = "Mandat 2025–2026",
+}: {
+  imageUrl?: string;
+  label?: string;
+}) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -85,7 +91,7 @@ export default function InfographicViewer() {
           <div className="space-y-0.5 sm:space-y-1">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30">
               <Sparkles className="w-3 h-3" />
-              <span>Mandat 2025–2026</span>
+              <span>{label}</span>
             </div>
             <h3 className="text-lg sm:text-2xl font-heading font-extrabold text-white">
               Organigramme Officiel du Bureau Exécutif
@@ -119,8 +125,8 @@ export default function InfographicViewer() {
           className="relative w-full max-w-3xl mx-auto aspect-square rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#385A75]/50 shadow-2xl bg-black cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
         >
           <Image
-            src="/media/team/bureau_executif_2025_2026.jpg"
-            alt="Bureau Exécutif 2025-2026 - Dentalk Club FMDC"
+            src={imageUrl}
+            alt={`${label} — Bureau Exécutif Dentalk Club FMDC`}
             fill
             sizes="(max-width: 1024px) 100vw, 768px"
             className="object-contain group-hover:scale-[1.02] transition-transform duration-300"
@@ -209,8 +215,8 @@ export default function InfographicViewer() {
               className="relative w-full h-full"
             >
               <Image
-                src="/media/team/bureau_executif_2025_2026.jpg"
-                alt="Bureau Exécutif 2025-2026 Plein Écran"
+                src={imageUrl}
+                alt={`${label} — Bureau Exécutif plein écran`}
                 fill
                 sizes="100vw"
                 className="object-contain pointer-events-none"

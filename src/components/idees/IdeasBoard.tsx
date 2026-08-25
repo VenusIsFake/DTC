@@ -1,0 +1,303 @@
+"use client";
+
+import React, { useEffect, useMemo, useState } from "react";
+import { ArrowBigUp, Check, Lightbulb, MessageSquare, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import type { IdeaBoardItem, IdeaStatus } from "@/lib/types";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { formatRelative } from "@/lib/format";
+import { Badge, inputClass } from "@/components/ui/form";
+import UserAvatar from "@/components/UserAvatar";
+import PitchModal from "@/components/idees/PitchModal";
+import IdeaComments from "@/components/idees/IdeaComments";
+
+const STATUS_META: Record<IdeaStatus, { label: string; tone: "blue" | "gold" | "green" | "red" }> = {
+  open: { label: "Ouverte", tone: "blue" },
+  planned: { label: "Planifiée", tone: "gold" },
+  done: { label: "Réalisée", tone: "green" },
+  rejected: { label: "Rejetée", tone: "red" },
+};
+
+const WEEK_MS = 7 * 24 * 3600 * 1000;
+
+type SortMode = "top" | "new";
+
+export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardItem[] }) {
+  const { user, isBureau, openAuth } = useAuth();
+  const [items, setItems] = useState<IdeaBoardItem[]>(initialItems);
+  const [myVotes, setMyVotes] = useState<Set<string>>(new Set());
+  const [votePending, setVotePending] = useState<Set<string>>(new Set());
+  const [sort, setSort] = useState<SortMode>("top");
+  const [weekOnly, setWeekOnly] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const [pitchOpen, setPitchOpen] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  const refresh = async () => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    const { data } = await supabase.from("idea_board").select("*").order("created_at", { ascending: false });
+    setItems((data as IdeaBoardItem[] | null) ?? []);
+  };
+
+  useEffect(() => {
+    if (!user) {
+      setMyVotes(new Set());
+      return;
+    }
+    let cancelled = false;
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    supabase
+      .from("votes")
+      .select("idea_id")
+      .eq("user_id", user.id)
+      .then(({ data }) => {
+        if (cancelled) return;
+        setMyVotes(new Set((data as { idea_id: string }[] | null)?.map((v) => v.idea_id) ?? []));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  const toggleVote = async (item: IdeaBoardItem) => {
+    if (!user) {
+      openAuth();
+      return;
+    }
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    setVotePending((prev) => new Set(prev).add(item.id));
+    const had = myVotes.has(item.id);
+    try {
+      const { error } = had
+        ? await supabase.from("votes").delete().eq("idea_id", item.id).eq("user_id", user.id)
+        : await supabase.from("votes").insert({ idea_id: item.id, user_id: user.id });
+      if (error) throw error;
+      setMyVotes((prev) => {
+        const next = new Set(prev);
+        if (had) next.delete(item.id);
+        else next.add(item.id);
+        return next;
+      });
+      setItems((prev) =>
+        prev.map((i) => (i.id === item.id ? { ...i, vote_count: Math.max(0, i.vote_count + (had ? -1 : 1)) } : i))
+      );
+    } catch (err) {
+      setNotice(err instanceof Error ? err.message : "Vote impossible.");
+      setTimeout(() => setNotice(null), 3500);
+    } finally {
+      setVotePending((prev) => {
+        const next = new Set(prev);
+        next.delete(item.id);
+        return next;
+      });
+    }
+  };
+
+  const changeStatus = async (item: IdeaBoardItem, status: IdeaStatus) => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    const { error } = await supabase.from("ideas").update({ status }).eq("id", item.id);
+    if (error) {
+      setNotice(error.message);
+      setTimeout(() => setNotice(null), 4000);
+      return;
+    }
+    setNotice(null);
+    refresh();
+  };
+
+  const removeIdea = async (item: IdeaBoardItem) => {
+    if (!window.confirm(`Supprimer l'idée « ${item.title} » ?`)) return;
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    const { error } = await supabase.from("ideas").delete().eq("id", item.id);
+    if (error) {
+      setNotice(error.message);
+      setTimeout(() => setNotice(null), 4000);
+      return;
+    }
+    setNotice(null);
+    refresh();
+  };
+
+  const bumpComments = (id: string, delta: number) =>
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, comment_count: Math.max(0, i.comment_count + delta) } : i)));
+
+  const visible = useMemo(() => {
+    let list = [...items];
+    if (weekOnly) {
+      const cutoff = Date.now() - WEEK_MS;
+      list = list.filter((i) => new Date(i.created_at).getTime() >= cutoff);
+    }
+    if (sort === "top") {
+      list.sort((a, b) => b.vote_count - a.vote_count || b.created_at.localeCompare(a.created_at));
+    } else {
+      list.sort((a, b) => b.created_at.localeCompare(a.created_at));
+    }
+    return list;
+  }, [items, sort, weekOnly]);
+
+  return (
+    <div className="space-y-4 sm:space-y-5">
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
+        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#0F172A]/80 border border-[#385A75]/40">
+          {(
+            [
+              { id: "top", label: "Top votes" },
+              { id: "new", label: "Récentes" },
+            ] as const
+          ).map((option) => (
+            <button
+              key={option.id}
+              onClick={() => setSort(option.id)}
+              aria-pressed={sort === option.id}
+              className={`px-3 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
+                sort === option.id ? "bg-[#1B2E4B] text-[#D4AF37] border border-[#D4AF37]/30" : "text-[#94A3B8] hover:text-white"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+          <button
+            onClick={() => setWeekOnly((v) => !v)}
+            aria-pressed={weekOnly}
+            className={`px-3 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
+              weekOnly ? "bg-[#1B2E4B] text-[#D4AF37] border border-[#D4AF37]/30" : "text-[#94A3B8] hover:text-white"
+            }`}
+          >
+            Cette semaine
+          </button>
+        </div>
+
+        {user && (
+          <button
+            onClick={() => setPitchOpen(true)}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-md shadow-[#D4AF37]/20 transition-all active:scale-95"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>Proposer une idée</span>
+          </button>
+        )}
+      </div>
+
+      {notice && (
+        <p role="status" className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {notice}
+        </p>
+      )}
+
+      {visible.length === 0 && (
+        <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 sm:p-12 text-center space-y-2">
+          <Lightbulb className="w-8 h-8 text-[#385A75] mx-auto" />
+          <p className="text-sm font-semibold text-white">
+            {weekOnly ? "Aucune idée cette semaine" : "Aucune idée pour le moment"}
+          </p>
+          <p className="text-xs text-[#94A3B8]">
+            {user
+              ? "Lancez le mouvement : proposez la première idée du club !"
+              : "Connectez-vous pour proposer la première idée et voter."}
+          </p>
+        </div>
+      )}
+
+      {visible.map((item) => {
+        const voted = myVotes.has(item.id);
+        const pending = votePending.has(item.id);
+        const meta = STATUS_META[item.status];
+        const isExpanded = expanded === item.id;
+        return (
+          <article key={item.id} className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 space-y-3">
+            <div className="flex items-start gap-3 sm:gap-4">
+              {/* Vote column */}
+              <div className="flex flex-col items-center gap-1 shrink-0">
+                <button
+                  onClick={() => toggleVote(item)}
+                  disabled={pending}
+                  aria-label={voted ? "Retirer mon vote" : "Voter pour cette idée"}
+                  aria-pressed={voted}
+                  className={`flex flex-col items-center justify-center w-11 h-12 rounded-xl border transition-all active:scale-95 disabled:opacity-60 ${
+                    voted
+                      ? "bg-[#D4AF37]/20 border-[#D4AF37] text-[#D4AF37]"
+                      : "bg-[#0F172A] border-[#385A75]/50 text-[#94A3B8] hover:text-[#D4AF37] hover:border-[#D4AF37]/50"
+                  }`}
+                >
+                  {voted ? <Check className="w-4 h-4" /> : <ArrowBigUp className="w-4.5 h-4.5 w-5 h-5" />}
+                  <span className="text-xs font-extrabold leading-none pt-0.5">{item.vote_count}</span>
+                </button>
+              </div>
+
+              <div className="flex-1 min-w-0 space-y-1.5">
+                <div className="flex items-start justify-between gap-2 flex-wrap">
+                  <h3 className="text-sm sm:text-base font-heading font-bold text-white leading-snug">{item.title}</h3>
+                  <Badge tone={meta.tone}>{meta.label}</Badge>
+                </div>
+                {item.description && (
+                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed whitespace-pre-line line-clamp-4">
+                    {item.description}
+                  </p>
+                )}
+                <div className="flex items-center gap-2 flex-wrap text-[11px] text-[#94A3B8] pt-0.5">
+                  <UserAvatar name={item.author_name} src={item.author_avatar} size={20} />
+                  <span className="font-medium">{item.author_name ?? "Membre"}</span>
+                  <span>· {formatRelative(item.created_at)}</span>
+                  <button
+                    onClick={() => setExpanded(isExpanded ? null : item.id)}
+                    aria-expanded={isExpanded}
+                    className="flex items-center gap-1 ml-auto font-semibold text-[#D4AF37] hover:text-[#F59E0B] transition-colors"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>{item.comment_count}</span>
+                    <span className="hidden sm:inline">commentaire{item.comment_count > 1 ? "s" : ""}</span>
+                    {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                  </button>
+                  {isBureau && (
+                    <>
+                      <label className="sr-only" htmlFor={`status-${item.id}`}>
+                        Statut de l&apos;idée
+                      </label>
+                      <select
+                        id={`status-${item.id}`}
+                        value={item.status}
+                        onChange={(e) => changeStatus(item, e.target.value as IdeaStatus)}
+                        className={`${inputClass} !w-auto !py-1 !px-2 !text-[11px]`}
+                      >
+                        <option value="open">Ouverte</option>
+                        <option value="planned">Planifiée</option>
+                        <option value="done">Réalisée</option>
+                        <option value="rejected">Rejetée</option>
+                      </select>
+                      <button
+                        onClick={() => removeIdea(item)}
+                        aria-label="Supprimer l'idée"
+                        className="text-[#64748B] hover:text-red-400 transition-colors"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {isExpanded && <IdeaComments ideaId={item.id} onCountChange={(d) => bumpComments(item.id, d)} />}
+          </article>
+        );
+      })}
+
+      {!user && items.length > 0 && (
+        <p className="text-center text-xs text-[#64748B]">
+          <button onClick={openAuth} className="text-[#D4AF37] font-semibold hover:underline underline-offset-2">
+            Connectez-vous
+          </button>{" "}
+          pour voter, commenter et proposer vos idées.
+        </p>
+      )}
+
+      <PitchModal isOpen={pitchOpen} onClose={() => setPitchOpen(false)} onSaved={refresh} />
+    </div>
+  );
+}

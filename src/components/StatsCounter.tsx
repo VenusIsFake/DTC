@@ -1,21 +1,21 @@
 "use client";
 
 import React from "react";
-import { siteConfig } from "@/data/siteConfig";
+import type { HomeStat } from "@/lib/types";
 import { Users, FileText, Video, Radio } from "lucide-react";
 
-export default function StatsCounter() {
+export default function StatsCounter({ stats }: { stats: HomeStat[] }) {
   const icons = [Users, FileText, Video, Radio];
 
   return (
     <section className="relative z-20 pt-1 pb-4 sm:py-6 px-3.5 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-6">
-          {siteConfig.stats.map((stat, idx) => {
+          {stats.map((stat, idx) => {
             const Icon = icons[idx % icons.length];
             return (
               <div
-                key={stat.label}
+                key={`${stat.label}-${idx}`}
                 className="glass-card glass-card-hover p-2.5 sm:p-5 rounded-xl sm:rounded-2xl text-center space-y-0.5 sm:space-y-2 border border-[#385A75]/35 relative overflow-hidden group transition-all"
               >
                 <div className="absolute top-0 right-0 w-14 sm:w-24 h-14 sm:h-24 bg-[#D4AF37]/5 rounded-full blur-lg sm:blur-2xl group-hover:bg-[#D4AF37]/10 transition-all pointer-events-none" />

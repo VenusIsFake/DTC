@@ -114,6 +114,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
             poster={talk.posterUrl}
             autoPlay
             playsInline
+            webkit-playsinline="true"
             muted={isMuted}
             controls={false}
             loop

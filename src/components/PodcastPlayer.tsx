@@ -3,10 +3,19 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Play, Youtube, Award, Clock, Calendar, CheckCircle2, ChevronRight } from "lucide-react";
-import { podcastEpisodesData, PodcastEpisode } from "@/data/podcastData";
+import type { PodcastEpisode } from "@/data/podcastData";
 
-export default function PodcastPlayer() {
-  const [selectedEp, setSelectedEp] = useState<PodcastEpisode>(podcastEpisodesData[0]);
+export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[] }) {
+  const [selectedEp, setSelectedEp] = useState<PodcastEpisode | null>(episodes[0] ?? null);
+
+  if (!selectedEp) {
+    return (
+      <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 text-center">
+        <p className="text-sm font-semibold text-white">Aucun épisode publié pour le moment</p>
+        <p className="text-xs text-[#94A3B8] mt-1">Le prochain épisode du Let&apos;s Talk Podcast arrive bientôt.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5 sm:space-y-8">
@@ -99,7 +108,7 @@ export default function PodcastPlayer() {
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
-          {podcastEpisodesData.map((ep) => {
+          {episodes.map((ep) => {
             const isCurrent = selectedEp.id === ep.id;
             return (
               <button

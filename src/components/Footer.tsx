@@ -2,9 +2,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Youtube, Award, MapPin, Heart, ArrowUpRight } from "lucide-react";
+import type { NavItem } from "@/data/siteConfig";
 import { siteConfig } from "@/data/siteConfig";
 
-export default function Footer() {
+export default function Footer({ navItems = siteConfig.navItems }: { navItems?: NavItem[] }) {
   return (
     <footer className="bg-[#070C1B] border-t border-[#385A75]/30 pt-10 sm:pt-16 pb-8 sm:pb-12 text-[#94A3B8]">
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
@@ -44,7 +45,7 @@ export default function Footer() {
               Navigation
             </h3>
             <ul className="space-y-1.5 sm:space-y-2.5 text-xs sm:text-sm">
-              {siteConfig.navItems.map((item) => (
+              {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

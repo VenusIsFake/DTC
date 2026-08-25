@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import PodcastPlayer from "@/components/PodcastPlayer";
 import { Radio, Camera } from "lucide-react";
+import { getPodcastEpisodes } from "@/lib/data";
 
 export const metadata = {
   title: "Let's Talk Podcast",
@@ -11,7 +12,8 @@ export const metadata = {
   },
 };
 
-export default function PodcastPage() {
+export default async function PodcastPage() {
+  const episodes = await getPodcastEpisodes();
   return (
     <div className="pt-16 sm:pt-28 pb-10 sm:pb-20 px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 sm:space-y-16">
       {/* Header Banner */}
@@ -29,7 +31,7 @@ export default function PodcastPage() {
       </div>
 
       {/* Main Interactive Podcast Center */}
-      <PodcastPlayer />
+      <PodcastPlayer episodes={episodes} />
 
       {/* Behind The Scenes & Studio Production */}
       <section className="glass-card p-4 sm:p-10 rounded-2xl sm:rounded-3xl border border-[#385A75]/40 space-y-4 sm:space-y-6">

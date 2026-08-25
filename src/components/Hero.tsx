@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Play, Sparkles, ArrowRight, Mic, Calendar } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 
-export default function Hero() {
+export default function Hero({ eventsVisible = true }: { eventsVisible?: boolean }) {
   return (
     <section className="relative pt-20 sm:pt-28 pb-2 sm:pb-10 px-3.5 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Decorative Lighting Gradients */}
@@ -57,11 +57,11 @@ export default function Hero() {
         {/* Action Buttons */}
         <div className="animate-fade-in-up animation-delay-300 flex flex-wrap items-center justify-center gap-2 sm:gap-4 pt-1 px-1">
           <Link
-            href="/events"
+            href={eventsVisible ? "/events" : "/annonces"}
             className="flex items-center gap-1.5 px-3.5 sm:px-7 py-2 sm:py-3.5 rounded-full font-semibold text-xs sm:text-sm bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#D4AF37] text-[#0B132B] hover:brightness-110 shadow-md shadow-[#D4AF37]/20 transition-all active:scale-95"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
-            <span>TEDxFMDC</span>
+            <span>{eventsVisible ? "TEDxFMDC" : "Ateliers"}</span>
           </Link>
 
           <Link

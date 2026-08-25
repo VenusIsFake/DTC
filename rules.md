@@ -46,9 +46,11 @@ This document defines the rules, conventions, and operational standards for AI a
 
 ---
 
-## 7. Next.js Static Export & Fast-Deploy Workflows
-- **Static HTML Export:** For static media and marketing sites, always configure `output: "export"` and `images: { unoptimized: true }` in `next.config.mjs`.
-- **Sub-7s Prebuilt Deployments:** Always use `npm run fast-deploy` (`vercel build --prod && vercel deploy --prebuilt --prod --yes`) to deploy precompiled static deltas (~580 KB) rather than re-uploading multi-megabyte media libraries.
+## 7. Next.js Deployment Mode & Server Platform
+- **Server deployment (since 2026-08-25):** the site runs as a standard Next.js server app on Vercel (`npm run deploy` = `vercel --prod --yes`). The static-export `output: "export"` config and the `fast-deploy` prebuilt flow were retired when the club platform (Supabase auth/roles, backoffice, RSVP, ideas) landed — dynamic routes (`/events/[slug]`), server-side YouTube import, and settings-aware rendering require a server runtime.
+- **Backend contract:** Supabase (Postgres + RLS + Auth + Storage) is the enforcement layer; the app only reacts to what RLS allows. Public pages must keep their static `src/data` fallback so the site never blanks out when the DB is unreachable.
+- **Secrets:** `YOUTUBE_API_KEY` stays server-side (API route only); never prefix it with `NEXT_PUBLIC_`. See `docs/platform/deployment.md` for the full setup checklist.
+- **Images:** keep `images: { unoptimized: true }` (remote Supabase/YouTube posters flow through it unchanged); optimization is roadmap.
 
 ---
 

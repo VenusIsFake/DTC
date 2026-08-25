@@ -31,3 +31,6 @@ graphify-out/cache/
 *.mov
 /public/media/
 /instagram/
+
+!.env.example
+tsconfig.tsbuildinfo

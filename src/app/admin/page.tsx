@@ -1,0 +1,58 @@
+import React from "react";
+import Link from "next/link";
+import { ShieldCheck } from "lucide-react";
+import { getServerProfile } from "@/lib/data";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
+import SignInPrompt from "@/components/auth/SignInPrompt";
+import AdminConsole from "@/components/admin/AdminConsole";
+
+export const metadata = {
+  title: "Console d'Administration",
+  robots: { index: false, follow: false },
+};
+
+export const dynamic = "force-dynamic";
+
+function AccessDenied() {
+  return (
+    <div className="pt-16 sm:pt-28 pb-10 sm:pb-20 px-3.5 sm:px-6 max-w-xl mx-auto">
+      <div className="glass-card rounded-2xl sm:rounded-3xl border border-[#385A75]/40 p-8 sm:p-12 text-center space-y-4">
+        <div className="inline-flex p-3 rounded-2xl bg-red-500/15 text-red-400">
+          <ShieldCheck className="w-6 h-6" />
+        </div>
+        <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-white">Accès refusé</h1>
+        <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed max-w-sm mx-auto">
+          La console d&apos;administration est réservée aux administrateurs du club. Si vous faites
+          partie du bureau, demandez au président de vous attribuer le rôle.
+        </p>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-bold border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all"
+        >
+          <span>Retour à l&apos;accueil</span>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default async function AdminPage() {
+  if (!isSupabaseConfigured()) {
+    return <SignInPrompt title="Console indisponible" description="La base de données n'est pas configurée." />;
+  }
+
+  const profile = await getServerProfile();
+  if (!profile) {
+    return (
+      <SignInPrompt
+        title="Console d'Administration"
+        description="Connectez-vous avec un compte administrateur pour gérer le club."
+      />
+    );
+  }
+  if (profile.role !== "admin") {
+    return <AccessDenied />;
+  }
+
+  return <AdminConsole adminName={profile.full_name || "Admin"} />;
+}

@@ -1,116 +1,158 @@
 # Graph Report - DTC  (2026-08-25)
 
 ## Corpus Check
-- Large corpus: 172 files · ~585,468 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
+- 101 files · ~87,913 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 174 nodes · 195 edges · 32 communities (24 shown, 8 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
-- Token cost: 2,400 input · 1,300 output
+- 444 nodes · 902 edges · 42 communities (33 shown, 9 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.85)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `4893c095`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- DTC Core Platform & TEDx Video Reels
-- 2025-2026 Executive Bureau Infographic Visual
-- Podcast Media & Brand Assets
-- Media Organization Engine
-- Instaloader Scraper Pipeline
-- Instagram Embed Extractor
-- Image Labeling & Classification Engine
-- Root Instagram Reorganizer
-- Authentic Logo Extractor
-- TEDx Video Reel Downloader
-- Production Deployment & Faststream Optimization
-- Community 11
-- Community 12
-- Community 13
-- Community 27
-- Community 28
-- Community 30
+- devDependencies
+- compilerOptions
+- app/layout.tsx
+- useOverlayDialog
+- types.ts
+- data.ts
+- DTC Website Platform (Next.js 14)
+- EventsTab.tsx
+- 🎤 3. Key Milestone Archive
+- fetch_all_posts.py
+- events/layout.tsx
+- gallery/layout.tsx
+- next.config.mjs
+- next-env.d.ts
+- tailwind.config.ts
+- vercel.json
+- dtc-media-pipeline
+- 🚀 DTC Club Platform — Approved Implementation Plan & Session Handoff
+- Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC
+- AI Agent Operational Rules & Guidelines for DTC Website
+- extends
+- Dentalk Club FMDC (DTC) — Project Overview
+- README.md
+- DTC Project Activity Log
+- 📋 Comprehensive Category Index
 
 ## God Nodes (most connected - your core abstractions)
-1. `compilerOptions` - 16 edges
-2. `siteConfig` - 10 edges
-3. `scripts` - 7 edges
-4. `useOverlayDialog()` - 7 edges
-5. `DTC Website Platform (Next.js 14)` - 6 edges
-6. `TedxTalk` - 5 edges
-7. `include` - 5 edges
-8. `Dentalk Club FMDC` - 5 edges
-9. `VideoPlayerModal()` - 4 edges
-10. `GalleryItem` - 4 edges
+1. `getSupabaseBrowserClient()` - 41 edges
+2. `useOverlayDialog()` - 22 edges
+3. `useAuth()` - 21 edges
+4. `createSupabaseServerClient()` - 18 edges
+5. `isSupabaseConfigured()` - 17 edges
+6. `formatRelative()` - 16 edges
+7. `compilerOptions` - 16 edges
+8. `getSiteSettings()` - 15 edges
+9. `inputClass` - 12 edges
+10. `withFallback()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Dentalk Club FMDC` --BRANDED_BY--> `Authentic DTC Circular Logo`  [EXTRACTED]
-  docs/club/concept.md → instagram/metadata/dtc_logo.png
-- `Dentalk Club FMDC` --GOVERNED_BY--> `Bureau Exécutif 2025-2026 Visual`  [EXTRACTED]
-  docs/club/concept.md → instagram/team/bureau_executif_2025_2026.jpg
-- `Dentalk Club FMDC` --ORGANIZED--> `TEDxFMDC 8-Video Reel Archive`  [EXTRACTED]
-  docs/club/concept.md → instagram/metadata/tedx_talks.json
-- `DTC Website Platform (Next.js 14)` --SHOWCASES_HIERARCHY_VISUAL--> `Bureau Exécutif 2025-2026 Visual`  [EXTRACTED]
-  docs/platform/architecture.md → instagram/team/bureau_executif_2025_2026.jpg
-- `DTC Website Platform (Next.js 14)` --PLAYS_VIDEO_REELS_OF--> `TEDxFMDC 8-Video Reel Archive`  [EXTRACTED]
-  docs/platform/architecture.md → instagram/metadata/tedx_talks.json
+- `DTC Website Platform (Next.js 14)` --EMBEDS_EPISODES_OF--> `Let's Talk Podcast Series`  [EXTRACTED]
+  docs/platform/architecture.md → src/data/podcastData.ts
+- `RootLayout()` --calls--> `getSiteSettings()`  [EXTRACTED]
+  src/app/layout.tsx → src/lib/data.ts
+- `SectionsEditor()` --calls--> `getSupabaseBrowserClient()`  [EXTRACTED]
+  src/components/admin/AboutTab.tsx → src/lib/supabase/client.ts
+- `StatsEditor()` --calls--> `getSupabaseBrowserClient()`  [EXTRACTED]
+  src/components/admin/AboutTab.tsx → src/lib/supabase/client.ts
+- `CommitteesEditor()` --calls--> `getSupabaseBrowserClient()`  [EXTRACTED]
+  src/components/admin/CommitteesTab.tsx → src/lib/supabase/client.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (32 total, 8 thin omitted)
+## Communities (42 total, 9 thin omitted)
 
-### Community 0 - "DTC Core Platform & TEDx Video Reels"
-Cohesion: 0.10
-Nodes (19): lucide-react, dependencies, lucide-react, next, react, react-dom, next, name (+11 more)
+### Community 0 - "devDependencies"
+Cohesion: 0.05
+Nodes (41): autoprefixer, eslint, eslint-config-next, lucide-react, dependencies, lucide-react, next, react (+33 more)
 
-### Community 1 - "2025-2026 Executive Bureau Infographic Visual"
-Cohesion: 0.11
-Nodes (19): dom, dom.iterable, esnext, compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules (+11 more)
+### Community 1 - "compilerOptions"
+Cohesion: 0.07
+Nodes (26): dom, dom.iterable, esnext, next-env.d.ts, .next/types/**/*.ts, node_modules, **/*.ts, **/*.tsx (+18 more)
 
-### Community 2 - "Podcast Media & Brand Assets"
-Cohesion: 0.17
-Nodes (9): inter, jakarta, metadata, organizationJsonLd, viewport, Footer(), Navbar(), NavItem (+1 more)
+### Community 2 - "app/layout.tsx"
+Cohesion: 0.07
+Nodes (31): AnnoncesPage(), metadata, inter, jakarta, metadata, organizationJsonLd, RootLayout(), viewport (+23 more)
 
-### Community 3 - "Media Organization Engine"
-Cohesion: 0.22
-Nodes (8): metadata, CategoryFilter, ImageLightbox(), ImageLightboxProps, InfographicViewer(), GalleryItem, galleryItemsData, useOverlayDialog()
-
-### Community 4 - "Instaloader Scraper Pipeline"
+### Community 3 - "useOverlayDialog"
 Cohesion: 0.13
-Nodes (15): autoprefixer, devDependencies, autoprefixer, postcss, tailwindcss, @types/node, @types/react, @types/react-dom (+7 more)
+Nodes (17): dynamic, isoDurationToClock(), POST(), YouTubeVideoResponse, CategoryFilter, EditorModal(), AuthModal(), Mode (+9 more)
 
-### Community 5 - "Instagram Embed Extractor"
-Cohesion: 0.25
-Nodes (7): Hero(), StatsCounter(), IOSVideo, VideoPlayerModal(), VideoPlayerModalProps, TedxTalk, tedxTalksData
+### Community 4 - "types.ts"
+Cohesion: 0.08
+Nodes (55): MandatesEditor(), AnnouncementsTab(), IdeasTab(), STATUS_LABELS, ROLE_LABELS, UsersTab(), AnnouncementsFeed(), Attendee (+47 more)
 
-### Community 6 - "Image Labeling & Classification Engine"
-Cohesion: 0.28
-Nodes (9): Full 97-Post Media Library, Authentic DTC Circular Logo, Dentalk Club FMDC, Bureau Exécutif 2025-2026 Visual, Faculté de Médecine Dentaire de Casablanca, Let's Talk Podcast Series, TEDxFMDC 8-Video Reel Archive, Live Deployment (dentalkclub-fmdc.vercel.app) (+1 more)
+### Community 5 - "data.ts"
+Cohesion: 0.08
+Nodes (43): AboutPage(), metadata, AdminPage(), dynamic, metadata, AnnuairePage(), dynamic, metadata (+35 more)
 
-### Community 7 - "Root Instagram Reorganizer"
-Cohesion: 0.25
-Nodes (7): next-env.d.ts, .next/types/**/*.ts, node_modules, **/*.ts, **/*.tsx, exclude, include
+### Community 6 - "DTC Website Platform (Next.js 14)"
+Cohesion: 0.33
+Nodes (6): Full 97-Post Media Library, Dentalk Club FMDC, Faculté de Médecine Dentaire de Casablanca, Let's Talk Podcast Series, Live Deployment (dentalkclub-fmdc.vercel.app), DTC Website Platform (Next.js 14)
 
-### Community 8 - "Authentic Logo Extractor"
-Cohesion: 0.36
-Nodes (4): metadata, PodcastPlayer(), PodcastEpisode, podcastEpisodesData
+### Community 7 - "EventsTab.tsx"
+Cohesion: 0.09
+Nodes (36): AboutTab(), SectionsEditor(), StatsEditor(), AdminConsole(), TabId, TABS, STATUS_LABELS, CommitteesEditor() (+28 more)
+
+### Community 8 - "🎤 3. Key Milestone Archive"
+Cohesion: 0.20
+Nodes (9): 📊 1. Account & Timeline Overview, 📈 2. Category & Event Breakdown across 97 Posts, 🎤 3. Key Milestone Archive, Instagram Data & Content Analysis: Dentalk Club FMDC, 📂 Master Metadata Location, Milestone 1: Founding & Inception (October – November 2024), Milestone 2: TEDxFMDC First Edition (November 22, 2025), Milestone 3: Let's Talk Podcast Series (2025–2026) (+1 more)
+
+### Community 32 - "🚀 DTC Club Platform — Approved Implementation Plan & Session Handoff"
+Cohesion: 0.15
+Nodes (13): 10. Supabase MCP — status & known quirks, 11. Out of scope v1 (roadmap only), 1. The vision, 2. Current state of the repo (verify before executing), 3. Architecture (settled), 4. Settled decisions (from the dev Q&A — do not reopen), 5. Database design (`supabase/schema.sql` + `supabase/seed.sql`), 6. Frontend plan (French UI, existing idiom, mobile-first, iOS-safe) (+5 more)
+
+### Community 33 - "Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC"
+Cohesion: 0.20
+Nodes (9): 🛠️ 1. Architecture Overview, 🔑 2. Authentication & Rate-Limit Bypassing, 📂 3. Utility Scripts Roster, 📋 4. JSON Data Schemas, Active scripts (`scripts/`), Instagram Scraper & Synchronization Pipeline: Dentalk Club FMDC, Podcast Episode Object (`podcasts_catalog.json`):, Retired legacy scripts (`scripts/legacy/`) — target the deleted `data/` tree (+1 more)
+
+### Community 34 - "AI Agent Operational Rules & Guidelines for DTC Website"
+Cohesion: 0.18
+Nodes (10): 1. Core Principles & Philosophy, 2. Environment & Tooling Conventions, 3. Instagram & Media Scraping Rules, 4. Documentation & Knowledge Graph Conventions, 5. WebKit & iOS Safari Compatibility Invariants, 6. Mobile Space-Efficiency Standards, 7. Next.js Deployment Mode & Server Platform, 8. Media Player & Interactive Lifecycle Rules (+2 more)
+
+### Community 37 - "Dentalk Club FMDC (DTC) — Project Overview"
+Cohesion: 0.29
+Nodes (6): 🎯 About Dentalk Club FMDC, 🏛️ Club Platform Layer (2026-08-25), Dentalk Club FMDC (DTC) — Project Overview, 🚀 Key Assets & Data Ready for Web Development, 🌐 Live Production Platform & DNS, 📂 Repository Structure
+
+### Community 39 - "README.md"
+Cohesion: 0.33
+Nodes (3): 🏛️ DTC (Dentalk Club FMDC) — Master Documentation Hub, 🌐 Live Production Links, 📂 Organized Documentation Structure
+
+### Community 40 - "DTC Project Activity Log"
+Cohesion: 0.33
+Nodes (6): 2026-08-24, 2026-08-25 — Club platform implementation (phases A–D, full build), 2026-08-25 — Club platform planning session (no code changes), 2026-08-25 — Independent judge audit + remediation, 2026-08-25 — Production-readiness audit & remediation, DTC Project Activity Log
+
+### Community 41 - "📋 Comprehensive Category Index"
+Cohesion: 0.40
+Nodes (5): 1. 🏛️ Club Governance & Identity, 2. 💻 Web Platform Engineering, 3. 📸 Media Archives & Data Pipeline, 4. 📜 Audit & History Tracking, 📋 Comprehensive Category Index
 
 ## Knowledge Gaps
-- **63 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `dev` (+58 more)
+- **157 isolated node(s):** `next/core-web-vitals`, `nextConfig`, `name`, `version`, `private` (+152 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `devDependencies` connect `Instaloader Scraper Pipeline` to `DTC Core Platform & TEDx Video Reels`?**
+- **Why does `getSupabaseBrowserClient()` connect `types.ts` to `useOverlayDialog`, `data.ts`, `EventsTab.tsx`?**
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **Why does `useOverlayDialog()` connect `useOverlayDialog` to `app/layout.tsx`, `types.ts`, `EventsTab.tsx`?**
   _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Why does `siteConfig` connect `Podcast Media & Brand Assets` to `Media Organization Engine`, `Instagram Embed Extractor`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Why does `useOverlayDialog()` connect `Media Organization Engine` to `Instagram Embed Extractor`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **What connects `nextConfig`, `name`, `version` to the rest of the system?**
-  _63 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `DTC Core Platform & TEDx Video Reels` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
-- **Should `2025-2026 Executive Bureau Infographic Visual` be split into smaller, more focused modules?**
-  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
-- **Should `Instaloader Scraper Pipeline` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
+- **Why does `isSupabaseConfigured()` connect `data.ts` to `types.ts`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **What connects `next/core-web-vitals`, `nextConfig`, `name` to the rest of the system?**
+  _157 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `devDependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
+- **Should `compilerOptions` be split into smaller, more focused modules?**
+  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
+- **Should `app/layout.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.0726950354609929 - nodes in this community are weakly interconnected._
