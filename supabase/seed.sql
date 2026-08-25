@@ -134,3 +134,29 @@ insert into public.about_sections (key, sort_order, title, body, is_published) v
    E'Flex Dental, sponsor officiel, accompagne nos cérémonies académiques, trophées d''éloquence et tournages podcasts. Le Club Social Dentaire (CSD), club partenaire, co-produit le Let''s Talk Podcast et anime la vie étudiante à nos côtés.',
    true)
 on conflict (key) do nothing;
+
+-- Galerie (v2, 2026-08-25) — mirrors src/data/galleryData.ts; only seeds an
+-- empty table (the live project was seeded via MCP migration gallery_seed_static_items).
+insert into public.gallery_images (title, category, category_label, image_url, description, date_label, sort)
+select * from (
+  values
+    ('Amphithéâtre TEDxFMDC', 'tedx', 'TEDxFMDC', '/media/events/tedx_fmdc_auditorium.jpg', 'Photo de groupe emblématique avec les lettres 3D ''TEDx'' sur la scène de l''amphithéâtre.', 'Novembre 2025', 1),
+    ('Talk TEDx: Yahia Chemsi', 'tedx', 'TEDxFMDC', '/media/events/tedx_01_yahia_chemsi.jpg', 'Extrait 1/8: Les réseaux sociaux, l''intelligence artificielle et l''humain.', 'Novembre 2025', 2),
+    ('Talk TEDx: Aya Jei', 'tedx', 'TEDxFMDC', '/media/events/tedx_02_aya_jei.jpg', 'Extrait 2/8: Brain rot et déconnexion attentionnelle.', 'Novembre 2025', 3),
+    ('Talk TEDx: Inès Ben Salah', 'tedx', 'TEDxFMDC', '/media/events/tedx_03_ines_ben_salah.jpg', 'Extrait 3/8: L''intelligence émotionnelle en pratique médicale.', 'Novembre 2025', 4),
+    ('Talk TEDx: Fahd Rahim', 'tedx', 'TEDxFMDC', '/media/events/tedx_08_fahd_rahim.jpg', 'Extrait 8/8: Purpose over pressure.', 'Novembre 2025', 5),
+    ('Affiche Officielle: Pr. Sidi Mohamed Bouzoubaa', 'podcast', 'Let''s Talk Podcast', '/media/podcasts/podcast_ep4_prof_bouzoubaa.jpg', 'Affiche de sortie YouTube pour le 4ème épisode du podcast.', 'Avril 2026', 6),
+    ('Coulisses Studio d''Enregistrement', 'podcast', 'Let''s Talk Podcast', '/media/podcasts/studio_bts_viewfinder.jpg', 'Moniteur caméra DSLR cadrant les micros et les animateurs en plein enregistrement.', 'Avril 2026', 7),
+    ('Épisode 3 : Pr. Sofia Haitami', 'podcast', 'Let''s Talk Podcast', '/media/podcasts/podcast_ep3_prof_haitam.jpg', 'Affiche officielle de l''épisode 3 consacré à l''odontologie académique.', 'Novembre 2025', 8),
+    ('Session Débats en Table Dentalk', 'debates', 'Débats & Formations', '/media/events/debate_table_session.jpg', 'Match parlementaire en face-à-face entre membres du club.', 'Octobre 2025', 9),
+    ('Table Ronde & Échanges Rhétoriques', 'debates', 'Débats & Formations', '/media/events/debate_roundtable.jpg', 'Cercle d''argumentation et débat interactif avec le public étudiant.', 'Février 2025', 10),
+    ('Discours d''Éloquence en Amphithéâtre', 'debates', 'Débats & Formations', '/media/events/eloquence_keynote_stage.jpg', 'Prise de parole captivante depuis le pupitre principal.', '2025', 11),
+    ('Atelier Pratique de Prise de Parole', 'debates', 'Débats & Formations', '/media/events/eloquence_workshop.jpg', 'Exercices de posture, modulation vocale et gestion du trac en Salle Vésale.', 'Octobre 2025', 12),
+    ('Bureau Exécutif (Mandat 2025-2026)', 'team', 'Vie du Club', '/media/team/bureau_executif_2025_2026.jpg', 'Organigramme officiel et présentation des membres du bureau.', 'Juin 2025', 13),
+    ('Hommage Floral au Professeur Conseiller', 'team', 'Vie du Club', '/media/team/advisor_flower_tribute.jpg', 'Remise d''un bouquet par le bureau exécutif en signe de gratitude.', '2025', 14),
+    ('Sortie & Cohésion en Plein Air', 'team', 'Vie du Club', '/media/team/outdoor_retreat.jpg', 'Journée de partage, détente et cohésion d''équipe dans la forêt de Bouskoura.', 'Février 2025', 15),
+    ('Réunion Stratégique du Bureau', 'team', 'Vie du Club', '/media/team/leadership_meeting.jpg', 'Planification des grands projets et calendrier annuel du club.', '2025', 16),
+    ('Remise de Trophée Officiel', 'awards', 'Trophées & Cérémonies', '/media/awards/trophy_hatim_elguerraoui.jpg', 'Trophée d''excellence remis par le jury professoral (Sponsorisé par Flex Dental).', 'Mars 2026', 17),
+    ('Grande Finale & Clôture Officielle', 'awards', 'Trophées & Cérémonies', '/media/awards/grand_finale_group.jpg', 'Photo de clôture réunissant professeurs, jury et orateurs sur scène.', 'Mars 2026', 18)
+) as seed(title, category, category_label, image_url, description, date_label, sort)
+where not exists (select 1 from public.gallery_images);

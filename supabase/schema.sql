@@ -768,3 +768,130 @@ insert into public.site_settings (key, value) values
   ('promo_years', '[2024, 2025, 2026]'::jsonb),
   ('home_stats', '[{"value":"1,500+","label":"Étudiants & Communauté"},{"value":"97+","label":"Activités & Publications"},{"value":"8","label":"Talks Vidéo TEDxFMDC"},{"value":"4+","label":"Épisodes Podcast"}]'::jsonb)
 on conflict (key) do nothing;
+
+-- ============================================================================
+-- v2 (2026-08-25) — review hardening: FK indexes, RLS init-plan fix,
+-- RSVP headcount cache + Realtime, gallery_images. Applied live via MCP;
+-- kept here so fresh installs reach the same shape. Idempotent.
+-- ============================================================================
+
+-- Covering indexes for foreign keys ("Mes activités" queries, cascades).
+create index if not exists idx_announcements_author on public.announcements (author_id);
+create index if not exists idx_ideas_author on public.ideas (author_id);
+create index if not exists idx_comments_author on public.comments (author_id);
+create index if not exists idx_rsvps_user on public.rsvps (user_id);
+create index if not exists idx_votes_user on public.votes (user_id);
+
+-- auth.uid() wrapped as scalar subqueries (evaluated once per statement).
+alter policy "profiles_self_update" on public.profiles
+  using (id = (select auth.uid()))
+  with check (id = (select auth.uid()));
+alter policy "announcements_bureau_insert" on public.announcements
+  with check (public.is_bureau_or_admin() and author_id = (select auth.uid()));
+alter policy "rsvps_self_read" on public.rsvps
+  using (user_id = (select auth.uid()) or public.is_bureau_or_admin());
+alter policy "rsvps_self_insert" on public.rsvps
+  with check (
+    user_id = (select auth.uid())
+    and public.is_active_member()
+    and exists (
+      select 1 from public.announcements a
+      where a.id = announcement_id and a.status = 'published'
+    )
+  );
+alter policy "rsvps_self_delete" on public.rsvps
+  using (user_id = (select auth.uid()));
+alter policy "ideas_member_insert" on public.ideas
+  with check (author_id = (select auth.uid()) and public.is_active_member());
+alter policy "votes_self_insert" on public.votes
+  with check (user_id = (select auth.uid()) and public.is_active_member());
+alter policy "votes_self_delete" on public.votes
+  using (user_id = (select auth.uid()));
+alter policy "comments_member_insert" on public.comments
+  with check (author_id = (select auth.uid()) and public.is_active_member());
+alter policy "comments_self_update" on public.comments
+  using (author_id = (select auth.uid()))
+  with check (author_id = (select auth.uid()));
+alter policy "comments_self_or_bureau_delete" on public.comments
+  using (author_id = (select auth.uid()) or public.is_bureau_or_admin());
+
+-- RSVP headcount cache: maintained by trigger, read by announcement_board,
+-- broadcast over Realtime (clients subscribe to announcements UPDATEs).
+alter table public.announcements add column if not exists rsvp_count_cache integer not null default 0;
+
+create or replace function public.sync_announcement_rsvp_count()
+returns trigger
+language plpgsql security definer set search_path = ''
+as $$
+declare
+  aid uuid;
+begin
+  aid := coalesce(new.announcement_id, old.announcement_id);
+  update public.announcements a
+  set rsvp_count_cache = (select count(*) from public.rsvps r where r.announcement_id = a.id)
+  where a.id = aid;
+  return null;
+end;
+$$;
+
+drop trigger if exists on_rsvp_change on public.rsvps;
+create trigger on_rsvp_change
+  after insert or delete on public.rsvps
+  for each row execute procedure public.sync_announcement_rsvp_count();
+
+revoke execute on function public.sync_announcement_rsvp_count() from public, anon, authenticated;
+
+create or replace view public.announcement_board
+with (security_invoker = true) as
+select
+  a.id, a.kind, a.title, a.body, a.event_date, a.location, a.is_pinned,
+  a.status, a.author_id, a.created_at, a.updated_at,
+  p.full_name as author_name,
+  a.rsvp_count_cache as rsvp_count
+from public.announcements a
+left join public.profiles p on p.id = a.author_id
+where a.status = 'published';
+
+-- Realtime broadcast of public content (RLS still filters delivery).
+do $$ begin
+  alter publication supabase_realtime add table public.announcements;
+exception when duplicate_object then null; end $$;
+do $$ begin
+  alter publication supabase_realtime add table public.ideas;
+exception when duplicate_object then null; end $$;
+do $$ begin
+  alter publication supabase_realtime add table public.votes;
+exception when duplicate_object then null; end $$;
+do $$ begin
+  alter publication supabase_realtime add table public.comments;
+exception when duplicate_object then null; end $$;
+
+-- Gallery (curated from the /admin console).
+create table if not exists public.gallery_images (
+  id uuid primary key default gen_random_uuid(),
+  title text not null check (char_length(title) between 3 and 200),
+  category text not null default 'team' check (category in ('tedx', 'podcast', 'debates', 'team', 'awards')),
+  category_label text not null default '',
+  image_url text not null,
+  description text not null default '',
+  date_label text not null default '',
+  sort integer not null default 0,
+  is_published boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table public.gallery_images enable row level security;
+
+create policy "gallery_public_read" on public.gallery_images
+  for select to anon, authenticated
+  using (is_published or public.is_bureau_or_admin());
+
+create policy "gallery_bureau_write" on public.gallery_images
+  for all to authenticated
+  using (public.is_bureau_or_admin())
+  with check (public.is_bureau_or_admin());
+
+drop trigger if exists touch_updated_at on public.gallery_images;
+create trigger touch_updated_at before update on public.gallery_images
+  for each row execute procedure public.set_updated_at();
