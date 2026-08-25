@@ -173,6 +173,26 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
     refresh();
   }, [isBureau, refresh]);
 
+  // Realtime (Supabase): RSVP headcounts update live — the DB trigger on
+  // rsvps bumps announcements.rsvp_count_cache, which re-emits the row.
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const trigger = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => refresh(), 400);
+    };
+    const channel = supabase
+      .channel("annonces-live")
+      .on("postgres_changes", { event: "*", schema: "public", table: "announcements" }, trigger)
+      .subscribe();
+    return () => {
+      if (timer) clearTimeout(timer);
+      supabase.removeChannel(channel);
+    };
+  }, [refresh]);
+
   // Load my RSVPs
   useEffect(() => {
     if (!user) {

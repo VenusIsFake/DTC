@@ -29,9 +29,12 @@ Founded in **November 2024**, Dentalk Club FMDC is the premier student organizat
 The site evolved from a static brochure into a **two-layer platform** on a **standard Vercel server deployment** with **Supabase** (Postgres + RLS + Auth + Storage):
 
 * **Member features:** email/password auth (open signup), roles `member → bureau → admin`; `/annonces` (atelier feed + RSVP + live headcount), `/idees` (pitch + 1-vote-per-person + comments + bureau status badges), `/espace` (profil : promo, commission, avatar, bio, téléphone + « Mes activités » + panneau admin), `/espace/annuaire` (annuaire membres uniquement).
-* **Backoffice:** hidden `/admin` console — Utilisateurs (rôles/bannissements), Annonces, Idées (modération), **Podcast Studio** (import YouTube par URL), Événements (visibilité de section, CRUD TEDx, pages `/events/[slug]`), À propos (sections éditables, stats, mandats + infographies, archivage automatique), Commissions & listes.
-* **Resilience & security:** every public page falls back to the static `src/data` seeds when the DB is unreachable; RLS is the enforcement layer (contact info bureau-only via security-definer RPCs); `events_visible` masque réellement la section (redirect + nav + sitemap).
-* **Status:** code implemented & building; **schema/seed to be applied to Supabase** by the dev (`supabase/schema.sql` + `seed.sql` — see `docs/platform/deployment.md`), then admin bootstrap. Plan: `docs/platform/club-platform-plan.md`.
+* **Backoffice:** hidden `/admin` console — Utilisateurs (rôles/bannissements), Annonces (+ « Notifier par email » via Resend), Idées (modération), **Podcast Studio** (import YouTube par URL), Événements (visibilité de section, CRUD TEDx, pages `/events/[slug]`), **Galerie** (CRUD + upload), À propos (sections éditables, stats, mandats + infographies, archivage automatique), Commissions & listes.
+* **Live updates:** Supabase Realtime — vote counts, comments and RSVP headcounts refresh live for everyone (debounced refetch, RLS-filtered delivery).
+* **Resilience & security:** every public page falls back to the static `src/data` seeds when the DB is unreachable; RLS is the enforcement layer (contact info bureau-only via security-definer RPCs); `events_visible` masque réellement la section (redirect + nav + sitemap); forgot-password flow (email reset link); optional Turnstile captcha + Resend email broadcast (dormant until configured).
+* **Client caching:** hand-rolled service worker (rules.md §10) — network-first pages (new deploys visible on next load), immutable assets cached, media stale-while-revalidate; `/media` served with 1-day Cache-Control + SWR. Built for Vercel Hobby bandwidth.
+* **Engineering:** Next.js **15.5** + React 19 (npm audit clean), CI on GitHub Actions (tsc/lint/vitest/build), 14 vitest unit tests, weekly pg_dump backups to Actions artifacts.
+* **Status:** live; DB schema v2 applied (FK indexes, RLS init-plan fix, RSVP count cache, realtime publication, gallery table + seed).
 
 ---
 

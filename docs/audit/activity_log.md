@@ -154,3 +154,33 @@ This log records actions, milestones, scraping sessions, and structural updates 
 
 ## 2026-08-25 — rules.md §7a: unpatched Next.js 14.2 CVE guardrail
 - Added a binding rule (dev request) after the security pass #2 CVE findings: agents must stop and notify Venus before introducing any feature in the unpatched 14.2 CVE surface — Server Actions/`"use server"`, config rewrites/redirects, cached handlers/fetch with request bodies, Edge-runtime Server Actions, or any `next` version bump (must target ≥15.5). Rationale: 5 npm-audit highs have no 14.2 patch; fixes land only in Next 15.5+, and the site stays safe only by not using the affected features until the upgrade.
+
+## 2026-08-25 — Major platform pass: Next 15.5 upgrade, review bundles, client caching, gallery/realtime/email features
+
+**Next.js 15.5.23 + React 19.2 upgrade (dev-approved per §7a):**
+- `next 14.2.35 → 15.5.23`, `react/react-dom → 19.2.8`, `@types/* → 19`, `eslint-config-next → 15.5.23`. Breaking-change fixes: `createSupabaseServerClient()` now async (`await cookies()`), `/events/[slug]` awaits `params`.
+- **npm audit: 0 vulnerabilities** (was 2 high in prod deps; also overrode nested `sharp → 0.35.3` and `postcss → 8.5.26` that next 15.5 pins internally). §7a's feature freeze is lifted for the patched 15.5 line; Server Actions/rewrites remain unused by choice.
+
+**Review bundles (from the 2026-08-25 project review):**
+1. Housekeeping: `verify-tmp.mjs` untracked & removed, stale `out/` deleted, `next` range aligned.
+2. Resilience: root `loading.tsx`/`error.tsx` (+ skeletons for `/annonces`, `/idees`); `getSiteSettings` wrapped in React `cache()` (1 DB call/request instead of 2-3); `getMandates` N+1 → single embedded-select query.
+3. DB perf (applied live via MCP): 5 FK indexes added; all `auth.uid()` RLS predicates wrapped as `(select auth.uid())` (init-plan lint).
+6. `/events/[slug]` metadata: twitter card added (OG already present).
+- Auth: **forgot-password flow** (email link → PASSWORD_RECOVERY → new-password modal) + **Turnstile-ready captcha** (widget renders only when `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set; CSP already allows challenges.cloudflare.com).
+
+**Client caching (bandwidth, Hobby plan):**
+- Hand-rolled service worker `public/sw.js` (rules.md **§10** now documents the invariants): network-first navigations (new deploys visible on next load), cache-first only for hashed `_next/static` + opaque YouTube thumbs, SWR for `/media` + storage images; never caches `/api`, Supabase auth/REST/realtime, non-GET, or Range (video) requests. Registered production-only.
+- `next.config.mjs` headers: `/media/*` + icons get `max-age=86400, swr=604800`.
+
+**Engineering safety net:**
+- **CI** `.github/workflows/ci.yml`: tsc + lint + vitest + build on push/PR (no secrets — static-fallback contract enforced).
+- **vitest** (14 unit tests, pure helpers: parseYouTubeId, isoDurationToClock — moved to lib/format, escapeHtml, initials…).
+- **Weekly DB backup** `.github/workflows/backup-db.yml`: pg_dump (postgres:17 docker) → Actions artifacts (90d retention); needs one-time `SUPABASE_DB_URL` secret from the dev (Session pooler string — setup steps in the workflow header + deployment.md §6).
+
+**New features (plan §11 pull-forward, dev-approved):**
+- **Galerie admin:** `gallery_images` table (RLS public-read/bureau-write) + seeded with the 18 static items; `/gallery` is now DB-driven with static fallback; console gains a "Galerie" tab (CRUD + club-media upload + publish toggle).
+- **Realtime:** votes/ideas/comments/announcements added to `supabase_realtime` publication; `rsvps` trigger maintains `announcements.rsvp_count_cache` (SECURITY DEFINER, trigger-only) so RSVP headcounts broadcast to everyone via announcements UPDATE events; `/idees` + `/annonces` subscribe with 400 ms debounce. RLS still filters delivery (anon only sees published announcements).
+- **Email broadcast:** `POST /api/admin/email-broadcast` (bureau+ session) sends a published announcement to all member emails via Resend (BCC ×50, escaped HTML template); "Notifier" button in console → Annonces; dormant with clear 503 until `RESEND_API_KEY` is set.
+
+**DB migrations applied live (5):** `perf_fk_indexes`, `rls_initplan_auth_uid`, `rsvp_count_cache_realtime`, `realtime_publication`, `gallery_images_table` + `gallery_seed_static_items` — `supabase/schema.sql` (v2 section) + `seed.sql` synced for fresh installs.
+**Quality:** tsc/lint/vitest/build green. graphify updated. Docs: deployment.md §6, rules.md §10, .env.example, overview.md.

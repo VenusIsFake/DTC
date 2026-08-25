@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Loader2, Pencil, Pin, PinOff, Plus, Trash2 } from "lucide-react";
+import { Loader2, Mail, Pencil, Pin, PinOff, Plus, Trash2 } from "lucide-react";
 import type { Announcement } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { formatRelative } from "@/lib/format";
@@ -18,6 +18,8 @@ export default function AnnouncementsTab() {
   const [items, setItems] = useState<Announcement[] | null>(null);
   const [composerOpen, setComposerOpen] = useState(false);
   const [editing, setEditing] = useState<Announcement | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [emailing, setEmailing] = useState<string | null>(null);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -33,6 +35,29 @@ export default function AnnouncementsTab() {
   useEffect(() => {
     load();
   }, []);
+
+  // Broadcast the published announcement to every member email via Resend.
+  // Dormant (clear 503 message) until RESEND_API_KEY is configured.
+  const broadcast = async (item: Announcement) => {
+    if (!window.confirm(`Envoyer « ${item.title} » par email à tous les membres ?`)) return;
+    setEmailing(item.id);
+    setNotice(null);
+    try {
+      const res = await fetch("/api/admin/email-broadcast", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ announcement_id: item.id }),
+      });
+      const payload = (await res.json()) as { sent?: number; error?: string };
+      if (!res.ok) throw new Error(payload.error ?? "Échec de l'envoi.");
+      setNotice(`Email envoyé à ${payload.sent} membre(s) ✓`);
+    } catch (err) {
+      setNotice(err instanceof Error ? err.message : "Échec de l'envoi.");
+    } finally {
+      setEmailing(null);
+      setTimeout(() => setNotice(null), 6000);
+    }
+  };
 
   const togglePin = async (item: Announcement) => {
     const supabase = getSupabaseBrowserClient();
@@ -78,6 +103,12 @@ export default function AnnouncementsTab() {
         </div>
       )}
 
+      {notice && (
+        <p role="status" className="text-xs text-[#CBD5E1] bg-[#1B2E4B]/80 border border-[#385A75]/40 rounded-lg px-3 py-2">
+          {notice}
+        </p>
+      )}
+
       <div className="space-y-2">
         {items?.map((item) => {
           const status = STATUS_LABELS[item.status];
@@ -97,6 +128,23 @@ export default function AnnouncementsTab() {
               </div>
               <Badge tone={status.tone}>{status.label}</Badge>
               <div className="flex items-center gap-1">
+                <button
+                  onClick={() => broadcast(item)}
+                  disabled={item.status !== "published" || emailing === item.id}
+                  aria-label="Notifier par email"
+                  title={
+                    item.status === "published"
+                      ? "Envoyer par email à tous les membres"
+                      : "Publiez d'abord l'annonce"
+                  }
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#1B2E4B] transition-colors disabled:opacity-40 disabled:hover:text-[#94A3B8] disabled:hover:bg-transparent"
+                >
+                  {emailing === item.id ? (
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  ) : (
+                    <Mail className="w-3.5 h-3.5" />
+                  )}
+                </button>
                 <button
                   onClick={() => togglePin(item)}
                   aria-label={item.is_pinned ? "Désépingler" : "Épingler"}

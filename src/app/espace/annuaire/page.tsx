@@ -37,7 +37,7 @@ export default async function AnnuairePage() {
   let entries: DirectoryEntry[] = [];
   let dbError = false;
   try {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     if (supabase) {
       const { data, error } = await supabase.rpc("member_directory");
       if (error) throw error;

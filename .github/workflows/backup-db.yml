@@ -1,0 +1,47 @@
+# Weekly logical backup of the Supabase database (free tier has no PITR).
+#
+# One-time setup (dev):
+#   1. Supabase Dashboard → (your DTC project) → Connect → "Session pooler"
+#      connection string (port 5432, host aws-0-eu-west-1.pooler.supabase.com).
+#      Session mode is required: the direct db.* host is IPv6-only, which
+#      GitHub runners cannot reach, and transaction mode breaks pg_dump.
+#   2. Add it as the SUPABASE_DB_URL secret in GitHub → Settings → Secrets and
+#      variables → Actions (include the postgres password).
+#
+# Backups land as encrypted-at-rest Actions artifacts (only repo collaborators
+# can download them, even on public repos) and expire after 90 days. Run
+# manually any time from the Actions tab ("Run workflow").
+name: Weekly DB backup
+
+on:
+  schedule:
+    - cron: "0 2 * * 0" # Sundays 02:00 UTC (~03:00 Morocco)
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump database (public + storage schemas)
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::warning::SUPABASE_DB_URL secret is not set — skipping backup. See .github/workflows/backup-db.yml header for setup."
+            exit 0
+          fi
+          mkdir -p backup
+          docker run --rm -v "$PWD/backup:/backup" postgres:17-alpine \
+            pg_dump "$SUPABASE_DB_URL" \
+            --format=custom \
+            --schema=public --schema=storage \
+            --file="/backup/dtc-$(date -u +%Y-%m-%d).dump"
+          ls -lh backup/
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dtc-db-backup-${{ github.run_number }}
+          path: backup/*.dump
+          retention-days: 90
+          if-no-files-found: ignore

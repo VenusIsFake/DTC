@@ -25,8 +25,33 @@ Set in `.env.local` (dev) and Vercel → Project → Settings → Environment Va
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Project Settings → API | client + server |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` *(or `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — both names accepted)* | Same screen (new projects call it "publishable key", `sb_pub_…`) | client + server |
 | `YOUTUBE_API_KEY` | Google Cloud → enable **YouTube Data API v3** → create/restrict key | **server only** (never `NEXT_PUBLIC_`) |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | *(optional)* Cloudflare Turnstile site key — see §6 Captcha | client |
+| `RESEND_API_KEY` + `EMAIL_FROM` + `NEXT_PUBLIC_SITE_URL` | *(optional)* Resend account — see §6 Email | server |
 
 A template lives in `.env.example`. Never commit `.env*` (git-ignored).
+
+---
+
+## 🔐 6. Optional integrations (dormant until configured)
+
+All three ship in the code but stay **invisible/inactive without their env vars** — no error, no UI change:
+
+**Captcha (Turnstile)** — anti-bot on sign-in/sign-up:
+1. Cloudflare dashboard → Turnstile → *Add site* → copy the **site key** (public) and **secret key**.
+2. Supabase → Authentication → Sign In / Up → **Captcha** → paste the **secret key**, enable.
+3. Add `NEXT_PUBLIC_TURNSTILE_SITE_KEY` to `.env.local` + Vercel (Production). The widget then appears in the auth modal automatically; the CSP already allows `challenges.cloudflare.com`.
+
+**Email broadcast (Resend)** — "Notifier par email" button on published announcements (console → Annonces):
+1. Create a free account at resend.com → API Keys → create a key.
+2. Verify a sending domain (Settings → Domains), or keep the default `onboarding@resend.dev` for testing (100 emails/day, enough for the club).
+3. Set `RESEND_API_KEY`, `EMAIL_FROM` (e.g. `Dentalk Club FMDC <noreply@votre-domaine.ma>`) and `NEXT_PUBLIC_SITE_URL` in `.env.local` + Vercel. The button sends to all member emails in BCC batches of 50; without the key it returns a clear French 503 with instructions.
+
+**Weekly DB backups (GitHub Actions)** — `.github/workflows/backup-db.yml`:
+1. Supabase → Connect → copy the **Session pooler** connection string (port 5432, `…pooler.supabase.com` — session mode; the direct `db.*` host is IPv6-only and unreachable from GitHub runners).
+2. GitHub repo → Settings → Secrets and variables → Actions → new secret `SUPABASE_DB_URL` (string includes the password).
+3. Runs Sundays 02:00 UTC + manual "Run workflow" button; dumps land as Actions artifacts (90-day retention, collaborators-only download).
+
+**CI (GitHub Actions)** — `.github/workflows/ci.yml` runs `tsc --noEmit` + lint + vitest + `next build` on every push/PR to `main`. No secrets needed: the build must pass without env vars (static-fallback contract).
 
 ---
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowBigUp, Check, Lightbulb, MessageSquare, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import type { IdeaBoardItem, IdeaStatus } from "@/lib/types";
 import { useAuth } from "@/components/auth/AuthProvider";
@@ -33,12 +33,34 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
   const [pitchOpen, setPitchOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     const { data } = await supabase.from("idea_board").select("*").order("created_at", { ascending: false });
     setItems((data as IdeaBoardItem[] | null) ?? []);
-  };
+  }, []);
+
+  // Realtime (Supabase): any vote / comment / idea change by any member
+  // live-updates counts and statuses for everyone on the page.
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const trigger = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => refresh(), 400);
+    };
+    const channel = supabase
+      .channel("idees-live")
+      .on("postgres_changes", { event: "*", schema: "public", table: "votes" }, trigger)
+      .on("postgres_changes", { event: "*", schema: "public", table: "ideas" }, trigger)
+      .on("postgres_changes", { event: "*", schema: "public", table: "comments" }, trigger)
+      .subscribe();
+    return () => {
+      if (timer) clearTimeout(timer);
+      supabase.removeChannel(channel);
+    };
+  }, [refresh]);
 
   useEffect(() => {
     if (!user) {
@@ -290,7 +312,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
 
       {!user && items.length > 0 && (
         <p className="text-center text-xs text-[#64748B]">
-          <button onClick={openAuth} className="text-[#D4AF37] font-semibold hover:underline underline-offset-2">
+          <button onClick={() => openAuth()} className="text-[#D4AF37] font-semibold hover:underline underline-offset-2">
             Connectez-vous
           </button>{" "}
           pour voter, commenter et proposer vos idées.

@@ -188,6 +188,20 @@ export interface DirectoryEntry {
   committee: string;
 }
 
+export interface GalleryImageRow {
+  id: string;
+  title: string;
+  category: "tedx" | "podcast" | "debates" | "team" | "awards";
+  category_label: string;
+  image_url: string;
+  description: string;
+  date_label: string;
+  sort: number;
+  is_published: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface AdminProfileRow {
   id: string;
   full_name: string;

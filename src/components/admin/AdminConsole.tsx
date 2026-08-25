@@ -9,6 +9,7 @@ import {
   CalendarDays,
   FileText,
   Building2,
+  Images,
   ShieldCheck,
 } from "lucide-react";
 import UsersTab from "@/components/admin/UsersTab";
@@ -18,6 +19,7 @@ import PodcastTab from "@/components/admin/PodcastTab";
 import EventsTab from "@/components/admin/EventsTab";
 import AboutTab from "@/components/admin/AboutTab";
 import CommitteesTab from "@/components/admin/CommitteesTab";
+import GalleryTab from "@/components/admin/GalleryTab";
 
 const TABS = [
   { id: "users", label: "Utilisateurs", icon: Users, component: UsersTab },
@@ -25,6 +27,7 @@ const TABS = [
   { id: "idees", label: "Idées", icon: Lightbulb, component: IdeasTab },
   { id: "podcast", label: "Podcast Studio", icon: Radio, component: PodcastTab },
   { id: "events", label: "Événements", icon: CalendarDays, component: EventsTab },
+  { id: "gallery", label: "Galerie", icon: Images, component: GalleryTab },
   { id: "about", label: "À propos", icon: FileText, component: AboutTab },
   { id: "committees", label: "Commissions & listes", icon: Building2, component: CommitteesTab },
 ] as const;
