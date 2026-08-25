@@ -7,10 +7,11 @@ import { ArrowLeft, CalendarDays } from "lucide-react";
 import EventItemsGrid from "@/components/events/EventItemsGrid";
 import { getEventPage, getSiteSettings } from "@/lib/data";
 
-type Params = { params: { slug: string } };
+type Params = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const result = await getEventPage(params.slug);
+  const { slug } = await params;
+  const result = await getEventPage(slug);
   if (!result) return { title: "Événement introuvable" };
   const { page } = result;
   return {
@@ -26,12 +27,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
           images: [{ url: page.hero_poster }],
         }
       : undefined,
+    twitter: page.hero_poster
+      ? {
+          card: "summary_large_image",
+          title: page.title,
+          description: page.tagline || undefined,
+          images: [page.hero_poster],
+        }
+      : undefined,
   };
 }
 
 export default async function EventLandingPage({ params }: Params) {
+  const { slug } = await params;
   // Event pages live under the events section: honor its visibility setting.
-  const [settings, result] = await Promise.all([getSiteSettings(), getEventPage(params.slug)]);
+  const [settings, result] = await Promise.all([getSiteSettings(), getEventPage(slug)]);
   if (!settings.events_visible || !result) {
     notFound();
   }

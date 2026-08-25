@@ -5,11 +5,12 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL, isSupabaseConfigured } from "./client"
 /**
  * Server-side Supabase client bound to the request cookies (server
  * components, route handlers). Returns null when Supabase is not
- * configured so callers can degrade to static content.
+ * configured so callers can degrade to static content. Async since
+ * Next 15 (cookies() must be awaited).
  */
-export function createSupabaseServerClient() {
+export async function createSupabaseServerClient() {
   if (!isSupabaseConfigured()) return null;
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
