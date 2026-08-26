@@ -11,7 +11,7 @@
     --paper: #f7f5f0;
     --paper-deep: #edeae1;
     --line: #dcd7cb;
-    --gold: #8a6d1f;
+    --gold: #755b18;
   }
 
   html {
@@ -40,7 +40,7 @@
   }
 
   ::selection {
-    background-color: rgba(138, 109, 31, 0.22);
+    background-color: rgba(117, 91, 24, 0.22);
     color: #16233a;
   }
 
@@ -57,7 +57,7 @@
     border: 2px solid #edeae1;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #8a6d1f;
+    background: #755b18;
   }
 }
 
@@ -74,13 +74,13 @@
 
 .glass-card-hover:hover {
   background-color: #fffdf8;
-  border-color: rgba(138, 109, 31, 0.45);
+  border-color: rgba(117, 91, 24, 0.45);
   box-shadow: 0 2px 8px rgba(22, 35, 58, 0.06);
 }
 
 /* Brand accent word — solid ink-gold, no gradient */
 .gold-gradient-text {
-  color: #8a6d1f;
+  color: #755b18;
 }
 
 /* Scroll-reveal: elements rise gently into place on first viewport entry.

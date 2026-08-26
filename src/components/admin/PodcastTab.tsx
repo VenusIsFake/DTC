@@ -143,7 +143,7 @@ function EditorModal({
       <div className="relative z-10 w-full max-w-2xl max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-4 shadow-lg">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 text-lg font-heading font-bold text-[#16233A]">
-            <Radio className="w-5 h-5 text-[#8A6D1F]" />
+            <Radio className="w-5 h-5 text-[#755B18]" />
             {draft.id ? "Modifier l'épisode" : "Nouvel épisode"}
           </h2>
           <button
@@ -275,7 +275,7 @@ function EditorModal({
                 type="checkbox"
                 checked={draft.is_published}
                 onChange={(e) => update("is_published", e.target.checked)}
-                className="w-4 h-4 accent-[#8A6D1F]"
+                className="w-4 h-4 accent-[#755B18]"
               />
               <span>Publié</span>
             </label>
@@ -284,9 +284,9 @@ function EditorModal({
                 type="checkbox"
                 checked={draft.is_featured}
                 onChange={(e) => update("is_featured", e.target.checked)}
-                className="w-4 h-4 accent-[#8A6D1F]"
+                className="w-4 h-4 accent-[#755B18]"
               />
-              <Sparkles className="w-3.5 h-3.5 text-[#8A6D1F]" />
+              <Sparkles className="w-3.5 h-3.5 text-[#755B18]" />
               <span>À la une</span>
             </label>
           </div>
@@ -431,7 +431,7 @@ export default function PodcastTab() {
       {/* Episode list */}
       {episodes === null ? (
         <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-          <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
+          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
         </div>
       ) : (
         <div className="space-y-2">
@@ -450,7 +450,7 @@ export default function PodcastTab() {
                   href={youtubeWatchUrl(row.youtube_id)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] text-[#5C6672] hover:text-[#8A6D1F] truncate block"
+                  className="text-[10px] text-[#5C6672] hover:text-[#755B18] truncate block"
                 >
                   {row.release_date || "—"} · {row.duration || "—"} · youtube.com/watch?v={row.youtube_id}
                 </a>
@@ -462,13 +462,13 @@ export default function PodcastTab() {
                     setEditorOpen(true);
                   }}
                   aria-label="Modifier"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => togglePublished(row)}
-                  className="px-2.5 py-1.5 rounded-lg text-[10px] font-semibold border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#8A6D1F]/50 hover:text-[#8A6D1F] transition-all"
+                  className="px-2.5 py-1.5 rounded-lg text-[10px] font-semibold border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#755B18]/50 hover:text-[#755B18] transition-all"
                 >
                   {row.is_published ? "Dépublier" : "Publier"}
                 </button>

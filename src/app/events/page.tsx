@@ -25,7 +25,7 @@ export default async function EventsPage() {
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-8 sm:space-y-14">
       {/* Header Banner */}
       <div className="max-w-3xl mx-auto space-y-2 sm:space-y-4">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
           Événements, TEDx &amp; Éloquence
         </p>
         <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">
@@ -66,14 +66,14 @@ export default async function EventsPage() {
                 )}
                 <div className="p-3.5 sm:p-5 space-y-1 flex-1 flex flex-col justify-between">
                   <div className="space-y-1">
-                    <h3 className="text-sm sm:text-base font-heading font-bold text-[#16233A] group-hover:text-[#8A6D1F] transition-colors">
+                    <h3 className="text-sm sm:text-base font-heading font-bold text-[#16233A] group-hover:text-[#755B18] transition-colors">
                       {page.title}
                     </h3>
                     {page.tagline && (
                       <p className="text-[11px] sm:text-xs text-[#5C6672] line-clamp-2">{page.tagline}</p>
                     )}
                   </div>
-                  <span className="text-[11px] sm:text-xs font-semibold text-[#8A6D1F] flex items-center gap-1 pt-2">
+                  <span className="text-[11px] sm:text-xs font-semibold text-[#755B18] flex items-center gap-1 pt-2">
                     <span>Découvrir l&apos;événement</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                   </span>
@@ -93,7 +93,7 @@ export default async function EventsPage() {
       <section className="glass-card p-4 sm:p-10 rounded-lg border border-[#DCD7CB]/40 space-y-4 sm:space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-center">
           <div className="lg:col-span-6 space-y-2.5 sm:space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#EFECE4] text-[#8A6D1F] border border-[#DCD7CB]/40">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#EFECE4] text-[#755B18] border border-[#DCD7CB]/40">
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Tournois Parlementaires</span>
             </div>
@@ -106,11 +106,11 @@ export default async function EventsPage() {
             </p>
             <div className="space-y-1.5 text-[11px] sm:text-xs text-[#5C6672]">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8A6D1F]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#755B18]" />
                 <span>Format officiel en 3 sections linguistiques (Français, Anglais, Arabe)</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8A6D1F]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#755B18]" />
                 <span>Évaluation sur la clarté argumentative, l&apos;écoute et la conviction</span>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default async function EventsPage() {
           </div>
 
           <div className="lg:col-span-6 order-1 lg:order-2 space-y-2.5 sm:space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#EFECE4] text-[#8A6D1F] border border-[#DCD7CB]/40">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#EFECE4] text-[#755B18] border border-[#DCD7CB]/40">
               <BookOpen className="w-3.5 h-3.5" />
               <span>Formation & Soft Skills</span>
             </div>
@@ -179,11 +179,11 @@ export default async function EventsPage() {
             </p>
             <div className="space-y-1.5 text-[11px] sm:text-xs text-[#5C6672]">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8A6D1F]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#755B18]" />
                 <span>Exercices de rhétorique et gestion du langage non-verbal</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8A6D1F]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#755B18]" />
                 <span>Préparation aux examens oraux et stages hospitaliers</span>
               </div>
             </div>

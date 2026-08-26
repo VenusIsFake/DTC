@@ -100,7 +100,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
         <button
           onClick={onClose}
           data-autofocus
-          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-white hover:text-[#8A6D1F] hover:bg-black/80 transition-all focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-white hover:text-[#755B18] hover:bg-black/80 transition-all focus-visible:ring-2 focus-visible:ring-[#755B18]"
           aria-label="Fermer"
         >
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -128,7 +128,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
           <div className="absolute bottom-0 inset-x-0 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-center justify-between opacity-90 group-hover:opacity-100 transition-opacity">
             <button
               onClick={togglePlay}
-              className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#8A6D1F] transition-colors focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+              className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#755B18] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
               aria-label={isPlaying ? "Pause" : "Lecture"}
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-current" />}
@@ -137,7 +137,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
             <div className="flex items-center gap-2">
               <button
                 onClick={toggleMute}
-                className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#8A6D1F] transition-colors focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+                className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#755B18] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
                 aria-label={isMuted ? "Activer le son" : "Couper le son"}
               >
                 {isMuted ? <VolumeX className="w-5 h-5 text-amber-400" /> : <Volume2 className="w-5 h-5" />}
@@ -145,7 +145,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
 
               <button
                 onClick={toggleFullscreen}
-                className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#8A6D1F] transition-colors focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+                className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#755B18] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
                 aria-label="Plein écran"
               >
                 <Maximize className="w-5 h-5" />
@@ -158,7 +158,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
         <div className="w-full md:w-1/2 p-4 sm:p-6 flex flex-col justify-between overflow-y-auto space-y-3 sm:space-y-4">
           <div className="space-y-2 sm:space-y-3">
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold bg-[#8A6D1F]/20 text-[#8A6D1F] border border-[#8A6D1F]/30">
+              <span className="px-2.5 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold bg-[#755B18]/20 text-[#755B18] border border-[#755B18]/30">
                 TEDxFMDC · Extrait {talk.extractNumber}/8
               </span>
               <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#EFECE4] text-[#5C6672]">
@@ -171,7 +171,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
             </h2>
 
             <div className="text-xs sm:text-sm font-semibold text-[#3D4A58]">
-              Orateur: <span className="text-[#8A6D1F]">{talk.speaker}</span>
+              Orateur: <span className="text-[#755B18]">{talk.speaker}</span>
             </div>
 
             <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed">
@@ -184,7 +184,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
               href={talk.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#EFECE4] hover:bg-[#EFECE4]/80 text-[#16233A] hover:text-[#8A6D1F] border border-[#DCD7CB]/40 text-xs font-semibold transition-all shadow-sm active:scale-95"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#EFECE4] hover:bg-[#EFECE4]/80 text-[#16233A] hover:text-[#755B18] border border-[#DCD7CB]/40 text-xs font-semibold transition-all shadow-sm active:scale-95"
             >
               <span>Voir le Reel officiel sur Instagram</span>
               <ExternalLink className="w-3.5 h-3.5" />

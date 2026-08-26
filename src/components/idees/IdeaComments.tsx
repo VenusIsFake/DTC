@@ -75,7 +75,7 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
     <div className="space-y-3 pt-3 border-t border-[#DCD7CB]/30">
       {comments === null && <p className="text-xs text-[#5C6672]">Chargement des commentaires…</p>}
       {comments !== null && comments.length === 0 && (
-        <p className="text-xs text-[#7A828D]">Soyez le premier à commenter cette idée.</p>
+        <p className="text-xs text-[#5F6774]">Soyez le premier à commenter cette idée.</p>
       )}
 
       {comments?.map((comment) => (
@@ -86,12 +86,12 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
               <span className="text-[11px] font-bold text-[#16233A] truncate">
                 {comment.author_name ?? "Membre"}
               </span>
-              <span className="text-[10px] text-[#7A828D]">{formatRelative(comment.created_at)}</span>
+              <span className="text-[10px] text-[#5F6774]">{formatRelative(comment.created_at)}</span>
               {(isBureau || comment.author_id === user?.id) && (
                 <button
                   onClick={() => remove(comment)}
                   aria-label="Supprimer le commentaire"
-                  className="ml-auto text-[#7A828D] hover:text-red-600 transition-colors"
+                  className="ml-auto text-[#5F6774] hover:text-red-600 transition-colors"
                 >
                   <Trash2 className="w-3 h-3" />
                 </button>
@@ -113,13 +113,13 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
           onChange={(e) => setDraft(e.target.value)}
           maxLength={2000}
           placeholder={user ? "Ajouter un commentaire constructif…" : "Se connecter pour commenter…"}
-          className="flex-1 px-3 py-2 rounded-full bg-white border border-[#DCD7CB]/50 text-xs text-[#16233A] placeholder:text-[#7A828D] focus:outline-none focus:border-[#8A6D1F]/60"
+          className="flex-1 px-3 py-2 rounded-full bg-white border border-[#DCD7CB]/50 text-xs text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18]/60"
         />
         <button
           type="submit"
           disabled={sending || !draft.trim()}
           aria-label="Envoyer le commentaire"
-          className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#8A6D1F]/15 border border-[#8A6D1F]/40 text-[#8A6D1F] hover:bg-[#8A6D1F]/25 transition-all active:scale-95 disabled:opacity-50"
+          className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#755B18]/15 border border-[#755B18]/40 text-[#755B18] hover:bg-[#755B18]/25 transition-all active:scale-95 disabled:opacity-50"
         >
           {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
         </button>

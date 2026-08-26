@@ -32,7 +32,7 @@ export default function HomeContent({
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-[#DCD7CB] pb-5">
             <div className="space-y-1.5">
-              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#755B18]">
                 Événement phare · 22 Nov 2025
               </p>
               <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#16233A] tracking-tight">
@@ -46,7 +46,7 @@ export default function HomeContent({
 
             <Link
               href="/events"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#16233A] border-b border-[#8A6D1F] pb-0.5 hover:text-[#8A6D1F] transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#16233A] border-b border-[#755B18] pb-0.5 hover:text-[#755B18] transition-colors shrink-0"
             >
               <span>Tous les extraits ({talks.length})</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -68,7 +68,7 @@ export default function HomeContent({
                     setActiveTalk(talk);
                   }
                 }}
-                className="glass-card glass-card-hover rounded-lg overflow-hidden flex flex-col group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6D1F] flex-1"
+                className="glass-card glass-card-hover rounded-lg overflow-hidden flex flex-col group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18] flex-1"
               >
                 {/* Poster Screen */}
                 <div className="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-black">
@@ -95,10 +95,10 @@ export default function HomeContent({
                 {/* Card Meta */}
                 <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2 sm:space-y-3">
                   <div className="space-y-1">
-                    <span className="text-[11px] sm:text-xs font-semibold text-[#8A6D1F]">
+                    <span className="text-[11px] sm:text-xs font-semibold text-[#755B18]">
                       {talk.speaker}
                     </span>
-                    <h3 className="text-sm sm:text-base font-heading font-semibold text-[#16233A] group-hover:text-[#8A6D1F] transition-colors line-clamp-2">
+                    <h3 className="text-sm sm:text-base font-heading font-semibold text-[#16233A] group-hover:text-[#755B18] transition-colors line-clamp-2">
                       {talk.topic}
                     </h3>
                     <p className="text-[11px] sm:text-xs text-[#5C6672] line-clamp-2">
@@ -106,9 +106,9 @@ export default function HomeContent({
                     </p>
                   </div>
 
-                  <div className="pt-2 flex items-center justify-between text-[11px] sm:text-xs text-[#7A828D] border-t border-[#DCD7CB]">
+                  <div className="pt-2 flex items-center justify-between text-[11px] sm:text-xs text-[#5F6774] border-t border-[#DCD7CB]">
                     <span>Amphithéâtre FMDC</span>
-                    <span className="text-[#8A6D1F] font-medium flex items-center gap-1">
+                    <span className="text-[#755B18] font-medium flex items-center gap-1">
                       Regarder <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
@@ -184,7 +184,7 @@ export default function HomeContent({
       {/* 5. Activities & Debates Highlights */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
         <div className="max-w-2xl space-y-1.5">
-          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#755B18]">
             Nos pôles d&apos;activité
           </p>
           <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#16233A] tracking-tight">
@@ -217,7 +217,7 @@ export default function HomeContent({
             </p>
             <Link
               href={eventsVisible ? "/events" : "/annonces"}
-              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#8A6D1F] hover:text-[#16233A]"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A]"
             >
               <span>{eventsVisible ? "Découvrir les formats" : "Voir les annonces"}</span>
               <ArrowRight className="w-3 h-3" />
@@ -243,7 +243,7 @@ export default function HomeContent({
             </p>
             <Link
               href="/annonces"
-              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#8A6D1F] hover:text-[#16233A]"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A]"
             >
               <span>Voir les ateliers</span>
               <ArrowRight className="w-3 h-3" />
@@ -269,7 +269,7 @@ export default function HomeContent({
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#8A6D1F] hover:text-[#16233A]"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A]"
             >
               <span>Rencontrer l&apos;équipe</span>
               <ArrowRight className="w-3 h-3" />

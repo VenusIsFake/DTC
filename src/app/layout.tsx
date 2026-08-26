@@ -89,7 +89,7 @@ export default async function RootLayout({
 
   return (
     <html lang="fr" className={`${inter.variable} ${display.variable}`}>
-      <body className="bg-[#F7F5F0] text-[#16233A] min-h-screen flex flex-col antialiased selection:bg-[#8A6D1F]/20 selection:text-[#16233A]">
+      <body className="bg-[#F7F5F0] text-[#16233A] min-h-screen flex flex-col antialiased selection:bg-[#755B18]/20 selection:text-[#16233A]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

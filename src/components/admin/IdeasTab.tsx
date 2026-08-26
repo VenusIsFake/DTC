@@ -46,7 +46,7 @@ export default function IdeasTab() {
   if (items === null) {
     return (
       <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
+        <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
       </div>
     );
   }

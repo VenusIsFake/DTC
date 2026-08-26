@@ -61,7 +61,7 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
       <div className="relative z-10 w-full max-w-lg glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-4 shadow-lg">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 text-lg font-heading font-bold text-[#16233A]">
-            <Lightbulb className="w-5 h-5 text-[#8A6D1F]" />
+            <Lightbulb className="w-5 h-5 text-[#755B18]" />
             Proposer une idée
           </h2>
           <button

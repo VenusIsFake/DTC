@@ -43,7 +43,7 @@ function VisibilityCard() {
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <CalendarDays className="w-4 h-4 text-[#8A6D1F]" />
+          <CalendarDays className="w-4 h-4 text-[#755B18]" />
           Visibilité de la section « TEDx & Débats »
         </h3>
         <p className="text-[11px] text-[#5C6672] mt-0.5">
@@ -175,7 +175,7 @@ function TedxCard() {
             setError(null);
             setOpen(true);
           }}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 active:scale-95"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95"
         >
           <Plus className="w-3 h-3" />
           <span>Talk</span>
@@ -183,12 +183,12 @@ function TedxCard() {
       </div>
 
       {talks === null ? (
-        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {talks.map((row) => (
             <div key={row.id} className="flex items-center gap-2.5 p-2 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-[10px] font-bold text-[#8A6D1F] w-7 shrink-0">#{row.extract_number}</span>
+              <span className="text-[10px] font-bold text-[#755B18] w-7 shrink-0">#{row.extract_number}</span>
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-semibold text-[#16233A] truncate">
                   {row.speaker} {!row.is_published && <Badge tone="gray">Masqué</Badge>}
@@ -202,7 +202,7 @@ function TedxCard() {
                   setOpen(true);
                 }}
                 aria-label="Modifier"
-                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F]"
+                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]"
               >
                 <Pencil className="w-3 h-3" />
               </button>
@@ -273,7 +273,7 @@ function TedxCard() {
                 <textarea id="tedx-desc" rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputClass} resize-y`} />
               </Field>
               <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
-                <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#8A6D1F]" />
+                <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#755B18]" />
                 <span>Publié</span>
               </label>
               {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
@@ -404,7 +404,7 @@ function EventPagesCard() {
         </div>
         <button
           onClick={() => openEditor(null)}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 active:scale-95"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95"
         >
           <Plus className="w-3 h-3" />
           <span>Page</span>
@@ -412,7 +412,7 @@ function EventPagesCard() {
       </div>
 
       {pages === null ? (
-        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {pages.map((page) => {
@@ -423,14 +423,14 @@ function EventPagesCard() {
                   <button
                     onClick={() => setExpanded(isExpanded ? null : page.id)}
                     aria-expanded={isExpanded}
-                    className="flex items-center gap-1 text-[#7A828D] hover:text-[#8A6D1F]"
+                    className="flex items-center gap-1 text-[#5F6774] hover:text-[#755B18]"
                     aria-label={isExpanded ? "Replier" : "Déplier"}
                   >
                     {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-semibold text-[#16233A] truncate">
-                      {page.title} <span className="text-[#7A828D] font-normal">/events/{page.slug}</span>
+                      {page.title} <span className="text-[#5F6774] font-normal">/events/{page.slug}</span>
                     </p>
                     <p className="text-[10px] text-[#5C6672]">
                       {itemsByPage[page.id]?.length ?? 0} élément(s)
@@ -439,7 +439,7 @@ function EventPagesCard() {
                   <Badge tone={page.status === "published" ? "green" : page.status === "draft" ? "gold" : "gray"}>
                     {page.status === "published" ? "Publiée" : page.status === "draft" ? "Brouillon" : "Archivée"}
                   </Badge>
-                  <button onClick={() => openEditor(page)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F]">
+                  <button onClick={() => openEditor(page)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
                     <Pencil className="w-3 h-3" />
                   </button>
                   <button onClick={() => remove(page)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
@@ -453,10 +453,10 @@ function EventPagesCard() {
                       <div key={item.id} className="flex items-center gap-2 p-2 rounded-lg bg-white/60 border border-[#DCD7CB]/20">
                         <div className="min-w-0 flex-1">
                           <p className="text-[11px] font-semibold text-[#16233A] truncate">
-                            {item.title} {item.speaker && <span className="text-[#8A6D1F]">— {item.speaker}</span>}
+                            {item.title} {item.speaker && <span className="text-[#755B18]">— {item.speaker}</span>}
                           </p>
                         </div>
-                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#7A828D] hover:text-red-600">
+                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#5F6774] hover:text-red-600">
                           <Trash2 className="w-3 h-3" />
                         </button>
                       </div>

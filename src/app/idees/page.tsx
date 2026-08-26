@@ -19,7 +19,7 @@ export default async function IdeesPage() {
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6 sm:space-y-10">
       {/* Header Banner */}
       <div className="max-w-2xl mx-auto space-y-2 sm:space-y-4">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
           Boîte à idées collaborative
         </p>
         <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">

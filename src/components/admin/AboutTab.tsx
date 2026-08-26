@@ -74,17 +74,17 @@ function SectionsEditor() {
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
         <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <FileText className="w-4 h-4 text-[#8A6D1F]" />
+          <FileText className="w-4 h-4 text-[#755B18]" />
           Sections « À propos »
         </h3>
-        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 active:scale-95">
+        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95">
           <Plus className="w-3 h-3" />
           <span>Section</span>
         </button>
       </div>
 
       {editing && (
-        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-[#8A6D1F]/25">
+        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-[#755B18]/25">
           <div className="grid grid-cols-2 gap-3">
             <Field label="Clé (identifiant)" htmlFor="about-key">
               <input id="about-key" type="text" value={form.key} onChange={(e) => setForm({ ...form, key: e.target.value })} className={inputClass} disabled={Boolean(editing.id)} />
@@ -100,7 +100,7 @@ function SectionsEditor() {
             <textarea id="about-body" rows={6} value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} className={`${inputClass} resize-y`} />
           </Field>
           <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
-            <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#8A6D1F]" />
+            <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#755B18]" />
             <span>Publiée</span>
           </label>
           <div className="flex justify-end gap-2">
@@ -111,22 +111,22 @@ function SectionsEditor() {
       )}
 
       {sections === null ? (
-        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {sections.map((section) => (
             <div key={section.id} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-[10px] font-bold text-[#8A6D1F] w-5 shrink-0">{section.sort_order}</span>
+              <span className="text-[10px] font-bold text-[#755B18] w-5 shrink-0">{section.sort_order}</span>
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-semibold text-[#16233A] truncate">
                   {section.title} {!section.is_published && <Badge tone="gray">Masquée</Badge>}
                 </p>
-                <p className="text-[10px] text-[#7A828D] truncate">{section.key}</p>
+                <p className="text-[10px] text-[#5F6774] truncate">{section.key}</p>
               </div>
-              <button onClick={() => togglePublished(section)} className="text-[10px] font-semibold text-[#5C6672] hover:text-[#8A6D1F] shrink-0">
+              <button onClick={() => togglePublished(section)} className="text-[10px] font-semibold text-[#5C6672] hover:text-[#755B18] shrink-0">
                 {section.is_published ? "Masquer" : "Afficher"}
               </button>
-              <button onClick={() => startEdit(section)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F]">
+              <button onClick={() => startEdit(section)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
                 <Pencil className="w-3 h-3" />
               </button>
               <button onClick={() => remove(section)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
@@ -195,7 +195,7 @@ function StatsEditor() {
             <button
               onClick={() => setStats(stats.filter((_, i) => i !== idx))}
               aria-label="Retirer la statistique"
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#7A828D] hover:text-red-600"
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5F6774] hover:text-red-600"
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -322,7 +322,7 @@ function MandatesEditor() {
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
         <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <Crown className="w-4 h-4 text-[#8A6D1F]" />
+          <Crown className="w-4 h-4 text-[#755B18]" />
           Mandats & organigrammes
         </h3>
         <form onSubmit={createMandate} className="flex gap-2">
@@ -355,14 +355,14 @@ function MandatesEditor() {
       />
 
       {mandates === null ? (
-        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
       ) : (
         <div className="space-y-2">
           {mandates.map((mandate) => (
             <div
               key={mandate.id}
               className={`rounded-xl border p-3 space-y-2 ${
-                mandate.is_current ? "border-[#8A6D1F]/40 bg-[#8A6D1F]/5" : "border-[#DCD7CB]/30 bg-[#EFECE4]/30"
+                mandate.is_current ? "border-[#755B18]/40 bg-[#755B18]/5" : "border-[#DCD7CB]/30 bg-[#EFECE4]/30"
               }`}
             >
               <div className="flex flex-wrap items-center gap-2">
@@ -370,7 +370,7 @@ function MandatesEditor() {
                 {mandate.is_current && <Badge tone="gold">Courant</Badge>}
                 <div className="ml-auto flex items-center gap-1.5">
                   {!mandate.is_current && (
-                    <button onClick={() => setCurrent(mandate)} className="text-[10px] font-semibold text-[#8A6D1F] hover:underline">
+                    <button onClick={() => setCurrent(mandate)} className="text-[10px] font-semibold text-[#755B18] hover:underline">
                       Définir courant
                     </button>
                   )}
@@ -379,7 +379,7 @@ function MandatesEditor() {
                       setPendingUploadMandate(mandate.id);
                       fileRef.current?.click();
                     }}
-                    className="flex items-center gap-1 text-[10px] font-semibold text-[#5C6672] hover:text-[#8A6D1F]"
+                    className="flex items-center gap-1 text-[10px] font-semibold text-[#5C6672] hover:text-[#755B18]"
                     disabled={uploadingFor === mandate.id}
                   >
                     {uploadingFor === mandate.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
@@ -390,15 +390,15 @@ function MandatesEditor() {
                   </button>
                 </div>
               </div>
-              <p className="text-[10px] text-[#7A828D] truncate">
+              <p className="text-[10px] text-[#5F6774] truncate">
                 {mandate.infographic_url || "Aucune infographie"} · {mandate.members.length} membres
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {mandate.members.map((member) => (
                   <span key={member.id} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/80 border border-[#DCD7CB]/40 text-[10px] text-[#3D4A58]">
                     <span className="font-semibold text-[#16233A]">{member.name}</span>
-                    <span className="text-[#8A6D1F]">{member.role}</span>
-                    <button onClick={() => removeMember(member)} aria-label={`Retirer ${member.name}`} className="text-[#7A828D] hover:text-red-600">
+                    <span className="text-[#755B18]">{member.role}</span>
+                    <button onClick={() => removeMember(member)} aria-label={`Retirer ${member.name}`} className="text-[#5F6774] hover:text-red-600">
                       <Trash2 className="w-2.5 h-2.5" />
                     </button>
                   </span>

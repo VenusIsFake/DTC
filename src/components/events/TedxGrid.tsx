@@ -15,7 +15,7 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
       <div className="glass-card p-4 sm:p-8 rounded-lg border border-[#DCD7CB]/40 relative overflow-hidden space-y-4 sm:space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-4 border-b border-[#DCD7CB]/30 pb-4 sm:pb-6">
           <div className="space-y-0.5 sm:space-y-1">
-            <span className="text-[10px] sm:text-xs font-bold text-[#8A6D1F] uppercase tracking-wider block">
+            <span className="text-[10px] sm:text-xs font-bold text-[#755B18] uppercase tracking-wider block">
               Première Édition Historique · 22 Nov 2025
             </span>
             <h2 className="text-xl sm:text-3xl font-heading font-bold text-[#16233A]">
@@ -23,7 +23,7 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
             </h2>
           </div>
           <div className="text-xs text-[#5C6672] flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5 text-[#8A6D1F]" />
+            <Calendar className="w-3.5 h-3.5 text-[#755B18]" />
             <span>Amphithéâtre FMDC Casablanca</span>
           </div>
         </div>
@@ -40,7 +40,7 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-3.5 sm:p-6">
             <div className="text-[#16233A] space-y-0.5 sm:space-y-1">
-              <span className="text-[10px] sm:text-xs font-semibold text-[#8A6D1F] uppercase tracking-[0.14em]">
+              <span className="text-[10px] sm:text-xs font-semibold text-[#755B18] uppercase tracking-[0.14em]">
                 Scène Officielle TEDxFMDC
               </span>
               <h3 className="text-sm sm:text-xl font-heading font-bold">
@@ -65,7 +65,7 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
                   setActiveTalk(talk);
                 }
               }}
-              className="glass-card glass-card-hover rounded-xl sm:rounded-lg overflow-hidden border border-[#DCD7CB]/40 flex flex-col group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+              className="glass-card glass-card-hover rounded-xl sm:rounded-lg overflow-hidden border border-[#DCD7CB]/40 flex flex-col group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18]"
             >
               {/* 9:16 Video Thumbnail Container */}
               <div className="relative aspect-[9/16] w-full overflow-hidden bg-black">
@@ -77,12 +77,12 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-center justify-center">
-                  <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#8A6D1F] text-[#F7F5F0] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                  <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#755B18] text-[#F7F5F0] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                     <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-current translate-x-0.5" />
                   </div>
                 </div>
 
-                <div className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 px-1.5 sm:px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-bold bg-black/70 text-[#8A6D1F] border border-[#8A6D1F]/30">
+                <div className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 px-1.5 sm:px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-bold bg-black/70 text-[#755B18] border border-[#755B18]/30">
                   Extrait {talk.extractNumber}/{talks.length}
                 </div>
 
@@ -98,7 +98,7 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
               {/* Talk Info */}
               <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between space-y-1.5 sm:space-y-2">
                 <div className="space-y-0.5 sm:space-y-1">
-                  <span className="text-[10px] sm:text-xs font-semibold text-[#8A6D1F] block truncate">
+                  <span className="text-[10px] sm:text-xs font-semibold text-[#755B18] block truncate">
                     {talk.speaker}
                   </span>
                   <h4 className="text-xs sm:text-sm font-heading font-bold text-[#16233A] line-clamp-2 leading-snug">
@@ -107,7 +107,7 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
                 </div>
 
                 <span className="text-[10px] sm:text-[11px] text-[#5C6672] font-medium flex items-center gap-1 pt-1.5 sm:pt-2 border-t border-[#DCD7CB]/20">
-                  <Play className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#8A6D1F] fill-current" />
+                  <Play className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#755B18] fill-current" />
                   <span className="truncate">Lancer la vidéo</span>
                 </span>
               </div>

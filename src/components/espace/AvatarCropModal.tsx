@@ -384,7 +384,7 @@ export default function AvatarCropModal({
                 cy={VIEWPORT_SIZE / 2}
                 r={CIRCLE_RADIUS}
                 fill="none"
-                stroke="#8A6D1F"
+                stroke="#755B18"
                 strokeWidth="2.5"
                 className="drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]"
               />
@@ -413,7 +413,7 @@ export default function AvatarCropModal({
         <div className="flex items-center gap-4 bg-white/70 border border-[#DCD7CB]/40 rounded-lg p-3">
           {/* Mini Live Preview */}
           <div className="flex flex-col items-center gap-1 shrink-0">
-            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#8A6D1F] bg-[#EFECE4] shadow-md shadow-[#8A6D1F]/15">
+            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#755B18] bg-[#EFECE4] shadow-md shadow-[#755B18]/15">
               <canvas
                 ref={previewCanvasRef}
                 width={72}
@@ -428,7 +428,7 @@ export default function AvatarCropModal({
           <div className="flex-1 space-y-1.5">
             <div className="flex items-center justify-between text-[11px] font-semibold text-[#3D4A58]">
               <span>Zoom</span>
-              <span className="text-[#8A6D1F] font-mono">{Math.round(zoom * 100)}%</span>
+              <span className="text-[#755B18] font-mono">{Math.round(zoom * 100)}%</span>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -449,7 +449,7 @@ export default function AvatarCropModal({
                 value={zoom}
                 onChange={(e) => handleZoomChange(parseFloat(e.target.value))}
                 disabled={submitting}
-                className="flex-1 h-1.5 bg-[#EFECE4] rounded-lg appearance-none cursor-pointer accent-[#8A6D1F]"
+                className="flex-1 h-1.5 bg-[#EFECE4] rounded-lg appearance-none cursor-pointer accent-[#755B18]"
                 aria-label="Niveau de zoom"
               />
 
@@ -467,7 +467,7 @@ export default function AvatarCropModal({
                 type="button"
                 onClick={handleReset}
                 disabled={submitting || (zoom === 1.0 && pan.x === 0 && pan.y === 0)}
-                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#8A6D1F] disabled:opacity-30 transition-all active:scale-95 ml-0.5"
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#755B18] disabled:opacity-30 transition-all active:scale-95 ml-0.5"
                 title="Réinitialiser le cadrage"
                 aria-label="Réinitialiser le cadrage"
               >

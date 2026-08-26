@@ -117,7 +117,7 @@ export default function ProfileEditor({
           <p className="text-[11px] text-[#5C6672]">
             Visible par les membres dans l&apos;annuaire. Choisissez et cadrez votre photo.
           </p>
-          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-semibold border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#8A6D1F]/50 hover:text-[#8A6D1F] cursor-pointer transition-all">
+          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-semibold border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#755B18]/50 hover:text-[#755B18] cursor-pointer transition-all">
             <input
               ref={fileInputRef}
               type="file"

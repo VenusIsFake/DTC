@@ -90,7 +90,7 @@ export default function AnnouncementsTab() {
             setEditing(null);
             setComposerOpen(true);
           }}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#8A6D1F]/20 transition-all active:scale-95"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Nouvelle</span>
@@ -99,7 +99,7 @@ export default function AnnouncementsTab() {
 
       {items === null && (
         <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-          <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
+          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
         </div>
       )}
 
@@ -119,7 +119,7 @@ export default function AnnouncementsTab() {
             >
               <div className="min-w-0 flex-1">
                 <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate flex items-center gap-2">
-                  {item.is_pinned && <Pin className="w-3 h-3 text-[#8A6D1F] shrink-0" />}
+                  {item.is_pinned && <Pin className="w-3 h-3 text-[#755B18] shrink-0" />}
                   {item.title}
                 </p>
                 <p className="text-[10px] text-[#5C6672]">
@@ -137,7 +137,7 @@ export default function AnnouncementsTab() {
                       ? "Envoyer par email à tous les membres"
                       : "Publiez d'abord l'annonce"
                   }
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors disabled:opacity-40 disabled:hover:text-[#5C6672] disabled:hover:bg-transparent"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors disabled:opacity-40 disabled:hover:text-[#5C6672] disabled:hover:bg-transparent"
                 >
                   {emailing === item.id ? (
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -148,7 +148,7 @@ export default function AnnouncementsTab() {
                 <button
                   onClick={() => togglePin(item)}
                   aria-label={item.is_pinned ? "Désépingler" : "Épingler"}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                 >
                   {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
                 </button>
@@ -158,7 +158,7 @@ export default function AnnouncementsTab() {
                     setComposerOpen(true);
                   }}
                   aria-label="Modifier"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                 </button>

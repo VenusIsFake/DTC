@@ -26,7 +26,7 @@ export default function EspaceClient({
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-5 sm:space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
           Espace Membre
         </p>
         <h1 className="font-heading font-semibold text-3xl sm:text-4xl text-[#16233A] tracking-tight">
@@ -54,7 +54,7 @@ export default function EspaceClient({
             aria-pressed={tab === option.id}
             className={`flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-[11px] sm:text-xs font-semibold transition-colors ${
               tab === option.id
-                ? "bg-[#EFECE4] text-[#8A6D1F]"
+                ? "bg-[#EFECE4] text-[#755B18]"
                 : "text-[#5C6672] hover:text-[#16233A]"
             }`}
           >
@@ -78,13 +78,13 @@ export default function EspaceClient({
       )}
 
       {isBureau && tab === "profil" && (
-        <p className="text-[11px] text-[#7A828D] text-center">
+        <p className="text-[11px] text-[#5F6774] text-center">
           Membre du bureau : vos outils de gestion se trouvent directement dans les fils{" "}
-          <Link href="/annonces" className="text-[#8A6D1F] hover:underline underline-offset-2">
+          <Link href="/annonces" className="text-[#755B18] hover:underline underline-offset-2">
             Annonces
           </Link>{" "}
           et{" "}
-          <Link href="/idees" className="text-[#8A6D1F] hover:underline underline-offset-2">
+          <Link href="/idees" className="text-[#755B18] hover:underline underline-offset-2">
             Idées
           </Link>
           .

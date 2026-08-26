@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="pt-16 sm:pt-24 pb-16 px-4 max-w-xl mx-auto text-center space-y-4">
-      <p className="text-6xl sm:text-8xl font-heading font-semibold text-[#8A6D1F]">
+      <p className="text-6xl sm:text-8xl font-heading font-semibold text-[#755B18]">
         404
       </p>
       <h1 className="text-xl sm:text-3xl font-heading font-semibold text-[#16233A]">

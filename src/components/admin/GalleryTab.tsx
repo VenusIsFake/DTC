@@ -250,7 +250,7 @@ function EditorModal({
             type="checkbox"
             checked={form.is_published}
             onChange={(e) => set("is_published", e.target.checked)}
-            className="accent-[#8A6D1F]"
+            className="accent-[#755B18]"
           />
           Publiée (visible sur la galerie publique)
         </label>
@@ -322,7 +322,7 @@ export default function GalleryTab() {
             setDraft(null);
             setEditorOpen(true);
           }}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#8A6D1F]/20 transition-all active:scale-95"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Ajouter</span>
@@ -331,7 +331,7 @@ export default function GalleryTab() {
 
       {items === null && (
         <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-          <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
+          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
         </div>
       )}
 
@@ -361,7 +361,7 @@ export default function GalleryTab() {
               <button
                 onClick={() => togglePublish(item)}
                 aria-label={item.is_published ? "Dépublier" : "Publier"}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
               >
                 {item.is_published ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
               </button>
@@ -380,7 +380,7 @@ export default function GalleryTab() {
                   setEditorOpen(true);
                 }}
                 aria-label="Modifier"
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
               >
                 <Pencil className="w-3.5 h-3.5" />
               </button>

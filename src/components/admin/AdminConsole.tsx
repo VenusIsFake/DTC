@@ -41,7 +41,7 @@ export default function AdminConsole({ adminName }: { adminName: string }) {
   return (
     <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-4 sm:space-y-6">
       <div className="space-y-1.5">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
           Console DTC — {adminName}
         </p>
         <h1 className="font-heading font-semibold text-2xl sm:text-4xl text-[#16233A] tracking-tight">
@@ -65,7 +65,7 @@ export default function AdminConsole({ adminName }: { adminName: string }) {
               onClick={() => setTab(option.id)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                 isActive
-                  ? "bg-[#EFECE4] text-[#8A6D1F] border border-[#8A6D1F]/30 shadow-md"
+                  ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30 shadow-md"
                   : "text-[#5C6672] hover:text-[#16233A] border border-transparent hover:bg-[#EFECE4]"
               }`}
             >

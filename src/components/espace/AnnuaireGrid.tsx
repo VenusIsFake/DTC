@@ -30,7 +30,7 @@ export default function AnnuaireGrid({
   return (
     <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-5 sm:space-y-8">
       <div className="space-y-2">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">Membres du club</p>
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">Membres du club</p>
         <h1 className="font-heading font-semibold text-3xl sm:text-4xl text-[#16233A] tracking-tight">
           Annuaire DTC
         </h1>
@@ -48,7 +48,7 @@ export default function AnnuaireGrid({
       )}
 
       <div className="relative max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#7A828D]" aria-hidden="true" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#5F6774]" aria-hidden="true" />
         <label htmlFor="annuaire-search" className="sr-only">
           Rechercher un membre
         </label>
@@ -84,7 +84,7 @@ export default function AnnuaireGrid({
               <UserAvatar name={entry.full_name} src={entry.avatar_url} size={56} />
               <div className="space-y-0.5 min-w-0 w-full">
                 <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">{entry.full_name || "Membre"}</p>
-                <p className="text-[10px] text-[#8A6D1F] font-semibold truncate">
+                <p className="text-[10px] text-[#755B18] font-semibold truncate">
                   {entry.promo ? `Promo ${entry.promo}` : "Promo —"}
                 </p>
                 <p className="text-[10px] text-[#5C6672] truncate">{entry.committee || "Sans commission"}</p>

@@ -99,7 +99,7 @@ export default function ActivitiesPanel() {
   if (!activity) {
     return (
       <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
+        <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
         <p className="text-xs text-[#5C6672] mt-2">Chargement de vos activités…</p>
       </div>
     );
@@ -109,15 +109,15 @@ export default function ActivitiesPanel() {
     <div className="space-y-4 sm:space-y-5">
       {/* Admin quick panel */}
       {isAdmin && stats && (
-        <div className="glass-card rounded-lg border border-[#8A6D1F]/40 p-4 sm:p-6 space-y-3">
+        <div className="glass-card rounded-lg border border-[#755B18]/40 p-4 sm:p-6 space-y-3">
           <div className="flex items-center justify-between gap-3">
             <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-              <ShieldCheck className="w-4 h-4 text-[#8A6D1F]" />
+              <ShieldCheck className="w-4 h-4 text-[#755B18]" />
               Panneau administrateur
             </h3>
             <Link
               href="/admin"
-              className="text-[11px] font-bold text-[#8A6D1F] hover:text-[#8A6D1F] transition-colors"
+              className="text-[11px] font-bold text-[#755B18] hover:text-[#755B18] transition-colors"
             >
               Ouvrir la console →
             </Link>
@@ -144,13 +144,13 @@ export default function ActivitiesPanel() {
       {/* My ideas */}
       <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
         <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <Lightbulb className="w-4 h-4 text-[#8A6D1F]" />
+          <Lightbulb className="w-4 h-4 text-[#755B18]" />
           Mes idées ({activity.ideas.length})
         </h3>
         {activity.ideas.length === 0 && (
           <p className="text-xs text-[#5C6672]">
             Aucune idée proposée.{" "}
-            <Link href="/idees" className="text-[#8A6D1F] font-semibold hover:underline underline-offset-2">
+            <Link href="/idees" className="text-[#755B18] font-semibold hover:underline underline-offset-2">
               Pitcher ma première idée
             </Link>
           </p>
@@ -161,7 +161,7 @@ export default function ActivitiesPanel() {
               <span className="text-xs font-semibold text-[#16233A] truncate">{idea.title}</span>
               <span className="flex items-center gap-2 shrink-0">
                 <Badge tone="gold">{idea.vote_count} vote{idea.vote_count > 1 ? "s" : ""}</Badge>
-                <span className="text-[10px] text-[#7A828D]">{formatRelative(idea.created_at)}</span>
+                <span className="text-[10px] text-[#5F6774]">{formatRelative(idea.created_at)}</span>
               </span>
             </li>
           ))}
@@ -171,13 +171,13 @@ export default function ActivitiesPanel() {
       {/* My votes */}
       <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
         <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <ArrowBigUp className="w-4 h-4 text-[#8A6D1F]" />
+          <ArrowBigUp className="w-4 h-4 text-[#755B18]" />
           Mes votes ({activity.votedIdeas.length})
         </h3>
         {activity.votedIdeas.length === 0 && (
           <p className="text-xs text-[#5C6672]">
             Aucun vote pour l&apos;instant.{" "}
-            <Link href="/idees" className="text-[#8A6D1F] font-semibold hover:underline underline-offset-2">
+            <Link href="/idees" className="text-[#755B18] font-semibold hover:underline underline-offset-2">
               Découvrir les idées du club
             </Link>
           </p>
@@ -186,7 +186,7 @@ export default function ActivitiesPanel() {
           {activity.votedIdeas.map((idea) => (
             <li key={idea.id} className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
               <span className="text-xs font-semibold text-[#16233A] truncate">{idea.title}</span>
-              <span className="text-[10px] text-[#7A828D] shrink-0">{idea.vote_count} votes</span>
+              <span className="text-[10px] text-[#5F6774] shrink-0">{idea.vote_count} votes</span>
             </li>
           ))}
         </ul>
@@ -195,13 +195,13 @@ export default function ActivitiesPanel() {
       {/* My RSVPs */}
       <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
         <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <CalendarDays className="w-4 h-4 text-[#8A6D1F]" />
+          <CalendarDays className="w-4 h-4 text-[#755B18]" />
           Mes participations ({activity.rsvps.length})
         </h3>
         {activity.rsvps.length === 0 && (
           <p className="text-xs text-[#5C6672]">
             Aucune participation confirmée.{" "}
-            <Link href="/annonces" className="text-[#8A6D1F] font-semibold hover:underline underline-offset-2">
+            <Link href="/annonces" className="text-[#755B18] font-semibold hover:underline underline-offset-2">
               Voir les prochains ateliers
             </Link>
           </p>
@@ -216,7 +216,7 @@ export default function ActivitiesPanel() {
         </ul>
       </section>
 
-      <p className="flex items-center justify-center gap-1.5 text-[11px] text-[#7A828D]">
+      <p className="flex items-center justify-center gap-1.5 text-[11px] text-[#5F6774]">
         <Activity className="w-3.5 h-3.5" />
         Votre historique personnel — visible uniquement par vous.
       </p>

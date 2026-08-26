@@ -89,7 +89,7 @@ export default function InfographicViewer({
       <div className="glass-card p-4 sm:p-8 rounded-lg border border-[#DCD7CB]/40 shadow-lg relative overflow-hidden space-y-4 sm:space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div className="space-y-0.5 sm:space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#8A6D1F]/15 text-[#8A6D1F] border border-[#8A6D1F]/30">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#755B18]/15 text-[#755B18] border border-[#755B18]/30">
               <Sparkles className="w-3 h-3" />
               <span>{label}</span>
             </div>
@@ -103,7 +103,7 @@ export default function InfographicViewer({
 
           <button
             onClick={toggleFullscreen}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 sm:px-4 rounded-xl bg-[#EFECE4] hover:bg-[#EFECE4]/80 text-[#16233A] hover:text-[#8A6D1F] border border-[#DCD7CB]/40 text-xs font-semibold transition-all shadow-sm self-start sm:self-auto active:scale-95"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 sm:px-4 rounded-xl bg-[#EFECE4] hover:bg-[#EFECE4]/80 text-[#16233A] hover:text-[#755B18] border border-[#DCD7CB]/40 text-xs font-semibold transition-all shadow-sm self-start sm:self-auto active:scale-95"
           >
             <Maximize2 className="w-3.5 h-3.5" />
             <span>Inspecter l&apos;organigramme</span>
@@ -122,7 +122,7 @@ export default function InfographicViewer({
               toggleFullscreen();
             }
           }}
-          className="relative w-full max-w-3xl mx-auto aspect-square rounded-xl sm:rounded-lg overflow-hidden border-2 border-[#DCD7CB]/50 shadow-lg bg-black cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+          className="relative w-full max-w-3xl mx-auto aspect-square rounded-xl sm:rounded-lg overflow-hidden border-2 border-[#DCD7CB]/50 shadow-lg bg-black cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18]"
         >
           <Image
             src={imageUrl}
@@ -133,8 +133,8 @@ export default function InfographicViewer({
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-3 sm:p-4 pointer-events-none">
-            <span className="text-xs font-semibold text-white bg-black/70 px-3 py-1.5 rounded-md border border-[#8A6D1F]/40 flex items-center gap-1.5">
-              <Maximize2 className="w-3.5 h-3.5 text-[#8A6D1F]" />
+            <span className="text-xs font-semibold text-white bg-black/70 px-3 py-1.5 rounded-md border border-[#755B18]/40 flex items-center gap-1.5">
+              <Maximize2 className="w-3.5 h-3.5 text-[#755B18]" />
               <span>Cliquer pour inspecter en plein écran</span>
             </span>
           </div>
@@ -157,7 +157,7 @@ export default function InfographicViewer({
           <div className="absolute top-[max(0.75rem,env(safe-area-inset-top))] right-3 z-20 flex items-center gap-1.5 sm:gap-2">
             <button
               onClick={() => setZoomLevel((z) => Math.min(z + 0.25, 2.5))}
-              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#EFECE4]/90 text-[#16233A] hover:text-[#8A6D1F] border border-[#DCD7CB]/50 transition-colors shadow-lg active:scale-95"
+              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#EFECE4]/90 text-[#16233A] hover:text-[#755B18] border border-[#DCD7CB]/50 transition-colors shadow-lg active:scale-95"
               aria-label="Zoom avant"
             >
               <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -170,14 +170,14 @@ export default function InfographicViewer({
                   return next;
                 });
               }}
-              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#EFECE4]/90 text-[#16233A] hover:text-[#8A6D1F] border border-[#DCD7CB]/50 transition-colors shadow-lg active:scale-95"
+              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#EFECE4]/90 text-[#16233A] hover:text-[#755B18] border border-[#DCD7CB]/50 transition-colors shadow-lg active:scale-95"
               aria-label="Zoom arrière"
             >
               <ZoomOut className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={handleReset}
-              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#EFECE4]/90 text-[#16233A] hover:text-[#8A6D1F] border border-[#DCD7CB]/50 transition-colors shadow-lg active:scale-95"
+              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#EFECE4]/90 text-[#16233A] hover:text-[#755B18] border border-[#DCD7CB]/50 transition-colors shadow-lg active:scale-95"
               aria-label="Réinitialiser le zoom"
             >
               <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />

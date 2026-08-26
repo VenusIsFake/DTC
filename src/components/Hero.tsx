@@ -12,7 +12,7 @@ export default function Hero({ eventsVisible = true }: { eventsVisible?: boolean
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-center">
         {/* Text column */}
         <div className="max-w-2xl">
-          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
             Faculté de Médecine Dentaire de Casablanca
           </p>
 
@@ -40,9 +40,9 @@ export default function Hero({ eventsVisible = true }: { eventsVisible?: boolean
 
             <Link
               href="/podcast"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#16233A] border-b border-[#8A6D1F] pb-0.5 hover:text-[#8A6D1F] transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#16233A] border-b border-[#755B18] pb-0.5 hover:text-[#755B18] transition-colors"
             >
-              <Mic className="w-4 h-4 text-[#8A6D1F]" />
+              <Mic className="w-4 h-4 text-[#755B18]" />
               <span>Podcast Let&apos;s Talk</span>
             </Link>
           </div>
@@ -52,7 +52,7 @@ export default function Hero({ eventsVisible = true }: { eventsVisible?: boolean
         <div className="hidden lg:flex justify-center items-center pr-4">
           <div className="relative w-56 xl:w-64 aspect-square">
             <div className="absolute inset-0 rounded-full border border-[#DCD7CB]" />
-            <div className="absolute inset-3 rounded-full border border-[#8A6D1F]/40" />
+            <div className="absolute inset-3 rounded-full border border-[#755B18]/40" />
             <div className="absolute inset-0 m-auto w-40 xl:w-48 h-40 xl:h-48 rounded-full overflow-hidden border border-[#DCD7CB] shadow-sm">
               <Image
                 src="/logo.png"

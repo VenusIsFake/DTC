@@ -320,12 +320,12 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
       {isBureau && (
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs text-[#5C6672] flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#8A6D1F] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#755B18] animate-pulse" />
             Mode bureau : créez les annonces des prochains ateliers.
           </p>
           <button
             onClick={() => openComposer(null)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#8A6D1F]/20 transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Nouvelle annonce</span>
@@ -356,7 +356,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
           <article
             key={item.id}
             className={`glass-card rounded-lg border p-4 sm:p-6 space-y-3 ${
-              item.is_pinned ? "border-[#8A6D1F]/40" : "border-[#DCD7CB]/40"
+              item.is_pinned ? "border-[#755B18]/40" : "border-[#DCD7CB]/40"
             }`}
           >
             <div className="flex items-start justify-between gap-3">
@@ -379,14 +379,14 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                   <button
                     onClick={() => togglePin(item)}
                     aria-label={item.is_pinned ? "Désépingler" : "Épingler"}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                   >
                     {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
                   </button>
                   <button
                     onClick={() => openComposer(item)}
                     aria-label="Modifier"
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                   >
                     <Pencil className="w-3.5 h-3.5" />
                   </button>
@@ -416,7 +416,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
             )}
 
             <div className="space-y-1.5">
-              <h3 className="text-base sm:text-xl font-heading font-bold text-[#16233A] leading-snug">{item.title}</h3>
+              <h2 className="text-base sm:text-xl font-heading font-bold text-[#16233A] leading-snug">{item.title}</h2>
               {item.body && (
                 <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed whitespace-pre-line">{item.body}</p>
               )}
@@ -425,18 +425,18 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-[#5C6672]">
               {item.event_date && (
                 <span className="flex items-center gap-1.5 font-medium">
-                  <CalendarDays className="w-3.5 h-3.5 text-[#8A6D1F]" />
+                  <CalendarDays className="w-3.5 h-3.5 text-[#755B18]" />
                   {formatDateTime(item.event_date)}
                 </span>
               )}
               {item.location && (
                 <span className="flex items-center gap-1.5 font-medium">
-                  <MapPin className="w-3.5 h-3.5 text-[#8A6D1F]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#755B18]" />
                   {item.location}
                 </span>
               )}
               <span className="flex items-center gap-1.5">
-                <span className="w-5 h-5 rounded-full bg-[#EFECE4] border border-[#DCD7CB]/50 inline-flex items-center justify-center text-[9px] font-bold text-[#8A6D1F]">
+                <span className="w-5 h-5 rounded-full bg-[#EFECE4] border border-[#DCD7CB]/50 inline-flex items-center justify-center text-[9px] font-bold text-[#755B18]">
                   {initials(item.author_name)}
                 </span>
                 {item.author_name ?? "Bureau DTC"} · {formatRelative(item.created_at)}
@@ -451,10 +451,10 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold transition-all active:scale-95 disabled:opacity-60 ${
                     joined
                       ? "bg-emerald-600/10 text-emerald-700 border border-emerald-600/40 hover:bg-emerald-500/25"
-                      : "bg-[#8A6D1F]/15 text-[#8A6D1F] border border-[#8A6D1F]/40 hover:bg-[#8A6D1F]/25"
+                      : "bg-[#755B18]/15 text-[#755B18] border border-[#755B18]/40 hover:bg-[#755B18]/25"
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full ${joined ? "bg-emerald-600" : "bg-[#8A6D1F]"}`} />
+                  <span className={`w-2 h-2 rounded-full ${joined ? "bg-emerald-600" : "bg-[#755B18]"}`} />
                   {joined ? "Je participe ✓" : user ? "Je participe" : "Se connecter pour participer"}
                 </button>
               )}
@@ -467,7 +467,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 {isBureau && isAtelier && item.rsvp_count > 0 && (
                   <button
                     onClick={() => setAttendeesFor(item)}
-                    className="flex items-center gap-1 text-[11px] font-semibold text-[#8A6D1F] hover:text-[#8A6D1F] transition-colors"
+                    className="flex items-center gap-1 text-[11px] font-semibold text-[#755B18] hover:text-[#755B18] transition-colors"
                   >
                     <Users className="w-3.5 h-3.5" />
                     <span>Liste</span>
@@ -476,7 +476,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 {isBureau && item.status !== "archived" && (
                   <button
                     onClick={() => setStatus(item, item.status === "published" ? "archived" : "published")}
-                    className="text-[11px] font-medium text-[#7A828D] hover:text-[#5C6672] transition-colors"
+                    className="text-[11px] font-medium text-[#5F6774] hover:text-[#5C6672] transition-colors"
                   >
                     {item.status === "published" ? "Archiver" : "Publier"}
                   </button>
@@ -484,7 +484,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 {isBureau && item.status === "archived" && (
                   <button
                     onClick={() => setStatus(item, "published")}
-                    className="text-[11px] font-medium text-[#7A828D] hover:text-[#5C6672] transition-colors"
+                    className="text-[11px] font-medium text-[#5F6774] hover:text-[#5C6672] transition-colors"
                   >
                     Republier
                   </button>

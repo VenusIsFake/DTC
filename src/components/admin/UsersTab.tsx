@@ -83,7 +83,7 @@ export default function UsersTab() {
   if (users === null) {
     return (
       <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
+        <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
         <p className="text-xs text-[#5C6672] mt-2">Chargement des comptes…</p>
       </div>
     );
@@ -108,7 +108,7 @@ export default function UsersTab() {
             <option value="name">Tri : Nom A→Z</option>
           </select>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#7A828D]" aria-hidden="true" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#5F6774]" aria-hidden="true" />
             <label htmlFor="users-search" className="sr-only">Rechercher un compte</label>
             <input
               id="users-search"
@@ -152,11 +152,11 @@ export default function UsersTab() {
                 {u.promo ? ` · Promo ${u.promo}` : ""}
                 {u.committee ? ` · ${u.committee}` : ""}
               </p>
-              <p className="text-[10px] text-[#7A828D]">Inscrit {formatRelative(u.created_at)}</p>
+              <p className="text-[10px] text-[#5F6774]">Inscrit {formatRelative(u.created_at)}</p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {busyId === u.id ? (
-                <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin" />
+                <Loader2 className="w-4 h-4 text-[#755B18] animate-spin" />
               ) : (
                 <>
                   <label className="sr-only" htmlFor={`role-${u.id}`}>

@@ -38,7 +38,7 @@ function translateError(message: string): string {
 }
 
 const inputClass =
-  "w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DCD7CB]/50 text-sm text-[#16233A] placeholder:text-[#7A828D] focus:outline-none focus:border-[#8A6D1F]/60 focus:ring-2 focus:ring-[#8A6D1F]/20";
+  "w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DCD7CB]/50 text-sm text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18]/60 focus:ring-2 focus:ring-[#755B18]/20";
 
 export default function AuthModal({
   isOpen,
@@ -229,7 +229,7 @@ export default function AuthModal({
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
                   mode === tab.id
-                    ? "bg-[#EFECE4] text-[#8A6D1F] border border-[#8A6D1F]/30"
+                    ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30"
                     : "text-[#5C6672] hover:text-[#16233A]"
                 }`}
               >
@@ -241,8 +241,8 @@ export default function AuthModal({
 
         {(mode === "forgot" || mode === "signup") && sent ? (
           <div className="space-y-4 text-center py-2">
-            <div className="mx-auto w-12 h-12 rounded-full bg-[#8A6D1F]/10 border border-[#8A6D1F]/30 flex items-center justify-center">
-              <MailCheck className="w-5 h-5 text-[#8A6D1F]" />
+            <div className="mx-auto w-12 h-12 rounded-full bg-[#755B18]/10 border border-[#755B18]/30 flex items-center justify-center">
+              <MailCheck className="w-5 h-5 text-[#755B18]" />
             </div>
             {mode === "signup" ? (
               <p className="text-sm text-[#3D4A58]">
@@ -262,7 +262,7 @@ export default function AuthModal({
                 setMode("signin");
                 setSent(false);
               }}
-              className="text-xs font-semibold text-[#8A6D1F] hover:underline underline-offset-2"
+              className="text-xs font-semibold text-[#755B18] hover:underline underline-offset-2"
             >
               Retour à la connexion
             </button>
@@ -277,7 +277,7 @@ export default function AuthModal({
                   setError(null);
                   setSent(false);
                 }}
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#5C6672] hover:text-[#8A6D1F] transition-colors"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#5C6672] hover:text-[#755B18] transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>{mode === "newpassword" ? "Retour à la connexion" : "Retour"}</span>
@@ -337,7 +337,7 @@ export default function AuthModal({
                   placeholder="••••••••"
                 />
                 {mode === "signup" && (
-                  <p className="text-[10px] text-[#7A828D]">8 caractères minimum, évitez les mots de passe déjà utilisés ailleurs.</p>
+                  <p className="text-[10px] text-[#5F6774]">8 caractères minimum, évitez les mots de passe déjà utilisés ailleurs.</p>
                 )}
               </div>
             )}
@@ -404,14 +404,14 @@ export default function AuthModal({
               setError(null);
               setSent(false);
             }}
-            className="w-full text-center text-[11px] font-semibold text-[#5C6672] hover:text-[#8A6D1F] transition-colors"
+            className="w-full text-center text-[11px] font-semibold text-[#5C6672] hover:text-[#755B18] transition-colors"
           >
             Mot de passe oublié ?
           </button>
         )}
 
         {(mode === "signin" || mode === "signup") && (
-          <p className="text-center text-[10px] text-[#7A828D] leading-relaxed">
+          <p className="text-center text-[10px] text-[#5F6774] leading-relaxed">
             Inscription libre, réservée aux étudiants de la FMDC. En créant un compte vous acceptez
             que le bureau du club modère les échanges.{" "}
             <Link href="/about" className="text-[#5C6672] underline underline-offset-2">

@@ -31,7 +31,7 @@ export default function ImageLightbox({ item, onClose }: ImageLightboxProps) {
           onClick={onClose}
           data-autofocus
           aria-label="Fermer"
-          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-white hover:text-[#8A6D1F] hover:bg-black/80 transition-all focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-white hover:text-[#755B18] hover:bg-black/80 transition-all focus-visible:ring-2 focus-visible:ring-[#755B18]"
         >
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
@@ -52,13 +52,13 @@ export default function ImageLightbox({ item, onClose }: ImageLightboxProps) {
         <div className="w-full md:w-2/5 p-4 sm:p-6 flex flex-col justify-between space-y-3 sm:space-y-4 bg-white">
           <div className="space-y-2 sm:space-y-3">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#8A6D1F]/15 text-[#8A6D1F] border border-[#8A6D1F]/30">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#755B18]/15 text-[#755B18] border border-[#755B18]/30">
                 <Tag className="w-3 h-3" />
                 <span>{item.categoryLabel}</span>
               </span>
               {item.date && (
                 <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-[#5C6672]">
-                  <Calendar className="w-3 h-3 text-[#8A6D1F]" />
+                  <Calendar className="w-3 h-3 text-[#755B18]" />
                   <span>{item.date}</span>
                 </span>
               )}

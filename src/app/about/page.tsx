@@ -25,7 +25,7 @@ export default async function AboutPage() {
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-8 sm:space-y-14">
       {/* Header Banner */}
       <div className="max-w-3xl mx-auto space-y-2 sm:space-y-4">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
           Histoire, Vision &amp; Gouvernance
         </p>
         <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">
@@ -75,7 +75,7 @@ export default async function AboutPage() {
 
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-36 h-36 sm:w-72 sm:h-72 rounded-full p-1.5 border border-[#DCD7CB]">
-                <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#8A6D1F]/50">
+                <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#755B18]/50">
                   <Image
                     src="/logo.png"
                     alt="DTC Logo"
@@ -101,7 +101,7 @@ export default async function AboutPage() {
         <Reveal>
         <section className="space-y-4 sm:space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-1 sm:space-y-2">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8A6D1F]">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#755B18]">
               <Crown className="w-3.5 h-3.5" />
               <span>Bureau Exécutif — {current.year_label}</span>
             </div>
@@ -116,13 +116,13 @@ export default async function AboutPage() {
                 key={member.id}
                 className="glass-card p-3 sm:p-5 rounded-xl sm:rounded-lg border border-[#DCD7CB]/30 text-center space-y-1 flex flex-col justify-between"
               >
-                <span className="inline-flex mx-auto p-2 rounded-lg bg-[#EFECE4] text-[#8A6D1F]">
+                <span className="inline-flex mx-auto p-2 rounded-lg bg-[#EFECE4] text-[#755B18]">
                   <Users className="w-3.5 h-3.5" />
                 </span>
                 <h3 className="text-xs sm:text-sm font-heading font-bold text-[#16233A] leading-snug">
                   {member.name}
                 </h3>
-                <p className="text-[10px] sm:text-xs text-[#8A6D1F] font-semibold">{member.role}</p>
+                <p className="text-[10px] sm:text-xs text-[#755B18] font-semibold">{member.role}</p>
               </div>
             ))}
           </div>
@@ -141,7 +141,7 @@ export default async function AboutPage() {
             {section.key === "partners" ? (
               <div className="space-y-4 sm:space-y-8 text-center">
                 <div className="max-w-xl mx-auto space-y-1 sm:space-y-2">
-                  <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8A6D1F]">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#755B18]">
                     <Award className="w-3.5 h-3.5" />
                     <span>Partenaires & Soutiens</span>
                   </div>
@@ -153,14 +153,14 @@ export default async function AboutPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 max-w-2xl mx-auto text-left">
                   <div className="p-4 sm:p-6 rounded-xl sm:rounded-lg bg-[#EFECE4]/50 border border-[#DCD7CB]/40 space-y-1.5">
                     <div className="flex items-center gap-2 text-[#16233A] font-bold text-base sm:text-lg">
-                      <Award className="w-4 h-4 text-[#8A6D1F]" />
+                      <Award className="w-4 h-4 text-[#755B18]" />
                       <span>{siteConfig.sponsor.name}</span>
                     </div>
                     <p className="text-xs text-[#3D4A58]">{siteConfig.sponsor.tagline}</p>
                   </div>
                   <div className="p-4 sm:p-6 rounded-xl sm:rounded-lg bg-[#EFECE4]/50 border border-[#DCD7CB]/40 space-y-1.5">
                     <div className="flex items-center gap-2 text-[#16233A] font-bold text-base sm:text-lg">
-                      <Heart className="w-4 h-4 text-[#8A6D1F]" />
+                      <Heart className="w-4 h-4 text-[#755B18]" />
                       <span>{siteConfig.partnerClub.name}</span>
                     </div>
                     <p className="text-xs text-[#3D4A58]">{siteConfig.partnerClub.tagline}</p>
@@ -231,7 +231,7 @@ function ArchivedMandate({ mandate }: { mandate: MandateWithMembers }) {
               className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[#EFECE4]/50 border border-[#DCD7CB]/40 text-[11px]"
             >
               <span className="font-semibold text-[#16233A]">{member.name}</span>
-              <span className="text-[#8A6D1F]">{member.role}</span>
+              <span className="text-[#755B18]">{member.role}</span>
             </span>
           ))}
         </div>

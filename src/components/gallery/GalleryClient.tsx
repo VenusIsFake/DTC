@@ -29,7 +29,7 @@ export default function GalleryClient({ initialItems }: { initialItems: GalleryI
     <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6 sm:space-y-12">
       {/* Header Banner */}
       <div className="max-w-2xl mx-auto space-y-2 sm:space-y-4">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">Archives Visuelles & Moments Forts</p>
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">Archives Visuelles & Moments Forts</p>
         <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">
           Galerie Média
         </h1>
@@ -46,7 +46,7 @@ export default function GalleryClient({ initialItems }: { initialItems: GalleryI
             onClick={() => setFilter(cat.key as CategoryFilter)}
             className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all ${
               filter === cat.key
-                ? "bg-[#8A6D1F] text-[#F7F5F0] shadow-md shadow-[#8A6D1F]/20 scale-105"
+                ? "bg-[#755B18] text-[#F7F5F0] shadow-md shadow-[#755B18]/20 scale-105"
                 : "glass-card text-[#3D4A58] hover:text-[#16233A] hover:border-[#DCD7CB]"
             }`}
           >
@@ -70,7 +70,7 @@ export default function GalleryClient({ initialItems }: { initialItems: GalleryI
                 setActiveItem(item);
               }
             }}
-            className="glass-card glass-card-hover rounded-xl sm:rounded-lg overflow-hidden border border-[#DCD7CB]/40 flex flex-col group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+            className="glass-card glass-card-hover rounded-xl sm:rounded-lg overflow-hidden border border-[#DCD7CB]/40 flex flex-col group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18]"
           >
             {/* Image Box */}
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
@@ -83,7 +83,7 @@ export default function GalleryClient({ initialItems }: { initialItems: GalleryI
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-2.5 sm:p-4">
                 <span className="text-[10px] sm:text-xs font-semibold text-white bg-black/60 px-2 py-0.5 rounded flex items-center gap-1">
-                  <Maximize2 className="w-3 h-3 text-[#8A6D1F]" />
+                  <Maximize2 className="w-3 h-3 text-[#755B18]" />
                   <span>Agrandir</span>
                 </span>
               </div>
@@ -92,10 +92,10 @@ export default function GalleryClient({ initialItems }: { initialItems: GalleryI
             {/* Metadata Info */}
             <div className="p-2.5 sm:p-4 space-y-1 flex-1 flex flex-col justify-between">
               <div>
-                <span className="text-[9px] sm:text-[11px] font-bold text-[#8A6D1F] block uppercase tracking-wider">
+                <span className="text-[9px] sm:text-[11px] font-bold text-[#755B18] block uppercase tracking-wider">
                   {item.categoryLabel}
                 </span>
-                <h3 className="text-xs sm:text-sm font-heading font-bold text-[#16233A] group-hover:text-[#8A6D1F] transition-colors line-clamp-1">
+                <h3 className="text-xs sm:text-sm font-heading font-bold text-[#16233A] group-hover:text-[#755B18] transition-colors line-clamp-1">
                   {item.title}
                 </h3>
                 <p className="text-[10px] sm:text-xs text-[#5C6672] line-clamp-2 mt-0.5">

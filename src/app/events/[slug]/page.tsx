@@ -67,12 +67,12 @@ export default async function EventLandingPage({ params }: Params) {
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-8 sm:pb-14 space-y-3 pt-16">
           <Link
             href="/events"
-            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-[#5C6672] hover:text-[#8A6D1F] transition-colors"
+            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-[#5C6672] hover:text-[#755B18] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Tous les événements</span>
           </Link>
-          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
             Événement DTC
           </p>
           <h1 className="font-heading font-semibold text-3xl sm:text-6xl text-[#16233A] leading-tight tracking-tight">

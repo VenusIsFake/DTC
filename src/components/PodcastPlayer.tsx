@@ -38,15 +38,15 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
             <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs text-[#5C6672] px-1">
               <div className="flex items-center gap-3 sm:gap-4">
                 <span className="flex items-center gap-1 font-medium text-[#3D4A58]">
-                  <Calendar className="w-3 h-3 text-[#8A6D1F]" />
+                  <Calendar className="w-3 h-3 text-[#755B18]" />
                   <span>{selectedEp.releaseDate}</span>
                 </span>
                 <span className="flex items-center gap-1 font-medium text-[#3D4A58]">
-                  <Clock className="w-3 h-3 text-[#8A6D1F]" />
+                  <Clock className="w-3 h-3 text-[#755B18]" />
                   <span>{selectedEp.duration}</span>
                 </span>
               </div>
-              <span className="flex items-center gap-1 font-semibold text-[#8A6D1F]">
+              <span className="flex items-center gap-1 font-semibold text-[#755B18]">
                 <Award className="w-3 h-3" />
                 <span>Sponsor: {selectedEp.sponsor}</span>
               </span>
@@ -56,13 +56,13 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
           {/* Episode Info & Synopsis */}
           <div className="lg:col-span-5 space-y-3 sm:space-y-5">
             <div className="space-y-1 sm:space-y-2">
-              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#8A6D1F]/15 text-[#8A6D1F] border border-[#8A6D1F]/30">
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#755B18]/15 text-[#755B18] border border-[#755B18]/30">
                 <span>Épisode {selectedEp.episodeNumber}</span>
               </div>
               <h3 className="text-xl sm:text-3xl font-heading font-semibold text-[#16233A] leading-tight">
                 {selectedEp.guest}
               </h3>
-              <p className="text-xs sm:text-sm font-semibold text-[#8A6D1F]">
+              <p className="text-xs sm:text-sm font-semibold text-[#755B18]">
                 {selectedEp.role}
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
               <ul className="space-y-1 sm:space-y-1.5">
                 {selectedEp.takeaways.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#3D4A58]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#8A6D1F] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#755B18] shrink-0 mt-0.5" />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -116,7 +116,7 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                 onClick={() => setSelectedEp(ep)}
                 className={`text-left p-2.5 sm:p-4 rounded-xl sm:rounded-lg border transition-all duration-200 flex items-center gap-3 group ${
                   isCurrent
-                    ? "bg-[#EFECE4] border-[#8A6D1F] shadow-lg shadow-[#8A6D1F]/10"
+                    ? "bg-[#EFECE4] border-[#755B18] shadow-lg shadow-[#755B18]/10"
                     : "glass-card hover:border-[#DCD7CB] hover:bg-[#EFECE4]/40"
                 }`}
               >
@@ -134,7 +134,7 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                 </div>
 
                 <div className="space-y-0.5 min-w-0 flex-1">
-                  <span className="text-[10px] sm:text-[11px] font-bold text-[#8A6D1F] block">
+                  <span className="text-[10px] sm:text-[11px] font-bold text-[#755B18] block">
                     ÉPISODE {ep.episodeNumber}
                   </span>
                   <h4 className="text-xs sm:text-sm font-semibold text-[#16233A] truncate">
@@ -143,7 +143,7 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                   <p className="text-[10px] sm:text-xs text-[#5C6672] truncate">{ep.releaseDate}</p>
                 </div>
 
-                <ChevronRight className={`w-3.5 h-3.5 text-[#5C6672] transition-transform shrink-0 ${isCurrent ? "text-[#8A6D1F] translate-x-0.5" : ""}`} />
+                <ChevronRight className={`w-3.5 h-3.5 text-[#5C6672] transition-transform shrink-0 ${isCurrent ? "text-[#755B18] translate-x-0.5" : ""}`} />
               </button>
             );
           })}

@@ -297,9 +297,9 @@ export default function AnnouncementComposer({
               type="checkbox"
               checked={form.is_pinned}
               onChange={(e) => update("is_pinned", e.target.checked)}
-              className="w-4 h-4 accent-[#8A6D1F]"
+              className="w-4 h-4 accent-[#755B18]"
             />
-            <Pin className="w-3.5 h-3.5 text-[#8A6D1F]" />
+            <Pin className="w-3.5 h-3.5 text-[#755B18]" />
             <span>Épingler en haut du fil</span>
           </label>
 

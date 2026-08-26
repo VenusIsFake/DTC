@@ -71,7 +71,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-16">
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#DCD7CB] group-hover:border-[#8A6D1F] transition-colors shrink-0">
+          <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#DCD7CB] group-hover:border-[#755B18] transition-colors shrink-0">
             <Image
               src="/logo.png"
               alt="Dentalk Club FMDC Logo"
@@ -83,7 +83,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           </div>
           <div className="leading-tight">
             <span className="font-heading text-[15px] sm:text-base text-[#16233A]">
-              Dentalk <span className="text-[#8A6D1F]">Club</span>
+              Dentalk <span className="text-[#755B18]">Club</span>
             </span>
             <span className="block text-[10px] sm:text-[11px] text-[#5C6672] tracking-[0.14em] uppercase">
               FMDC Casablanca
@@ -101,7 +101,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                 href={item.href}
                 className={`relative text-[13px] transition-colors pb-0.5 -mb-px border-b ${
                   isActive
-                    ? "text-[#16233A] font-semibold border-[#8A6D1F]"
+                    ? "text-[#16233A] font-semibold border-[#755B18]"
                     : "text-[#5C6672] hover:text-[#16233A] border-transparent hover:border-[#DCD7CB]"
                 }`}
               >
@@ -130,7 +130,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                   aria-haspopup="menu"
                   aria-expanded={menuOpen}
                   aria-label="Menu du compte"
-                  className="flex items-center gap-2 px-1.5 py-1 rounded-md border border-[#DCD7CB] bg-white hover:border-[#8A6D1F] transition-colors"
+                  className="flex items-center gap-2 px-1.5 py-1 rounded-md border border-[#DCD7CB] bg-white hover:border-[#755B18] transition-colors"
                 >
                   <UserAvatar name={profile?.full_name} src={profile?.avatar_url} size={28} />
                   <span className="max-w-[110px] truncate text-xs font-semibold text-[#16233A] hidden xl:inline">
@@ -184,7 +184,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram du club"
-              className="flex items-center justify-center w-8 h-8 rounded-md text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
+              className="flex items-center justify-center w-8 h-8 rounded-md text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
             >
               <Instagram className="w-4 h-4" />
             </a>
@@ -215,7 +215,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2.5 -m-1 rounded-md text-[#16233A] hover:bg-[#EFECE4] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
+            className="lg:hidden p-2.5 -m-1 rounded-md text-[#16233A] hover:bg-[#EFECE4] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18]"
             aria-label={isOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
@@ -240,7 +240,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                 onClick={() => setIsOpen(false)}
                 className={`block px-3 py-2.5 rounded-md text-sm transition-colors ${
                   isActive
-                    ? "bg-[#EFECE4] text-[#16233A] font-semibold border-l-2 border-[#8A6D1F]"
+                    ? "bg-[#EFECE4] text-[#16233A] font-semibold border-l-2 border-[#755B18]"
                     : "text-[#3D4A58] hover:bg-[#EFECE4] hover:text-[#16233A] border-l-2 border-transparent"
                 }`}
               >
@@ -258,7 +258,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                     onClick={() => setIsOpen(false)}
                     className="flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-[#3D4A58] hover:bg-[#EFECE4] hover:text-[#16233A] transition-colors"
                   >
-                    <link.icon className="w-4 h-4 text-[#8A6D1F]" />
+                    <link.icon className="w-4 h-4 text-[#755B18]" />
                     <span>{link.label}</span>
                   </Link>
                 ))}
@@ -278,7 +278,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               href={siteConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-md text-xs font-semibold border border-[#DCD7CB] text-[#3D4A58] hover:border-[#8A6D1F] hover:text-[#8A6D1F] transition-colors"
+              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-md text-xs font-semibold border border-[#DCD7CB] text-[#3D4A58] hover:border-[#755B18] hover:text-[#755B18] transition-colors"
             >
               <Instagram className="w-4 h-4" />
               <span>@dentalkclub_fmdc</span>

@@ -27,7 +27,7 @@ function AccessDenied() {
         </p>
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-bold border border-[#8A6D1F]/50 text-[#8A6D1F] hover:bg-[#8A6D1F]/10 transition-all"
+          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-bold border border-[#755B18]/50 text-[#755B18] hover:bg-[#755B18]/10 transition-all"
         >
           <span>Retour à l&apos;accueil</span>
         </Link>

@@ -39,7 +39,7 @@ export default async function PodcastPage() {
       <section className="glass-card p-4 sm:p-10 rounded-lg border border-[#DCD7CB]/40 space-y-4 sm:space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 border-b border-[#DCD7CB]/30 pb-3 sm:pb-4">
           <div className="space-y-0.5 sm:space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#8A6D1F]">
+            <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#755B18]">
               <Camera className="w-3.5 h-3.5" />
               <span>Coulisses & Production Studio</span>
             </div>
@@ -74,7 +74,7 @@ export default async function PodcastPage() {
               </div>
               <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30">
                 <span className="text-[#5C6672] block text-[10px] sm:text-xs">Partenaire & Sponsor</span>
-                <span className="font-semibold text-[#8A6D1F] text-[11px] sm:text-xs">Flex Dental</span>
+                <span className="font-semibold text-[#755B18] text-[11px] sm:text-xs">Flex Dental</span>
               </div>
             </div>
           </div>
