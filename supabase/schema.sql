@@ -520,10 +520,18 @@ create policy "committees_member_read" on public.committees
   for select to authenticated
   using (true);
 
-create policy "committees_bureau_write" on public.committees
-  for all to authenticated
+create policy "committees_bureau_insert" on public.committees
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "committees_bureau_update" on public.committees
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "committees_bureau_delete" on public.committees
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "announcements_public_read" on public.announcements
   for select to anon, authenticated
@@ -611,28 +619,52 @@ create policy "podcast_public_read" on public.podcast_episodes
   for select to anon, authenticated
   using (is_published or public.is_bureau_or_admin());
 
-create policy "podcast_bureau_write" on public.podcast_episodes
-  for all to authenticated
+create policy "podcast_episodes_bureau_insert" on public.podcast_episodes
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "podcast_episodes_bureau_update" on public.podcast_episodes
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "podcast_episodes_bureau_delete" on public.podcast_episodes
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "tedx_public_read" on public.tedx_talks
   for select to anon, authenticated
   using (is_published or public.is_bureau_or_admin());
 
-create policy "tedx_bureau_write" on public.tedx_talks
-  for all to authenticated
+create policy "tedx_talks_bureau_insert" on public.tedx_talks
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "tedx_talks_bureau_update" on public.tedx_talks
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "tedx_talks_bureau_delete" on public.tedx_talks
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "event_pages_public_read" on public.event_pages
   for select to anon, authenticated
   using (status = 'published' or public.is_bureau_or_admin());
 
-create policy "event_pages_bureau_write" on public.event_pages
-  for all to authenticated
+create policy "event_pages_bureau_insert" on public.event_pages
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "event_pages_bureau_update" on public.event_pages
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "event_pages_bureau_delete" on public.event_pages
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "event_items_public_read" on public.event_page_items
   for select to anon, authenticated
@@ -643,46 +675,86 @@ create policy "event_items_public_read" on public.event_page_items
     )
   );
 
-create policy "event_items_bureau_write" on public.event_page_items
-  for all to authenticated
+create policy "event_page_items_bureau_insert" on public.event_page_items
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "event_page_items_bureau_update" on public.event_page_items
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "event_page_items_bureau_delete" on public.event_page_items
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "settings_public_read" on public.site_settings
   for select to anon, authenticated
   using (true);
 
-create policy "settings_bureau_write" on public.site_settings
-  for all to authenticated
+create policy "site_settings_bureau_insert" on public.site_settings
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "site_settings_bureau_update" on public.site_settings
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "site_settings_bureau_delete" on public.site_settings
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "mandates_public_read" on public.mandates
   for select to anon, authenticated
   using (true);
 
-create policy "mandates_bureau_write" on public.mandates
-  for all to authenticated
+create policy "mandates_bureau_insert" on public.mandates
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "mandates_bureau_update" on public.mandates
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "mandates_bureau_delete" on public.mandates
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "mandate_members_public_read" on public.mandate_members
   for select to anon, authenticated
   using (true);
 
-create policy "mandate_members_bureau_write" on public.mandate_members
-  for all to authenticated
+create policy "mandate_members_bureau_insert" on public.mandate_members
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "mandate_members_bureau_update" on public.mandate_members
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "mandate_members_bureau_delete" on public.mandate_members
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 create policy "about_public_read" on public.about_sections
   for select to anon, authenticated
   using (is_published or public.is_bureau_or_admin());
 
-create policy "about_bureau_write" on public.about_sections
-  for all to authenticated
+create policy "about_sections_bureau_insert" on public.about_sections
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "about_sections_bureau_update" on public.about_sections
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "about_sections_bureau_delete" on public.about_sections
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 -- ----------------------------------------------------------------------------
 -- COLUMN GRANTS — profiles carries contact info; scope table-level access to
@@ -887,10 +959,18 @@ create policy "gallery_public_read" on public.gallery_images
   for select to anon, authenticated
   using (is_published or public.is_bureau_or_admin());
 
-create policy "gallery_bureau_write" on public.gallery_images
-  for all to authenticated
+create policy "gallery_images_bureau_insert" on public.gallery_images
+  for insert to authenticated
+  with check (public.is_bureau_or_admin());
+
+create policy "gallery_images_bureau_update" on public.gallery_images
+  for update to authenticated
   using (public.is_bureau_or_admin())
   with check (public.is_bureau_or_admin());
+
+create policy "gallery_images_bureau_delete" on public.gallery_images
+  for delete to authenticated
+  using (public.is_bureau_or_admin());
 
 drop trigger if exists touch_updated_at on public.gallery_images;
 create trigger touch_updated_at before update on public.gallery_images
