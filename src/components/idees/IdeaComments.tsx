@@ -86,7 +86,7 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
               <span className="text-[11px] font-bold text-[#16233A] truncate">
                 {comment.author_name ?? "Membre"}
               </span>
-              <span className="text-[10px] text-[#5F6774]">{formatRelative(comment.created_at)}</span>
+              <span className="text-[10px] text-[#5F6774]"><span suppressHydrationWarning>{formatRelative(comment.created_at)}</span></span>
               {(isBureau || comment.author_id === user?.id) && (
                 <button
                   onClick={() => remove(comment)}

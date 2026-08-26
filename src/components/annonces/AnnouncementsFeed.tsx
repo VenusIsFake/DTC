@@ -439,7 +439,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 <span className="w-5 h-5 rounded-full bg-[#EFECE4] border border-[#DCD7CB]/50 inline-flex items-center justify-center text-[9px] font-bold text-[#755B18]">
                   {initials(item.author_name)}
                 </span>
-                {item.author_name ?? "Bureau DTC"} · {formatRelative(item.created_at)}
+                {item.author_name ?? "Bureau DTC"} · <span suppressHydrationWarning>{formatRelative(item.created_at)}</span>
               </span>
             </div>
 

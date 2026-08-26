@@ -265,7 +265,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
                 <div className="flex items-center gap-2 flex-wrap text-[11px] text-[#5C6672] pt-0.5">
                   <UserAvatar name={item.author_name} src={item.author_avatar} size={20} />
                   <span className="font-medium">{item.author_name ?? "Membre"}</span>
-                  <span>· {formatRelative(item.created_at)}</span>
+                  <span suppressHydrationWarning>· {formatRelative(item.created_at)}</span>
                   <button
                     onClick={() => setExpanded(isExpanded ? null : item.id)}
                     aria-expanded={isExpanded}

@@ -1,6 +1,7 @@
 /** Small shared formatting / parsing helpers (client & server safe). */
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+  timeZone: "Africa/Casablanca",
   weekday: "long",
   day: "numeric",
   month: "long",
@@ -8,6 +9,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
 });
 
 const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
+  timeZone: "Africa/Casablanca",
   weekday: "long",
   day: "numeric",
   month: "long",

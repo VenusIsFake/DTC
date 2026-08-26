@@ -161,7 +161,7 @@ export default function ActivitiesPanel() {
               <span className="text-xs font-semibold text-[#16233A] truncate">{idea.title}</span>
               <span className="flex items-center gap-2 shrink-0">
                 <Badge tone="gold">{idea.vote_count} vote{idea.vote_count > 1 ? "s" : ""}</Badge>
-                <span className="text-[10px] text-[#5F6774]">{formatRelative(idea.created_at)}</span>
+                <span className="text-[10px] text-[#5F6774]"><span suppressHydrationWarning>{formatRelative(idea.created_at)}</span></span>
               </span>
             </li>
           ))}
