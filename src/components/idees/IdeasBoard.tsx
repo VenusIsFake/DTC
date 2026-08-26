@@ -166,7 +166,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
     <div className="space-y-4 sm:space-y-5">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#0F172A]/80 border border-[#385A75]/40">
+        <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/80 border border-[#DCD7CB]/40">
           {(
             [
               { id: "top", label: "Top votes" },
@@ -177,8 +177,8 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
               key={option.id}
               onClick={() => setSort(option.id)}
               aria-pressed={sort === option.id}
-              className={`px-3 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
-                sort === option.id ? "bg-[#1B2E4B] text-[#D4AF37] border border-[#D4AF37]/30" : "text-[#94A3B8] hover:text-white"
+              className={`px-3 py-1.5 rounded-md text-[11px] font-semibold transition-all ${
+                sort === option.id ? "bg-[#EFECE4] text-[#8A6D1F] border border-[#8A6D1F]/30" : "text-[#5C6672] hover:text-[#16233A]"
               }`}
             >
               {option.label}
@@ -187,8 +187,8 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
           <button
             onClick={() => setWeekOnly((v) => !v)}
             aria-pressed={weekOnly}
-            className={`px-3 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
-              weekOnly ? "bg-[#1B2E4B] text-[#D4AF37] border border-[#D4AF37]/30" : "text-[#94A3B8] hover:text-white"
+            className={`px-3 py-1.5 rounded-md text-[11px] font-semibold transition-all ${
+              weekOnly ? "bg-[#EFECE4] text-[#8A6D1F] border border-[#8A6D1F]/30" : "text-[#5C6672] hover:text-[#16233A]"
             }`}
           >
             Cette semaine
@@ -198,7 +198,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
         {user && (
           <button
             onClick={() => setPitchOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-md shadow-[#D4AF37]/20 transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#8A6D1F]/20 transition-all active:scale-95"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Proposer une idée</span>
@@ -207,18 +207,18 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
       </div>
 
       {notice && (
-        <p role="status" className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="status" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {notice}
         </p>
       )}
 
       {visible.length === 0 && (
-        <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 sm:p-12 text-center space-y-2">
-          <Lightbulb className="w-8 h-8 text-[#385A75] mx-auto" />
-          <p className="text-sm font-semibold text-white">
+        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 sm:p-12 text-center space-y-2">
+          <Lightbulb className="w-8 h-8 text-[#DCD7CB] mx-auto" />
+          <p className="text-sm font-semibold text-[#16233A]">
             {weekOnly ? "Aucune idée cette semaine" : "Aucune idée pour le moment"}
           </p>
-          <p className="text-xs text-[#94A3B8]">
+          <p className="text-xs text-[#5C6672]">
             {user
               ? "Lancez le mouvement : proposez la première idée du club !"
               : "Connectez-vous pour proposer la première idée et voter."}
@@ -232,7 +232,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
         const meta = STATUS_META[item.status];
         const isExpanded = expanded === item.id;
         return (
-          <article key={item.id} className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 space-y-3">
+          <article key={item.id} className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
             <div className="flex items-start gap-3 sm:gap-4">
               {/* Vote column */}
               <div className="flex flex-col items-center gap-1 shrink-0">
@@ -243,33 +243,33 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
                   aria-pressed={voted}
                   className={`flex flex-col items-center justify-center w-11 h-12 rounded-xl border transition-all active:scale-95 disabled:opacity-60 ${
                     voted
-                      ? "bg-[#D4AF37]/20 border-[#D4AF37] text-[#D4AF37]"
-                      : "bg-[#0F172A] border-[#385A75]/50 text-[#94A3B8] hover:text-[#D4AF37] hover:border-[#D4AF37]/50"
+                      ? "bg-[#8A6D1F]/20 border-[#8A6D1F] text-[#8A6D1F]"
+                      : "bg-white border-[#DCD7CB]/50 text-[#5C6672] hover:text-[#8A6D1F] hover:border-[#8A6D1F]/50"
                   }`}
                 >
                   {voted ? <Check className="w-4 h-4" /> : <ArrowBigUp className="w-4.5 h-4.5 w-5 h-5" />}
-                  <span className="text-xs font-extrabold leading-none pt-0.5">{item.vote_count}</span>
+                  <span className="text-xs font-semibold leading-none pt-0.5">{item.vote_count}</span>
                 </button>
               </div>
 
               <div className="flex-1 min-w-0 space-y-1.5">
                 <div className="flex items-start justify-between gap-2 flex-wrap">
-                  <h3 className="text-sm sm:text-base font-heading font-bold text-white leading-snug">{item.title}</h3>
+                  <h3 className="text-sm sm:text-base font-heading font-bold text-[#16233A] leading-snug">{item.title}</h3>
                   <Badge tone={meta.tone}>{meta.label}</Badge>
                 </div>
                 {item.description && (
-                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed whitespace-pre-line line-clamp-4">
+                  <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed whitespace-pre-line line-clamp-4">
                     {item.description}
                   </p>
                 )}
-                <div className="flex items-center gap-2 flex-wrap text-[11px] text-[#94A3B8] pt-0.5">
+                <div className="flex items-center gap-2 flex-wrap text-[11px] text-[#5C6672] pt-0.5">
                   <UserAvatar name={item.author_name} src={item.author_avatar} size={20} />
                   <span className="font-medium">{item.author_name ?? "Membre"}</span>
                   <span>· {formatRelative(item.created_at)}</span>
                   <button
                     onClick={() => setExpanded(isExpanded ? null : item.id)}
                     aria-expanded={isExpanded}
-                    className="flex items-center gap-1 ml-auto font-semibold text-[#D4AF37] hover:text-[#F59E0B] transition-colors"
+                    className="flex items-center gap-1 ml-auto font-semibold text-[#8A6D1F] hover:text-[#8A6D1F] transition-colors"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>{item.comment_count}</span>
@@ -295,7 +295,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
                       <button
                         onClick={() => removeIdea(item)}
                         aria-label="Supprimer l'idée"
-                        className="text-[#64748B] hover:text-red-400 transition-colors"
+                        className="text-[#7A828D] hover:text-red-600 transition-colors"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -311,8 +311,8 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
       })}
 
       {!user && items.length > 0 && (
-        <p className="text-center text-xs text-[#64748B]">
-          <button onClick={() => openAuth()} className="text-[#D4AF37] font-semibold hover:underline underline-offset-2">
+        <p className="text-center text-xs text-[#7A828D]">
+          <button onClick={() => openAuth()} className="text-[#8A6D1F] font-semibold hover:underline underline-offset-2">
             Connectez-vous
           </button>{" "}
           pour voter, commenter et proposer vos idées.

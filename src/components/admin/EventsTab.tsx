@@ -40,13 +40,13 @@ function VisibilityCard() {
   };
 
   return (
-    <div className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-white">
-          <CalendarDays className="w-4 h-4 text-[#D4AF37]" />
+        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+          <CalendarDays className="w-4 h-4 text-[#8A6D1F]" />
           Visibilité de la section « TEDx & Débats »
         </h3>
-        <p className="text-[11px] text-[#94A3B8] mt-0.5">
+        <p className="text-[11px] text-[#5C6672] mt-0.5">
           Masquer retire le lien de navigation, redirige /events vers l&apos;accueil et l&apos;exclut du
           sitemap — la section disparaît réellement.
         </p>
@@ -55,10 +55,10 @@ function VisibilityCard() {
         onClick={toggle}
         disabled={visible === null || saving}
         aria-pressed={visible === true}
-        className={`flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold transition-all active:scale-95 disabled:opacity-50 ${
+        className={`flex items-center gap-1.5 px-4 py-2.5 rounded-md text-xs font-bold transition-all active:scale-95 disabled:opacity-50 ${
           visible
-            ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/40"
-            : "bg-slate-500/15 text-slate-300 border border-slate-500/40"
+            ? "bg-emerald-600/10 text-emerald-700 border border-emerald-600/40"
+            : "bg-slate-500/10 text-slate-600 border border-slate-500/40"
         }`}
       >
         {saving ? (
@@ -166,16 +166,16 @@ function TedxCard() {
   };
 
   return (
-    <div className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h3 className="text-sm font-heading font-bold text-white">TEDxFMDC — talks ({talks?.length ?? "…"})</h3>
+        <h3 className="text-sm font-heading font-bold text-[#16233A]">TEDxFMDC — talks ({talks?.length ?? "…"})</h3>
         <button
           onClick={() => {
             setForm({ ...EMPTY_TEDX, extract_number: (talks?.at(-1)?.extract_number ?? 0) + 1 });
             setError(null);
             setOpen(true);
           }}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 active:scale-95"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 active:scale-95"
         >
           <Plus className="w-3 h-3" />
           <span>Talk</span>
@@ -183,17 +183,17 @@ function TedxCard() {
       </div>
 
       {talks === null ? (
-        <Loader2 className="w-4 h-4 text-[#D4AF37] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {talks.map((row) => (
-            <div key={row.id} className="flex items-center gap-2.5 p-2 rounded-lg bg-[#1B2E4B]/40 border border-[#385A75]/25">
-              <span className="text-[10px] font-bold text-[#D4AF37] w-7 shrink-0">#{row.extract_number}</span>
+            <div key={row.id} className="flex items-center gap-2.5 p-2 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
+              <span className="text-[10px] font-bold text-[#8A6D1F] w-7 shrink-0">#{row.extract_number}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold text-white truncate">
+                <p className="text-xs font-semibold text-[#16233A] truncate">
                   {row.speaker} {!row.is_published && <Badge tone="gray">Masqué</Badge>}
                 </p>
-                <p className="text-[10px] text-[#94A3B8] truncate">{row.topic}</p>
+                <p className="text-[10px] text-[#5C6672] truncate">{row.topic}</p>
               </div>
               <button
                 onClick={() => {
@@ -202,14 +202,14 @@ function TedxCard() {
                   setOpen(true);
                 }}
                 aria-label="Modifier"
-                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37]"
+                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F]"
               >
                 <Pencil className="w-3 h-3" />
               </button>
               <button
                 onClick={() => remove(row)}
                 aria-label="Supprimer"
-                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400"
+                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600"
               >
                 <Trash2 className="w-3 h-3" />
               </button>
@@ -227,12 +227,12 @@ function TedxCard() {
           className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-2xl border border-[#385A75]/50 p-5 sm:p-6 space-y-3.5 shadow-2xl">
+          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h4 className="text-base font-heading font-bold text-white">
+              <h4 className="text-base font-heading font-bold text-[#16233A]">
                 {form.id ? "Modifier le talk" : "Nouveau talk"}
               </h4>
-              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1B2E4B]/80 text-[#94A3B8] hover:text-white">
+              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -272,11 +272,11 @@ function TedxCard() {
               <Field label="Description" htmlFor="tedx-desc">
                 <textarea id="tedx-desc" rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputClass} resize-y`} />
               </Field>
-              <label className="flex items-center gap-2 text-xs text-[#CBD5E1] cursor-pointer select-none">
-                <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#D4AF37]" />
+              <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
+                <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#8A6D1F]" />
                 <span>Publié</span>
               </label>
-              {error && <p role="alert" className="text-xs text-red-400">{error}</p>}
+              {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
               <div className="flex justify-end gap-2">
                 <GhostButton type="button" onClick={() => setOpen(false)}>Annuler</GhostButton>
                 <PrimaryButton type="submit">Enregistrer</PrimaryButton>
@@ -396,15 +396,15 @@ function EventPagesCard() {
   };
 
   return (
-    <div className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
         <div>
-          <h3 className="text-sm font-heading font-bold text-white">Pages d&apos;événement ({pages?.length ?? "…"})</h3>
-          <p className="text-[11px] text-[#94A3B8]">Pages vitrines dynamiques servies sur /events/[slug].</p>
+          <h3 className="text-sm font-heading font-bold text-[#16233A]">Pages d&apos;événement ({pages?.length ?? "…"})</h3>
+          <p className="text-[11px] text-[#5C6672]">Pages vitrines dynamiques servies sur /events/[slug].</p>
         </div>
         <button
           onClick={() => openEditor(null)}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 active:scale-95"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 active:scale-95"
         >
           <Plus className="w-3 h-3" />
           <span>Page</span>
@@ -412,56 +412,56 @@ function EventPagesCard() {
       </div>
 
       {pages === null ? (
-        <Loader2 className="w-4 h-4 text-[#D4AF37] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {pages.map((page) => {
             const isExpanded = expanded === page.id;
             return (
-              <div key={page.id} className="rounded-xl bg-[#1B2E4B]/40 border border-[#385A75]/25">
+              <div key={page.id} className="rounded-xl bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
                 <div className="flex items-center gap-2.5 p-2.5">
                   <button
                     onClick={() => setExpanded(isExpanded ? null : page.id)}
                     aria-expanded={isExpanded}
-                    className="flex items-center gap-1 text-[#64748B] hover:text-[#D4AF37]"
+                    className="flex items-center gap-1 text-[#7A828D] hover:text-[#8A6D1F]"
                     aria-label={isExpanded ? "Replier" : "Déplier"}
                   >
                     {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-semibold text-white truncate">
-                      {page.title} <span className="text-[#64748B] font-normal">/events/{page.slug}</span>
+                    <p className="text-xs font-semibold text-[#16233A] truncate">
+                      {page.title} <span className="text-[#7A828D] font-normal">/events/{page.slug}</span>
                     </p>
-                    <p className="text-[10px] text-[#94A3B8]">
+                    <p className="text-[10px] text-[#5C6672]">
                       {itemsByPage[page.id]?.length ?? 0} élément(s)
                     </p>
                   </div>
                   <Badge tone={page.status === "published" ? "green" : page.status === "draft" ? "gold" : "gray"}>
                     {page.status === "published" ? "Publiée" : page.status === "draft" ? "Brouillon" : "Archivée"}
                   </Badge>
-                  <button onClick={() => openEditor(page)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37]">
+                  <button onClick={() => openEditor(page)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F]">
                     <Pencil className="w-3 h-3" />
                   </button>
-                  <button onClick={() => remove(page)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400">
+                  <button onClick={() => remove(page)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
                     <Trash2 className="w-3 h-3" />
                   </button>
                 </div>
 
                 {isExpanded && (
-                  <div className="px-3 pb-3 space-y-2 border-t border-[#385A75]/25 pt-2.5">
+                  <div className="px-3 pb-3 space-y-2 border-t border-[#DCD7CB]/25 pt-2.5">
                     {(itemsByPage[page.id] ?? []).map((item) => (
-                      <div key={item.id} className="flex items-center gap-2 p-2 rounded-lg bg-[#0F172A]/60 border border-[#385A75]/20">
+                      <div key={item.id} className="flex items-center gap-2 p-2 rounded-lg bg-white/60 border border-[#DCD7CB]/20">
                         <div className="min-w-0 flex-1">
-                          <p className="text-[11px] font-semibold text-white truncate">
-                            {item.title} {item.speaker && <span className="text-[#D4AF37]">— {item.speaker}</span>}
+                          <p className="text-[11px] font-semibold text-[#16233A] truncate">
+                            {item.title} {item.speaker && <span className="text-[#8A6D1F]">— {item.speaker}</span>}
                           </p>
                         </div>
-                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#64748B] hover:text-red-400">
+                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#7A828D] hover:text-red-600">
                           <Trash2 className="w-3 h-3" />
                         </button>
                       </div>
                     ))}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 rounded-lg border border-dashed border-[#385A75]/40">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 rounded-lg border border-dashed border-[#DCD7CB]/40">
                       <input type="text" value={newItem.title} onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} placeholder="Titre (ex : Talk d'ouverture)" className={`${inputClass} !text-xs`} aria-label="Titre de l'élément" />
                       <input type="text" value={newItem.speaker} onChange={(e) => setNewItem({ ...newItem, speaker: e.target.value })} placeholder="Intervenant" className={`${inputClass} !text-xs`} aria-label="Intervenant" />
                       <input type="text" value={newItem.video_url} onChange={(e) => setNewItem({ ...newItem, video_url: e.target.value })} placeholder="Vidéo (chemin/URL)" className={`${inputClass} !text-xs`} aria-label="Vidéo" />
@@ -479,7 +479,7 @@ function EventPagesCard() {
             );
           })}
           {pages.length === 0 && (
-            <p className="text-xs text-[#94A3B8] text-center py-4">
+            <p className="text-xs text-[#5C6672] text-center py-4">
               Aucune page — créez « la page du TEDx de l&apos;année prochaine » ici.
             </p>
           )}
@@ -495,12 +495,12 @@ function EventPagesCard() {
           className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-2xl border border-[#385A75]/50 p-5 sm:p-6 space-y-3.5 shadow-2xl">
+          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h4 className="text-base font-heading font-bold text-white">
+              <h4 className="text-base font-heading font-bold text-[#16233A]">
                 {editing ? "Modifier la page" : "Nouvelle page d'événement"}
               </h4>
-              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1B2E4B]/80 text-[#94A3B8] hover:text-white">
+              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -529,7 +529,7 @@ function EventPagesCard() {
               <Field label="Description" htmlFor="epage-desc">
                 <textarea id="epage-desc" rows={4} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputClass} resize-y`} />
               </Field>
-              {error && <p role="alert" className="text-xs text-red-400">{error}</p>}
+              {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
               <div className="flex justify-end gap-2">
                 <GhostButton type="button" onClick={() => setOpen(false)}>Annuler</GhostButton>
                 <PrimaryButton type="submit">Enregistrer</PrimaryButton>

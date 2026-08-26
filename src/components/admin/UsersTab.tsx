@@ -82,9 +82,9 @@ export default function UsersTab() {
 
   if (users === null) {
     return (
-      <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#D4AF37] animate-spin mx-auto" />
-        <p className="text-xs text-[#94A3B8] mt-2">Chargement des comptes…</p>
+      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
+        <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
+        <p className="text-xs text-[#5C6672] mt-2">Chargement des comptes…</p>
       </div>
     );
   }
@@ -92,7 +92,7 @@ export default function UsersTab() {
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <p className="text-xs text-[#94A3B8]">
+        <p className="text-xs text-[#5C6672]">
           {users.length} compte{users.length > 1 ? "s" : ""} — rôles, bannissements et coordonnées.
         </p>
         <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ export default function UsersTab() {
             <option value="name">Tri : Nom A→Z</option>
           </select>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#64748B]" aria-hidden="true" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#7A828D]" aria-hidden="true" />
             <label htmlFor="users-search" className="sr-only">Rechercher un compte</label>
             <input
               id="users-search"
@@ -123,7 +123,7 @@ export default function UsersTab() {
       </div>
 
       {error && (
-        <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2" role="alert">
+        <p className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2" role="alert">
           {error}
         </p>
       )}
@@ -133,12 +133,12 @@ export default function UsersTab() {
           <div
             key={u.id}
             className={`glass-card rounded-xl border p-3 sm:p-4 flex flex-wrap items-center gap-3 ${
-              u.is_banned ? "border-red-500/30 opacity-75" : "border-[#385A75]/40"
+              u.is_banned ? "border-red-500/30 opacity-75" : "border-[#DCD7CB]/40"
             }`}
           >
             <UserAvatar name={u.full_name} src={u.avatar_url} size={38} />
             <div className="min-w-0 flex-1">
-              <p className="text-xs sm:text-sm font-bold text-white truncate">
+              <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">
                 {u.full_name || "(sans nom)"}
                 {u.is_banned && (
                   <Badge tone="red" className="ml-2">
@@ -146,17 +146,17 @@ export default function UsersTab() {
                   </Badge>
                 )}
               </p>
-              <p className="text-[11px] text-[#94A3B8] truncate">
+              <p className="text-[11px] text-[#5C6672] truncate">
                 {u.email}
                 {u.phone ? ` · ${u.phone}` : ""}
                 {u.promo ? ` · Promo ${u.promo}` : ""}
                 {u.committee ? ` · ${u.committee}` : ""}
               </p>
-              <p className="text-[10px] text-[#64748B]">Inscrit {formatRelative(u.created_at)}</p>
+              <p className="text-[10px] text-[#7A828D]">Inscrit {formatRelative(u.created_at)}</p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {busyId === u.id ? (
-                <Loader2 className="w-4 h-4 text-[#D4AF37] animate-spin" />
+                <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin" />
               ) : (
                 <>
                   <label className="sr-only" htmlFor={`role-${u.id}`}>
@@ -178,8 +178,8 @@ export default function UsersTab() {
                     title={u.is_banned ? "Réactiver" : "Bannir"}
                     className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
                       u.is_banned
-                        ? "text-emerald-300 hover:bg-emerald-500/10"
-                        : "text-[#94A3B8] hover:text-red-400 hover:bg-red-500/10"
+                        ? "text-emerald-700 hover:bg-emerald-600/10"
+                        : "text-[#5C6672] hover:text-red-600 hover:bg-red-500/10"
                     }`}
                   >
                     {u.is_banned ? <ShieldCheck className="w-4 h-4" /> : <ShieldOff className="w-4 h-4" />}
@@ -190,7 +190,7 @@ export default function UsersTab() {
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="text-xs text-[#94A3B8] text-center py-6">Aucun compte ne correspond.</p>
+          <p className="text-xs text-[#5C6672] text-center py-6">Aucun compte ne correspond.</p>
         )}
       </div>
     </div>

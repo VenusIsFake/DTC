@@ -5,7 +5,7 @@ import React from "react";
 /** Shared form styling bits for club-platform modals & admin console. */
 
 export const inputClass =
-  "w-full px-3 py-2 rounded-lg bg-[#0F172A] border border-[#385A75]/50 text-sm text-white placeholder:text-[#64748B] focus:outline-none focus:border-[#D4AF37]/60 focus:ring-2 focus:ring-[#D4AF37]/20 disabled:opacity-50";
+  "w-full px-3 py-2 rounded-lg bg-white border border-[#DCD7CB]/50 text-sm text-[#16233A] placeholder:text-[#7A828D] focus:outline-none focus:border-[#8A6D1F]/60 focus:ring-2 focus:ring-[#8A6D1F]/20 disabled:opacity-50";
 
 export function Field({
   label,
@@ -20,11 +20,11 @@ export function Field({
 }) {
   return (
     <div className="space-y-1">
-      <label htmlFor={htmlFor} className="text-[11px] font-semibold text-[#CBD5E1] block">
+      <label htmlFor={htmlFor} className="text-[11px] font-semibold text-[#3D4A58] block">
         {label}
       </label>
       {children}
-      {hint && <p className="text-[10px] text-[#64748B]">{hint}</p>}
+      {hint && <p className="text-[10px] text-[#7A828D]">{hint}</p>}
     </div>
   );
 }
@@ -36,7 +36,7 @@ export function PrimaryButton({
   return (
     <button
       {...props}
-      className={`inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full font-bold text-xs sm:text-sm bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-md shadow-[#D4AF37]/20 transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
+      className={`inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md font-bold text-xs sm:text-sm bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#8A6D1F]/20 transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
     >
       {children}
     </button>
@@ -50,7 +50,7 @@ export function GhostButton({
   return (
     <button
       {...props}
-      className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full font-semibold text-xs border border-[#385A75]/60 text-[#CBD5E1] hover:border-[#D4AF37]/50 hover:text-[#D4AF37] transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
+      className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-md font-semibold text-xs border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#8A6D1F]/50 hover:text-[#8A6D1F] transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
     >
       {children}
     </button>
@@ -58,11 +58,11 @@ export function GhostButton({
 }
 
 const badgeStyles: Record<string, string> = {
-  gold: "bg-[#D4AF37]/15 text-[#D4AF37] border-[#D4AF37]/30",
-  blue: "bg-blue-500/15 text-blue-300 border-blue-500/30",
-  green: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
-  red: "bg-red-500/15 text-red-300 border-red-500/30",
-  gray: "bg-slate-500/15 text-slate-300 border-slate-500/30",
+  gold: "bg-[#8A6D1F]/15 text-[#8A6D1F] border-[#8A6D1F]/30",
+  blue: "bg-blue-600/10 text-blue-700 border-blue-500/30",
+  green: "bg-emerald-600/10 text-emerald-700 border-emerald-600/30",
+  red: "bg-red-500/15 text-red-700 border-red-500/30",
+  gray: "bg-slate-500/10 text-slate-600 border-slate-500/30",
 };
 
 export function Badge({

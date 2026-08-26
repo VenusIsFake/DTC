@@ -71,20 +71,20 @@ function SectionsEditor() {
   };
 
   return (
-    <div className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-white">
-          <FileText className="w-4 h-4 text-[#D4AF37]" />
+        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+          <FileText className="w-4 h-4 text-[#8A6D1F]" />
           Sections « À propos »
         </h3>
-        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 active:scale-95">
+        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 active:scale-95">
           <Plus className="w-3 h-3" />
           <span>Section</span>
         </button>
       </div>
 
       {editing && (
-        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-[#0F172A]/60 border border-[#D4AF37]/25">
+        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-[#8A6D1F]/25">
           <div className="grid grid-cols-2 gap-3">
             <Field label="Clé (identifiant)" htmlFor="about-key">
               <input id="about-key" type="text" value={form.key} onChange={(e) => setForm({ ...form, key: e.target.value })} className={inputClass} disabled={Boolean(editing.id)} />
@@ -99,8 +99,8 @@ function SectionsEditor() {
           <Field label="Contenu" htmlFor="about-body" hint="Texte simple — sauts de ligne conservés. Jamais de HTML brut.">
             <textarea id="about-body" rows={6} value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} className={`${inputClass} resize-y`} />
           </Field>
-          <label className="flex items-center gap-2 text-xs text-[#CBD5E1] cursor-pointer select-none">
-            <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#D4AF37]" />
+          <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
+            <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#8A6D1F]" />
             <span>Publiée</span>
           </label>
           <div className="flex justify-end gap-2">
@@ -111,25 +111,25 @@ function SectionsEditor() {
       )}
 
       {sections === null ? (
-        <Loader2 className="w-4 h-4 text-[#D4AF37] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {sections.map((section) => (
-            <div key={section.id} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#1B2E4B]/40 border border-[#385A75]/25">
-              <span className="text-[10px] font-bold text-[#D4AF37] w-5 shrink-0">{section.sort_order}</span>
+            <div key={section.id} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
+              <span className="text-[10px] font-bold text-[#8A6D1F] w-5 shrink-0">{section.sort_order}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold text-white truncate">
+                <p className="text-xs font-semibold text-[#16233A] truncate">
                   {section.title} {!section.is_published && <Badge tone="gray">Masquée</Badge>}
                 </p>
-                <p className="text-[10px] text-[#64748B] truncate">{section.key}</p>
+                <p className="text-[10px] text-[#7A828D] truncate">{section.key}</p>
               </div>
-              <button onClick={() => togglePublished(section)} className="text-[10px] font-semibold text-[#94A3B8] hover:text-[#D4AF37] shrink-0">
+              <button onClick={() => togglePublished(section)} className="text-[10px] font-semibold text-[#5C6672] hover:text-[#8A6D1F] shrink-0">
                 {section.is_published ? "Masquer" : "Afficher"}
               </button>
-              <button onClick={() => startEdit(section)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37]">
+              <button onClick={() => startEdit(section)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F]">
                 <Pencil className="w-3 h-3" />
               </button>
-              <button onClick={() => remove(section)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400">
+              <button onClick={() => remove(section)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
                 <Trash2 className="w-3 h-3" />
               </button>
             </div>
@@ -173,8 +173,8 @@ function StatsEditor() {
   };
 
   return (
-    <div className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 space-y-3">
-      <h3 className="text-sm font-heading font-bold text-white">Statistiques de la page d&apos;accueil</h3>
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+      <h3 className="text-sm font-heading font-bold text-[#16233A]">Statistiques de la page d&apos;accueil</h3>
       <div className="space-y-2">
         {stats.map((stat, idx) => (
           <div key={idx} className="grid grid-cols-[100px_1fr_auto] gap-2 items-center">
@@ -195,7 +195,7 @@ function StatsEditor() {
             <button
               onClick={() => setStats(stats.filter((_, i) => i !== idx))}
               aria-label="Retirer la statistique"
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#64748B] hover:text-red-400"
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#7A828D] hover:text-red-600"
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -319,10 +319,10 @@ function MandatesEditor() {
   };
 
   return (
-    <div className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-white">
-          <Crown className="w-4 h-4 text-[#D4AF37]" />
+        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+          <Crown className="w-4 h-4 text-[#8A6D1F]" />
           Mandats & organigrammes
         </h3>
         <form onSubmit={createMandate} className="flex gap-2">
@@ -355,22 +355,22 @@ function MandatesEditor() {
       />
 
       {mandates === null ? (
-        <Loader2 className="w-4 h-4 text-[#D4AF37] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-[#8A6D1F] animate-spin mx-auto" />
       ) : (
         <div className="space-y-2">
           {mandates.map((mandate) => (
             <div
               key={mandate.id}
               className={`rounded-xl border p-3 space-y-2 ${
-                mandate.is_current ? "border-[#D4AF37]/40 bg-[#D4AF37]/5" : "border-[#385A75]/30 bg-[#1B2E4B]/30"
+                mandate.is_current ? "border-[#8A6D1F]/40 bg-[#8A6D1F]/5" : "border-[#DCD7CB]/30 bg-[#EFECE4]/30"
               }`}
             >
               <div className="flex flex-wrap items-center gap-2">
-                <p className="text-xs font-bold text-white">{mandate.year_label}</p>
+                <p className="text-xs font-bold text-[#16233A]">{mandate.year_label}</p>
                 {mandate.is_current && <Badge tone="gold">Courant</Badge>}
                 <div className="ml-auto flex items-center gap-1.5">
                   {!mandate.is_current && (
-                    <button onClick={() => setCurrent(mandate)} className="text-[10px] font-semibold text-[#D4AF37] hover:underline">
+                    <button onClick={() => setCurrent(mandate)} className="text-[10px] font-semibold text-[#8A6D1F] hover:underline">
                       Définir courant
                     </button>
                   )}
@@ -379,26 +379,26 @@ function MandatesEditor() {
                       setPendingUploadMandate(mandate.id);
                       fileRef.current?.click();
                     }}
-                    className="flex items-center gap-1 text-[10px] font-semibold text-[#94A3B8] hover:text-[#D4AF37]"
+                    className="flex items-center gap-1 text-[10px] font-semibold text-[#5C6672] hover:text-[#8A6D1F]"
                     disabled={uploadingFor === mandate.id}
                   >
                     {uploadingFor === mandate.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
                     <span>Infographie</span>
                   </button>
-                  <button onClick={() => removeMandate(mandate)} aria-label="Supprimer le mandat" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400">
+                  <button onClick={() => removeMandate(mandate)} aria-label="Supprimer le mandat" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
                     <Trash2 className="w-3 h-3" />
                   </button>
                 </div>
               </div>
-              <p className="text-[10px] text-[#64748B] truncate">
+              <p className="text-[10px] text-[#7A828D] truncate">
                 {mandate.infographic_url || "Aucune infographie"} · {mandate.members.length} membres
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {mandate.members.map((member) => (
-                  <span key={member.id} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#0F172A]/80 border border-[#385A75]/40 text-[10px] text-[#CBD5E1]">
-                    <span className="font-semibold text-white">{member.name}</span>
-                    <span className="text-[#D4AF37]">{member.role}</span>
-                    <button onClick={() => removeMember(member)} aria-label={`Retirer ${member.name}`} className="text-[#64748B] hover:text-red-400">
+                  <span key={member.id} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/80 border border-[#DCD7CB]/40 text-[10px] text-[#3D4A58]">
+                    <span className="font-semibold text-[#16233A]">{member.name}</span>
+                    <span className="text-[#8A6D1F]">{member.role}</span>
+                    <button onClick={() => removeMember(member)} aria-label={`Retirer ${member.name}`} className="text-[#7A828D] hover:text-red-600">
                       <Trash2 className="w-2.5 h-2.5" />
                     </button>
                   </span>

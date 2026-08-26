@@ -23,18 +23,17 @@ export default function EspaceClient({
   const [tab, setTab] = useState<Tab>("profil");
 
   return (
-    <div className="pt-16 sm:pt-28 pb-10 sm:pb-20 px-3.5 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-5 sm:space-y-8">
+    <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-5 sm:space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30">
-          <User className="w-3.5 h-3.5" />
-          <span>Espace Membre</span>
-        </div>
-        <h1 className="text-2xl sm:text-4xl font-heading font-extrabold text-white">
-          Bonjour, <span className="gold-gradient-text">{profile.full_name?.split(" ")[0] || "membre"}</span>
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+          Espace Membre
+        </p>
+        <h1 className="font-heading font-semibold text-3xl sm:text-4xl text-[#16233A] tracking-tight">
+          Bonjour, {profile.full_name?.split(" ")[0] || "membre"}
         </h1>
         {isBanned && (
-          <p className="flex items-center gap-1.5 text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2 w-fit">
+          <p className="flex items-center gap-1.5 text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2 w-fit">
             <ShieldAlert className="w-3.5 h-3.5" />
             Votre compte est suspendu : contactez le bureau pour le réactiver.
           </p>
@@ -42,7 +41,7 @@ export default function EspaceClient({
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#0F172A]/80 border border-[#385A75]/40 w-fit">
+      <div className="flex items-center gap-1 p-1 rounded-md bg-white border border-[#DCD7CB] w-fit">
         {(
           [
             { id: "profil", label: "Mon profil", icon: User },
@@ -53,10 +52,10 @@ export default function EspaceClient({
             key={option.id}
             onClick={() => setTab(option.id)}
             aria-pressed={tab === option.id}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-[11px] sm:text-xs font-semibold transition-colors ${
               tab === option.id
-                ? "bg-[#1B2E4B] text-[#D4AF37] border border-[#D4AF37]/30"
-                : "text-[#94A3B8] hover:text-white"
+                ? "bg-[#EFECE4] text-[#8A6D1F]"
+                : "text-[#5C6672] hover:text-[#16233A]"
             }`}
           >
             <option.icon className="w-3.5 h-3.5" />
@@ -65,7 +64,7 @@ export default function EspaceClient({
         ))}
         <Link
           href="/espace/annuaire"
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] sm:text-xs font-semibold text-[#94A3B8] hover:text-white transition-all"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-[11px] sm:text-xs font-semibold text-[#5C6672] hover:text-[#16233A] transition-colors"
         >
           <Users className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Annuaire</span>
@@ -79,13 +78,13 @@ export default function EspaceClient({
       )}
 
       {isBureau && tab === "profil" && (
-        <p className="text-[11px] text-[#64748B] text-center">
+        <p className="text-[11px] text-[#7A828D] text-center">
           Membre du bureau : vos outils de gestion se trouvent directement dans les fils{" "}
-          <Link href="/annonces" className="text-[#D4AF37] hover:underline underline-offset-2">
+          <Link href="/annonces" className="text-[#8A6D1F] hover:underline underline-offset-2">
             Annonces
           </Link>{" "}
           et{" "}
-          <Link href="/idees" className="text-[#D4AF37] hover:underline underline-offset-2">
+          <Link href="/idees" className="text-[#8A6D1F] hover:underline underline-offset-2">
             Idées
           </Link>
           .

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Menu, X, Mic, ExternalLink, LogIn, LogOut, User, Users, ShieldCheck, ShieldAlert } from "lucide-react";
+import { Menu, X, Instagram, LogIn, LogOut, User, Users, ShieldCheck, ShieldAlert } from "lucide-react";
 import type { NavItem } from "@/data/siteConfig";
 import { siteConfig } from "@/data/siteConfig";
 import { useAuth } from "@/components/auth/AuthProvider";
@@ -13,18 +13,9 @@ import UserAvatar from "@/components/UserAvatar";
 export default function Navbar({ navItems }: { navItems: NavItem[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const { user, profile, loading, dbReady, isAdmin, isBanned, signOut, openAuth } = useAuth();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // The navbar never unmounts across navigations, so drawers must be closed
   // explicitly on route change.
@@ -76,48 +67,42 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "bg-[#0B132B]/95 backdrop-blur-md border-b border-[#385A75]/30 shadow-lg shadow-black/20 py-2 sm:py-3"
-          : "bg-transparent py-2.5 sm:py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+    <header className="sticky top-0 left-0 right-0 z-40 bg-[#F7F5F0]/95 backdrop-blur-sm border-b border-[#DCD7CB]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-16">
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-[#D4AF37]/50 shadow-md group-hover:border-[#D4AF37] transition-all shrink-0">
+          <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#DCD7CB] group-hover:border-[#8A6D1F] transition-colors shrink-0">
             <Image
               src="/logo.png"
               alt="Dentalk Club FMDC Logo"
               fill
-              sizes="(max-width: 640px) 32px, 40px"
+              sizes="36px"
               className="object-cover"
               priority
             />
           </div>
-          <div>
-            <span className="font-heading font-extrabold text-sm sm:text-xl tracking-wider text-white flex items-center gap-1">
-              DENTALK <span className="text-[#D4AF37]">CLUB</span>
+          <div className="leading-tight">
+            <span className="font-heading text-[15px] sm:text-base text-[#16233A]">
+              Dentalk <span className="text-[#8A6D1F]">Club</span>
             </span>
-            <span className="text-[9px] sm:text-xs text-[#94A3B8] font-medium tracking-widest block uppercase">
-              FMDC CASABLANCA
+            <span className="block text-[10px] sm:text-[11px] text-[#5C6672] tracking-[0.14em] uppercase">
+              FMDC Casablanca
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-0.5 bg-[#0F172A]/70 backdrop-blur-md border border-[#385A75]/30 px-2.5 py-1.5 rounded-full shadow-inner">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-2.5 xl:px-3 py-1.5 rounded-full text-[11px] xl:text-xs font-medium transition-all duration-200 ${
+                className={`relative text-[13px] transition-colors pb-0.5 -mb-px border-b ${
                   isActive
-                    ? "bg-[#1B2E4B] text-[#D4AF37] shadow-sm font-semibold border border-[#D4AF37]/30"
-                    : "text-[#E2E8F0] hover:text-white hover:bg-white/5"
+                    ? "text-[#16233A] font-semibold border-[#8A6D1F]"
+                    : "text-[#5C6672] hover:text-[#16233A] border-transparent hover:border-[#DCD7CB]"
                 }`}
               >
                 {item.label}
@@ -126,13 +111,13 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           })}
         </nav>
 
-        {/* Right: auth + CTA */}
+        {/* Right: auth + social */}
         <div className="flex items-center gap-2 shrink-0">
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2">
             {dbReady && !user && !loading && (
               <button
                 onClick={() => openAuth()}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-semibold bg-[#16233A] text-[#F7F5F0] hover:bg-[#233753] transition-colors"
               >
                 <LogIn className="w-3.5 h-3.5" />
                 <span>Se connecter</span>
@@ -145,10 +130,10 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                   aria-haspopup="menu"
                   aria-expanded={menuOpen}
                   aria-label="Menu du compte"
-                  className="flex items-center gap-2 px-1.5 py-1 rounded-full border border-[#385A75]/50 hover:border-[#D4AF37]/50 bg-[#0F172A]/70 transition-all"
+                  className="flex items-center gap-2 px-1.5 py-1 rounded-md border border-[#DCD7CB] bg-white hover:border-[#8A6D1F] transition-colors"
                 >
                   <UserAvatar name={profile?.full_name} src={profile?.avatar_url} size={28} />
-                  <span className="max-w-[110px] truncate text-xs font-semibold text-white hidden xl:inline">
+                  <span className="max-w-[110px] truncate text-xs font-semibold text-[#16233A] hidden xl:inline">
                     {profile?.full_name?.split(" ")[0] ?? "Membre"}
                   </span>
                 </button>
@@ -156,13 +141,13 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                 {menuOpen && (
                   <div
                     role="menu"
-                    className="absolute right-0 top-[calc(100%+8px)] w-52 glass-card rounded-xl border border-[#385A75]/50 shadow-2xl p-1.5 space-y-0.5 animate-fadeIn"
+                    className="absolute right-0 top-[calc(100%+8px)] w-52 bg-white rounded-lg border border-[#DCD7CB] shadow-lg p-1.5 space-y-0.5 animate-drop-in"
                   >
-                    <div className="px-2.5 py-2 border-b border-[#385A75]/30 mb-1">
-                      <p className="text-xs font-bold text-white truncate">{profile?.full_name || "Membre DTC"}</p>
-                      <p className="text-[10px] text-[#94A3B8] truncate">{profile?.email || user.email}</p>
+                    <div className="px-2.5 py-2 border-b border-[#DCD7CB] mb-1">
+                      <p className="text-xs font-bold text-[#16233A] truncate">{profile?.full_name || "Membre DTC"}</p>
+                      <p className="text-[10px] text-[#5C6672] truncate">{profile?.email || user.email}</p>
                       {isBanned && (
-                        <p className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-red-400">
+                        <p className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-red-600">
                           <ShieldAlert className="w-3 h-3" /> Compte suspendu
                         </p>
                       )}
@@ -172,7 +157,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                         key={link.href}
                         href={link.href}
                         role="menuitem"
-                        className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium text-[#E2E8F0] hover:bg-[#1B2E4B] hover:text-[#D4AF37] transition-colors"
+                        className="flex items-center gap-2 px-2.5 py-2 rounded-md text-xs font-medium text-[#3D4A58] hover:bg-[#EFECE4] hover:text-[#16233A] transition-colors"
                       >
                         <link.icon className="w-3.5 h-3.5" />
                         <span>{link.label}</span>
@@ -184,7 +169,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                         signOut();
                       }}
                       role="menuitem"
-                      className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium text-[#94A3B8] hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                      className="w-full flex items-center gap-2 px-2.5 py-2 rounded-md text-xs font-medium text-[#5C6672] hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
                       <LogOut className="w-3.5 h-3.5" />
                       <span>Déconnexion</span>
@@ -198,11 +183,10 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               href={siteConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 transition-all shadow-md shadow-[#D4AF37]/10"
+              aria-label="Instagram du club"
+              className="flex items-center justify-center w-8 h-8 rounded-md text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
             >
-              <Mic className="w-3.5 h-3.5" />
-              <span>Instagram</span>
-              <ExternalLink className="w-3 h-3 ml-0.5 opacity-80" />
+              <Instagram className="w-4 h-4" />
             </a>
           </div>
 
@@ -211,7 +195,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
             <button
               onClick={() => openAuth()}
               aria-label="Se connecter"
-              className="lg:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[11px] font-semibold border border-[#D4AF37]/50 text-[#D4AF37] active:scale-95"
+              className="lg:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[11px] font-semibold bg-[#16233A] text-[#F7F5F0]"
             >
               <LogIn className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Se connecter</span>
@@ -221,7 +205,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
             <Link
               href="/espace"
               aria-label="Mon espace"
-              className="lg:hidden flex items-center active:scale-95"
+              className="lg:hidden flex items-center"
               onClick={() => setIsOpen(false)}
             >
               <UserAvatar name={profile?.full_name} src={profile?.avatar_url} size={32} />
@@ -231,12 +215,12 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-3 -m-1 rounded-lg text-[#E2E8F0] hover:text-white hover:bg-[#1B2E4B]/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+            className="lg:hidden p-2.5 -m-1 rounded-md text-[#16233A] hover:bg-[#EFECE4] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
             aria-label={isOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
           >
-            {isOpen ? <X className="w-5 h-5 text-[#D4AF37]" /> : <Menu className="w-5 h-5" />}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -245,7 +229,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
       {isOpen && (
         <div
           id="mobile-nav"
-          className="lg:hidden bg-[#0B132B]/98 backdrop-blur-xl border-b border-[#385A75]/40 px-4 pt-2.5 pb-5 space-y-1.5 mt-2 shadow-2xl max-h-[80dvh] overflow-y-auto"
+          className="lg:hidden bg-[#F7F5F0] border-b border-[#DCD7CB] px-4 pt-2 pb-5 space-y-0.5 shadow-lg max-h-[80dvh] overflow-y-auto animate-drop-in"
         >
           {navItems.map((item) => {
             const isActive = pathname === item.href;
@@ -254,17 +238,17 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`block px-3 py-2.5 rounded-md text-sm transition-colors ${
                   isActive
-                    ? "bg-[#1B2E4B] text-[#D4AF37] border-l-4 border-[#D4AF37] font-semibold"
-                    : "text-[#E2E8F0] hover:bg-white/5 hover:text-white"
+                    ? "bg-[#EFECE4] text-[#16233A] font-semibold border-l-2 border-[#8A6D1F]"
+                    : "text-[#3D4A58] hover:bg-[#EFECE4] hover:text-[#16233A] border-l-2 border-transparent"
                 }`}
               >
                 {item.label}
               </Link>
             );
           })}
-          <div className="pt-2 border-t border-[#385A75]/30 mt-2 space-y-1.5">
+          <div className="pt-2 border-t border-[#DCD7CB] mt-2 space-y-0.5">
             {user ? (
               <>
                 {accountLinks.map((link) => (
@@ -272,9 +256,9 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-[#E2E8F0] hover:bg-white/5 hover:text-[#D4AF37] transition-all"
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-[#3D4A58] hover:bg-[#EFECE4] hover:text-[#16233A] transition-colors"
                   >
-                    <link.icon className="w-4 h-4 text-[#D4AF37]" />
+                    <link.icon className="w-4 h-4 text-[#8A6D1F]" />
                     <span>{link.label}</span>
                   </Link>
                 ))}
@@ -283,7 +267,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                     setIsOpen(false);
                     signOut();
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-[#94A3B8] hover:bg-red-500/10 hover:text-red-400 transition-all"
+                  className="w-full flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-[#5C6672] hover:bg-red-50 hover:text-red-600 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Déconnexion</span>
@@ -294,10 +278,10 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               href={siteConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] shadow-md"
+              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-md text-xs font-semibold border border-[#DCD7CB] text-[#3D4A58] hover:border-[#8A6D1F] hover:text-[#8A6D1F] transition-colors"
             >
-              <Mic className="w-3.5 h-3.5" />
-              <span>Suivre @dentalkclub_fmdc</span>
+              <Instagram className="w-4 h-4" />
+              <span>@dentalkclub_fmdc</span>
             </a>
           </div>
         </div>

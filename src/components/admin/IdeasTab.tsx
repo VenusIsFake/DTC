@@ -45,15 +45,15 @@ export default function IdeasTab() {
 
   if (items === null) {
     return (
-      <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#D4AF37] animate-spin mx-auto" />
+      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
+        <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
       </div>
     );
   }
 
   return (
     <div className="space-y-2">
-      <p className="text-xs text-[#94A3B8]">
+      <p className="text-xs text-[#5C6672]">
         {items.length} idée{items.length > 1 ? "s" : ""} — changement de statut visible publiquement (badges).
       </p>
       {items.map((item) => {
@@ -61,11 +61,11 @@ export default function IdeasTab() {
         return (
           <div
             key={item.id}
-            className="glass-card rounded-xl border border-[#385A75]/40 p-3 flex flex-wrap items-center gap-2.5"
+            className="glass-card rounded-xl border border-[#DCD7CB]/40 p-3 flex flex-wrap items-center gap-2.5"
           >
             <div className="min-w-0 flex-1">
-              <p className="text-xs sm:text-sm font-bold text-white truncate">{item.title}</p>
-              <p className="text-[10px] text-[#94A3B8]">
+              <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">{item.title}</p>
+              <p className="text-[10px] text-[#5C6672]">
                 {item.author_name ?? "Membre"} · {formatRelative(item.created_at)} · {item.vote_count} votes ·{" "}
                 {item.comment_count} commentaires
               </p>
@@ -88,7 +88,7 @@ export default function IdeasTab() {
             <button
               onClick={() => remove(item)}
               aria-label="Supprimer"
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400 hover:bg-red-500/10 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -96,7 +96,7 @@ export default function IdeasTab() {
         );
       })}
       {items.length === 0 && (
-        <p className="text-xs text-[#94A3B8] text-center py-6">Aucune idée soumise pour le moment.</p>
+        <p className="text-xs text-[#5C6672] text-center py-6">Aucune idée soumise pour le moment.</p>
       )}
     </div>
   );

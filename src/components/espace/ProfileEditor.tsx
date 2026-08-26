@@ -100,7 +100,7 @@ export default function ProfileEditor({
   };
 
   return (
-    <form onSubmit={handleSave} className="glass-card rounded-2xl border border-[#385A75]/40 p-4 sm:p-7 space-y-5">
+    <form onSubmit={handleSave} className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-7 space-y-5">
       {/* Avatar */}
       <div className="flex items-center gap-4">
         <div className="relative">
@@ -113,11 +113,11 @@ export default function ProfileEditor({
           />
         </div>
         <div className="space-y-1.5">
-          <p className="text-sm font-semibold text-white">Photo de profil</p>
-          <p className="text-[11px] text-[#94A3B8]">
+          <p className="text-sm font-semibold text-[#16233A]">Photo de profil</p>
+          <p className="text-[11px] text-[#5C6672]">
             Visible par les membres dans l&apos;annuaire. Choisissez et cadrez votre photo.
           </p>
-          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold border border-[#385A75]/60 text-[#CBD5E1] hover:border-[#D4AF37]/50 hover:text-[#D4AF37] cursor-pointer transition-all">
+          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-semibold border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#8A6D1F]/50 hover:text-[#8A6D1F] cursor-pointer transition-all">
             <input
               ref={fileInputRef}
               type="file"
@@ -198,8 +198,8 @@ export default function ProfileEditor({
           role="status"
           className={`text-xs rounded-lg px-3 py-2 border ${
             message.kind === "ok"
-              ? "text-emerald-300 bg-emerald-500/10 border-emerald-500/30"
-              : "text-red-400 bg-red-500/10 border-red-500/30"
+              ? "text-emerald-700 bg-emerald-600/10 border-emerald-600/30"
+              : "text-red-600 bg-red-500/10 border-red-500/30"
           }`}
         >
           {message.text}

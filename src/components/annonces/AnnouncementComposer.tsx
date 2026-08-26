@@ -154,15 +154,15 @@ export default function AnnouncementComposer({
       className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-2xl border border-[#385A75]/50 p-5 sm:p-7 space-y-4 shadow-2xl">
+      <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-4 shadow-lg">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-heading font-bold text-white">
+          <h2 className="text-lg font-heading font-bold text-[#16233A]">
             {editing ? "Modifier l'annonce" : "Nouvelle annonce"}
           </h2>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1B2E4B]/80 text-[#94A3B8] hover:text-white transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -256,7 +256,7 @@ export default function AnnouncementComposer({
           </Field>
 
           {form.poster_url && (
-            <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#385A75]/50">
+            <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#DCD7CB]/50">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={form.poster_url} alt="Aperçu de l'affiche" className="w-full h-full object-cover" />
               <button
@@ -292,19 +292,19 @@ export default function AnnouncementComposer({
             </Field>
           </div>
 
-          <label className="flex items-center gap-2.5 text-xs text-[#CBD5E1] cursor-pointer select-none">
+          <label className="flex items-center gap-2.5 text-xs text-[#3D4A58] cursor-pointer select-none">
             <input
               type="checkbox"
               checked={form.is_pinned}
               onChange={(e) => update("is_pinned", e.target.checked)}
-              className="w-4 h-4 accent-[#D4AF37]"
+              className="w-4 h-4 accent-[#8A6D1F]"
             />
-            <Pin className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <Pin className="w-3.5 h-3.5 text-[#8A6D1F]" />
             <span>Épingler en haut du fil</span>
           </label>
 
           {error && (
-            <p role="alert" className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
               {error}
             </p>
           )}

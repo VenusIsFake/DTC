@@ -25,13 +25,13 @@ export default function ImageLightbox({ item, onClose }: ImageLightboxProps) {
         role="dialog"
         aria-modal="true"
         aria-label={item.title}
-        className="relative z-10 w-full max-w-4xl bg-[#0B132B] border border-[#385A75]/50 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90dvh]"
+        className="relative z-10 w-full max-w-4xl bg-[#F7F5F0] border border-[#DCD7CB]/50 rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row max-h-[90dvh]"
       >
         <button
           onClick={onClose}
           data-autofocus
           aria-label="Fermer"
-          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-white hover:text-[#D4AF37] hover:bg-black/80 transition-all focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-white hover:text-[#8A6D1F] hover:bg-black/80 transition-all focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
         >
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
@@ -49,32 +49,32 @@ export default function ImageLightbox({ item, onClose }: ImageLightboxProps) {
         </div>
 
         {/* Content Info */}
-        <div className="w-full md:w-2/5 p-4 sm:p-6 flex flex-col justify-between space-y-3 sm:space-y-4 bg-[#0F172A]">
+        <div className="w-full md:w-2/5 p-4 sm:p-6 flex flex-col justify-between space-y-3 sm:space-y-4 bg-white">
           <div className="space-y-2 sm:space-y-3">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#8A6D1F]/15 text-[#8A6D1F] border border-[#8A6D1F]/30">
                 <Tag className="w-3 h-3" />
                 <span>{item.categoryLabel}</span>
               </span>
               {item.date && (
-                <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-[#94A3B8]">
-                  <Calendar className="w-3 h-3 text-[#D4AF37]" />
+                <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-[#5C6672]">
+                  <Calendar className="w-3 h-3 text-[#8A6D1F]" />
                   <span>{item.date}</span>
                 </span>
               )}
             </div>
 
-            <h3 className="text-base sm:text-xl font-heading font-bold text-white leading-snug">
+            <h3 className="text-base sm:text-xl font-heading font-bold text-[#16233A] leading-snug">
               {item.title}
             </h3>
 
-            <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed">
               {item.description}
             </p>
           </div>
 
-          <div className="pt-3 sm:pt-4 border-t border-[#385A75]/30">
-            <p className="text-[10px] sm:text-xs text-[#94A3B8]">
+          <div className="pt-3 sm:pt-4 border-t border-[#DCD7CB]/30">
+            <p className="text-[10px] sm:text-xs text-[#5C6672]">
               Dentalk Club FMDC · Archive Officielle Instagram
             </p>
           </div>

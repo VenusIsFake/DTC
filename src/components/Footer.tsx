@@ -7,51 +7,49 @@ import { siteConfig } from "@/data/siteConfig";
 
 export default function Footer({ navItems = siteConfig.navItems }: { navItems?: NavItem[] }) {
   return (
-    <footer className="bg-[#070C1B] border-t border-[#385A75]/30 pt-10 sm:pt-16 pb-8 sm:pb-12 text-[#94A3B8]">
-      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 mb-6 sm:mb-12">
+    <footer className="bg-[#16233A] text-[#C9CFD9] mt-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Col 1: Brand & Identity */}
-          <div className="space-y-2.5 sm:space-y-4">
+          <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-[#D4AF37]">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#3D4A58]">
                 <Image
                   src="/logo.png"
                   alt="DTC Logo"
                   fill
-                  sizes="(max-width: 640px) 36px, 44px"
+                  sizes="40px"
                   className="object-cover"
                 />
               </div>
-              <div>
-                <span className="font-heading font-extrabold text-base sm:text-lg text-white tracking-wider block">
-                  DENTALK <span className="text-[#D4AF37]">CLUB</span>
+              <div className="leading-tight">
+                <span className="font-heading text-base text-[#F7F5F0] block">
+                  Dentalk <span className="text-[#D4AF37]">Club</span>
                 </span>
-                <span className="text-[10px] sm:text-xs text-[#94A3B8] font-medium tracking-widest block uppercase">
-                  FMDC CASABLANCA
+                <span className="text-[10px] text-[#8E99A8] tracking-[0.14em] uppercase block">
+                  FMDC Casablanca
                 </span>
               </div>
             </div>
-            <p className="text-xs sm:text-sm leading-relaxed text-[#CBD5E1]">
-              Club d&apos;éloquence, débats et événements académiques de la Faculté de Médecine Dentaire de Casablanca (UH2C).
+            <p className="text-xs sm:text-sm leading-relaxed text-[#AEB6C2]">
+              Club d&apos;éloquence, débats et événements académiques de la Faculté de Médecine
+              Dentaire de Casablanca (UH2C).
             </p>
-            <p className="text-[11px] sm:text-xs font-semibold text-[#D4AF37] italic">
-              &ldquo;{siteConfig.tagline}&rdquo;
+            <p className="text-xs font-heading italic text-[#D4AF37]">
+              &laquo;&nbsp;{siteConfig.tagline}&nbsp;&raquo;
             </p>
           </div>
 
           {/* Col 2: Navigation Links */}
           <div>
-            <h3 className="text-white font-heading font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2.5 sm:mb-4 border-l-2 border-[#D4AF37] pl-2">
+            <h3 className="text-[#F7F5F0] font-semibold text-xs sm:text-sm mb-3.5 sm:mb-5 tracking-wide">
               Navigation
             </h3>
-            <ul className="space-y-1.5 sm:space-y-2.5 text-xs sm:text-sm">
+            <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
-                  >
-                    <span>{item.label}</span>
+                  <Link href={item.href} className="hover:text-[#D4AF37] transition-colors">
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -60,26 +58,26 @@ export default function Footer({ navItems = siteConfig.navItems }: { navItems?: 
 
           {/* Col 3: Partners & Sponsors */}
           <div>
-            <h3 className="text-white font-heading font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2.5 sm:mb-4 border-l-2 border-[#D4AF37] pl-2">
+            <h3 className="text-[#F7F5F0] font-semibold text-xs sm:text-sm mb-3.5 sm:mb-5 tracking-wide">
               Partenaires & Sponsors
             </h3>
-            <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
-              <div className="p-2.5 sm:p-3 rounded-lg bg-[#1B2E4B]/40 border border-[#385A75]/30">
-                <div className="flex items-center gap-2 text-white font-semibold text-xs sm:text-sm">
+            <div className="space-y-3 text-xs sm:text-sm">
+              <div className="p-3 rounded-md bg-[#1E2E47] border border-[#3D4A58]">
+                <div className="flex items-center gap-2 text-[#F7F5F0] font-semibold text-xs sm:text-sm">
                   <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D4AF37]" />
                   <span>{siteConfig.sponsor.name}</span>
                 </div>
-                <p className="text-[11px] sm:text-xs text-[#94A3B8] mt-0.5">
+                <p className="text-[11px] sm:text-xs text-[#8E99A8] mt-0.5">
                   {siteConfig.sponsor.tagline}
                 </p>
               </div>
 
-              <div className="p-2.5 sm:p-3 rounded-lg bg-[#1B2E4B]/40 border border-[#385A75]/30">
-                <div className="flex items-center gap-2 text-white font-semibold text-xs sm:text-sm">
+              <div className="p-3 rounded-md bg-[#1E2E47] border border-[#3D4A58]">
+                <div className="flex items-center gap-2 text-[#F7F5F0] font-semibold text-xs sm:text-sm">
                   <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D4AF37]" />
                   <span>{siteConfig.partnerClub.name}</span>
                 </div>
-                <p className="text-[11px] sm:text-xs text-[#94A3B8] mt-0.5">
+                <p className="text-[11px] sm:text-xs text-[#8E99A8] mt-0.5">
                   {siteConfig.partnerClub.tagline}
                 </p>
               </div>
@@ -88,11 +86,11 @@ export default function Footer({ navItems = siteConfig.navItems }: { navItems?: 
 
           {/* Col 4: Location & Social */}
           <div>
-            <h3 className="text-white font-heading font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2.5 sm:mb-4 border-l-2 border-[#D4AF37] pl-2">
+            <h3 className="text-[#F7F5F0] font-semibold text-xs sm:text-sm mb-3.5 sm:mb-5 tracking-wide">
               Campus & Réseaux
             </h3>
-            <div className="space-y-2.5 sm:space-y-3 text-xs sm:text-sm">
-              <div className="flex items-start gap-2 text-[11px] sm:text-xs text-[#CBD5E1]">
+            <div className="space-y-3.5 text-xs sm:text-sm">
+              <div className="flex items-start gap-2 text-[11px] sm:text-xs text-[#AEB6C2]">
                 <MapPin className="w-3.5 h-3.5 text-[#D4AF37] shrink-0 mt-0.5" />
                 <span>Faculté de Médecine Dentaire de Casablanca, Rue Abou Al Alaa Zahar, 20250 Casablanca</span>
               </div>
@@ -102,7 +100,7 @@ export default function Footer({ navItems = siteConfig.navItems }: { navItems?: 
                   href={siteConfig.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1B2E4B] text-white hover:text-[#D4AF37] border border-[#385A75]/40 text-xs font-medium transition-all"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#1E2E47] text-[#F7F5F0] hover:text-[#D4AF37] border border-[#3D4A58] text-xs font-medium transition-colors"
                 >
                   <Instagram className="w-3.5 h-3.5" />
                   <span>Instagram</span>
@@ -113,7 +111,7 @@ export default function Footer({ navItems = siteConfig.navItems }: { navItems?: 
                   href={siteConfig.youtubeChannelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1B2E4B] text-white hover:text-[#D4AF37] border border-[#385A75]/40 text-xs font-medium transition-all"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#1E2E47] text-[#F7F5F0] hover:text-[#D4AF37] border border-[#3D4A58] text-xs font-medium transition-colors"
                 >
                   <Youtube className="w-3.5 h-3.5" />
                   <span>YouTube</span>
@@ -125,11 +123,9 @@ export default function Footer({ navItems = siteConfig.navItems }: { navItems?: 
         </div>
 
         {/* Bottom Sub-footer */}
-        <div className="border-t border-[#385A75]/20 pt-4 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] sm:text-xs text-[#94A3B8] gap-2 sm:gap-4">
+        <div className="border-t border-[#3D4A58] pt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] sm:text-xs text-[#8E99A8] gap-2">
           <p>© 2026 Dentalk Club FMDC. Tous droits réservés.</p>
-          <p className="flex items-center gap-1">
-            Fait avec passion par et pour les étudiants de la FMDC
-          </p>
+          <p className="flex items-center gap-1">Fait avec passion par et pour les étudiants de la FMDC</p>
         </div>
       </div>
     </footer>

@@ -65,37 +65,37 @@ function AttendeesModal({
       className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-md glass-card rounded-2xl border border-[#385A75]/50 p-5 sm:p-6 space-y-4 shadow-2xl">
+      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-4 shadow-lg">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h2 className="text-base font-heading font-bold text-white leading-snug">{announcement.title}</h2>
-            <p className="text-xs text-[#94A3B8] mt-0.5">
+            <h2 className="text-base font-heading font-bold text-[#16233A] leading-snug">{announcement.title}</h2>
+            <p className="text-xs text-[#5C6672] mt-0.5">
               {announcement.rsvp_count} participant{announcement.rsvp_count > 1 ? "s" : ""}
             </p>
           </div>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#1B2E4B]/80 text-[#94A3B8] hover:text-white transition-colors"
+            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         <div className="space-y-2 max-h-[55dvh] overflow-y-auto pr-1">
-          {loading && <p className="text-xs text-[#94A3B8]">Chargement…</p>}
+          {loading && <p className="text-xs text-[#5C6672]">Chargement…</p>}
           {!loading && attendees.length === 0 && (
-            <p className="text-xs text-[#94A3B8]">Aucun participant pour le moment.</p>
+            <p className="text-xs text-[#5C6672]">Aucun participant pour le moment.</p>
           )}
           {attendees.map((a) => (
             <div
               key={a.user_id}
-              className="flex items-center gap-3 p-2.5 rounded-xl bg-[#1B2E4B]/50 border border-[#385A75]/30"
+              className="flex items-center gap-3 p-2.5 rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30"
             >
               <UserAvatar name={a.full_name} src={a.avatar_url} size={34} />
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-white truncate">{a.full_name || "Membre"}</p>
-                {a.promo && <p className="text-[10px] text-[#94A3B8]">Promo {a.promo}</p>}
+                <p className="text-xs font-semibold text-[#16233A] truncate">{a.full_name || "Membre"}</p>
+                {a.promo && <p className="text-[10px] text-[#5C6672]">Promo {a.promo}</p>}
               </div>
             </div>
           ))}
@@ -319,13 +319,13 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
     <div className="space-y-4 sm:space-y-5">
       {isBureau && (
         <div className="flex items-center justify-between gap-3">
-          <p className="text-xs text-[#94A3B8] flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
+          <p className="text-xs text-[#5C6672] flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8A6D1F] animate-pulse" />
             Mode bureau : créez les annonces des prochains ateliers.
           </p>
           <button
             onClick={() => openComposer(null)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-md shadow-[#D4AF37]/20 transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#8A6D1F]/20 transition-all active:scale-95"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Nouvelle annonce</span>
@@ -334,15 +334,15 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
       )}
 
       {notice && (
-        <p role="status" className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="status" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {notice}
         </p>
       )}
 
-      {items.length === 0 && (        <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 sm:p-12 text-center space-y-2">
-          <CalendarDays className="w-8 h-8 text-[#385A75] mx-auto" />
-          <p className="text-sm font-semibold text-white">Aucune annonce pour le moment</p>
-          <p className="text-xs text-[#94A3B8]">
+      {items.length === 0 && (        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 sm:p-12 text-center space-y-2">
+          <CalendarDays className="w-8 h-8 text-[#DCD7CB] mx-auto" />
+          <p className="text-sm font-semibold text-[#16233A]">Aucune annonce pour le moment</p>
+          <p className="text-xs text-[#5C6672]">
             Les ateliers hebdomadaires et informations du club apparaîtront ici en priorité.
           </p>
         </div>
@@ -355,8 +355,8 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
         return (
           <article
             key={item.id}
-            className={`glass-card rounded-2xl border p-4 sm:p-6 space-y-3 ${
-              item.is_pinned ? "border-[#D4AF37]/40" : "border-[#385A75]/40"
+            className={`glass-card rounded-lg border p-4 sm:p-6 space-y-3 ${
+              item.is_pinned ? "border-[#8A6D1F]/40" : "border-[#DCD7CB]/40"
             }`}
           >
             <div className="flex items-start justify-between gap-3">
@@ -379,14 +379,14 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                   <button
                     onClick={() => togglePin(item)}
                     aria-label={item.is_pinned ? "Désépingler" : "Épingler"}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#1B2E4B] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
                   >
                     {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
                   </button>
                   <button
                     onClick={() => openComposer(item)}
                     aria-label="Modifier"
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#1B2E4B] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
                   >
                     <Pencil className="w-3.5 h-3.5" />
                   </button>
@@ -394,7 +394,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                     <button
                       onClick={() => remove(item)}
                       aria-label="Supprimer"
-                      className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                      className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -404,7 +404,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
             </div>
 
             {item.poster_url && (
-              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#385A75]/40 bg-black">
+              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#DCD7CB]/40 bg-black">
                 <Image
                   src={item.poster_url}
                   alt={`Affiche — ${item.title}`}
@@ -416,50 +416,50 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
             )}
 
             <div className="space-y-1.5">
-              <h3 className="text-base sm:text-xl font-heading font-bold text-white leading-snug">{item.title}</h3>
+              <h3 className="text-base sm:text-xl font-heading font-bold text-[#16233A] leading-snug">{item.title}</h3>
               {item.body && (
-                <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed whitespace-pre-line">{item.body}</p>
+                <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed whitespace-pre-line">{item.body}</p>
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-[#94A3B8]">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-[#5C6672]">
               {item.event_date && (
                 <span className="flex items-center gap-1.5 font-medium">
-                  <CalendarDays className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <CalendarDays className="w-3.5 h-3.5 text-[#8A6D1F]" />
                   {formatDateTime(item.event_date)}
                 </span>
               )}
               {item.location && (
                 <span className="flex items-center gap-1.5 font-medium">
-                  <MapPin className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#8A6D1F]" />
                   {item.location}
                 </span>
               )}
               <span className="flex items-center gap-1.5">
-                <span className="w-5 h-5 rounded-full bg-[#1B2E4B] border border-[#385A75]/50 inline-flex items-center justify-center text-[9px] font-bold text-[#D4AF37]">
+                <span className="w-5 h-5 rounded-full bg-[#EFECE4] border border-[#DCD7CB]/50 inline-flex items-center justify-center text-[9px] font-bold text-[#8A6D1F]">
                   {initials(item.author_name)}
                 </span>
                 {item.author_name ?? "Bureau DTC"} · {formatRelative(item.created_at)}
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#385A75]/25">
+            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#DCD7CB]/25">
               {isAtelier && item.status === "published" && (
                 <button
                   onClick={() => toggleRsvp(item)}
                   disabled={pending}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold transition-all active:scale-95 disabled:opacity-60 ${
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold transition-all active:scale-95 disabled:opacity-60 ${
                     joined
-                      ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/25"
-                      : "bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/40 hover:bg-[#D4AF37]/25"
+                      ? "bg-emerald-600/10 text-emerald-700 border border-emerald-600/40 hover:bg-emerald-500/25"
+                      : "bg-[#8A6D1F]/15 text-[#8A6D1F] border border-[#8A6D1F]/40 hover:bg-[#8A6D1F]/25"
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full ${joined ? "bg-emerald-400" : "bg-[#D4AF37]"}`} />
+                  <span className={`w-2 h-2 rounded-full ${joined ? "bg-emerald-600" : "bg-[#8A6D1F]"}`} />
                   {joined ? "Je participe ✓" : user ? "Je participe" : "Se connecter pour participer"}
                 </button>
               )}
               {isAtelier && (
-                <span className="text-[11px] text-[#94A3B8] font-medium px-1">
+                <span className="text-[11px] text-[#5C6672] font-medium px-1">
                   {item.rsvp_count} participant{item.rsvp_count > 1 ? "s" : ""}
                 </span>
               )}
@@ -467,7 +467,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 {isBureau && isAtelier && item.rsvp_count > 0 && (
                   <button
                     onClick={() => setAttendeesFor(item)}
-                    className="flex items-center gap-1 text-[11px] font-semibold text-[#D4AF37] hover:text-[#F59E0B] transition-colors"
+                    className="flex items-center gap-1 text-[11px] font-semibold text-[#8A6D1F] hover:text-[#8A6D1F] transition-colors"
                   >
                     <Users className="w-3.5 h-3.5" />
                     <span>Liste</span>
@@ -476,7 +476,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 {isBureau && item.status !== "archived" && (
                   <button
                     onClick={() => setStatus(item, item.status === "published" ? "archived" : "published")}
-                    className="text-[11px] font-medium text-[#64748B] hover:text-[#94A3B8] transition-colors"
+                    className="text-[11px] font-medium text-[#7A828D] hover:text-[#5C6672] transition-colors"
                   >
                     {item.status === "published" ? "Archiver" : "Publier"}
                   </button>
@@ -484,7 +484,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                 {isBureau && item.status === "archived" && (
                   <button
                     onClick={() => setStatus(item, "published")}
-                    className="text-[11px] font-medium text-[#64748B] hover:text-[#94A3B8] transition-colors"
+                    className="text-[11px] font-medium text-[#7A828D] hover:text-[#5C6672] transition-colors"
                   >
                     Republier
                   </button>

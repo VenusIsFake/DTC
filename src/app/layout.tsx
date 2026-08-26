@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,9 +14,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const display = Source_Serif_4({
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B132B",
+  themeColor: "#F7F5F0",
 };
 
 export default async function RootLayout({
@@ -88,8 +88,8 @@ export default async function RootLayout({
   const navItems = siteConfig.getNavItems(settings.events_visible);
 
   return (
-    <html lang="fr" className={`${inter.variable} ${jakarta.variable}`}>
-      <body className="bg-[#0B132B] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#D4AF37]/30 selection:text-white">
+    <html lang="fr" className={`${inter.variable} ${display.variable}`}>
+      <body className="bg-[#F7F5F0] text-[#16233A] min-h-screen flex flex-col antialiased selection:bg-[#8A6D1F]/20 selection:text-[#16233A]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

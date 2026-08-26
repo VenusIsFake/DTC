@@ -39,14 +39,13 @@ export default function AdminConsole({ adminName }: { adminName: string }) {
   const Active = TABS.find((t) => t.id === tab)?.component ?? UsersTab;
 
   return (
-    <div className="pt-16 sm:pt-28 pb-10 sm:pb-20 px-3.5 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-4 sm:space-y-6">
+    <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-4 sm:space-y-6">
       <div className="space-y-1.5">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          <span>Console DTC — {adminName}</span>
-        </div>
-        <h1 className="text-2xl sm:text-4xl font-heading font-extrabold text-white">
-          Administration du <span className="gold-gradient-text">Club</span>
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#8A6D1F]">
+          Console DTC — {adminName}
+        </p>
+        <h1 className="font-heading font-semibold text-2xl sm:text-4xl text-[#16233A] tracking-tight">
+          Administration du Club
         </h1>
       </div>
 
@@ -66,8 +65,8 @@ export default function AdminConsole({ adminName }: { adminName: string }) {
               onClick={() => setTab(option.id)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                 isActive
-                  ? "bg-[#1B2E4B] text-[#D4AF37] border border-[#D4AF37]/30 shadow-md"
-                  : "text-[#94A3B8] hover:text-white border border-transparent hover:bg-white/5"
+                  ? "bg-[#EFECE4] text-[#8A6D1F] border border-[#8A6D1F]/30 shadow-md"
+                  : "text-[#5C6672] hover:text-[#16233A] border border-transparent hover:bg-[#EFECE4]"
               }`}
             >
               <option.icon className="w-3.5 h-3.5" />

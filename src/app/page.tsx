@@ -23,7 +23,7 @@ export default async function HomePage() {
     .sort((a, b) => (a.event_date ?? "").localeCompare(b.event_date ?? ""))[0];
 
   return (
-    <div className="space-y-10 sm:space-y-24 pb-10 sm:pb-20">
+    <div className="space-y-8 sm:space-y-14 pb-6 sm:pb-10">
       {/* 1. Hero Banner */}
       <Hero eventsVisible={settings.events_visible} />
 

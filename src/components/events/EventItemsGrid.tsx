@@ -23,7 +23,7 @@ export default function EventItemsGrid({ items }: { items: EventPageItem[] }) {
               key={item.id}
               onClick={() => setActive(item)}
               aria-label={`Regarder : ${item.title}`}
-              className="glass-card glass-card-hover rounded-xl sm:rounded-2xl overflow-hidden border border-[#385A75]/40 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+              className="glass-card glass-card-hover rounded-xl sm:rounded-lg overflow-hidden border border-[#DCD7CB]/40 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6D1F]"
             >
               <div className="relative aspect-video w-full bg-black">
                 {item.poster_url ? (
@@ -35,12 +35,12 @@ export default function EventItemsGrid({ items }: { items: EventPageItem[] }) {
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#1B2E4B]/60">
-                    <Play className="w-8 h-8 text-[#D4AF37] fill-current" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#EFECE4]/60">
+                    <Play className="w-8 h-8 text-[#8A6D1F] fill-current" />
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-center justify-center">
-                  <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-[#D4AF37] text-[#0B132B] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                  <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-[#8A6D1F] text-[#F7F5F0] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                     <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current translate-x-0.5" />
                   </div>
                 </div>
@@ -52,15 +52,15 @@ export default function EventItemsGrid({ items }: { items: EventPageItem[] }) {
               </div>
               <div className="p-3.5 sm:p-4 space-y-1">
                 {item.speaker && (
-                  <span className="text-[11px] sm:text-xs font-semibold text-[#D4AF37] block truncate">
+                  <span className="text-[11px] sm:text-xs font-semibold text-[#8A6D1F] block truncate">
                     {item.speaker}
                   </span>
                 )}
-                <h3 className="text-sm sm:text-base font-heading font-bold text-white group-hover:text-[#D4AF37] transition-colors line-clamp-2">
+                <h3 className="text-sm sm:text-base font-heading font-bold text-[#16233A] group-hover:text-[#8A6D1F] transition-colors line-clamp-2">
                   {item.title}
                 </h3>
                 {item.description && (
-                  <p className="text-[11px] sm:text-xs text-[#94A3B8] line-clamp-2">{item.description}</p>
+                  <p className="text-[11px] sm:text-xs text-[#5C6672] line-clamp-2">{item.description}</p>
                 )}
               </div>
             </button>
@@ -81,9 +81,9 @@ export default function EventItemsGrid({ items }: { items: EventPageItem[] }) {
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
                 {active.speaker && (
-                  <p className="text-xs font-semibold text-[#D4AF37] truncate">{active.speaker}</p>
+                  <p className="text-xs font-semibold text-[#8A6D1F] truncate">{active.speaker}</p>
                 )}
-                <h3 className="text-sm sm:text-lg font-heading font-bold text-white truncate">{active.title}</h3>
+                <h3 className="text-sm sm:text-lg font-heading font-bold text-[#16233A] truncate">{active.title}</h3>
               </div>
               <button
                 onClick={() => setActive(null)}
@@ -95,7 +95,7 @@ export default function EventItemsGrid({ items }: { items: EventPageItem[] }) {
               </button>
             </div>
 
-            <div className="relative aspect-video w-full rounded-xl sm:rounded-2xl overflow-hidden border border-[#385A75]/50 bg-black shadow-2xl">
+            <div className="relative aspect-video w-full rounded-xl sm:rounded-lg overflow-hidden border border-[#DCD7CB]/50 bg-black shadow-lg">
               {activeYouTube ? (
                 <iframe
                   key={active.id}
@@ -122,7 +122,7 @@ export default function EventItemsGrid({ items }: { items: EventPageItem[] }) {
             </div>
 
             {active.description && (
-              <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed px-1">{active.description}</p>
+              <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed px-1">{active.description}</p>
             )}
           </div>
         </div>

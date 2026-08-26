@@ -2,19 +2,19 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="pt-32 pb-20 px-3.5 max-w-xl mx-auto text-center space-y-4">
-      <p className="text-6xl sm:text-8xl font-heading font-extrabold gold-gradient-text">
+    <div className="pt-16 sm:pt-24 pb-16 px-4 max-w-xl mx-auto text-center space-y-4">
+      <p className="text-6xl sm:text-8xl font-heading font-semibold text-[#8A6D1F]">
         404
       </p>
-      <h1 className="text-xl sm:text-3xl font-heading font-bold text-white">
+      <h1 className="text-xl sm:text-3xl font-heading font-semibold text-[#16233A]">
         Page introuvable
       </h1>
-      <p className="text-sm text-[#94A3B8] leading-relaxed">
+      <p className="text-sm text-[#5C6672] leading-relaxed">
         La page que vous cherchez n&apos;existe pas ou a été déplacée. Laissez votre voix vous guider vers l&apos;accueil.
       </p>
       <Link
         href="/"
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-lg shadow-[#D4AF37]/20 transition-all active:scale-95 mt-2"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-sm bg-[#16233A] text-[#F7F5F0] hover:bg-[#233753] transition-colors mt-2"
       >
         Retour à l&apos;accueil
       </Link>

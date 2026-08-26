@@ -300,21 +300,21 @@ export default function AvatarCropModal({
     >
       <div className="absolute inset-0" onClick={submitting ? undefined : onClose} aria-hidden="true" />
 
-      <div className="relative z-10 w-full max-w-md glass-card rounded-2xl sm:rounded-3xl border border-[#385A75]/50 p-5 sm:p-7 space-y-5 shadow-2xl overflow-hidden">
+      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-5 shadow-lg overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="space-y-0.5">
-            <h2 className="text-lg sm:text-xl font-heading font-extrabold text-white">
+            <h2 className="text-lg sm:text-xl font-heading font-semibold text-[#16233A]">
               Cadrer votre <span className="gold-gradient-text">photo</span>
             </h2>
-            <p className="text-[11px] text-[#94A3B8]">
+            <p className="text-[11px] text-[#5C6672]">
               Glissez pour repositionner et zoomez pour ajuster le cadrage.
             </p>
           </div>
           <button
             onClick={onClose}
             disabled={submitting}
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-[#1B2E4B]/80 text-[#94A3B8] hover:text-white transition-colors disabled:opacity-50"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors disabled:opacity-50"
             aria-label="Fermer"
           >
             <X className="w-4 h-4" />
@@ -324,7 +324,7 @@ export default function AvatarCropModal({
         {/* Interactive Cropper Area */}
         <div className="flex flex-col items-center justify-center">
           <div
-            className={`relative rounded-2xl overflow-hidden bg-[#070D1E] border border-[#385A75]/60 select-none ${
+            className={`relative rounded-lg overflow-hidden bg-[#070D1E] border border-[#DCD7CB]/60 select-none ${
               isDragging ? "cursor-grabbing" : "cursor-grab"
             } touch-none`}
             style={{ width: `${VIEWPORT_SIZE}px`, height: `${VIEWPORT_SIZE}px` }}
@@ -384,7 +384,7 @@ export default function AvatarCropModal({
                 cy={VIEWPORT_SIZE / 2}
                 r={CIRCLE_RADIUS}
                 fill="none"
-                stroke="#D4AF37"
+                stroke="#8A6D1F"
                 strokeWidth="2.5"
                 className="drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]"
               />
@@ -410,10 +410,10 @@ export default function AvatarCropModal({
         </div>
 
         {/* Controls: Zoom & Real-time Mini Preview */}
-        <div className="flex items-center gap-4 bg-[#0F172A]/70 border border-[#385A75]/40 rounded-2xl p-3">
+        <div className="flex items-center gap-4 bg-white/70 border border-[#DCD7CB]/40 rounded-lg p-3">
           {/* Mini Live Preview */}
           <div className="flex flex-col items-center gap-1 shrink-0">
-            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#D4AF37] bg-[#1B2E4B] shadow-md shadow-[#D4AF37]/15">
+            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#8A6D1F] bg-[#EFECE4] shadow-md shadow-[#8A6D1F]/15">
               <canvas
                 ref={previewCanvasRef}
                 width={72}
@@ -421,21 +421,21 @@ export default function AvatarCropModal({
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-[9px] font-semibold text-[#94A3B8]">Aperçu</span>
+            <span className="text-[9px] font-semibold text-[#5C6672]">Aperçu</span>
           </div>
 
           {/* Zoom Slider and Quick Buttons */}
           <div className="flex-1 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px] font-semibold text-[#CBD5E1]">
+            <div className="flex items-center justify-between text-[11px] font-semibold text-[#3D4A58]">
               <span>Zoom</span>
-              <span className="text-[#D4AF37] font-mono">{Math.round(zoom * 100)}%</span>
+              <span className="text-[#8A6D1F] font-mono">{Math.round(zoom * 100)}%</span>
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => handleZoomChange(zoom - 0.2)}
                 disabled={zoom <= 1.0 || submitting}
-                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#1B2E4B] text-[#94A3B8] hover:text-white disabled:opacity-30 transition-all active:scale-95"
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#16233A] disabled:opacity-30 transition-all active:scale-95"
                 aria-label="Dézoomer"
               >
                 <ZoomOut className="w-3.5 h-3.5" />
@@ -449,7 +449,7 @@ export default function AvatarCropModal({
                 value={zoom}
                 onChange={(e) => handleZoomChange(parseFloat(e.target.value))}
                 disabled={submitting}
-                className="flex-1 h-1.5 bg-[#1B2E4B] rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
+                className="flex-1 h-1.5 bg-[#EFECE4] rounded-lg appearance-none cursor-pointer accent-[#8A6D1F]"
                 aria-label="Niveau de zoom"
               />
 
@@ -457,7 +457,7 @@ export default function AvatarCropModal({
                 type="button"
                 onClick={() => handleZoomChange(zoom + 0.2)}
                 disabled={zoom >= 3.0 || submitting}
-                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#1B2E4B] text-[#94A3B8] hover:text-white disabled:opacity-30 transition-all active:scale-95"
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#16233A] disabled:opacity-30 transition-all active:scale-95"
                 aria-label="Zoomer"
               >
                 <ZoomIn className="w-3.5 h-3.5" />
@@ -467,7 +467,7 @@ export default function AvatarCropModal({
                 type="button"
                 onClick={handleReset}
                 disabled={submitting || (zoom === 1.0 && pan.x === 0 && pan.y === 0)}
-                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#1B2E4B] text-[#94A3B8] hover:text-[#D4AF37] disabled:opacity-30 transition-all active:scale-95 ml-0.5"
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#8A6D1F] disabled:opacity-30 transition-all active:scale-95 ml-0.5"
                 title="Réinitialiser le cadrage"
                 aria-label="Réinitialiser le cadrage"
               >
@@ -480,7 +480,7 @@ export default function AvatarCropModal({
         {error && (
           <p
             role="alert"
-            className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
+            className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
           >
             {error}
           </p>

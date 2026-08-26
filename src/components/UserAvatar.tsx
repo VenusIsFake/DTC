@@ -15,7 +15,7 @@ export default function UserAvatar({ name, src, size = 36, className = "" }: Use
   if (src) {
     return (
       <span
-        className={`relative inline-block rounded-full overflow-hidden border border-[#D4AF37]/40 shrink-0 ${className}`}
+        className={`relative inline-block rounded-full overflow-hidden border border-[#8A6D1F]/40 shrink-0 ${className}`}
         style={{ width: dimension, height: dimension }}
       >
         <Image src={src} alt={name ?? "Avatar"} fill sizes={`${size}px`} className="object-cover" />
@@ -25,7 +25,7 @@ export default function UserAvatar({ name, src, size = 36, className = "" }: Use
   return (
     <span
       aria-hidden="true"
-      className={`inline-flex items-center justify-center rounded-full bg-[#1B2E4B] border border-[#385A75]/60 text-[#D4AF37] font-bold shrink-0 ${className}`}
+      className={`inline-flex items-center justify-center rounded-full bg-[#EFECE4] border border-[#DCD7CB]/60 text-[#8A6D1F] font-bold shrink-0 ${className}`}
       style={{ width: dimension, height: dimension, fontSize: Math.max(10, size * 0.38) }}
     >
       {initials(name)}

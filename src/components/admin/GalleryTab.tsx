@@ -135,15 +135,15 @@ function EditorModal({
       className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-lg glass-card rounded-2xl border border-[#385A75]/50 p-5 sm:p-6 space-y-4 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div className="relative z-10 w-full max-w-lg glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-4 shadow-lg max-h-[92vh] overflow-y-auto">
         <div className="flex items-start justify-between gap-3">
-          <h2 className="text-base font-heading font-bold text-white">
+          <h2 className="text-base font-heading font-bold text-[#16233A]">
             {form.id ? "Modifier" : "Nouvelle image"}
           </h2>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#1B2E4B]/80 text-[#94A3B8] hover:text-white transition-colors"
+            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -211,7 +211,7 @@ function EditorModal({
           <img
             src={form.image_url}
             alt="Aperçu"
-            className="w-full aspect-[4/3] object-cover rounded-xl border border-[#385A75]/50"
+            className="w-full aspect-[4/3] object-cover rounded-xl border border-[#DCD7CB]/50"
           />
         )}
 
@@ -245,18 +245,18 @@ function EditorModal({
           </Field>
         </div>
 
-        <label className="flex items-center gap-2 text-xs font-semibold text-[#CBD5E1] cursor-pointer">
+        <label className="flex items-center gap-2 text-xs font-semibold text-[#3D4A58] cursor-pointer">
           <input
             type="checkbox"
             checked={form.is_published}
             onChange={(e) => set("is_published", e.target.checked)}
-            className="accent-[#D4AF37]"
+            className="accent-[#8A6D1F]"
           />
           Publiée (visible sur la galerie publique)
         </label>
 
         {error && (
-          <p role="alert" className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
             {error}
           </p>
         )}
@@ -316,13 +316,13 @@ export default function GalleryTab() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <p className="text-xs text-[#94A3B8]">La galerie publique — images, affiches, moments du club.</p>
+        <p className="text-xs text-[#5C6672]">La galerie publique — images, affiches, moments du club.</p>
         <button
           onClick={() => {
             setDraft(null);
             setEditorOpen(true);
           }}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0B132B] hover:brightness-110 shadow-md shadow-[#D4AF37]/20 transition-all active:scale-95"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#8A6D1F] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#8A6D1F]/20 transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Ajouter</span>
@@ -330,8 +330,8 @@ export default function GalleryTab() {
       </div>
 
       {items === null && (
-        <div className="glass-card rounded-2xl border border-[#385A75]/40 p-8 text-center">
-          <Loader2 className="w-5 h-5 text-[#D4AF37] animate-spin mx-auto" />
+        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
+          <Loader2 className="w-5 h-5 text-[#8A6D1F] animate-spin mx-auto" />
         </div>
       )}
 
@@ -339,17 +339,17 @@ export default function GalleryTab() {
         {items?.map((item) => (
           <div
             key={item.id}
-            className="glass-card rounded-xl border border-[#385A75]/40 p-3 flex flex-wrap items-center gap-2.5"
+            className="glass-card rounded-xl border border-[#DCD7CB]/40 p-3 flex flex-wrap items-center gap-2.5"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={item.image_url}
               alt=""
-              className="w-14 h-11 rounded-lg object-cover border border-[#385A75]/50 shrink-0"
+              className="w-14 h-11 rounded-lg object-cover border border-[#DCD7CB]/50 shrink-0"
             />
             <div className="min-w-0 flex-1">
-              <p className="text-xs sm:text-sm font-bold text-white truncate">{item.title}</p>
-              <p className="text-[10px] text-[#94A3B8] truncate">
+              <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">{item.title}</p>
+              <p className="text-[10px] text-[#5C6672] truncate">
                 {item.category_label} · ordre {item.sort}
                 {item.date_label ? ` · ${item.date_label}` : ""}
               </p>
@@ -361,7 +361,7 @@ export default function GalleryTab() {
               <button
                 onClick={() => togglePublish(item)}
                 aria-label={item.is_published ? "Dépublier" : "Publier"}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#1B2E4B] transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
               >
                 {item.is_published ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
               </button>
@@ -380,14 +380,14 @@ export default function GalleryTab() {
                   setEditorOpen(true);
                 }}
                 aria-label="Modifier"
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#1B2E4B] transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#8A6D1F] hover:bg-[#EFECE4] transition-colors"
               >
                 <Pencil className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => remove(item)}
                 aria-label="Supprimer"
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -395,7 +395,7 @@ export default function GalleryTab() {
           </div>
         ))}
         {items?.length === 0 && (
-          <p className="text-xs text-[#94A3B8] text-center py-6 flex items-center justify-center gap-1.5">
+          <p className="text-xs text-[#5C6672] text-center py-6 flex items-center justify-center gap-1.5">
             <ImagePlus className="w-3.5 h-3.5" />
             Galerie vide côté base — le site affiche encore les images statiques intégrées.
           </p>
