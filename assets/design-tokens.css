@@ -1,0 +1,35 @@
+/**
+ * DTC Design Tokens CSS Variables
+ * Generated from docs/brand-guidelines.md
+ */
+:root {
+  /* Brand Primary */
+  --color-primary-navy: #16233A;
+  --color-primary-navy-surface: #1E2E47;
+  --color-primary-navy-deep: #0B132B;
+
+  /* Brand Secondary / Accents */
+  --color-gold-dark: #755B18;
+  --color-gold-bright: #D4AF37;
+  --color-gold-muted: #8A6D1F;
+
+  /* Neutrals */
+  --color-paper: #F7F5F0;
+  --color-paper-deep: #EDEAE1;
+  --color-paper-wash: #EFECE4;
+  --color-paper-line: #DCD7CB;
+  --color-surface: #FFFFFF;
+  --color-ink: #16233A;
+  --color-ink-muted: #5C6672;
+
+  /* Semantic */
+  --color-semantic-success: #16A34A;
+  --color-semantic-warning: #D97706;
+  --color-semantic-error: #DC2626;
+  --color-semantic-info: #2563EB;
+
+  /* Typography */
+  --font-heading: 'Source Serif 4', 'Georgia', serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}

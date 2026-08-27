@@ -10,8 +10,13 @@
     --ink-muted: #5c6672;
     --paper: #f7f5f0;
     --paper-deep: #edeae1;
+    --paper-wash: #efece4;
     --line: #dcd7cb;
+    --surface: #ffffff;
     --gold: #755b18;
+    --gold-dark: #755b18;
+    --gold-bright: #d4af37;
+    --gold-muted: #8a6d1f;
   }
 
   html {

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "primary": {
+      "navy": {
+        "DEFAULT": { "$value": "#16233A", "$type": "color" },
+        "surface": { "$value": "#1E2E47", "$type": "color" },
+        "deep": { "$value": "#0B132B", "$type": "color" }
+      }
+    },
+    "secondary": {
+      "gold": {
+        "dark": { "$value": "#755B18", "$type": "color" },
+        "bright": { "$value": "#D4AF37", "$type": "color" },
+        "muted": { "$value": "#8A6D1F", "$type": "color" }
+      }
+    },
+    "neutral": {
+      "paper": {
+        "DEFAULT": { "$value": "#F7F5F0", "$type": "color" },
+        "deep": { "$value": "#EDEAE1", "$type": "color" },
+        "wash": { "$value": "#EFECE4", "$type": "color" },
+        "line": { "$value": "#DCD7CB", "$type": "color" }
+      },
+      "surface": { "$value": "#FFFFFF", "$type": "color" },
+      "ink": {
+        "DEFAULT": { "$value": "#16233A", "$type": "color" },
+        "muted": { "$value": "#5C6672", "$type": "color" }
+      }
+    },
+    "semantic": {
+      "success": { "$value": "#16A34A", "$type": "color" },
+      "warning": { "$value": "#D97706", "$type": "color" },
+      "error": { "$value": "#DC2626", "$type": "color" },
+      "info": { "$value": "#2563EB", "$type": "color" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "heading": { "$value": "Source Serif 4, Georgia, serif", "$type": "fontFamily" },
+      "body": { "$value": "Inter, system-ui, -apple-system, sans-serif", "$type": "fontFamily" },
+      "mono": { "$value": "JetBrains Mono, monospace", "$type": "fontFamily" }
+    }
+  }
+}

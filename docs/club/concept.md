@@ -136,11 +136,14 @@ Co-produced by **Dentalk Club FMDC** and **Club Social Dentaire (CSD)**, and off
 
 ## 🎨 7. Authentic Brand Identity & Design System
 
-* **Authentic Official Logo:** High-resolution circular emblem extracted from the founding release ([Post DBMRjqrAGlM](https://www.instagram.com/p/DBMRjqrAGlM/)), saved at [`instagram/metadata/dtc_logo.png`](../../instagram/metadata/dtc_logo.png) (716x716 PNG).
-* **Profile Avatar:** [`instagram/metadata/dtc_profile_avatar.jpg`](../../instagram/metadata/dtc_profile_avatar.jpg).
+* **Canonical Guidelines:** Detailed specifications are documented in [`docs/brand-guidelines.md`](../brand-guidelines.md).
+* **Official Logos & Emblems:**
+  * Vector SVG crest at [`public/logo.svg`](../../public/logo.svg) and high-res raster at [`public/logo.png`](../../public/logo.png) (716x716 PNG extracted from founding release [Post DBMRjqrAGlM](https://www.instagram.com/p/DBMRjqrAGlM/)).
+  * Profile Avatar at [`instagram/metadata/dtc_profile_avatar.jpg`](../../instagram/metadata/dtc_profile_avatar.jpg).
 * **Color Hierarchy:**
-  * **Midnight Navy (`#1B2E4B` / `#0B132B`):** Dominant dark canvas, conveying academic authority and prestige.
-  * **Steel Blue (`#385A75` / `#2C4A63`):** Secondary container backgrounds and card trims.
-  * **Prestige Gold (`#D4AF37` / `#F59E0B`):** Accent badges, trophy highlights, CTA borders, and glowing active states.
-  * **Clinical Pure White (`#FFFFFF` / `#F8FAFC`):** Primary typography, tooth icon, and high-contrast clinical surfaces.
-* **Typography:** Modern clean sans-serif pairing (`Inter` for body & clean data, `Plus Jakarta Sans` / `Outfit` for bold prestige headings).
+  * **Midnight Navy / Ink (`#16233A` / `#0B132B`):** Dominant typography, high-contrast dark canvas, conveying academic authority and prestige.
+  * **Heritage Gold Dark (`#755B18`):** Primary accent on light paper backgrounds (WCAG AA 4.5:1+ compliant).
+  * **Prestige Gold Bright (`#D4AF37`):** Accent badges, trophy highlights, CTA borders, and glowing active states on dark surfaces.
+  * **Paper Canvas (`#F7F5F0` / `#EDEAE1` / `#EFECE4`):** Warm editorial background and card wash surfaces.
+  * **Pure Surface (`#FFFFFF`):** Elevated card panels and clinical surfaces.
+* **Typography:** Academic editorial pairing (`Source Serif 4` display headings with `Inter` UI/body sans).

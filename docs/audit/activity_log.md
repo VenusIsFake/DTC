@@ -241,3 +241,31 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **Vérif prod :** 100/100/100/100 Lighthouse (a11y, best practices, SEO, agentic) sur /annonces, 0 échec d'audit.
 - **Limites :** flows admin (login requis) non re-testés visuellement — pas d'identifiants de session bureau à disposition ; restauration complète du dump non exécutée (pas de psql/pg_dump local — contenu artefact vérifié seulement).
 - **Déploiements :** 0ad4f12 poussé + déployé (3 commits : a11y, RLS split, deps patch, hydration).
+
+## 2026-08-27 — Audit de conformité /brand, Tokens de design & Remédiation complète
+
+**Demande de Venus : « check the current branding against /brand », commit baseline `ui-v2-baseline`, remédiation intégrale et validation par un agent juge avant déploiement Vercel.**
+
+- **Baseline sauvegardée :** tag `ui-v2-baseline` posé sur le commit initial `0c16030`.
+- **Création du guide de marque canonique (`docs/brand-guidelines.md`) :**
+  - Spécification intégrale au format standard `/brand` (palette primaire, secondaire, neutre, sémantique avec codes HEX, RGB et usages).
+  - Définition du système bi-or : `Heritage Gold Dark` (`#755B18`, AA 4.8:1+ sur papier clair) et `Prestige Gold Bright` (`#D4AF37` pour fonds marine, trophées et badges).
+  - Typographie éditoriale : `Source Serif 4` (titres display) + `Inter` (corps & UI).
+  - Voice Chart exhaustif (« We Are / We Are Not »), adaptation par contexte (Hero, Tournois, Réseaux, Podcast), phrases proscrites et argumentaires éclair (10s, 30s, 60s).
+  - Règles d'incitation IA (prompts de base, mots-clés, mood et contre-exemples visuels).
+- **Génération des Design Tokens (`assets/`) :**
+  - `assets/design-tokens.json` (W3C DTCG format standardisé).
+  - `assets/design-tokens.css` (variables CSS `:root`).
+- **Synchronisation & Intégration du code :**
+  - `tailwind.config.ts` étendu avec palette `dtc.*` structurée (`dtc.gold.DEFAULT`, `dtc.gold.dark`, `dtc.gold.bright`, `dtc.navy.*`, `dtc.semantic.*`).
+  - `src/styles/globals.css` enrichi des variables CSS `:root`.
+  - `docs/club/concept.md` Section 7 harmonisée avec le guide de marque canonique.
+  - Création de l'emblème vectoriel officiel `public/logo.svg` (blason circulaire haute définition 500x500 avec dégradés, dent et micro vintage).
+- **Validation par les scripts `/brand` :**
+  - `inject-brand-context.cjs --json` : extraction 100% sans erreur.
+  - `extract-colors.cjs --palette` : extraction des 16 couleurs de la palette.
+- **Contrôle QA & Juge indépendant :**
+  - Agent Juge (`brand_judge`) invoqué pour audit indépendant : **VERDICT PASS (100% conforme)**.
+  - Vitest : 14/14 tests passés.
+  - Next.js 15.5.24 : build de production `next build` propre (14/14 routes générées).
+
