@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/auth/AuthProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/data/siteConfig";
 import { getSiteSettings } from "@/lib/data";
 
@@ -103,6 +105,8 @@ export default async function RootLayout({
           <Footer navItems={navItems} />
         </AuthProvider>
         <ServiceWorkerRegister />
+      <Analytics />
+      <SpeedInsights />
       </body>
     </html>
   );
