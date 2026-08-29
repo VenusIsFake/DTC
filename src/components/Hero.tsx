@@ -33,9 +33,6 @@ export default function Hero({
               WE PRESENT TO YOU
             </span>
             <span className="flex-1 h-px bg-gradient-to-r from-[#755B18]/50 via-[#DCD7CB]/40 to-transparent" />
-            <span className="text-[9.5px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5C6672] font-mono shrink-0">
-              FMDC Casablanca
-            </span>
           </div>
 
           {/* Title & Slogan Row */}
