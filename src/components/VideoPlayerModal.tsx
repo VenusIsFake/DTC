@@ -84,9 +84,9 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
   };
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-lg animate-fadeIn overflow-y-auto">
       {/* Backdrop overlay click */}
-      <div className="absolute inset-0" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/60" onClick={onClose} />
 
       {/* Modal Container */}
       <div
@@ -94,13 +94,13 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
         role="dialog"
         aria-modal="true"
         aria-label={talk.topic}
-        className="relative z-10 w-full max-w-2xl bg-[#F7F5F0] border border-[#DCD7CB]/50 rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row max-h-[90dvh]"
+        className="relative z-10 w-full max-w-2xl bg-[#F7F5F0] border border-[#DCD7CB]/80 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90dvh] my-auto"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
           data-autofocus
-          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-white hover:text-[#755B18] hover:bg-black/80 transition-all focus-visible:ring-2 focus-visible:ring-[#755B18]"
+          className="absolute top-3 right-3 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-black/75 text-white hover:text-[#755B18] hover:bg-black border border-white/20 shadow-xl backdrop-blur-md transition-all focus-visible:ring-2 focus-visible:ring-[#755B18] cursor-pointer"
           aria-label="Fermer"
         >
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -128,16 +128,16 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
           <div className="absolute bottom-0 inset-x-0 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-center justify-between opacity-90 group-hover:opacity-100 transition-opacity">
             <button
               onClick={togglePlay}
-              className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#755B18] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
+              className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-[#D4AF37] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
               aria-label={isPlaying ? "Pause" : "Lecture"}
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-current" />}
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={toggleMute}
-                className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#755B18] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-[#D4AF37] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
                 aria-label={isMuted ? "Activer le son" : "Couper le son"}
               >
                 {isMuted ? <VolumeX className="w-5 h-5 text-amber-400" /> : <Volume2 className="w-5 h-5" />}
@@ -145,7 +145,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
 
               <button
                 onClick={toggleFullscreen}
-                className="w-11 h-11 flex items-center justify-center rounded-full text-[#16233A] hover:text-[#755B18] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-[#D4AF37] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
                 aria-label="Plein écran"
               >
                 <Maximize className="w-5 h-5" />
