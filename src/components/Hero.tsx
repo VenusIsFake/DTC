@@ -49,23 +49,46 @@ export default function Hero({ eventsVisible = true }: { eventsVisible?: boolean
         </div>
 
         {/* Crest column */}
-        <div className="hidden lg:flex justify-center items-center pr-4">
+        <div className="hidden lg:flex justify-center items-center pr-4 select-none">
           <div className="relative w-56 xl:w-64 aspect-square">
             <div className="absolute inset-0 rounded-full border border-[#DCD7CB]" />
-            <div className="absolute inset-3 rounded-full border border-[#755B18]/40" />
-            <div className="absolute inset-0 m-auto w-40 xl:w-48 h-40 xl:h-48 rounded-full overflow-hidden border border-[#DCD7CB] shadow-sm">
+            <div className="absolute inset-2.5 xl:inset-3 rounded-full border border-[#755B18]/30" />
+            <div className="absolute inset-0 m-auto w-36 xl:w-44 h-36 xl:h-44 rounded-full overflow-hidden border border-[#DCD7CB] shadow-sm">
               <Image
                 src="/logo.png"
                 alt="Dentalk Club FMDC Logo"
                 fill
-                sizes="192px"
+                sizes="(max-width: 1280px) 144px, 176px"
                 className="object-cover"
                 priority
               />
             </div>
-            <span className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-semibold tracking-[0.22em] uppercase text-[#5C6672] whitespace-nowrap">
-              Depuis 2024
-            </span>
+            {/* Arched text following the bottom outer ring curve */}
+            <svg
+              viewBox="0 0 256 256"
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              aria-hidden="true"
+            >
+              <defs>
+                <path
+                  id="depuis-arc"
+                  d="M 35,182 A 108,108 0 0,0 221,182"
+                  fill="none"
+                />
+              </defs>
+              <text
+                className="font-semibold uppercase fill-[#5C6672]"
+                style={{ fontSize: "10.5px", letterSpacing: "0.26em" }}
+              >
+                <textPath
+                  href="#depuis-arc"
+                  startOffset="50%"
+                  textAnchor="middle"
+                >
+                  DEPUIS 2024
+                </textPath>
+              </text>
+            </svg>
           </div>
         </div>
       </div>
