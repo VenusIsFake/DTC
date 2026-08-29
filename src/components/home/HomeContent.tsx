@@ -20,7 +20,7 @@ export default function HomeContent({
   eventsVisible,
 }: {
   talks: TedxTalk[];
-  featuredEpisode: PodcastEpisode | null;
+  featuredEpisode?: PodcastEpisode | null;
   eventsVisible: boolean;
 }) {
   const [activeTalk, setActiveTalk] = useState<TedxTalk | null>(null);
@@ -120,66 +120,7 @@ export default function HomeContent({
         </section>
       )}
 
-      {/* 4. Let's Talk Podcast Featured Banner */}
-      {featuredEpisode && (
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal>
-          <div className="bg-white border border-[#DCD7CB] rounded-lg p-5 sm:p-10 shadow-sm">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-              <div className="lg:col-span-7 space-y-4">
-                <p className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.18em] uppercase text-red-700">
-                  <Mic className="w-3.5 h-3.5" />
-                  <span>Let&apos;s Talk Podcast · Épisode {featuredEpisode.episodeNumber}</span>
-                </p>
 
-                <h2 className="font-heading font-semibold text-xl sm:text-4xl text-[#16233A] leading-tight tracking-tight">
-                  Rencontre avec {featuredEpisode.guest}
-                </h2>
-
-                <p className="text-xs sm:text-base text-[#3D4A58] leading-relaxed">
-                  {featuredEpisode.synopsis}
-                </p>
-
-                <div className="flex flex-wrap items-center gap-4 pt-1">
-                  <Link
-                    href="/podcast"
-                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md font-semibold text-xs sm:text-sm bg-[#16233A] text-[#F7F5F0] hover:bg-[#233753] transition-colors"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                    <span>Écouter l&apos;épisode</span>
-                  </Link>
-
-                  <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[#5C6672] font-medium">
-                    <span>Co-produit avec le CSD</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-5">
-                <div className="relative aspect-video rounded-lg overflow-hidden border border-[#DCD7CB] group">
-                  <Image
-                    src={featuredEpisode.posterImage}
-                    alt={featuredEpisode.guest}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <Link
-                      href="/podcast"
-                      aria-label={`Écouter l'épisode avec ${featuredEpisode.guest}`}
-                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-red-700 text-white flex items-center justify-center group-hover:scale-110 transition-transform"
-                    >
-                      <Play className="w-5 h-5 sm:w-7 sm:h-7 fill-current translate-x-0.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </Reveal>
-        </section>
-      )}
 
       {/* 5. Activities & Debates Highlights */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">

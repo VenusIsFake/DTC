@@ -21,14 +21,14 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-8 sm:space-y-14 pb-6 sm:pb-10">
-      {/* 1. Hero Banner */}
-      <Hero eventsVisible={settings.events_visible} />
+      {/* 1. Hero Banner with Latest Podcast Showcase */}
+      <Hero eventsVisible={settings.events_visible} featuredEpisode={featuredEpisode} />
 
       {/* 2. Prochain atelier teaser (hidden when the board has none) */}
       {upcoming && <NextAtelierTeaser atelier={upcoming} />}
 
       {/* 3. Interactive DB-driven sections */}
-      <HomeContent talks={talks} featuredEpisode={featuredEpisode} eventsVisible={settings.events_visible} />
+      <HomeContent talks={talks} eventsVisible={settings.events_visible} />
     </div>
   );
 }
