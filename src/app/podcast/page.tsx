@@ -21,7 +21,7 @@ export default async function PodcastPage() {
       <div className="max-w-3xl mx-auto space-y-2 sm:space-y-4">
         <p className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-red-700">
           <Radio className="w-3.5 h-3.5" />
-          <span>Le Podcast des Étudiants, par les Étudiants</span>
+          <span>Un podcast par les étudiants, pour les étudiants</span>
         </p>
         <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">
           Let&apos;s Talk Podcast
@@ -36,7 +36,7 @@ export default async function PodcastPage() {
 
       {/* Behind The Scenes & Studio Production */}
       <Reveal>
-      <section className="glass-card p-4 sm:p-10 rounded-lg border border-[#DCD7CB]/40 space-y-4 sm:space-y-6">
+      <section className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-[#DCD7CB]/50 shadow-sm space-y-4 sm:space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 border-b border-[#DCD7CB]/30 pb-3 sm:pb-4">
           <div className="space-y-0.5 sm:space-y-1">
             <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#755B18]">
@@ -49,8 +49,8 @@ export default async function PodcastPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
-          <div className="relative aspect-video rounded-xl sm:rounded-lg overflow-hidden border border-[#DCD7CB]/50 shadow-xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 items-start">
+          <div className="relative aspect-video rounded-lg sm:rounded-xl overflow-hidden border border-[#DCD7CB]/60 shadow-sm">
             <Image
               src="/media/podcasts/studio_bts_viewfinder.jpg"
               alt="Moniteur Studio Let's Talk"

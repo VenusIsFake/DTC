@@ -12,11 +12,13 @@ export default function StatsCounter({ stats }: { stats: HomeStat[] }) {
     <section className="px-4 sm:px-6 lg:px-8">
       <Reveal>
       <div className="max-w-6xl mx-auto border-y border-[#DCD7CB]">
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#DCD7CB]">
+        <div className="grid grid-cols-2 md:grid-cols-4">
           {stats.map((stat, idx) => (
             <div
               key={`${stat.label}-${idx}`}
               className={`py-5 sm:py-8 text-center ${
+                idx % 2 !== 0 ? "border-l border-[#DCD7CB]" : "border-l-0"
+              } ${idx > 0 ? "md:border-l md:border-[#DCD7CB]" : "md:border-l-0"} ${
                 idx >= 2 ? "border-t border-[#DCD7CB] md:border-t-0" : ""
               }`}
             >

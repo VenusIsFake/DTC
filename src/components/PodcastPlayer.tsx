@@ -20,11 +20,11 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
   return (
     <div className="space-y-5 sm:space-y-8">
       {/* Featured Player Card */}
-      <div className="glass-card p-3.5 sm:p-8 rounded-lg border border-[#DCD7CB]/40 shadow-lg relative overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 items-center">
+      <div className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-[#DCD7CB]/50 shadow-sm relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
           {/* Video / YouTube Screen */}
-          <div className="lg:col-span-7 space-y-2.5 sm:space-y-4">
-            <div className="relative aspect-video w-full rounded-xl sm:rounded-lg overflow-hidden bg-black border border-[#DCD7CB]/50 shadow-xl group">
+          <div className="lg:col-span-7 space-y-3">
+            <div className="relative aspect-video w-full rounded-lg sm:rounded-xl overflow-hidden bg-black border border-[#DCD7CB]/60 shadow-sm group">
               <iframe
                 key={selectedEp.id}
                 src={`https://www.youtube.com/embed/${selectedEp.youtubeId}?rel=0&playsinline=1`}
@@ -35,34 +35,34 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
               />
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs text-[#5C6672] px-1">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs bg-[#F7F5F0]/80 border border-[#DCD7CB]/40 rounded-lg px-3 py-2 text-[#5C6672]">
               <div className="flex items-center gap-3 sm:gap-4">
                 <span className="flex items-center gap-1 font-medium text-[#3D4A58]">
-                  <Calendar className="w-3 h-3 text-[#755B18]" />
+                  <Calendar className="w-3.5 h-3.5 text-[#755B18]" />
                   <span>{selectedEp.releaseDate}</span>
                 </span>
                 <span className="flex items-center gap-1 font-medium text-[#3D4A58]">
-                  <Clock className="w-3 h-3 text-[#755B18]" />
+                  <Clock className="w-3.5 h-3.5 text-[#755B18]" />
                   <span>{selectedEp.duration}</span>
                 </span>
               </div>
               <span className="flex items-center gap-1 font-semibold text-[#755B18]">
-                <Award className="w-3 h-3" />
+                <Award className="w-3.5 h-3.5" />
                 <span>Sponsor: {selectedEp.sponsor}</span>
               </span>
             </div>
           </div>
 
           {/* Episode Info & Synopsis */}
-          <div className="lg:col-span-5 space-y-3 sm:space-y-5">
-            <div className="space-y-1 sm:space-y-2">
+          <div className="lg:col-span-5 space-y-3.5 sm:space-y-4">
+            <div className="space-y-1.5">
               <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#755B18]/15 text-[#755B18] border border-[#755B18]/30">
                 <span>Épisode {selectedEp.episodeNumber}</span>
               </div>
-              <h3 className="text-xl sm:text-3xl font-heading font-semibold text-[#16233A] leading-tight">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-[#16233A] leading-tight tracking-tight">
                 {selectedEp.guest}
               </h3>
-              <p className="text-xs sm:text-sm font-semibold text-[#755B18]">
+              <p className="text-xs sm:text-sm font-semibold text-[#755B18] leading-snug">
                 {selectedEp.role}
               </p>
             </div>
@@ -76,9 +76,9 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
               <h4 className="text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider text-[#3D4A58]">
                 Points Clés & Enseignements
               </h4>
-              <ul className="space-y-1 sm:space-y-1.5">
+              <ul className="space-y-1.5">
                 {selectedEp.takeaways.map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#3D4A58]">
+                  <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#3D4A58] leading-relaxed">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#755B18] shrink-0 mt-0.5" />
                     <span>{point}</span>
                   </li>
@@ -91,7 +91,7 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                 href={selectedEp.youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-md font-semibold text-xs bg-red-600 hover:bg-red-700 text-white transition-all shadow-md"
+                className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs bg-red-600 hover:bg-red-700 text-white transition-all shadow-sm"
               >
                 <Youtube className="w-3.5 h-3.5" />
                 <span>Regarder sur YouTube</span>
