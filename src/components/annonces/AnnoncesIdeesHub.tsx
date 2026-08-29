@@ -66,23 +66,32 @@ export default function AnnoncesIdeesHub({
         </p>
       </div>
 
-      {/* Segmented Tab Switcher */}
+      {/* Dynamic Segmented Tab Switcher with Active Expansion */}
       <div className="flex items-center justify-center sm:justify-start">
-        <div className="bg-[#EFECE4]/80 p-1 rounded-xl border border-[#DCD7CB]/50 inline-flex items-center gap-1 shadow-sm">
+        <div className="bg-[#EFECE4]/90 p-1.5 rounded-2xl border border-[#DCD7CB]/60 inline-flex items-center gap-1.5 shadow-sm">
+          {/* Annonces & Ateliers Tab */}
           <button
             type="button"
             onClick={() => handleTabChange("annonces")}
-            className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "annonces"
-                ? "bg-white text-[#16233A] shadow-sm border border-[#DCD7CB]/60"
-                : "text-[#5C6672] hover:text-[#16233A] hover:bg-white/40"
+                ? "bg-white text-[#16233A] font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-[#DCD7CB]/70 scale-[1.02] z-10"
+                : "text-[#5C6672] hover:text-[#16233A] hover:bg-white/50 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium scale-95 opacity-80 hover:opacity-100"
             }`}
           >
-            <Megaphone className="w-3.5 h-3.5 text-[#755B18]" />
-            <span>Annonces &amp; Ateliers</span>
+            <Megaphone
+              className={`transition-transform duration-300 ${
+                activeTab === "annonces"
+                  ? "w-4 h-4 text-[#755B18] scale-110"
+                  : "w-3.5 h-3.5 text-[#5C6672]"
+              }`}
+            />
+            <span className="tracking-tight whitespace-nowrap">
+              Annonces &amp; Ateliers
+            </span>
             {initialAnnouncements.length > 0 && (
               <span
-                className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                className={`transition-colors duration-300 px-2 py-0.5 rounded-full text-[10px] font-bold ${
                   activeTab === "annonces"
                     ? "bg-[#755B18]/15 text-[#755B18]"
                     : "bg-[#DCD7CB]/60 text-[#5C6672]"
@@ -93,20 +102,29 @@ export default function AnnoncesIdeesHub({
             )}
           </button>
 
+          {/* Boîte à Idées Tab */}
           <button
             type="button"
             onClick={() => handleTabChange("idees")}
-            className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "idees"
-                ? "bg-white text-[#16233A] shadow-sm border border-[#DCD7CB]/60"
-                : "text-[#5C6672] hover:text-[#16233A] hover:bg-white/40"
+                ? "bg-white text-[#16233A] font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-[#DCD7CB]/70 scale-[1.02] z-10"
+                : "text-[#5C6672] hover:text-[#16233A] hover:bg-white/50 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium scale-95 opacity-80 hover:opacity-100"
             }`}
           >
-            <Lightbulb className="w-3.5 h-3.5 text-[#755B18]" />
-            <span>Boîte à Idées</span>
+            <Lightbulb
+              className={`transition-transform duration-300 ${
+                activeTab === "idees"
+                  ? "w-4 h-4 text-[#755B18] scale-110"
+                  : "w-3.5 h-3.5 text-[#5C6672]"
+              }`}
+            />
+            <span className="tracking-tight whitespace-nowrap">
+              Boîte à Idées
+            </span>
             {initialIdeas.length > 0 && (
               <span
-                className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                className={`transition-colors duration-300 px-2 py-0.5 rounded-full text-[10px] font-bold ${
                   activeTab === "idees"
                     ? "bg-[#755B18]/15 text-[#755B18]"
                     : "bg-[#DCD7CB]/60 text-[#5C6672]"
