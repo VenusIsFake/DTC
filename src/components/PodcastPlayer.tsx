@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Play, Youtube, Award, Clock, Calendar, CheckCircle2, ChevronRight } from "lucide-react";
+import { Play, Youtube, Award, Clock, Calendar, CheckCircle2, ChevronRight, Eye } from "lucide-react";
 import type { PodcastEpisode } from "@/data/podcastData";
 
 export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[] }) {
@@ -45,6 +45,12 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                   <Clock className="w-3.5 h-3.5 text-[#755B18]" />
                   <span>{selectedEp.duration}</span>
                 </span>
+                {selectedEp.views && (
+                  <span className="flex items-center gap-1 font-medium text-[#3D4A58]">
+                    <Eye className="w-3.5 h-3.5 text-[#755B18]" />
+                    <span>{selectedEp.views} vues</span>
+                  </span>
+                )}
               </div>
               <span className="flex items-center gap-1 font-semibold text-[#755B18]">
                 <Award className="w-3.5 h-3.5" />

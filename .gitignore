@@ -29,7 +29,8 @@ graphify-out/cache/
 # Large media files, scraped archives & raw videos
 *.mp4
 *.mov
-/public/media/
+/public/media/*
+!/public/media/podcasts/
 /instagram/
 
 !.env.example

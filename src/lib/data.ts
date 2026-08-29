@@ -153,10 +153,13 @@ export async function getIdeaBoard(): Promise<IdeaBoardItem[]> {
 // ---------------------------------------------------------------------------
 
 export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
-  const poster =
-    row.youtube_id
-      ? `https://img.youtube.com/vi/${row.youtube_id}/maxresdefault.jpg`
-      : row.poster_image;
+  const poster = `/media/podcasts/youtube_thumb_ep${row.episode_number}.jpg`;
+  const defaultViews: Record<number, string> = {
+    4: "1.4k",
+    3: "1.1k",
+    2: "980",
+    1: "2.3k",
+  };
 
   return {
     id: row.id,
@@ -169,6 +172,7 @@ export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
     youtubeUrl: youtubeWatchUrl(row.youtube_id),
     posterImage: poster,
     duration: row.duration,
+    views: (row as unknown as { views?: string }).views || defaultViews[row.episode_number] || "1.2k",
     synopsis: row.synopsis,
     takeaways: row.takeaways ?? [],
     sponsor: row.sponsor,

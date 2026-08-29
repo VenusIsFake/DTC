@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Play, Radio, Calendar } from "lucide-react";
+import { ArrowRight, Play, Radio, Calendar, Eye } from "lucide-react";
 import type { PodcastEpisode } from "@/data/podcastData";
 
 export default function Hero({
@@ -13,6 +13,13 @@ export default function Hero({
   eventsVisible?: boolean;
   featuredEpisode?: PodcastEpisode | null;
 }) {
+  const [imgSrc, setImgSrc] = useState(
+    featuredEpisode?.posterImage ||
+      (featuredEpisode?.episodeNumber
+        ? `/media/podcasts/youtube_thumb_ep${featuredEpisode.episodeNumber}.jpg`
+        : "/media/podcasts/youtube_thumb_ep4.jpg")
+  );
+
   if (!featuredEpisode) return null;
 
   return (
@@ -26,9 +33,17 @@ export default function Hero({
               <Radio className="w-4 h-4" />
               <span>Dernière Sortie · Épisode {featuredEpisode.episodeNumber}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs sm:text-sm text-[#5C6672] font-medium">
-              <Calendar className="w-3.5 h-3.5 text-[#755B18]" />
-              <span>{featuredEpisode.releaseDate}</span>
+
+            <div className="flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm text-[#5C6672] font-medium">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#EFECE4]/70 border border-[#DCD7CB]/40 text-[#16233A] font-semibold">
+                <Eye className="w-3.5 h-3.5 text-[#755B18]" />
+                <span>{featuredEpisode.views || "1.4k"} vues</span>
+              </span>
+
+              <span className="inline-flex items-center gap-1">
+                <Calendar className="w-3.5 h-3.5 text-[#755B18]" />
+                <span>{featuredEpisode.releaseDate}</span>
+              </span>
             </div>
           </div>
 
@@ -38,14 +53,19 @@ export default function Hero({
             <div className="lg:col-span-7">
               <Link
                 href="/podcast"
-                className="relative aspect-video w-full rounded-xl sm:rounded-2xl overflow-hidden bg-black border border-[#DCD7CB]/60 shadow-md group/thumb block"
+                className="relative aspect-video w-full rounded-xl sm:rounded-2xl overflow-hidden bg-black/90 border border-[#DCD7CB]/60 shadow-md group/thumb block"
               >
                 <Image
-                  src={featuredEpisode.posterImage}
+                  src={imgSrc}
                   alt={featuredEpisode.guest}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 55vw"
+                  onError={() =>
+                    setImgSrc(
+                      `/media/podcasts/youtube_thumb_ep${featuredEpisode.episodeNumber}.jpg`
+                    )
+                  }
                   className="object-cover group-hover/thumb:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/15 group-hover/thumb:bg-black/30 transition-colors flex items-center justify-center">
@@ -53,8 +73,14 @@ export default function Hero({
                     <Play className="w-5 h-5 sm:w-7 sm:h-7 fill-current translate-x-0.5" />
                   </div>
                 </div>
+
+                <div className="absolute bottom-3 left-3 px-2 py-1 rounded-md bg-black/85 text-white text-xs font-semibold flex items-center gap-1.5 shadow backdrop-blur-sm">
+                  <Eye className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <span>{featuredEpisode.views || "1.4k"} vues</span>
+                </div>
+
                 {featuredEpisode.duration && (
-                  <div className="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-black/85 text-white text-xs font-semibold tabular-nums leading-none shadow">
+                  <div className="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-black/85 text-white text-xs font-semibold tabular-nums leading-none shadow backdrop-blur-sm">
                     {featuredEpisode.duration}
                   </div>
                 )}
