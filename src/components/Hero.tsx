@@ -30,7 +30,7 @@ export default function Hero({
           <div className="flex items-center gap-2.5 sm:gap-3.5">
             <span className="w-6 sm:w-10 h-px bg-[#755B18]/70 shrink-0" />
             <span className="text-[10.5px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[#755B18] font-mono">
-              DTC PRESENTS TO YOU
+              WE PRESENT TO YOU
             </span>
             <span className="flex-1 h-px bg-gradient-to-r from-[#755B18]/50 via-[#DCD7CB]/40 to-transparent" />
             <span className="text-[9.5px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5C6672] font-mono shrink-0">

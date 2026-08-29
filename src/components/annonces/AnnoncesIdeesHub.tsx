@@ -48,7 +48,7 @@ export default function AnnoncesIdeesHub({
   return (
     <div className="space-y-6 sm:space-y-10">
       {/* Dynamic Header Banner */}
-      <div className="max-w-2xl mx-auto space-y-2 sm:space-y-4 text-center sm:text-left">
+      <div className="max-w-2xl mx-auto space-y-2 sm:space-y-4 text-center">
         <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
           {activeTab === "annonces"
             ? "La vie du club, en direct"
@@ -67,7 +67,7 @@ export default function AnnoncesIdeesHub({
       </div>
 
       {/* Dynamic Segmented Tab Switcher with Active Expansion */}
-      <div className="flex items-center justify-center sm:justify-start">
+      <div className="flex items-center justify-center">
         <div className="bg-[#EFECE4]/90 p-1.5 rounded-2xl border border-[#DCD7CB]/60 inline-flex items-center gap-1.5 shadow-sm">
           {/* Annonces & Ateliers Tab */}
           <button
