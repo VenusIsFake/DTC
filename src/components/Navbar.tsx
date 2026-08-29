@@ -94,7 +94,9 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive =
+              pathname === item.href ||
+              (item.href === "/annonces" && pathname.startsWith("/idees"));
             return (
               <Link
                 key={item.href}
@@ -232,7 +234,9 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           className="lg:hidden bg-[#F7F5F0] border-b border-[#DCD7CB] px-4 pt-2 pb-5 space-y-0.5 shadow-lg max-h-[80dvh] overflow-y-auto animate-drop-in"
         >
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive =
+              pathname === item.href ||
+              (item.href === "/annonces" && pathname.startsWith("/idees"));
             return (
               <Link
                 key={item.href}

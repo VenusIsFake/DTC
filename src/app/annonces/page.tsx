@@ -1,46 +1,30 @@
-import React from "react";
-import { CalendarDays } from "lucide-react";
-import AnnouncementsFeed from "@/components/annonces/AnnouncementsFeed";
-import { getPublishedAnnouncements } from "@/lib/data";
-import Reveal from "@/components/Reveal";
+import React, { Suspense } from "react";
+import AnnoncesIdeesHub from "@/components/annonces/AnnoncesIdeesHub";
+import { getPublishedAnnouncements, getIdeaBoard } from "@/lib/data";
 
 export const metadata = {
-  title: "Annonces & Ateliers",
+  title: "Annonces & Idées",
   description:
-    "Fil officiel du Dentalk Club FMDC : ateliers hebdomadaires d'éloquence, annonces du bureau et participation en un clic.",
+    "Hub communautaire de Dentalk Club FMDC : ateliers hebdomadaires d'éloquence, annonces officielles du bureau et boîte à idées collaborative.",
   alternates: {
     canonical: "/annonces",
   },
 };
 
 export default async function AnnoncesPage() {
-  const announcements = await getPublishedAnnouncements();
+  const [announcements, ideas] = await Promise.all([
+    getPublishedAnnouncements(),
+    getIdeaBoard(),
+  ]);
 
   return (
-    <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6 sm:space-y-10">
-      {/* Header Banner */}
-      <div className="max-w-2xl mx-auto space-y-2 sm:space-y-4">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
-          La vie du club, en direct
-        </p>
-        <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">
-          Annonces &amp; Ateliers
-        </h1>
-        <p className="text-xs sm:text-base text-[#5C6672] leading-relaxed">
-          Les prochains ateliers d&apos;éloquence, débats et informations officielles du bureau.
-          Connectez-vous pour confirmer votre participation.
-        </p>
-      </div>
-
-      {/* Feed */}
-      <Reveal>
-      <AnnouncementsFeed initialItems={announcements} />
-      </Reveal>
-
-      <p className="flex items-center justify-center gap-1.5 text-[11px] text-[#5F6774] pt-2">
-        <CalendarDays className="w-3.5 h-3.5" />
-        Les ateliers ont lieu à la FMDC Casablanca — la salle est précisée dans chaque annonce.
-      </p>
+    <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <Suspense fallback={<div className="h-48 flex items-center justify-center text-xs text-[#5C6672]">Chargement...</div>}>
+        <AnnoncesIdeesHub
+          initialAnnouncements={announcements}
+          initialIdeas={ideas}
+        />
+      </Suspense>
     </div>
   );
 }

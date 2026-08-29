@@ -39,8 +39,7 @@ export const siteConfig = {
   getNavItems(eventsVisible: boolean): NavItem[] {
     const items: NavItem[] = [
       { label: "Accueil", href: "/" },
-      { label: "Annonces", href: "/annonces" },
-      { label: "Idées", href: "/idees" },
+      { label: "Annonces & Idées", href: "/annonces" },
     ];
     if (eventsVisible) {
       items.push({ label: "TEDx & Débats", href: "/events" });
