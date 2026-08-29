@@ -70,7 +70,7 @@ export default function Hero({
                 {/* Poster / Video Thumbnail */}
                 <Link
                   href="/podcast"
-                  className="sm:col-span-5 relative aspect-video rounded-lg sm:rounded-xl overflow-hidden bg-black border border-[#DCD7CB]/50 group/thumb block"
+                  className="sm:col-span-5 relative aspect-video rounded-lg sm:rounded-xl overflow-hidden bg-black/90 border border-[#DCD7CB]/60 shadow-sm group/thumb block"
                 >
                   <Image
                     src={featuredEpisode.posterImage}
@@ -79,11 +79,16 @@ export default function Hero({
                     sizes="(max-width: 640px) 100vw, 240px"
                     className="object-cover group-hover/thumb:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg group-hover/thumb:scale-110 transition-transform">
-                      <Play className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-current translate-x-0.5" />
+                  <div className="absolute inset-0 bg-black/15 group-hover/thumb:bg-black/30 transition-colors flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-white/95 text-red-600 shadow-md backdrop-blur-sm flex items-center justify-center group-hover/thumb:scale-110 group-hover/thumb:bg-red-600 group-hover/thumb:text-white transition-all">
+                      <Play className="w-4 h-4 fill-current translate-x-0.5" />
                     </div>
                   </div>
+                  {featuredEpisode.duration && (
+                    <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/80 text-white text-[10px] font-semibold tabular-nums leading-none">
+                      {featuredEpisode.duration}
+                    </div>
+                  )}
                 </Link>
 
                 {/* Episode Details */}
