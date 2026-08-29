@@ -24,26 +24,29 @@ export default function Hero({
   return (
     <section className="px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-6 pb-0">
       <div className="max-w-6xl mx-auto space-y-2.5 sm:space-y-4">
-        {/* Header Row: Title & Slogan on Left, DTC Presents To You on Right */}
-        <div className="flex items-center justify-between gap-2.5 sm:gap-6 border-b border-[#DCD7CB]/40 pb-2 sm:pb-3">
-          <div className="space-y-0.5 min-w-0">
-            <h1 className="font-heading font-semibold text-2xl sm:text-4xl lg:text-5xl text-[#16233A] tracking-tight leading-tight truncate sm:overflow-visible">
-              Dentalk <span className="text-[#755B18]">Club</span>
-            </h1>
-            <p className="font-heading italic text-[11px] sm:text-sm md:text-base text-[#3D4A58] line-clamp-1 sm:line-clamp-none">
-              &laquo;&nbsp;{siteConfig.tagline}&nbsp;&raquo;
-            </p>
+        {/* Cinematic Brand Header Lockup */}
+        <div className="border-b border-[#DCD7CB]/50 pb-2.5 sm:pb-3.5 space-y-1.5 sm:space-y-2">
+          {/* Editorial Marquee Line */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
+            <span className="w-6 sm:w-10 h-px bg-[#755B18]/70 shrink-0" />
+            <span className="text-[10.5px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[#755B18] font-mono">
+              DTC PRESENTS TO YOU
+            </span>
+            <span className="flex-1 h-px bg-gradient-to-r from-[#755B18]/50 via-[#DCD7CB]/40 to-transparent" />
+            <span className="text-[9.5px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5C6672] font-mono shrink-0">
+              FMDC Casablanca
+            </span>
           </div>
 
-          <div className="shrink-0 text-right">
-            <div className="inline-block px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-[#EFECE4]/70 border border-[#DCD7CB]/50">
-              <span className="block text-[8.5px] sm:text-[11px] font-bold tracking-[0.14em] sm:tracking-[0.18em] uppercase text-[#755B18]">
-                DTC Presents To You
-              </span>
-              <span className="block text-[8px] sm:text-[10px] text-[#5C6672] font-semibold tracking-wide">
-                FMDC Casablanca
-              </span>
-            </div>
+          {/* Title & Slogan Row */}
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
+            <h1 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-[#16233A] tracking-tight leading-tight">
+              Dentalk <span className="text-[#755B18]">Club</span>
+            </h1>
+
+            <p className="font-heading italic text-xs sm:text-sm md:text-base text-[#3D4A58]">
+              &laquo;&nbsp;{siteConfig.tagline}&nbsp;&raquo;
+            </p>
           </div>
         </div>
 
