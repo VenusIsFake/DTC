@@ -153,6 +153,11 @@ export async function getIdeaBoard(): Promise<IdeaBoardItem[]> {
 // ---------------------------------------------------------------------------
 
 export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
+  const poster =
+    row.youtube_id
+      ? `https://img.youtube.com/vi/${row.youtube_id}/maxresdefault.jpg`
+      : row.poster_image;
+
   return {
     id: row.id,
     episodeNumber: row.episode_number,
@@ -162,7 +167,7 @@ export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
     releaseDate: row.release_date,
     youtubeId: row.youtube_id,
     youtubeUrl: youtubeWatchUrl(row.youtube_id),
-    posterImage: row.poster_image,
+    posterImage: poster,
     duration: row.duration,
     synopsis: row.synopsis,
     takeaways: row.takeaways ?? [],
