@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, Play, Pause, Volume2, VolumeX, Maximize, ExternalLink } from "lucide-react";
 import { TedxTalk } from "@/data/tedxData";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
@@ -16,10 +17,15 @@ interface IOSVideo extends HTMLVideoElement {
 }
 
 export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProps) {
+  const [mounted, setMounted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const dialogRef = useOverlayDialog<HTMLDivElement>(talk !== null, onClose);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true); // Default to muted for universal Safari autoplay compliance
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Always start muted: iOS rejects unmuted autoplay, so an unmuted state
   // carried over from a previous open would leave the next talk stuck on its poster.
@@ -37,7 +43,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
     }
   }, [talk]);
 
-  if (!talk) return null;
+  if (!talk || !mounted) return null;
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -83,10 +89,10 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-lg animate-fadeIn overflow-y-auto">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-2.5 sm:p-6 bg-black/92 backdrop-blur-xl animate-fadeIn overflow-y-auto">
       {/* Backdrop overlay click */}
-      <div className="fixed inset-0 bg-black/60" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/75" onClick={onClose} />
 
       {/* Modal Container */}
       <div
@@ -196,6 +202,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
