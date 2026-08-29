@@ -20,7 +20,7 @@ export default function Hero({
         {/* Club Intro Text Column */}
         <div className="lg:col-span-5 space-y-4 sm:space-y-5">
           <div>
-            <h1 className="font-heading font-bold text-4xl sm:text-6xl lg:text-5xl xl:text-6xl text-[#16233A] leading-[1.05] tracking-tight">
+            <h1 className="font-heading font-semibold text-4xl sm:text-6xl lg:text-[4.25rem] text-[#16233A] leading-[1.05] tracking-tight">
               Dentalk Club
             </h1>
 
@@ -89,7 +89,7 @@ export default function Hero({
                 {/* Episode Details */}
                 <div className="sm:col-span-7 space-y-1.5 sm:space-y-2">
                   <div className="space-y-0.5">
-                    <h3 className="text-base sm:text-lg font-heading font-bold text-[#16233A] leading-tight group-hover:text-[#755B18] transition-colors">
+                    <h3 className="text-base sm:text-lg font-heading font-semibold text-[#16233A] leading-tight group-hover:text-[#755B18] transition-colors">
                       {featuredEpisode.guest}
                     </h3>
                     <p className="text-[11px] sm:text-xs font-semibold text-[#755B18] line-clamp-1">
