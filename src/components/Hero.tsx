@@ -58,7 +58,8 @@ export default function Hero({
               <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-red-700 uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-600 animate-pulse shrink-0" />
                 <Radio className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
-                <span className="truncate">Dernière Sortie · Ép. {featuredEpisode.episodeNumber}</span>
+                <span className="sm:hidden">Dernière Sortie · Ép. {featuredEpisode.episodeNumber}</span>
+                <span className="hidden sm:inline">Dernière Sortie · Épisode {featuredEpisode.episodeNumber}</span>
               </div>
 
               <div className="flex items-center gap-1.5 sm:gap-3 text-[10px] sm:text-xs text-[#5C6672] font-medium shrink-0">
@@ -123,12 +124,12 @@ export default function Hero({
                   <h2 className="text-base sm:text-xl lg:text-2xl font-heading font-semibold text-[#16233A] leading-snug tracking-tight">
                     {featuredEpisode.guest}
                   </h2>
-                  <p className="text-[10.5px] sm:text-xs font-semibold text-[#755B18] line-clamp-1">
+                  <p className="text-[10.5px] sm:text-xs font-semibold text-[#755B18] line-clamp-1 sm:line-clamp-none">
                     {featuredEpisode.role}
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed line-clamp-2">
+                <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed line-clamp-2 sm:line-clamp-none">
                   {featuredEpisode.synopsis}
                 </p>
 
@@ -138,7 +139,8 @@ export default function Hero({
                     className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs bg-[#16233A] text-[#F7F5F0] hover:bg-[#233753] transition-all shadow-sm text-center"
                   >
                     <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
-                    <span>Écouter</span>
+                    <span className="sm:hidden">Écouter</span>
+                    <span className="hidden sm:inline">Écouter l&apos;épisode</span>
                   </Link>
 
                   <Link
