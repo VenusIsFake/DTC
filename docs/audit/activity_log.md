@@ -304,3 +304,14 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **Documentation :** nouveau `docs/platform/production-readiness.md` (référence complète du sweep : mandats, accès, onglet Accueil, podcasts, événements, cycle de vie des comptes, matrice des clés) ; refresh de `overview.md`, `docs/README.md` (le plan plateforme n'était plus « not yet implemented »), `architecture.md` (9 onglets, contenu ops, buckets) et `deployment.md` (ligne `SUPABASE_SERVICE_ROLE_KEY`).
 - **Déploiement :** commit f906fae poussé + déployé (49 s).
 
+## 2026-09-01 (suite) — Miniatures YouTube, crop photo, partenaires supprimables, images de cartes
+
+**Demandes de Venus : utiliser les miniatures YouTube (plus nettes), réutiliser le modal de crop pour les photos de mandat, pouvoir supprimer les 2 partenaires par défaut, synchroniser le footer, choisir l'image de galerie des cartes d'activité de l'accueil.**
+
+- **Miniatures YouTube :** fallback poster = `i.ytimg.com/vi/<id>/maxresdefault.jpg` (hqdefault en cas de 404) dans le hero, la liste du lecteur et les seeds statiques ; `poster_image` des 4 épisodes vidé en base (les anciens chemins locaux flous ne prime plus) — vérifié en prod sur / et /podcast. L'import YouTube renseigne déjà ce champ avec la miniature.
+- **Crop photo mandat :** le bouton photo du formulaire membre ouvre le modal de crop de l'espace membre (512×512, zoom/pan) puis upload vers `club-media/mandates/<id>/`.
+- **Partenaires supprimables :** nom vidé + Enregistrer = carte retirée de /about ET du footer (qui reçoit maintenant sponsor/partner du layout via `site_settings`) ; sans ligne en base, les valeurs par défaut s'affichent.
+- **Cartes d'activité :** nouvelle carte Accueil — sélecteur d'image publié de la galerie pour chacune des 3 cartes « Écosystème » (`activity_card_images` jsonb, « Par défaut » conserve l'image du site, aperçu miniature).
+- **Vérifs :** tsc 0, eslint 0, vitest 22/22, build propre ; prod : miniatures i.ytimg servies sur / et /podcast, Flex Dental visible sur /about.
+- **Déploiement :** commits 336b760 (prefill partenaires/stats) + ad78bdb poussés et déployés.
+
