@@ -31,5 +31,6 @@ export async function GET() {
   return NextResponse.json({
     youtube: Boolean(process.env.YOUTUBE_API_KEY),
     resend: Boolean(process.env.RESEND_API_KEY),
+    serviceKey: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
   });
 }
