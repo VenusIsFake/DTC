@@ -83,6 +83,21 @@ async function fetchSiteSettings(): Promise<SiteSettings> {
         );
         if (stats.length > 0) settings.home_stats = stats;
       }
+      if (typeof entry.value === "string" && entry.value.trim() !== "") {
+        if (entry.key === "marquee_line") settings.marquee_line = entry.value.trim();
+        if (entry.key === "hero_tagline") settings.hero_tagline = entry.value.trim();
+        if (entry.key === "highlight_kicker") settings.highlight_kicker = entry.value.trim();
+        if (entry.key === "highlight_date") settings.highlight_date = entry.value.trim();
+        if (entry.key === "about_intro") settings.about_intro = entry.value.trim();
+      }
+      const asPartner = (v: unknown) =>
+        typeof v === "object" && v !== null &&
+        typeof (v as { name?: unknown }).name === "string" &&
+        typeof (v as { tagline?: unknown }).tagline === "string"
+          ? { name: (v as { name: string }).name, tagline: (v as { tagline: string }).tagline }
+          : null;
+      if (entry.key === "sponsor") settings.sponsor = asPartner(entry.value) ?? undefined;
+      if (entry.key === "partner_club") settings.partner_club = asPartner(entry.value) ?? undefined;
     }
     return settings;
   }, FALLBACK_SETTINGS);
@@ -153,13 +168,9 @@ export async function getIdeaBoard(): Promise<IdeaBoardItem[]> {
 // ---------------------------------------------------------------------------
 
 export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
-  const poster = `/media/podcasts/youtube_thumb_ep${row.episode_number}.jpg`;
-  const defaultViews: Record<number, string> = {
-    4: "1.4k",
-    3: "1.1k",
-    2: "980",
-    1: "2.3k",
-  };
+  // Console-entered poster wins; the committed media file is only a fallback
+  // so episodes 5+ don't 404 when no dev ships a youtube_thumb_epN.jpg.
+  const poster = row.poster_image?.trim() || `/media/podcasts/youtube_thumb_ep${row.episode_number}.jpg`;
 
   return {
     id: row.id,
@@ -172,7 +183,6 @@ export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
     youtubeUrl: youtubeWatchUrl(row.youtube_id),
     posterImage: poster,
     duration: row.duration,
-    views: (row as unknown as { views?: string }).views || defaultViews[row.episode_number] || "1.2k",
     synopsis: row.synopsis,
     takeaways: row.takeaways ?? [],
     sponsor: row.sponsor,
@@ -344,6 +354,8 @@ const FALLBACK_MANDATE: MandateWithMembers = {
     name: m.name,
     role: m.role,
     sort: i + 1,
+    photo_url: null,
+    profile_id: null,
     created_at: "",
   })),
 };

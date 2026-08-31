@@ -2,10 +2,11 @@ import React from "react";
 import Image from "next/image";
 import InfographicViewer from "@/components/InfographicViewer";
 import { siteConfig } from "@/data/siteConfig";
-import { getAboutSections, getMandates } from "@/lib/data";
+import { getAboutSections, getMandates, getSiteSettings } from "@/lib/data";
 import type { MandateWithMembers } from "@/lib/types";
-import { Award, Heart, Crown, Users } from "lucide-react";
+import { Award, Heart, Crown } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import UserAvatar from "@/components/UserAvatar";
 
 export const metadata = {
   title: "À Propos",
@@ -16,10 +17,16 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  const [sections, mandates] = await Promise.all([getAboutSections(), getMandates()]);
+  const [sections, mandates, settings] = await Promise.all([
+    getAboutSections(),
+    getMandates(),
+    getSiteSettings(),
+  ]);
   const current = mandates.find((m) => m.is_current) ?? mandates[0];
   const archived = mandates.filter((m) => m.id !== current?.id);
   const mission = sections.find((s) => s.key === "mission");
+  const sponsor = settings.sponsor ?? siteConfig.sponsor;
+  const partnerClub = settings.partner_club ?? siteConfig.partnerClub;
 
   return (
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-8 sm:space-y-14">
@@ -32,8 +39,8 @@ export default async function AboutPage() {
           À Propos de Dentalk Club
         </h1>
         <p className="text-xs sm:text-base text-[#5C6672] leading-relaxed">
-          Fondé en novembre 2024 à la Faculté de Médecine Dentaire de Casablanca pour forger les
-          futurs leaders de l&apos;art dentaire.
+          {settings.about_intro ||
+            "Fondé en novembre 2024 à la Faculté de Médecine Dentaire de Casablanca pour forger les futurs leaders de l'art dentaire."}
         </p>
       </div>
 
@@ -116,9 +123,7 @@ export default async function AboutPage() {
                 key={member.id}
                 className="glass-card p-3 sm:p-5 rounded-xl sm:rounded-lg border border-[#DCD7CB]/30 text-center space-y-1 flex flex-col justify-between"
               >
-                <span className="inline-flex mx-auto p-2 rounded-lg bg-[#EFECE4] text-[#755B18]">
-                  <Users className="w-3.5 h-3.5" />
-                </span>
+                <UserAvatar name={member.name} src={member.photo_url} size={64} className="mx-auto" />
                 <h3 className="text-xs sm:text-sm font-heading font-bold text-[#16233A] leading-snug">
                   {member.name}
                 </h3>
@@ -154,16 +159,16 @@ export default async function AboutPage() {
                   <div className="p-4 sm:p-6 rounded-xl sm:rounded-lg bg-[#EFECE4]/50 border border-[#DCD7CB]/40 space-y-1.5">
                     <div className="flex items-center gap-2 text-[#16233A] font-bold text-base sm:text-lg">
                       <Award className="w-4 h-4 text-[#755B18]" />
-                      <span>{siteConfig.sponsor.name}</span>
+                      <span>{sponsor.name}</span>
                     </div>
-                    <p className="text-xs text-[#3D4A58]">{siteConfig.sponsor.tagline}</p>
+                    <p className="text-xs text-[#3D4A58]">{sponsor.tagline}</p>
                   </div>
                   <div className="p-4 sm:p-6 rounded-xl sm:rounded-lg bg-[#EFECE4]/50 border border-[#DCD7CB]/40 space-y-1.5">
                     <div className="flex items-center gap-2 text-[#16233A] font-bold text-base sm:text-lg">
                       <Heart className="w-4 h-4 text-[#755B18]" />
-                      <span>{siteConfig.partnerClub.name}</span>
+                      <span>{partnerClub.name}</span>
                     </div>
-                    <p className="text-xs text-[#3D4A58]">{siteConfig.partnerClub.tagline}</p>
+                    <p className="text-xs text-[#3D4A58]">{partnerClub.tagline}</p>
                   </div>
                 </div>
               </div>
@@ -230,6 +235,7 @@ function ArchivedMandate({ mandate }: { mandate: MandateWithMembers }) {
               key={member.id}
               className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[#EFECE4]/50 border border-[#DCD7CB]/40 text-[11px]"
             >
+              <UserAvatar name={member.name} src={member.photo_url} size={20} />
               <span className="font-semibold text-[#16233A]">{member.name}</span>
               <span className="text-[#755B18]">{member.role}</span>
             </span>

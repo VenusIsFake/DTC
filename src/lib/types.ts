@@ -143,10 +143,22 @@ export interface HomeStat {
   label: string;
 }
 
+export interface PartnerCard {
+  name: string;
+  tagline: string;
+}
+
 export interface SiteSettings {
   events_visible: boolean;
   promo_years: number[];
   home_stats?: HomeStat[];
+  marquee_line?: string;
+  hero_tagline?: string;
+  highlight_kicker?: string;
+  highlight_date?: string;
+  about_intro?: string;
+  sponsor?: PartnerCard;
+  partner_club?: PartnerCard;
 }
 
 export interface Mandate {
@@ -163,7 +175,18 @@ export interface MandateMember {
   name: string;
   role: string;
   sort: number;
+  photo_url: string | null;
+  profile_id: string | null;
   created_at: string;
+}
+
+/** Minimal profile shape for the console member picker (bureau_list_profiles RPC). */
+export interface ProfileOption {
+  id: string;
+  full_name: string;
+  avatar_url: string | null;
+  promo: number | null;
+  committee: string;
 }
 
 export interface MandateWithMembers extends Mandate {

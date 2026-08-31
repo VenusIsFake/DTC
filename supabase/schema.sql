@@ -1,6 +1,8 @@
 -- ============================================================================
 -- DTC Club Platform — Supabase schema (v1)
 -- Apply once in the Supabase SQL editor (or via MCP) on a fresh project.
+-- Live schema deltas are kept in supabase/migrations/ (applied via MCP);
+-- this file stays the fresh-install source of truth — keep both in sync.
 -- Model: RLS is the enforcement layer; the Next.js app only reacts to what
 -- Supabase allows. Sensitive reads go through SECURITY DEFINER RPCs that
 -- check the caller's role internally.
@@ -158,6 +160,8 @@ create table if not exists public.mandate_members (
   name text not null,
   role text not null,
   sort integer not null default 0,
+  photo_url text,
+  profile_id uuid references public.profiles (id) on delete set null,
   created_at timestamptz not null default now(),
   unique (mandate_id, name)
 );
@@ -989,3 +993,14 @@ select
 from public.announcements a
 left join public.profiles p on p.id = a.author_id
 where a.status = 'published';
+
+-- ============================================================================
+-- v2.2 (2026-08-31) — mandate member photos + profile linking (see
+-- supabase/migrations/20260831_mandate_members_photo_profile.sql).
+-- ============================================================================
+
+alter table public.mandate_members add column if not exists photo_url text;
+alter table public.mandate_members add column if not exists profile_id uuid
+  references public.profiles (id) on delete set null;
+
+create index if not exists idx_mandate_members_profile on public.mandate_members (profile_id);
