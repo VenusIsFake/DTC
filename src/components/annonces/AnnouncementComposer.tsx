@@ -5,7 +5,8 @@ import { ImagePlus, Loader2, Pin, Upload, X } from "lucide-react";
 import type { Announcement } from "@/lib/types";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
-import { getSupabaseBrowserClient, publicStorageUrl } from "@/lib/supabase/client";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
 import { Field, PrimaryButton, GhostButton, inputClass } from "@/components/ui/form";
 
 export interface ComposerForm {
@@ -81,27 +82,13 @@ export default function AnnouncementComposer({
     setForm((prev) => ({ ...prev, [key]: value }));
 
   const uploadPoster = async (file: File) => {
-    const supabase = getSupabaseBrowserClient();
-    if (!supabase) {
-      setError("Stockage non configuré.");
-      return;
-    }
     setUploading(true);
     setError(null);
     try {
-      const safeName = file.name.replace(/[^\w.\-]+/g, "-");
-      const path = `posters/${Date.now()}-${safeName}`;
-      const { error: uploadError } = await supabase.storage
-        .from("club-media")
-        .upload(path, file, { upsert: false });
-      if (uploadError) throw uploadError;
-      update("poster_url", publicStorageUrl("club-media", path));
+      const url = await uploadClubImage(file, "posters");
+      update("poster_url", url);
     } catch (err) {
-      setError(
-        err instanceof Error && /size|mime|type/i.test(err.message)
-          ? "Image invalide ou trop lourde (max 25 Mo, JPG/PNG/WebP/GIF)."
-          : "Upload impossible."
-      );
+      setError(clubUploadErrorMessage(err));
     } finally {
       setUploading(false);
     }

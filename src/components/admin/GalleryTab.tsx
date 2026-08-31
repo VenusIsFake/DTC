@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, ImagePlus, Loader2, Pencil, Plus, Trash2, Upload } from "lucide-react";
 import type { GalleryImageRow } from "@/lib/types";
-import { getSupabaseBrowserClient, publicStorageUrl } from "@/lib/supabase/client";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
 import { Badge, Field, GhostButton, PrimaryButton, inputClass } from "@/components/ui/form";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 import { X } from "lucide-react";
@@ -69,23 +70,13 @@ function EditorModal({
     setForm((prev) => ({ ...prev, [key]: value }));
 
   const uploadImage = async (file: File) => {
-    const supabase = getSupabaseBrowserClient();
-    if (!supabase) {
-      setError("Stockage non configuré.");
-      return;
-    }
     setUploading(true);
     setError(null);
     try {
-      const safeName = file.name.replace(/[^\w.\-]+/g, "-");
-      const path = `gallery/${Date.now()}-${safeName}`;
-      const { error: uploadError } = await supabase.storage
-        .from("club-media")
-        .upload(path, file, { upsert: false });
-      if (uploadError) throw uploadError;
-      set("image_url", publicStorageUrl("club-media", path));
+      const url = await uploadClubImage(file, "gallery");
+      set("image_url", url);
     } catch (err) {
-      setError(err instanceof Error ? uploadErrorMessage(err.message) : "Upload impossible.");
+      setError(clubUploadErrorMessage(err));
     } finally {
       setUploading(false);
     }
@@ -270,12 +261,6 @@ function EditorModal({
       </div>
     </div>
   );
-}
-
-function uploadErrorMessage(message: string): string {
-  if (message.includes("25MB") || message.includes("size")) return "Image trop lourde (max 25 Mo).";
-  if (message.includes("mime") || message.includes("type")) return "Format non supporté (JPG, PNG, WebP, GIF).";
-  return message;
 }
 
 export default function GalleryTab() {
