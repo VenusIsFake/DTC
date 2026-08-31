@@ -269,3 +269,26 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
   - Vitest : 14/14 tests passés.
   - Next.js 15.5.24 : build de production `next build` propre (14/14 routes générées).
 
+## 2026-08-31 — Init Caveman + Audit « production readiness » du console admin
+
+**Demande de Venus : initialiser les règles caveman par dépôt, puis raffiner le prompt et exécuter un audit du console — objectif : le bureau publie tout lui-même, sans dev ni SQL, « record speed ».**
+
+- **Caveman init :** 6 fichiers de règles écrits (`AGENTS.md`, `.cursor/rules/caveman.mdc`, `.windsurf/rules/caveman.md`, `.clinerules/caveman.md`, `.github/copilot-instructions.md`, `.opencode/AGENTS.md`) via le script du plugin, dry-run d'abord, 0 écrasement.
+- **Audit (lecture seule, agent Explore, cartographie des 8 onglets `src/components/admin/*` + `supabase/schema.sql`) :**
+  - **P1 confirmé (photo mandat) :** `mandate_members` n'a aucune colonne photo (`schema.sql:155-163`) ; formulaire = 2 champs texte (`AboutTab.tsx:407-431`) ; rendu public = icône placeholder sans `<img>` (`about/page.tsx:113-127`). L'infra existe déjà ailleurs (infographie mandat `club-media`, crop avatar espace membre).
+  - **P2 confirmé (réutilisation membre) :** `mandate_members.name` = texte dupliqué, aucun `profile_id`/FK vers `profiles` ou `auth.users` ; pas de sélecteur de membre existant ni de suggestion du mandat précédent, alors que les mandats+members sont déjà chargés dans l'état (`AboutTab.tsx:230-246`).
+  - **Autres écarts majeurs :** console réservée `admin` alors que la RLS autorise `bureau` (sur-priviège, `admin/page.tsx:53`) ; `home_stats` éditable mais jamais rendu nulle part ; poster podcast saisi au console écrasé par chemin codé en dur `/media/podcasts/youtube_thumb_epN.jpg` (`data.ts:156`) — épisode 5+ = 404 ; TEDx/pages événements = URL-paste uniquement, upload vidéo bloqué par la politique storage (`image/%` only) ; `event_page_items` et members mandat sans edit ni reorder ; erreurs silencieuses généralisées (AboutTab/CommitteesTab ignorent les erreurs d'insert) ; création de comptes/rôles non self-service ; hero/marquee/partenaires/CTA codés en dur dans les composants.
+- **Livré :** liste priorisée P0/P1/P2 avec preuves fichier:ligne dans la session. Aucun changement de code applicatif ce jour (audit seul).
+
+## 2026-08-31 (soir) — Chasse aux écarts P0/P1/P2 : console production-ready
+
+**Demande de Venus : « shoot down p0 p1 and p2, /goal dont stop till youre done » — implémentation intégrale des 15 écarts de l'audit matin, DDL live, deploy prod.**
+
+- **P0 mandat (les 2 points de friction) :** `mandate_members` gagne `photo_url` + `profile_id` (FK profiles, `on delete set null`) — migration `20260831_mandate_members_photo_profile` appliquée via MCP + `schema.sql` v2.2 synchronisé + répertoire `supabase/migrations/` créé. Formulaire membre : upload photo (club-media), sélecteur de compte existant (`bureau_list_profiles`, nom prérempli, badge « compte lié »), édition complète, réordonnancement ↑↓, suppression confirmée, et **« Importer l'équipe précédente »** (copie rôles + photos + liens, match des comptes par nom). `/about` rend les photos (`UserAvatar`, fallback initiales) y compris puces archivées.
+- **P1 :** console ouverte au rôle `bureau` (onglet Utilisateurs restant admin-only, RLS déjà conforme) ; navbar suit `isBureau` ; `home_stats` ENFIN rendu (bandeau chiffres sous le hero, fallback `siteConfig.stats`) ; poster podcast : la valeur console prime sur le chemin codé en dur (`mapPodcastRow`) — épisode 5+ sans 404 ; compteurs de vues fabriqués supprimés partout ; posters TEDx/pages événement/éléments uploadables depuis la console (helper partagé `uploadClubImage`), vidéos restent des liens YouTube (politique storage image-only — décision assumée, documentée dans le hint du formulaire).
+- **P2 :** nouveau **onglet Accueil** (marquee, slogan, sur-titre + date TEDx, stats, partenaires sponsor/club, intro À propos — `site_settings` KV avec fallback statique) ; `event_page_items` éditables (+ description) ; erreurs DB surfacées dans AboutTab/CommitteesTab/EventsTab (libellés amicaux doublons) ; confirmations rôle/bannissement/suppressions ; badges clés manquantes YOUTUBE_API_KEY/RESEND_API_KEY via `GET /api/admin/config` (401/403 vérifiés) ; notices « base vide = fallback statique » sur mandats/talks/galerie.
+- **Refactor :** logique d'upload tripliquée (galerie/annonces/mandats) centralisée dans `src/lib/mediaUpload.ts` (+ 8 tests unitaires) ; `ShieldCheck` inutilisé retiré d'AdminConsole ; colonne fantôme `views` (cast) supprimée.
+- **Vérifs :** tsc 0 erreur, eslint 0, vitest **22/22** (14 existants + 8 nouveaux), `next build` propre, colonnes vérifiées en prod via MCP, smoke HTTP : / /about /podcast /gallery /events /annonces /admin = 200, `/api/admin/config` non authentifié = 401, bandeau stats + marquee visibles dans le HTML prod, plus aucun « vues » fabriqué.
+- **Limites :** flows console non testés visuellement (pas d'identifiants bureau pour l'agent — inchangé) ; clés Turnstile/Resend/YouTube toujours attendues côté Venus ; vidéos d'événements volontairement hors upload (25 Mo/policy).
+- **Déploiement :** 4 commits fonctionnels + 1 chore (0568457→be0dcfa + caveman), poussés et déployés sur `dtc-fmdc.vercel.app` (build 33 s).
+
