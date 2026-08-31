@@ -313,5 +313,6 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **Partenaires supprimables :** nom vidé + Enregistrer = carte retirée de /about ET du footer (qui reçoit maintenant sponsor/partner du layout via `site_settings`) ; sans ligne en base, les valeurs par défaut s'affichent.
 - **Cartes d'activité :** nouvelle carte Accueil — sélecteur d'image publié de la galerie pour chacune des 3 cartes « Écosystème » (`activity_card_images` jsonb, « Par défaut » conserve l'image du site, aperçu miniature).
 - **Vérifs :** tsc 0, eslint 0, vitest 22/22, build propre ; prod : miniatures i.ytimg servies sur / et /podcast, Flex Dental visible sur /about.
-- **Déploiement :** commits 336b760 (prefill partenaires/stats) + ad78bdb poussés et déployés.
+- **Double-check (demandé par Venus) :** 3 corrections — le footer affiche maintenant le slogan de la console (`hero_tagline`) au lieu du statique ; footer sans partenaires → 3 colonnes au lieu d'une case vide ; le sélecteur d'image de carte signale « ⚠️ image absente de la galerie » si l'image choisie a été supprimée (avant : select muet vide). `production-readiness.md` resynchronisé (posters ytimg, partenaires supprimables, `activity_card_images`, crop).
+- **Déploiement :** commits 336b760 (prefill partenaires/stats) + ad78bdb + 1f758c2 (double-check) poussés et déployés.
 
