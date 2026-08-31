@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Home, Loader2, Plus, Trash2 } from "lucide-react";
 import type { HomeStat, PartnerCard } from "@/lib/types";
+import { siteConfig } from "@/data/siteConfig";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Field, PrimaryButton, GhostButton, inputClass } from "@/components/ui/form";
 
@@ -136,8 +137,10 @@ function StatsEditor() {
       .eq("key", "home_stats")
       .maybeSingle()
       .then(({ data }) => {
+        // No saved row yet → show the live defaults so they are editable,
+        // not a blank list that hides what the site currently renders.
         if (data) setStats(((data as { value: HomeStat[] }).value ?? []).slice(0, 6));
-        else setStats([]);
+        else setStats(siteConfig.stats);
       });
   }, []);
 
@@ -223,8 +226,10 @@ function StatsEditor() {
 // ---------------------------------------------------------------------------
 
 function PartnersEditor() {
-  const sponsor = useSettingValue<PartnerCard>("sponsor", { name: "", tagline: "" });
-  const partner = useSettingValue<PartnerCard>("partner_club", { name: "", tagline: "" });
+  // Prefill with the live static defaults so the two existing partners are
+  // editable immediately — the DB row is only created on first save.
+  const sponsor = useSettingValue<PartnerCard>("sponsor", siteConfig.sponsor);
+  const partner = useSettingValue<PartnerCard>("partner_club", siteConfig.partnerClub);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
@@ -236,10 +241,12 @@ function PartnersEditor() {
       name: p.name.trim(),
       tagline: p.tagline.trim(),
     });
-    const s = clean(sponsor.value);
-    const c = clean(partner.value);
-    const errS = s.name ? await upsertSetting("sponsor", s) : null;
-    const errC = c.name ? await upsertSetting("partner_club", c) : null;
+    // Cleared name = reset to the site default (saved, so the field and the
+    // public page always agree).
+    const s = clean(sponsor.value).name ? clean(sponsor.value) : siteConfig.sponsor;
+    const c = clean(partner.value).name ? clean(partner.value) : siteConfig.partnerClub;
+    const errS = await upsertSetting("sponsor", s);
+    const errC = await upsertSetting("partner_club", c);
     setSaving(false);
     const err = errS ?? errC;
     if (err) {
