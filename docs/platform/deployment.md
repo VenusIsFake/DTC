@@ -25,6 +25,7 @@ Set in `.env.local` (dev) and Vercel → Project → Settings → Environment Va
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Project Settings → API | client + server |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` *(or `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — both names accepted)* | Same screen (new projects call it "publishable key", `sb_pub_…`) | client + server |
 | `YOUTUBE_API_KEY` | Google Cloud → enable **YouTube Data API v3** → create/restrict key | **server only** (never `NEXT_PUBLIC_`) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API → `service_role` (secret) | **server only** — console account lifecycle (`POST /api/admin/users`); optional but recommended (console shows a badge while missing) |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | *(optional)* Cloudflare Turnstile site key — see §6 Captcha | client |
 | `RESEND_API_KEY` + `EMAIL_FROM` + `NEXT_PUBLIC_SITE_URL` | *(optional)* Resend account — see §6 Email | server |
 

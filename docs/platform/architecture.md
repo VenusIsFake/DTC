@@ -9,7 +9,7 @@ This document details the full production architecture, routing schema, componen
 The site is now a **two-layer platform** (see `docs/platform/club-platform-plan.md` for the approved plan):
 
 1. **Public site** — home, annonces, idées, events/TEDx, podcast, gallery, about — same designs, but content is served from **Supabase** with a static `src/data` fallback when the DB is unreachable.
-2. **Backoffice** — Supabase email+password auth (open signup, confirmation off, default role `member`), roles `member → bureau → admin`, and a hidden `/admin` console (7 tabs: Utilisateurs, Annonces, Idées, Podcast Studio, Événements, À propos, Commissions & listes).
+2. **Backoffice** — Supabase email+password auth (open signup, confirmation off, default role `member`), roles `member → bureau → admin`, and the `/admin` console, open to **bureau + admin** (9 tabs: Utilisateurs* — *admin-only*, Accueil, Annonces, Idées, Podcast Studio, Événements, Galerie, À propos, Commissions & listes).
 
 Key architecture points:
 
@@ -17,8 +17,8 @@ Key architecture points:
 * **RLS is the enforcement layer** (`supabase/schema.sql`): public read for published content, login-to-interact; votes 1/person by PK; contact info only via `bureau_list_profiles()`/`admin_list_profiles()` RPCs; role/ban changes only via `admin_set_role()`/`admin_set_banned()` security-definer functions; column-level GRANTs keep `profiles` contact fields out of the base table.
 * **Data layer:** `src/lib/data.ts` (server fetchers with fallback), `src/lib/supabase/client.ts` (browser) + `server.ts` (cookies) + session refresh in `src/middleware.ts`.
 * **Member surfaces:** `/annonces` (RSVP + headcount + bureau attendee list), `/idees` (pitch/vote/comment + bureau status badges), `/espace` (profile: promo/commission/avatar/bio/phone + "Mes activités" + admin quick panel), `/espace/annuaire` (members-only directory).
-* **Content ops:** Podcast Studio (paste-URL YouTube import → auto-filled editor), TEDx CRUD, section visibility (`events_visible` = redirect + nav removal + sitemap exclusion), editable About sections, mandates with auto-archive, home stats — all bureau/admin-managed.
-* **Storage buckets:** `avatars` (self-write under `<uid>/`, public read), `club-media` (bureau+ write: organigrammes/posters).
+* **Content ops:** Podcast Studio (paste-URL YouTube import → auto-filled editor, poster upload), TEDx CRUD + event pages with image uploads and editable items, section visibility (`events_visible` = redirect + nav removal + sitemap exclusion), editable About sections, mandates with member **photos + account links + team import + reorder**, « Accueil » tab editing hero/stats/partners via `site_settings`, and the full **account lifecycle** (invite with one-time temp password, reset, delete) via `POST /api/admin/users` — all bureau/admin-managed, zero Supabase-dashboard work (details: `production-readiness.md`).
+* **Storage buckets:** `avatars` (self-write under `<uid>/`, public read), `club-media` (bureau+ write, images ≤ 25 MB: organigrammes, member photos, posters, gallery, podcasts, events — uploads go through `src/lib/mediaUpload.ts`).
 
 ---
 

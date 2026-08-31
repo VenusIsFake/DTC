@@ -292,3 +292,15 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **Limites :** flows console non testés visuellement (pas d'identifiants bureau pour l'agent — inchangé) ; clés Turnstile/Resend/YouTube toujours attendues côté Venus ; vidéos d'événements volontairement hors upload (25 Mo/policy).
 - **Déploiement :** 4 commits fonctionnels + 1 chore (0568457→be0dcfa + caveman), poussés et déployés sur `dtc-fmdc.vercel.app` (build 33 s).
 
+## 2026-09-01 — Cycle de vie des comptes 100 % console (clé service_role branchée)
+
+**Demande de Venus : « the project has supabase npm installed so do it » (gestion des comptes sans dashboard) + question sur la clé YouTube.**
+
+- **Clé YouTube : déjà présente** dans Vercel Production (`vercel env ls`) et en local — l'import Podcast Studio est donc fonctionnel ; le badge « clé manquante » ne s'affiche que si elle disparaît.
+- **`SUPABASE_SERVICE_ROLE_KEY`** : validée contre l'Admin API (HTTP 200) depuis `.env.local`, puis ajoutée à Vercel Production (`Sensitive`, jamais `NEXT_PUBLIC_`, import `server-only` en garde anti-bundle client).
+- **Nouveau `POST /api/admin/users`** (session admin + Content-Type JSON, service client côté serveur uniquement) : `create` (mot de passe temporaire généré serveur, `email_confirm`, rôle appliqué au profil), `reset_password` (nouveau temporaire, l'ancien tombe immédiatement), `delete` (auth.users ; profiles cascadent, contenus conservés sans auteur). Auto-protection : impossible de se supprimer/se réinitialiser soi-même.
+- **UsersTab :** bouton « Inviter » (modal email/nom/rôle), actions par ligne mot de passe temporaire + suppression, carte « affiché une seule fois » avec copie, badge de disponibilité via `/api/admin/config` (nouveau flag `serviceKey`).
+- **Vérifs :** tsc 0, eslint 0, vitest 22/22, build propre ; prod : POST non authentifié sur `/api/admin/users` = 401, `/api/admin/config` = 401, `/admin` = 200. Flows authentifiés non rejoués visuellement (pas de session admin pour l'agent).
+- **Documentation :** nouveau `docs/platform/production-readiness.md` (référence complète du sweep : mandats, accès, onglet Accueil, podcasts, événements, cycle de vie des comptes, matrice des clés) ; refresh de `overview.md`, `docs/README.md` (le plan plateforme n'était plus « not yet implemented »), `architecture.md` (9 onglets, contenu ops, buckets) et `deployment.md` (ligne `SUPABASE_SERVICE_ROLE_KEY`).
+- **Déploiement :** commit f906fae poussé + déployé (49 s).
+
