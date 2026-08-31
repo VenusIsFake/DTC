@@ -28,7 +28,6 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     youtubeUrl: "https://www.youtube.com/watch?v=FXTjMfmNmss",
     posterImage: "/media/podcasts/youtube_thumb_ep4.jpg",
     duration: "48:15",
-    views: "1.4k",
     synopsis: "Un échange d'une profondeur rare croisant chirurgie orale, rigueur clinique, transmission pédagogique et conseils précieux pour les générations futures de chirurgiens-dentistes.",
     takeaways: [
       "L'importance de la rigueur clinique dès les premières années de stage hospitalier",
@@ -50,7 +49,6 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     youtubeUrl: "https://www.youtube.com/watch?v=JoMwnQbmKm0",
     posterImage: "/media/podcasts/youtube_thumb_ep3.jpg",
     duration: "42:30",
-    views: "1.1k",
     synopsis: "Discussion passionnante sur les méthodes d'apprentissage en odontologie, la gestion des premiers cas complexes et les opportunités de recherche au Maroc.",
     takeaways: [
       "Comment structurer sa préparation aux examens cliniques",
@@ -71,7 +69,6 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     youtubeUrl: "https://www.youtube.com/watch?v=C1dKfXuC0us",
     posterImage: "/media/podcasts/youtube_thumb_ep2.jpg",
     duration: "39:45",
-    views: "980",
     synopsis: "Un retour d'expérience enrichissant sur la transition de l'université vers la pratique clinique avancée, la gestion d'équipe et la formation continue.",
     takeaways: [
       "Les clés pour réussir sa spécialisation et son insertion professionnelle",
@@ -92,7 +89,6 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     youtubeUrl: "https://www.youtube.com/watch?v=njrC04ZxJo0",
     posterImage: "/media/podcasts/youtube_thumb_ep1.jpg",
     duration: "45:10",
-    views: "2.3k",
     synopsis: "Le tout premier épisode historique du Let's Talk Podcast avec Pr. Said Dhaimy, animé par Hatim Elguerraoui & Ayman El Attar.",
     takeaways: [
       "La genèse et les objectifs du projet 'Let's Talk'",

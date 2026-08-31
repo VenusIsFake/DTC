@@ -18,10 +18,14 @@ export default function HomeContent({
   talks,
   featuredEpisode,
   eventsVisible,
+  highlightKicker,
+  highlightDate,
 }: {
   talks: TedxTalk[];
   featuredEpisode?: PodcastEpisode | null;
   eventsVisible: boolean;
+  highlightKicker?: string;
+  highlightDate?: string;
 }) {
   const [activeTalk, setActiveTalk] = useState<TedxTalk | null>(null);
 
@@ -33,7 +37,7 @@ export default function HomeContent({
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-[#DCD7CB] pb-5">
             <div className="space-y-1.5">
               <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#755B18]">
-                Événement phare · 22 Nov 2025
+                {highlightKicker?.trim() || "Événement phare"} · {highlightDate?.trim() || "22 Nov 2025"}
               </p>
               <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#16233A] tracking-tight">
                 Talks &amp; Reels TEDxFMDC

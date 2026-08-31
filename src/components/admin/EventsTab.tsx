@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { CalendarDays, ChevronDown, ChevronUp, Eye, EyeOff, Loader2, Pencil, Plus, Trash2, X } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { CalendarDays, ChevronDown, ChevronUp, Eye, EyeOff, Loader2, Pencil, Plus, Trash2, Upload, X } from "lucide-react";
 import type { EventPage, EventPageItem, TedxTalkRow } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 import { Field, PrimaryButton, GhostButton, Badge, inputClass } from "@/components/ui/form";
 
@@ -112,6 +113,8 @@ function TedxCard() {
   const [form, setForm] = useState<TedxForm>(EMPTY_TEDX);
   const dialogRef = useOverlayDialog<HTMLDivElement>(open, () => setOpen(false));
   const [error, setError] = useState<string | null>(null);
+  const posterFileRef = useRef<HTMLInputElement>(null);
+  const [uploadingPoster, setUploadingPoster] = useState(false);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -123,6 +126,19 @@ function TedxCard() {
   useEffect(() => {
     load();
   }, []);
+
+  const uploadPoster = async (file: File) => {
+    setUploadingPoster(true);
+    setError(null);
+    try {
+      const url = await uploadClubImage(file, "events");
+      setForm((prev) => ({ ...prev, poster_url: url }));
+    } catch (err) {
+      setError(clubUploadErrorMessage(err));
+    } finally {
+      setUploadingPoster(false);
+    }
+  };
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -153,7 +169,11 @@ function TedxCard() {
   const togglePublished = async (row: TedxTalkRow) => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("tedx_talks").update({ is_published: !row.is_published }).eq("id", row.id);
+    const { error: dbError } = await supabase
+      .from("tedx_talks")
+      .update({ is_published: !row.is_published })
+      .eq("id", row.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -161,7 +181,8 @@ function TedxCard() {
     if (!window.confirm(`Supprimer le talk de ${row.speaker} ?`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("tedx_talks").delete().eq("id", row.id);
+    const { error: dbError } = await supabase.from("tedx_talks").delete().eq("id", row.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -182,10 +203,21 @@ function TedxCard() {
         </button>
       </div>
 
+      {error && (
+        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
+
       {talks === null ? (
         <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
+          {talks.length === 0 && (
+            <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+              Aucun talk en base — la page /events affiche les extraits statiques intégrés.
+            </p>
+          )}
           {talks.map((row) => (
             <div key={row.id} className="flex items-center gap-2.5 p-2 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
               <span className="text-[10px] font-bold text-[#755B18] w-7 shrink-0">#{row.extract_number}</span>
@@ -258,17 +290,45 @@ function TedxCard() {
               <Field label="Sujet" htmlFor="tedx-topic">
                 <input id="tedx-topic" type="text" required value={form.topic} onChange={(e) => setForm({ ...form, topic: e.target.value })} className={inputClass} />
               </Field>
-              <Field label="Vidéo (chemin local ou URL YouTube)" htmlFor="tedx-video">
+              <Field label="Vidéo (chemin local ou URL YouTube)" htmlFor="tedx-video" hint="Les vidéos restent des liens (YouTube idéal) — l'upload console couvre les images.">
                 <input id="tedx-video" type="text" value={form.video_url} onChange={(e) => setForm({ ...form, video_url: e.target.value })} className={inputClass} placeholder="/media/events/… ou https://youtu.be/…" />
               </Field>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Field label="Poster (chemin/URL)" htmlFor="tedx-poster">
-                  <input id="tedx-poster" type="text" value={form.poster_url} onChange={(e) => setForm({ ...form, poster_url: e.target.value })} className={inputClass} />
+                <Field label="Poster (URL ou upload)" htmlFor="tedx-poster">
+                  <div className="flex gap-2">
+                    <input
+                      id="tedx-poster"
+                      type="text"
+                      value={form.poster_url}
+                      onChange={(e) => setForm({ ...form, poster_url: e.target.value })}
+                      className={`${inputClass} flex-1`}
+                    />
+                    <GhostButton
+                      type="button"
+                      onClick={() => posterFileRef.current?.click()}
+                      disabled={uploadingPoster}
+                      className="shrink-0"
+                    >
+                      {uploadingPoster ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                      <span className="hidden sm:inline">Upload</span>
+                    </GhostButton>
+                  </div>
                 </Field>
                 <Field label="Lien Instagram" htmlFor="tedx-ig">
                   <input id="tedx-ig" type="url" value={form.instagram_url} onChange={(e) => setForm({ ...form, instagram_url: e.target.value })} className={inputClass} />
                 </Field>
               </div>
+              <input
+                ref={posterFileRef}
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) uploadPoster(file);
+                  if (posterFileRef.current) posterFileRef.current.value = "";
+                }}
+              />
               <Field label="Description" htmlFor="tedx-desc">
                 <textarea id="tedx-desc" rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputClass} resize-y`} />
               </Field>
@@ -293,6 +353,26 @@ function TedxCard() {
 // Section 3: dynamic event pages (/events/[slug])
 // ---------------------------------------------------------------------------
 
+interface ItemForm {
+  pageId: string;
+  /** null = creating. */
+  id: string | null;
+  title: string;
+  speaker: string;
+  description: string;
+  video_url: string;
+  poster_url: string;
+}
+
+const EMPTY_ITEM: Omit<ItemForm, "pageId"> = {
+  id: null,
+  title: "",
+  speaker: "",
+  description: "",
+  video_url: "",
+  poster_url: "",
+};
+
 function EventPagesCard() {
   const [pages, setPages] = useState<EventPage[] | null>(null);
   const [itemsByPage, setItemsByPage] = useState<Record<string, EventPageItem[]>>({});
@@ -301,8 +381,12 @@ function EventPagesCard() {
   const [editing, setEditing] = useState<EventPage | null>(null);
   const dialogRef = useOverlayDialog<HTMLDivElement>(open, () => setOpen(false));
   const [form, setForm] = useState({ slug: "", title: "", tagline: "", hero_poster: "", description: "", status: "draft" as EventPage["status"] });
-  const [newItem, setNewItem] = useState({ title: "", speaker: "", description: "", video_url: "", poster_url: "" });
+  const [editingItem, setEditingItem] = useState<ItemForm | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const heroFileRef = useRef<HTMLInputElement>(null);
+  const itemPosterRef = useRef<HTMLInputElement>(null);
+  const [uploadingHero, setUploadingHero] = useState(false);
+  const [uploadingItemPoster, setUploadingItemPoster] = useState(false);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -336,6 +420,33 @@ function EventPagesCard() {
     setOpen(true);
   };
 
+  const uploadHero = async (file: File) => {
+    setUploadingHero(true);
+    setError(null);
+    try {
+      const url = await uploadClubImage(file, "events");
+      setForm((prev) => ({ ...prev, hero_poster: url }));
+    } catch (err) {
+      setError(clubUploadErrorMessage(err));
+    } finally {
+      setUploadingHero(false);
+    }
+  };
+
+  const uploadItemPoster = async (file: File) => {
+    if (!editingItem) return;
+    setUploadingItemPoster(true);
+    setError(null);
+    try {
+      const url = await uploadClubImage(file, "events");
+      setEditingItem({ ...editingItem, poster_url: url });
+    } catch (err) {
+      setError(clubUploadErrorMessage(err));
+    } finally {
+      setUploadingItemPoster(false);
+    }
+  };
+
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     const supabase = getSupabaseBrowserClient();
@@ -366,32 +477,39 @@ function EventPagesCard() {
     if (!window.confirm(`Supprimer la page « ${page.title} » et son contenu ?`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("event_pages").delete().eq("id", page.id);
+    const { error: dbError } = await supabase.from("event_pages").delete().eq("id", page.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
-  const addItem = async (page: EventPage) => {
-    if (!newItem.title.trim()) return;
+  const saveItem = async (page: EventPage) => {
+    if (!editingItem || !editingItem.title.trim()) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
+    const payload = {
+      title: editingItem.title.trim(),
+      speaker: editingItem.speaker.trim(),
+      description: editingItem.description.trim(),
+      video_url: editingItem.video_url.trim(),
+      poster_url: editingItem.poster_url.trim(),
+    };
     const existing = itemsByPage[page.id]?.length ?? 0;
-    await supabase.from("event_page_items").insert({
-      event_page_id: page.id,
-      title: newItem.title.trim(),
-      speaker: newItem.speaker.trim(),
-      description: newItem.description.trim(),
-      video_url: newItem.video_url.trim(),
-      poster_url: newItem.poster_url.trim(),
-      sort: existing + 1,
-    });
-    setNewItem({ title: "", speaker: "", description: "", video_url: "", poster_url: "" });
-    load();
+    const { error: dbError } = editingItem.id
+      ? await supabase.from("event_page_items").update(payload).eq("id", editingItem.id)
+      : await supabase.from("event_page_items").insert({ ...payload, event_page_id: page.id, sort: existing + 1 });
+    setError(dbError?.message ?? null);
+    if (!dbError) {
+      setEditingItem(null);
+      load();
+    }
   };
 
   const removeItem = async (item: EventPageItem) => {
+    if (!window.confirm(`Supprimer l'élément « ${item.title} » ?`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("event_page_items").delete().eq("id", item.id);
+    const { error: dbError } = await supabase.from("event_page_items").delete().eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -410,6 +528,12 @@ function EventPagesCard() {
           <span>Page</span>
         </button>
       </div>
+
+      {error && (
+        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
 
       {pages === null ? (
         <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
@@ -455,24 +579,105 @@ function EventPagesCard() {
                           <p className="text-[11px] font-semibold text-[#16233A] truncate">
                             {item.title} {item.speaker && <span className="text-[#755B18]">— {item.speaker}</span>}
                           </p>
+                          <p className="text-[10px] text-[#5F6774] truncate">{item.video_url || item.poster_url || "—"}</p>
                         </div>
+                        <button
+                          onClick={() =>
+                            setEditingItem({
+                              pageId: page.id,
+                              id: item.id,
+                              title: item.title,
+                              speaker: item.speaker,
+                              description: item.description,
+                              video_url: item.video_url,
+                              poster_url: item.poster_url,
+                            })
+                          }
+                          aria-label="Modifier l'élément"
+                          className="w-6 h-6 flex items-center justify-center rounded text-[#5F6774] hover:text-[#755B18]"
+                        >
+                          <Pencil className="w-3 h-3" />
+                        </button>
                         <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#5F6774] hover:text-red-600">
                           <Trash2 className="w-3 h-3" />
                         </button>
                       </div>
                     ))}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 rounded-lg border border-dashed border-[#DCD7CB]/40">
-                      <input type="text" value={newItem.title} onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} placeholder="Titre (ex : Talk d'ouverture)" className={`${inputClass} !text-xs`} aria-label="Titre de l'élément" />
-                      <input type="text" value={newItem.speaker} onChange={(e) => setNewItem({ ...newItem, speaker: e.target.value })} placeholder="Intervenant" className={`${inputClass} !text-xs`} aria-label="Intervenant" />
-                      <input type="text" value={newItem.video_url} onChange={(e) => setNewItem({ ...newItem, video_url: e.target.value })} placeholder="Vidéo (chemin/URL)" className={`${inputClass} !text-xs`} aria-label="Vidéo" />
-                      <input type="text" value={newItem.poster_url} onChange={(e) => setNewItem({ ...newItem, poster_url: e.target.value })} placeholder="Poster (chemin/URL)" className={`${inputClass} !text-xs`} aria-label="Poster" />
-                      <div className="sm:col-span-2 flex justify-end">
-                        <GhostButton onClick={() => addItem(page)} className="!py-1.5 !text-[11px]">
+
+                    {editingItem?.pageId === page.id ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2.5 rounded-lg border border-dashed border-[#755B18]/40 bg-white/40">
+                        <input
+                          type="text"
+                          value={editingItem.title}
+                          onChange={(e) => setEditingItem({ ...editingItem, title: e.target.value })}
+                          placeholder="Titre (ex : Talk d'ouverture)"
+                          className={`${inputClass} !text-xs`}
+                          aria-label="Titre de l'élément"
+                        />
+                        <input
+                          type="text"
+                          value={editingItem.speaker}
+                          onChange={(e) => setEditingItem({ ...editingItem, speaker: e.target.value })}
+                          placeholder="Intervenant"
+                          className={`${inputClass} !text-xs`}
+                          aria-label="Intervenant"
+                        />
+                        <input
+                          type="text"
+                          value={editingItem.video_url}
+                          onChange={(e) => setEditingItem({ ...editingItem, video_url: e.target.value })}
+                          placeholder="Vidéo (URL YouTube ou chemin)"
+                          className={`${inputClass} !text-xs`}
+                          aria-label="Vidéo"
+                        />
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={editingItem.poster_url}
+                            onChange={(e) => setEditingItem({ ...editingItem, poster_url: e.target.value })}
+                            placeholder="Poster (chemin/URL)"
+                            className={`${inputClass} !text-xs flex-1`}
+                            aria-label="Poster"
+                          />
+                          <GhostButton
+                            type="button"
+                            onClick={() => itemPosterRef.current?.click()}
+                            disabled={uploadingItemPoster}
+                            className="shrink-0 !py-1.5 !px-2.5"
+                          >
+                            {uploadingItemPoster ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
+                            <span className="sr-only">Uploader le poster</span>
+                          </GhostButton>
+                        </div>
+                        <textarea
+                          value={editingItem.description}
+                          onChange={(e) => setEditingItem({ ...editingItem, description: e.target.value })}
+                          placeholder="Description (optionnel)"
+                          rows={2}
+                          className={`${inputClass} !text-xs resize-y sm:col-span-2`}
+                          aria-label="Description de l'élément"
+                        />
+                        <div className="sm:col-span-2 flex justify-end gap-2">
+                          <GhostButton type="button" onClick={() => setEditingItem(null)} className="!py-1.5 !text-[11px]">
+                            Annuler
+                          </GhostButton>
+                          <PrimaryButton type="button" onClick={() => saveItem(page)} className="!py-1.5 !text-[11px]">
+                            {editingItem.id ? "Mettre à jour" : "Ajouter l'élément"}
+                          </PrimaryButton>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex justify-end">
+                        <GhostButton
+                          type="button"
+                          onClick={() => setEditingItem({ pageId: page.id, ...EMPTY_ITEM })}
+                          className="!py-1.5 !text-[11px]"
+                        >
                           <Plus className="w-3 h-3" />
-                          <span>Ajouter l&apos;élément</span>
+                          <span>Élément</span>
                         </GhostButton>
                       </div>
-                    </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -485,6 +690,29 @@ function EventPagesCard() {
           )}
         </div>
       )}
+
+      <input
+        ref={heroFileRef}
+        type="file"
+        accept="image/*"
+        className="sr-only"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) uploadHero(file);
+          if (heroFileRef.current) heroFileRef.current.value = "";
+        }}
+      />
+      <input
+        ref={itemPosterRef}
+        type="file"
+        accept="image/*"
+        className="sr-only"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) uploadItemPoster(file);
+          if (itemPosterRef.current) itemPosterRef.current.value = "";
+        }}
+      />
 
       {open && (
         <div
@@ -523,8 +751,25 @@ function EventPagesCard() {
               <Field label="Tagline" htmlFor="epage-tagline">
                 <input id="epage-tagline" type="text" value={form.tagline} onChange={(e) => setForm({ ...form, tagline: e.target.value })} className={inputClass} />
               </Field>
-              <Field label="Hero poster (chemin/URL)" htmlFor="epage-poster">
-                <input id="epage-poster" type="text" value={form.hero_poster} onChange={(e) => setForm({ ...form, hero_poster: e.target.value })} className={inputClass} />
+              <Field label="Hero poster (URL ou upload)" htmlFor="epage-poster">
+                <div className="flex gap-2">
+                  <input
+                    id="epage-poster"
+                    type="text"
+                    value={form.hero_poster}
+                    onChange={(e) => setForm({ ...form, hero_poster: e.target.value })}
+                    className={`${inputClass} flex-1`}
+                  />
+                  <GhostButton
+                    type="button"
+                    onClick={() => heroFileRef.current?.click()}
+                    disabled={uploadingHero}
+                    className="shrink-0"
+                  >
+                    {uploadingHero ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                    <span className="hidden sm:inline">Upload</span>
+                  </GhostButton>
+                </div>
               </Field>
               <Field label="Description" htmlFor="epage-desc">
                 <textarea id="epage-desc" rows={4} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputClass} resize-y`} />

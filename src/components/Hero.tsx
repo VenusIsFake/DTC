@@ -3,16 +3,20 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Play, Radio, Calendar, Eye } from "lucide-react";
+import { ArrowRight, Play, Radio, Calendar } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import type { PodcastEpisode } from "@/data/podcastData";
 
 export default function Hero({
   eventsVisible = true,
   featuredEpisode,
+  marqueeLine,
+  tagline,
 }: {
   eventsVisible?: boolean;
   featuredEpisode?: PodcastEpisode | null;
+  marqueeLine?: string;
+  tagline?: string;
 }) {
   const [imgSrc, setImgSrc] = useState(
     featuredEpisode?.posterImage ||
@@ -30,7 +34,7 @@ export default function Hero({
           <div className="flex items-center gap-2.5 sm:gap-3.5">
             <span className="w-6 sm:w-10 h-px bg-[#755B18]/70 shrink-0" />
             <span className="text-[10.5px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[#755B18] font-mono">
-              WE PRESENT TO YOU
+              {marqueeLine?.trim() || "WE PRESENT TO YOU"}
             </span>
             <span className="flex-1 h-px bg-gradient-to-r from-[#755B18]/50 via-[#DCD7CB]/40 to-transparent" />
           </div>
@@ -42,7 +46,7 @@ export default function Hero({
             </h1>
 
             <p className="font-heading italic text-xs sm:text-sm md:text-base text-[#3D4A58]">
-              &laquo;&nbsp;{siteConfig.tagline}&nbsp;&raquo;
+              &laquo;&nbsp;{tagline?.trim() || siteConfig.tagline}&nbsp;&raquo;
             </p>
           </div>
         </div>
@@ -60,11 +64,6 @@ export default function Hero({
               </div>
 
               <div className="flex items-center gap-1.5 sm:gap-3 text-[10px] sm:text-xs text-[#5C6672] font-medium shrink-0">
-                <span className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-[#EFECE4]/70 border border-[#DCD7CB]/40 text-[#16233A] font-semibold">
-                  <Eye className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#755B18]" />
-                  <span>{featuredEpisode.views || "1.4k"} vues</span>
-                </span>
-
                 <span className="inline-flex items-center gap-1">
                   <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#755B18]" />
                   <span>{featuredEpisode.releaseDate}</span>
@@ -97,11 +96,6 @@ export default function Hero({
                     <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/95 text-red-600 shadow-lg backdrop-blur-sm flex items-center justify-center group-hover/thumb:scale-110 group-hover/thumb:bg-red-600 group-hover/thumb:text-white transition-all">
                       <Play className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-current translate-x-0.5" />
                     </div>
-                  </div>
-
-                  <div className="absolute bottom-2 left-2 px-1.5 sm:px-2 py-0.5 rounded bg-black/85 text-white text-[10px] sm:text-[11px] font-semibold flex items-center gap-1 shadow backdrop-blur-sm">
-                    <Eye className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#D4AF37]" />
-                    <span>{featuredEpisode.views || "1.4k"} vues</span>
                   </div>
 
                   {featuredEpisode.duration && (

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Loader2, Pencil, Plus, Radio, Sparkles, Trash2, X, Youtube } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Loader2, Pencil, Plus, Radio, Sparkles, Trash2, Upload, X, Youtube } from "lucide-react";
 import type { PodcastEpisodeRow } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 import { youtubeWatchUrl } from "@/lib/format";
 import { Field, PrimaryButton, GhostButton, Badge, inputClass } from "@/components/ui/form";
@@ -86,6 +87,22 @@ function EditorModal({
 
   const update = <K extends keyof EpisodeForm>(key: K, value: EpisodeForm[K]) =>
     setDraft((prev) => ({ ...prev, [key]: value }));
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const uploadPoster = async (file: File) => {
+    setUploading(true);
+    setError(null);
+    try {
+      const url = await uploadClubImage(file, "podcasts");
+      update("poster_image", url);
+    } catch (err) {
+      setError(clubUploadErrorMessage(err));
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -235,19 +252,41 @@ function EditorModal({
           </div>
 
           <Field
-            label="Poster (URL)"
+            label="Poster (URL ou upload)"
             htmlFor="ep-poster"
-            hint="Collez l'URL d'une image ( miniature YouTube importée ou /media/… )."
+            hint="Miniature YouTube importée, fichier local, ou chemin /media/…"
           >
-            <input
-              id="ep-poster"
-              type="text"
-              value={draft.poster_image}
-              onChange={(e) => update("poster_image", e.target.value)}
-              className={inputClass}
-              placeholder="/media/podcasts/… ou https://i.ytimg.com/…"
-            />
+            <div className="flex gap-2">
+              <input
+                id="ep-poster"
+                type="text"
+                value={draft.poster_image}
+                onChange={(e) => update("poster_image", e.target.value)}
+                className={`${inputClass} flex-1`}
+                placeholder="/media/podcasts/… ou https://i.ytimg.com/…"
+              />
+              <GhostButton
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="shrink-0"
+              >
+                {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                <span className="hidden sm:inline">Upload</span>
+              </GhostButton>
+            </div>
           </Field>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="sr-only"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) uploadPoster(file);
+              if (fileInputRef.current) fileInputRef.current.value = "";
+            }}
+          />
 
           <Field label="Synopsis" htmlFor="ep-synopsis">
             <textarea
@@ -318,6 +357,15 @@ export default function PodcastTab() {
   const [importError, setImportError] = useState<string | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [editorForm, setEditorForm] = useState<EpisodeForm | null>(null);
+  const [youtubeReady, setYoutubeReady] = useState<boolean | null>(null);
+
+  // Which optional integrations are live server-side (clear badge when not).
+  useEffect(() => {
+    fetch("/api/admin/config")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((payload: { youtube?: boolean } | null) => setYoutubeReady(payload?.youtube ?? null))
+      .catch(() => setYoutubeReady(null));
+  }, []);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -403,6 +451,12 @@ export default function PodcastTab() {
           Collez l&apos;URL de la vidéo : titre, miniature, durée et date sont récupérés automatiquement,
           vous n&apos;avez plus qu&apos;à ajuster et publier.
         </p>
+        {youtubeReady === false && (
+          <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+            Import automatique désactivé : la clé serveur YOUTUBE_API_KEY n&apos;est pas configurée.
+            La création manuelle d&apos;un épisode ci-dessous reste disponible.
+          </p>
+        )}
         <form onSubmit={runImport} className="flex flex-col sm:flex-row gap-2">
           <label htmlFor="yt-import" className="sr-only">
             URL YouTube
