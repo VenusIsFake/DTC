@@ -8,20 +8,28 @@ import type { PartnerCard } from "@/lib/types";
 
 export default function Footer({
   navItems = siteConfig.navItems,
+  tagline,
   sponsor,
   partnerClub,
 }: {
   navItems?: NavItem[];
+  /** Console-edited hero tagline; undefined = default. */
+  tagline?: string;
   /** Console-edited partners; empty name hides the card, undefined = default. */
   sponsor?: PartnerCard;
   partnerClub?: PartnerCard;
 }) {
   const sponsorCard = sponsor ?? siteConfig.sponsor;
   const partnerCard = partnerClub ?? siteConfig.partnerClub;
+  const hasPartnerColumn = Boolean(sponsorCard.name || partnerCard.name);
   return (
     <footer className="bg-[#16233A] text-[#C9CFD9] mt-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 ${
+            hasPartnerColumn ? "lg:grid-cols-4" : "lg:grid-cols-3"
+          } gap-6 sm:gap-8 mb-6 sm:mb-8`}
+        >
           {/* Col 1: Brand & Identity */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
@@ -48,7 +56,7 @@ export default function Footer({
               Dentaire de Casablanca (UH2C).
             </p>
             <p className="text-xs font-heading italic text-[#D4AF37]">
-              &laquo;&nbsp;{siteConfig.tagline}&nbsp;&raquo;
+              &laquo;&nbsp;{tagline?.trim() || siteConfig.tagline}&nbsp;&raquo;
             </p>
           </div>
 
@@ -69,7 +77,7 @@ export default function Footer({
           </div>
 
           {/* Col 3: Partners & Sponsors (hidden entirely when both removed) */}
-          {(sponsorCard.name || partnerCard.name) && (
+          {hasPartnerColumn && (
           <div>
             <h3 className="text-[#F7F5F0] font-semibold text-xs sm:text-sm mb-3.5 sm:mb-5 tracking-wide">
               Partenaires & Sponsors

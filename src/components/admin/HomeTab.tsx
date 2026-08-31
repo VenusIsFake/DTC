@@ -395,6 +395,9 @@ function ActivityImagesCard() {
                   className={`${inputClass} !py-1.5 !text-[11px] mt-1`}
                 >
                   <option value="">Image par défaut du site</option>
+                  {value && !gallery.some((g) => g.image_url === value) && (
+                    <option value={value}>⚠️ Image absente de la galerie — choisi un remplacement</option>
+                  )}
                   {gallery.map((g) => (
                     <option key={g.id} value={g.image_url}>
                       {g.title}

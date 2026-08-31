@@ -24,9 +24,10 @@ first** (apply via MCP), then sync `schema.sql` so fresh installs match.
 
 **Console (`À propos` tab → Mandats & organigrammes):**
 
-- Member form: **photo upload** (stored under `club-media/mandates/<mandate-id>/`), **existing-account
-  picker** fed by the `bureau_list_profiles` RPC (picking an account pre-fills the name, shows a
-  « compte lié » badge), free-text fallback for people without an account.
+- Member form: **photo upload with crop** — picking a file opens the espace-membre cropper
+  (512×512 square, zoom/pan) before storing under `club-media/mandates/<mandate-id>/` — plus an
+  **existing-account picker** fed by the `bureau_list_profiles` RPC (picking an account pre-fills
+  the name, shows a « compte lié » badge), free-text fallback for people without an account.
 - Full **edit** of any member, **↑/↓ reorder** (swaps `sort`), confirmed delete.
 - **« Importer l'équipe précédente »** — one click copies the most recent other mandat's team
   (roles, photos and account links preserved; accounts re-matched by name when the link is missing;
@@ -54,7 +55,8 @@ New console tab editing `site_settings` KV rows. Empty field = static fallback f
 | `hero_tagline` | Hero quote | `siteConfig.tagline` |
 | `highlight_kicker` / `highlight_date` | TEDx section eyebrow | `Événement phare` / `22 Nov 2025` |
 | `home_stats` | Stats strip under the hero (grid, max 6) | `siteConfig.stats` |
-| `sponsor` / `partner_club` | `/about` partner cards | `siteConfig.sponsor` / `.partnerClub` |
+| `sponsor` / `partner_club` | `/about` partner cards **+ footer column** | `siteConfig` values; **empty saved name = card removed** (footer column hides when both are empty) |
+| `activity_card_images` | Homepage « Écosystème » activity card images (`debates`/`workshops`/`team`) | built-in `/media` images; values are picked from published gallery images in the Accueil tab |
 | `about_intro` | `/about` header paragraph | hardcoded founding sentence |
 
 `home_stats` was previously write-only (edited but never rendered) — it now renders as the
@@ -62,9 +64,9 @@ New console tab editing `site_settings` KV rows. Empty field = static fallback f
 
 ## 4. Podcast
 
-- **Poster precedence:** the console-entered `poster_image` wins; the committed
-  `/media/podcasts/youtube_thumb_epN.jpg` is only a fallback. Publishing episode 5+ no longer 404s
-  waiting for a dev to commit a thumbnail.
+- **Poster precedence:** the console-entered `poster_image` wins; otherwise the **YouTube
+  `maxresdefault` thumbnail** is used (falling back to `hqdefault` client-side when a video has no
+  maxres) — sharper than the old committed frame-grabs, and episode 5+ works with no dev commit.
 - **Fabricated view counts removed** everywhere (mapping, hero chips, static data). No fake
   « 2.3k vues » anywhere on the site.
 - The editor's poster field gained an **Upload** button (`club-media/podcasts/`), next to URL paste.

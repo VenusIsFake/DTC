@@ -102,7 +102,12 @@ export default async function RootLayout({
         <AuthProvider>
           <Navbar navItems={navItems} />
           <main className="flex-grow">{children}</main>
-          <Footer navItems={navItems} sponsor={settings.sponsor} partnerClub={settings.partner_club} />
+          <Footer
+            navItems={navItems}
+            tagline={settings.hero_tagline}
+            sponsor={settings.sponsor}
+            partnerClub={settings.partner_club}
+          />
         </AuthProvider>
         <ServiceWorkerRegister />
       <Analytics />
