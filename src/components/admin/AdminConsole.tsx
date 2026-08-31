@@ -10,8 +10,9 @@ import {
   FileText,
   Building2,
   Images,
-  ShieldCheck,
+  Home,
 } from "lucide-react";
+import type { Role } from "@/lib/types";
 import UsersTab from "@/components/admin/UsersTab";
 import AnnouncementsTab from "@/components/admin/AnnouncementsTab";
 import IdeasTab from "@/components/admin/IdeasTab";
@@ -20,9 +21,20 @@ import EventsTab from "@/components/admin/EventsTab";
 import AboutTab from "@/components/admin/AboutTab";
 import CommitteesTab from "@/components/admin/CommitteesTab";
 import GalleryTab from "@/components/admin/GalleryTab";
+import HomeTab from "@/components/admin/HomeTab";
 
-const TABS = [
-  { id: "users", label: "Utilisateurs", icon: Users, component: UsersTab },
+interface TabDef {
+  id: TabId;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  component: React.ComponentType;
+  /** Admin-only tab (user management) — hidden from bureau accounts. */
+  adminOnly?: boolean;
+}
+
+const TABS: TabDef[] = [
+  { id: "users", label: "Utilisateurs", icon: Users, component: UsersTab, adminOnly: true },
+  { id: "home", label: "Accueil", icon: Home, component: HomeTab },
   { id: "annonces", label: "Annonces", icon: Megaphone, component: AnnouncementsTab },
   { id: "idees", label: "Idées", icon: Lightbulb, component: IdeasTab },
   { id: "podcast", label: "Podcast Studio", icon: Radio, component: PodcastTab },
@@ -30,32 +42,42 @@ const TABS = [
   { id: "gallery", label: "Galerie", icon: Images, component: GalleryTab },
   { id: "about", label: "À propos", icon: FileText, component: AboutTab },
   { id: "committees", label: "Commissions & listes", icon: Building2, component: CommitteesTab },
-] as const;
+];
 
-type TabId = (typeof TABS)[number]["id"];
+type TabId =
+  | "users"
+  | "home"
+  | "annonces"
+  | "idees"
+  | "podcast"
+  | "events"
+  | "gallery"
+  | "about"
+  | "committees";
 
-export default function AdminConsole({ adminName }: { adminName: string }) {
-  const [tab, setTab] = useState<TabId>("users");
-  const Active = TABS.find((t) => t.id === tab)?.component ?? UsersTab;
+export default function AdminConsole({ adminName, role }: { adminName: string; role: Role }) {
+  const tabs = TABS.filter((t) => role === "admin" || !t.adminOnly);
+  const [tab, setTab] = useState<TabId>(role === "admin" ? "users" : "annonces");
+  const Active = tabs.find((t) => t.id === tab)?.component ?? AnnouncementsTab;
 
   return (
     <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-4 sm:space-y-6">
       <div className="space-y-1.5">
         <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
-          Console DTC — {adminName}
+          Console DTC — {adminName} · {role === "admin" ? "Admin" : "Bureau"}
         </p>
         <h1 className="font-heading font-semibold text-2xl sm:text-4xl text-[#16233A] tracking-tight">
           Administration du Club
         </h1>
       </div>
 
-      {/* Tab bar (horizontal scroll on mobile) */}
+        {/* Tab bar (horizontal scroll on mobile) */}
       <div
         className="flex items-center gap-1.5 overflow-x-auto pb-1 -mx-1 px-1"
         role="tablist"
         aria-label="Sections de la console"
       >
-        {TABS.map((option) => {
+        {tabs.map((option) => {
           const isActive = tab === option.id;
           return (
             <button

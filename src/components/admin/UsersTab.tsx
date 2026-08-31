@@ -38,6 +38,14 @@ export default function UsersTab() {
   }, []);
 
   const setRole = async (target: AdminProfileRow, role: Role) => {
+    if (role === target.role) return;
+    if (
+      !window.confirm(
+        `Donner le rôle « ${ROLE_LABELS[role]} » à ${target.full_name || target.email} ?`
+      )
+    ) {
+      return;
+    }
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setBusyId(target.id);
@@ -48,6 +56,14 @@ export default function UsersTab() {
   };
 
   const setBanned = async (target: AdminProfileRow, banned: boolean) => {
+    if (
+      banned &&
+      !window.confirm(
+        `Bannir ${target.full_name || target.email} ? Le compte ne pourra plus se connecter ni interagir.`
+      )
+    ) {
+      return;
+    }
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setBusyId(target.id);

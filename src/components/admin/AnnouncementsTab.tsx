@@ -20,6 +20,15 @@ export default function AnnouncementsTab() {
   const [editing, setEditing] = useState<Announcement | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [emailing, setEmailing] = useState<string | null>(null);
+  const [resendReady, setResendReady] = useState<boolean | null>(null);
+
+  // Which optional integrations are live server-side (clear badge when not).
+  useEffect(() => {
+    fetch("/api/admin/config")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((payload: { resend?: boolean } | null) => setResendReady(payload?.resend ?? null))
+      .catch(() => setResendReady(null));
+  }, []);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -96,6 +105,13 @@ export default function AnnouncementsTab() {
           <span>Nouvelle</span>
         </button>
       </div>
+
+      {resendReady === false && (
+        <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+          Envoi d&apos;emails désactivé : la clé serveur RESEND_API_KEY n&apos;est pas configurée.
+          Les annonces restent publiables sur le site — seul l&apos;email de masse est inactif.
+        </p>
+      )}
 
       {items === null && (
         <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">

@@ -15,7 +15,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
-  const { user, profile, loading, dbReady, isAdmin, isBanned, signOut, openAuth } = useAuth();
+  const { user, profile, loading, dbReady, isBureau, isBanned, signOut, openAuth } = useAuth();
 
   // The navbar never unmounts across navigations, so drawers must be closed
   // explicitly on route change.
@@ -63,7 +63,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
   const accountLinks = [
     { href: "/espace", label: "Mon espace", icon: User },
     { href: "/espace/annuaire", label: "Annuaire", icon: Users },
-    ...(isAdmin ? [{ href: "/admin", label: "Console", icon: ShieldCheck }] : []),
+    ...(isBureau ? [{ href: "/admin", label: "Console", icon: ShieldCheck }] : []),
   ];
 
   return (

@@ -22,8 +22,9 @@ function AccessDenied() {
         </div>
         <h1 className="text-xl sm:text-2xl font-heading font-semibold text-[#16233A]">Accès refusé</h1>
         <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed max-w-sm mx-auto">
-          La console d&apos;administration est réservée aux administrateurs du club. Si vous faites
-          partie du bureau, demandez au président de vous attribuer le rôle.
+          La console est réservée aux membres du bureau et aux administrateurs du club. Si vous faites
+          partie du bureau mais n&apos;avez pas encore accès, demandez au président de vous attribuer
+          le rôle « Bureau ».
         </p>
         <Link
           href="/"
@@ -45,14 +46,14 @@ export default async function AdminPage() {
   if (!profile) {
     return (
       <SignInPrompt
-        title="Console d'Administration"
-        description="Connectez-vous avec un compte administrateur pour gérer le club."
+        title="Console du Club"
+        description="Connectez-vous avec un compte bureau ou administrateur pour gérer le club."
       />
     );
   }
-  if (profile.role !== "admin") {
+  if (profile.role !== "admin" && profile.role !== "bureau") {
     return <AccessDenied />;
   }
 
-  return <AdminConsole adminName={profile.full_name || "Admin"} />;
+  return <AdminConsole adminName={profile.full_name || "Bureau"} role={profile.role} />;
 }

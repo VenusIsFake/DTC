@@ -10,6 +10,7 @@ function CommitteesEditor() {
   const [committees, setCommittees] = useState<Committee[] | null>(null);
   const [editing, setEditing] = useState<Committee | null>(null);
   const [form, setForm] = useState({ name: "", description: "", sort: 1 });
+  const [error, setError] = useState<string | null>(null);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -37,13 +38,16 @@ function CommitteesEditor() {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     const payload = { name: form.name.trim(), description: form.description.trim(), sort: Number(form.sort) || 1 };
-    const { error } = editing
+    const { error: dbError } = editing
       ? await supabase.from("committees").update(payload).eq("id", editing.id)
       : await supabase.from("committees").insert(payload);
-    if (!error) {
-      setEditing(null);
-      load();
+    if (dbError) {
+      setError(dbError.message);
+      return;
     }
+    setError(null);
+    setEditing(null);
+    load();
   };
 
   const remove = async (committee: Committee) => {
@@ -66,6 +70,12 @@ function CommitteesEditor() {
           <span>Commission</span>
         </button>
       </div>
+
+      {error && (
+        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
 
       {editing && (
         <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-[#755B18]/25">
