@@ -4,8 +4,20 @@ import Image from "next/image";
 import { Instagram, Youtube, Award, MapPin, Heart, ArrowUpRight } from "lucide-react";
 import type { NavItem } from "@/data/siteConfig";
 import { siteConfig } from "@/data/siteConfig";
+import type { PartnerCard } from "@/lib/types";
 
-export default function Footer({ navItems = siteConfig.navItems }: { navItems?: NavItem[] }) {
+export default function Footer({
+  navItems = siteConfig.navItems,
+  sponsor,
+  partnerClub,
+}: {
+  navItems?: NavItem[];
+  /** Console-edited partners; empty name hides the card, undefined = default. */
+  sponsor?: PartnerCard;
+  partnerClub?: PartnerCard;
+}) {
+  const sponsorCard = sponsor ?? siteConfig.sponsor;
+  const partnerCard = partnerClub ?? siteConfig.partnerClub;
   return (
     <footer className="bg-[#16233A] text-[#C9CFD9] mt-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-6">
@@ -56,33 +68,39 @@ export default function Footer({ navItems = siteConfig.navItems }: { navItems?: 
             </ul>
           </div>
 
-          {/* Col 3: Partners & Sponsors */}
+          {/* Col 3: Partners & Sponsors (hidden entirely when both removed) */}
+          {(sponsorCard.name || partnerCard.name) && (
           <div>
             <h3 className="text-[#F7F5F0] font-semibold text-xs sm:text-sm mb-3.5 sm:mb-5 tracking-wide">
               Partenaires & Sponsors
             </h3>
             <div className="space-y-3 text-xs sm:text-sm">
+              {sponsorCard.name && (
               <div className="p-3 rounded-md bg-[#1E2E47] border border-[#3D4A58]">
                 <div className="flex items-center gap-2 text-[#F7F5F0] font-semibold text-xs sm:text-sm">
                   <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D4AF37]" />
-                  <span>{siteConfig.sponsor.name}</span>
+                  <span>{sponsorCard.name}</span>
                 </div>
                 <p className="text-[11px] sm:text-xs text-[#8E99A8] mt-0.5">
-                  {siteConfig.sponsor.tagline}
+                  {sponsorCard.tagline}
                 </p>
               </div>
+              )}
 
+              {partnerCard.name && (
               <div className="p-3 rounded-md bg-[#1E2E47] border border-[#3D4A58]">
                 <div className="flex items-center gap-2 text-[#F7F5F0] font-semibold text-xs sm:text-sm">
                   <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D4AF37]" />
-                  <span>{siteConfig.partnerClub.name}</span>
+                  <span>{partnerCard.name}</span>
                 </div>
                 <p className="text-[11px] sm:text-xs text-[#8E99A8] mt-0.5">
-                  {siteConfig.partnerClub.tagline}
+                  {partnerCard.tagline}
                 </p>
               </div>
+              )}
             </div>
           </div>
+          )}
 
           {/* Col 4: Location & Social */}
           <div>

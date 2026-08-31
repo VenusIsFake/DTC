@@ -237,16 +237,13 @@ function PartnersEditor() {
   const save = async () => {
     setSaving(true);
     setError(null);
+    // Empty name = card removed (public pages + footer hide it).
     const clean = (p: PartnerCard) => ({
       name: p.name.trim(),
       tagline: p.tagline.trim(),
     });
-    // Cleared name = reset to the site default (saved, so the field and the
-    // public page always agree).
-    const s = clean(sponsor.value).name ? clean(sponsor.value) : siteConfig.sponsor;
-    const c = clean(partner.value).name ? clean(partner.value) : siteConfig.partnerClub;
-    const errS = await upsertSetting("sponsor", s);
-    const errC = await upsertSetting("partner_club", c);
+    const errS = await upsertSetting("sponsor", clean(sponsor.value));
+    const errC = await upsertSetting("partner_club", clean(partner.value));
     setSaving(false);
     const err = errS ?? errC;
     if (err) {
@@ -274,7 +271,8 @@ function PartnersEditor() {
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <h3 className="text-sm font-heading font-bold text-[#16233A]">Partenaires & soutiens</h3>
       <p className="text-[11px] text-[#5C6672]">
-        Cartes affichées sur la page À propos. Champ vide = valeur par défaut du site.
+        Cartes affichées sur la page À propos et dans le pied de page. Vider le nom et enregistrer
+        retire la carte du site.
       </p>
       {rows.map((row) => (
         <div key={row.title} className="space-y-2 p-3 rounded-xl bg-white/60 border border-[#DCD7CB]/40">
@@ -301,6 +299,118 @@ function PartnersEditor() {
           </div>
         </div>
       ))}
+      {error && (
+        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
+      <div className="flex justify-end">
+        <PrimaryButton onClick={save} disabled={saving} className="!py-2">
+          {saving ? "…" : saved ? "Enregistré ✓" : "Enregistrer"}
+        </PrimaryButton>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Activity card images — pick a gallery image per homepage activity card
+// ---------------------------------------------------------------------------
+
+interface GalleryOption {
+  id: string;
+  title: string;
+  image_url: string;
+}
+
+function ActivityImagesCard() {
+  const images = useSettingValue<Record<string, string>>("activity_card_images", {});
+  const [gallery, setGallery] = useState<GalleryOption[] | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    supabase
+      .from("gallery_images")
+      .select("id, title, image_url")
+      .eq("is_published", true)
+      .order("sort")
+      .then(({ data }) => setGallery((data as GalleryOption[] | null) ?? []));
+  }, []);
+
+  const save = async () => {
+    setSaving(true);
+    setError(null);
+    const err = await upsertSetting("activity_card_images", images.value);
+    setSaving(false);
+    if (err) {
+      setError(err);
+      return;
+    }
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
+  const cards: { key: string; label: string; fallback: string }[] = [
+    { key: "debates", label: "Débats en Table Dentalk", fallback: "/media/events/debate_table_session.jpg" },
+    { key: "workshops", label: "Ateliers Pratiques & Masterclasses", fallback: "/media/events/eloquence_workshop.jpg" },
+    { key: "team", label: "Vie du Club & Sorties Cohésion", fallback: "/media/team/outdoor_retreat.jpg" },
+  ];
+
+  if (!images.loaded || gallery === null) {
+    return (
+      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-5">
+        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+      <h3 className="text-sm font-heading font-bold text-[#16233A]">Images des cartes d&apos;activité (accueil)</h3>
+      <p className="text-[11px] text-[#5C6672]">
+        Choisissez pour chaque carte une image publiée dans la galerie. « Par défaut » garde
+        l&apos;image actuelle du site.
+      </p>
+      <div className="space-y-2">
+        {cards.map((card) => {
+          const value = images.value[card.key] ?? "";
+          const preview = value || card.fallback;
+          return (
+            <div key={card.key} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/60 border border-[#DCD7CB]/40">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={preview} alt="" className="w-16 h-12 rounded-lg object-cover border border-[#DCD7CB]/50 shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-bold text-[#16233A] truncate">{card.label}</p>
+                <label className="sr-only" htmlFor={`card-img-${card.key}`}>
+                  Image de la carte {card.label}
+                </label>
+                <select
+                  id={`card-img-${card.key}`}
+                  value={value}
+                  onChange={(e) => images.setValue({ ...images.value, [card.key]: e.target.value })}
+                  className={`${inputClass} !py-1.5 !text-[11px] mt-1`}
+                >
+                  <option value="">Image par défaut du site</option>
+                  {gallery.map((g) => (
+                    <option key={g.id} value={g.image_url}>
+                      {g.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {gallery.length === 0 && (
+        <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+          Aucune image dans la galerie — publiez d&apos;abord des images dans l&apos;onglet Galerie.
+        </p>
+      )}
       {error && (
         <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
@@ -349,6 +459,7 @@ export default function HomeTab() {
         />
       </div>
       <StatsEditor />
+      <ActivityImagesCard />
       <PartnersEditor />
       <TextSettingCard
         title="Introduction de la page À propos"

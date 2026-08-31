@@ -18,6 +18,7 @@ import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
 import { Field, PrimaryButton, GhostButton, Badge, inputClass } from "@/components/ui/form";
 import UserAvatar from "@/components/UserAvatar";
+import AvatarCropModal from "@/components/espace/AvatarCropModal";
 
 // ---------------------------------------------------------------------------
 // Sections editor
@@ -193,6 +194,7 @@ function MandatesEditor() {
   const [notice, setNotice] = useState<string | null>(null);
   const [uploadingFor, setUploadingFor] = useState<string | null>(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [cropSrc, setCropSrc] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const photoFileRef = useRef<HTMLInputElement>(null);
   const [pendingUploadMandate, setPendingUploadMandate] = useState<string | null>(null);
@@ -417,6 +419,18 @@ function MandatesEditor() {
     }
   };
 
+  /** Crop-modal confirm: square 512px JPEG blob → club-media → form field. */
+  const uploadCroppedPhoto = async (blob: Blob) => {
+    if (!memberForm) return;
+    await uploadMemberPhoto(new File([blob], "photo.jpg", { type: "image/jpeg" }));
+  };
+
+  const openPhotoCrop = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => setCropSrc(String(reader.result));
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
@@ -629,7 +643,7 @@ function MandatesEditor() {
                         className="sr-only"
                         onChange={(e) => {
                           const file = e.target.files?.[0];
-                          if (file) uploadMemberPhoto(file);
+                          if (file) openPhotoCrop(file);
                           if (photoFileRef.current) photoFileRef.current.value = "";
                         }}
                       />
@@ -669,6 +683,12 @@ function MandatesEditor() {
           })}
         </div>
       )}
+      <AvatarCropModal
+        isOpen={cropSrc !== null}
+        imageSrc={cropSrc}
+        onClose={() => setCropSrc(null)}
+        onConfirm={uploadCroppedPhoto}
+      />
     </div>
   );
 }

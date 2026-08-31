@@ -156,6 +156,7 @@ export default async function AboutPage() {
                   {section.body}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 max-w-2xl mx-auto text-left">
+                  {sponsor.name && (
                   <div className="p-4 sm:p-6 rounded-xl sm:rounded-lg bg-[#EFECE4]/50 border border-[#DCD7CB]/40 space-y-1.5">
                     <div className="flex items-center gap-2 text-[#16233A] font-bold text-base sm:text-lg">
                       <Award className="w-4 h-4 text-[#755B18]" />
@@ -163,6 +164,8 @@ export default async function AboutPage() {
                     </div>
                     <p className="text-xs text-[#3D4A58]">{sponsor.tagline}</p>
                   </div>
+                  )}
+                  {partnerClub.name && (
                   <div className="p-4 sm:p-6 rounded-xl sm:rounded-lg bg-[#EFECE4]/50 border border-[#DCD7CB]/40 space-y-1.5">
                     <div className="flex items-center gap-2 text-[#16233A] font-bold text-base sm:text-lg">
                       <Heart className="w-4 h-4 text-[#755B18]" />
@@ -170,6 +173,7 @@ export default async function AboutPage() {
                     </div>
                     <p className="text-xs text-[#3D4A58]">{partnerClub.tagline}</p>
                   </div>
+                  )}
                 </div>
               </div>
             ) : (

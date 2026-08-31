@@ -60,6 +60,7 @@ export default async function HomePage() {
         eventsVisible={settings.events_visible}
         highlightKicker={settings.highlight_kicker}
         highlightDate={settings.highlight_date}
+        activityImages={settings.activity_card_images}
       />
     </div>
   );

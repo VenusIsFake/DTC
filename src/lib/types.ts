@@ -159,6 +159,12 @@ export interface SiteSettings {
   about_intro?: string;
   sponsor?: PartnerCard;
   partner_club?: PartnerCard;
+  /** Console-picked gallery image per homepage activity card (undefined = default). */
+  activity_card_images?: {
+    debates?: string;
+    workshops?: string;
+    team?: string;
+  };
 }
 
 export interface Mandate {

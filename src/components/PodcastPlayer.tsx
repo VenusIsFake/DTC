@@ -133,6 +133,13 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                     fill
                     sizes="(max-width: 640px) 48px, 64px"
                     className="object-cover group-hover:scale-105 transition-transform"
+                    onError={(e) => {
+                      // maxresdefault 404s on some videos — hqdefault always exists.
+                      const el = e.currentTarget;
+                      if (!el.src.includes("hqdefault")) {
+                        el.src = `https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`;
+                      }
+                    }}
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                     <Play className="w-4 h-4 text-[#16233A] fill-current opacity-80" />

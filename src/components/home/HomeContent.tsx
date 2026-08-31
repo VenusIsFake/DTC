@@ -20,12 +20,15 @@ export default function HomeContent({
   eventsVisible,
   highlightKicker,
   highlightDate,
+  activityImages,
 }: {
   talks: TedxTalk[];
   featuredEpisode?: PodcastEpisode | null;
   eventsVisible: boolean;
   highlightKicker?: string;
   highlightDate?: string;
+  /** Console-picked gallery image per activity card; undefined = built-in default. */
+  activityImages?: { debates?: string; workshops?: string; team?: string };
 }) {
   const [activeTalk, setActiveTalk] = useState<TedxTalk | null>(null);
 
@@ -147,7 +150,7 @@ export default function HomeContent({
           <div className="glass-card p-4 sm:p-5 rounded-lg space-y-3">
             <div className="relative aspect-video rounded-md overflow-hidden border border-[#DCD7CB]">
               <Image
-                src="/media/events/debate_table_session.jpg"
+                src={activityImages?.debates || "/media/events/debate_table_session.jpg"}
                 alt="Débats en Table"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -173,7 +176,7 @@ export default function HomeContent({
           <div className="glass-card p-4 sm:p-5 rounded-lg space-y-3">
             <div className="relative aspect-video rounded-md overflow-hidden border border-[#DCD7CB]">
               <Image
-                src="/media/events/eloquence_workshop.jpg"
+                src={activityImages?.workshops || "/media/events/eloquence_workshop.jpg"}
                 alt="Ateliers d'Éloquence"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -199,7 +202,7 @@ export default function HomeContent({
           <div className="glass-card p-4 sm:p-5 rounded-lg space-y-3">
             <div className="relative aspect-video rounded-md overflow-hidden border border-[#DCD7CB]">
               <Image
-                src="/media/team/outdoor_retreat.jpg"
+                src={activityImages?.team || "/media/team/outdoor_retreat.jpg"}
                 alt="Vie du Club"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"

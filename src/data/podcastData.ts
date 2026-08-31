@@ -26,7 +26,7 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     releaseDate: "Avril 2026",
     youtubeId: "FXTjMfmNmss",
     youtubeUrl: "https://www.youtube.com/watch?v=FXTjMfmNmss",
-    posterImage: "/media/podcasts/youtube_thumb_ep4.jpg",
+    posterImage: "https://i.ytimg.com/vi/FXTjMfmNmss/maxresdefault.jpg",
     duration: "48:15",
     synopsis: "Un échange d'une profondeur rare croisant chirurgie orale, rigueur clinique, transmission pédagogique et conseils précieux pour les générations futures de chirurgiens-dentistes.",
     takeaways: [
@@ -47,7 +47,7 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     releaseDate: "Novembre 2025",
     youtubeId: "JoMwnQbmKm0",
     youtubeUrl: "https://www.youtube.com/watch?v=JoMwnQbmKm0",
-    posterImage: "/media/podcasts/youtube_thumb_ep3.jpg",
+    posterImage: "https://i.ytimg.com/vi/JoMwnQbmKm0/maxresdefault.jpg",
     duration: "42:30",
     synopsis: "Discussion passionnante sur les méthodes d'apprentissage en odontologie, la gestion des premiers cas complexes et les opportunités de recherche au Maroc.",
     takeaways: [
@@ -67,7 +67,7 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     releaseDate: "Septembre 2025",
     youtubeId: "C1dKfXuC0us",
     youtubeUrl: "https://www.youtube.com/watch?v=C1dKfXuC0us",
-    posterImage: "/media/podcasts/youtube_thumb_ep2.jpg",
+    posterImage: "https://i.ytimg.com/vi/C1dKfXuC0us/maxresdefault.jpg",
     duration: "39:45",
     synopsis: "Un retour d'expérience enrichissant sur la transition de l'université vers la pratique clinique avancée, la gestion d'équipe et la formation continue.",
     takeaways: [
@@ -87,7 +87,7 @@ export const podcastEpisodesData: PodcastEpisode[] = [
     releaseDate: "Juin 2025",
     youtubeId: "njrC04ZxJo0",
     youtubeUrl: "https://www.youtube.com/watch?v=njrC04ZxJo0",
-    posterImage: "/media/podcasts/youtube_thumb_ep1.jpg",
+    posterImage: "https://i.ytimg.com/vi/njrC04ZxJo0/maxresdefault.jpg",
     duration: "45:10",
     synopsis: "Le tout premier épisode historique du Let's Talk Podcast avec Pr. Said Dhaimy, animé par Hatim Elguerraoui & Ayman El Attar.",
     takeaways: [

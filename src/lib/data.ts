@@ -98,6 +98,15 @@ async function fetchSiteSettings(): Promise<SiteSettings> {
           : null;
       if (entry.key === "sponsor") settings.sponsor = asPartner(entry.value) ?? undefined;
       if (entry.key === "partner_club") settings.partner_club = asPartner(entry.value) ?? undefined;
+      if (entry.key === "activity_card_images" && typeof entry.value === "object" && entry.value !== null) {
+        const pick = (v: unknown) => (typeof v === "string" && v.trim() !== "" ? v.trim() : undefined);
+        const cards = entry.value as Record<string, unknown>;
+        settings.activity_card_images = {
+          debates: pick(cards.debates),
+          workshops: pick(cards.workshops),
+          team: pick(cards.team),
+        };
+      }
     }
     return settings;
   }, FALLBACK_SETTINGS);
@@ -168,9 +177,11 @@ export async function getIdeaBoard(): Promise<IdeaBoardItem[]> {
 // ---------------------------------------------------------------------------
 
 export function mapPodcastRow(row: PodcastEpisodeRow): PodcastEpisode {
-  // Console-entered poster wins; the committed media file is only a fallback
-  // so episodes 5+ don't 404 when no dev ships a youtube_thumb_epN.jpg.
-  const poster = row.poster_image?.trim() || `/media/podcasts/youtube_thumb_ep${row.episode_number}.jpg`;
+  // Console-entered poster wins; else the YouTube thumbnail (much clearer
+  // than the committed screen-grabs), maxres with a client-side hq fallback.
+  const poster =
+    row.poster_image?.trim() ||
+    `https://i.ytimg.com/vi/${row.youtube_id}/maxresdefault.jpg`;
 
   return {
     id: row.id,

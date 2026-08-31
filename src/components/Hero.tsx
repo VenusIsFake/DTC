@@ -18,12 +18,7 @@ export default function Hero({
   marqueeLine?: string;
   tagline?: string;
 }) {
-  const [imgSrc, setImgSrc] = useState(
-    featuredEpisode?.posterImage ||
-      (featuredEpisode?.episodeNumber
-        ? `/media/podcasts/youtube_thumb_ep${featuredEpisode.episodeNumber}.jpg`
-        : "/media/podcasts/youtube_thumb_ep4.jpg")
-  );
+  const [imgSrc, setImgSrc] = useState(featuredEpisode?.posterImage || "");
 
   return (
     <section className="px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-6 pb-0">
@@ -86,8 +81,10 @@ export default function Hero({
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     onError={() =>
-                      setImgSrc(
-                        `/media/podcasts/youtube_thumb_ep${featuredEpisode.episodeNumber}.jpg`
+                      setImgSrc((prev) =>
+                        prev.includes("hqdefault")
+                          ? prev
+                          : `https://i.ytimg.com/vi/${featuredEpisode.youtubeId}/hqdefault.jpg`
                       )
                     }
                     className="object-cover group-hover/thumb:scale-105 transition-transform duration-300"
