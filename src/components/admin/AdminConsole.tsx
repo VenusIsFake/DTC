@@ -4,23 +4,19 @@ import React, { useState } from "react";
 import {
   Users,
   Megaphone,
-  Lightbulb,
   Radio,
   CalendarDays,
   FileText,
-  Building2,
   Images,
   Home,
   ClipboardList,
 } from "lucide-react";
 import type { Role } from "@/lib/types";
 import UsersTab from "@/components/admin/UsersTab";
-import AnnouncementsTab from "@/components/admin/AnnouncementsTab";
-import IdeasTab from "@/components/admin/IdeasTab";
+import AnnoncesIdeesTab from "@/components/admin/AnnoncesIdeesTab";
 import PodcastTab from "@/components/admin/PodcastTab";
 import EventsTab from "@/components/admin/EventsTab";
-import AboutTab from "@/components/admin/AboutTab";
-import CommitteesTab from "@/components/admin/CommitteesTab";
+import AboutCommitteesTab from "@/components/admin/AboutCommitteesTab";
 import GalleryTab from "@/components/admin/GalleryTab";
 import HomeTab from "@/components/admin/HomeTab";
 import RecruitmentsTab from "@/components/admin/RecruitmentsTab";
@@ -37,13 +33,11 @@ interface TabDef {
 const TABS: TabDef[] = [
   { id: "users", label: "Utilisateurs", icon: Users, component: UsersTab, adminOnly: true },
   { id: "home", label: "Accueil", icon: Home, component: HomeTab },
-  { id: "annonces", label: "Annonces", icon: Megaphone, component: AnnouncementsTab },
-  { id: "idees", label: "Idées", icon: Lightbulb, component: IdeasTab },
+  { id: "annonces", label: "Annonces & Idées", icon: Megaphone, component: AnnoncesIdeesTab },
   { id: "podcast", label: "Podcast Studio", icon: Radio, component: PodcastTab },
   { id: "events", label: "Événements", icon: CalendarDays, component: EventsTab },
   { id: "gallery", label: "Galerie", icon: Images, component: GalleryTab },
-  { id: "about", label: "À propos", icon: FileText, component: AboutTab },
-  { id: "committees", label: "Commissions & listes", icon: Building2, component: CommitteesTab },
+  { id: "about", label: "À propos & Commissions", icon: FileText, component: AboutCommitteesTab },
   { id: "candidatures", label: "Candidatures", icon: ClipboardList, component: RecruitmentsTab },
 ];
 
@@ -51,18 +45,16 @@ type TabId =
   | "users"
   | "home"
   | "annonces"
-  | "idees"
   | "podcast"
   | "events"
   | "gallery"
   | "about"
-  | "committees"
   | "candidatures";
 
 export default function AdminConsole({ adminName, role }: { adminName: string; role: Role }) {
   const tabs = TABS.filter((t) => role === "admin" || !t.adminOnly);
   const [tab, setTab] = useState<TabId>(role === "admin" ? "users" : "annonces");
-  const Active = tabs.find((t) => t.id === tab)?.component ?? AnnouncementsTab;
+  const Active = tabs.find((t) => t.id === tab)?.component ?? AnnoncesIdeesTab;
 
   return (
     <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-4 sm:space-y-6">

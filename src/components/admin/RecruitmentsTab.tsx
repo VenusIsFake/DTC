@@ -432,11 +432,21 @@ function ApplicationsList() {
   };
 
   const remove = async (item: ApplicationRow) => {
-    if (!window.confirm(`Supprimer définitivement la candidature de « ${item.full_name} » ?`))
+    // Irreversible: warn explicitly, then surface any DB failure (RLS, network).
+    if (
+      !window.confirm(
+        `Supprimer définitivement la candidature de « ${item.full_name} » ?\n\n` +
+          "Cette action est irréversible : toutes ses réponses seront perdues."
+      )
+    )
       return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("applications").delete().eq("id", item.id);
+    const { error } = await supabase.from("applications").delete().eq("id", item.id);
+    if (error) {
+      window.alert(`Suppression impossible : ${error.message}`);
+      return;
+    }
     load();
   };
 
