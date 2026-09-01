@@ -561,7 +561,7 @@ function ApplicationsList() {
                       id={`app-status-${item.id}`}
                       value={item.status}
                       onChange={(e) => setStatus(item, e.target.value as ApplicationStatus)}
-                      className={`${inputClass} flex-1 sm:flex-none !py-1.5 !px-2 !text-[11px]`}
+                      className={`${inputClass} !w-auto flex-1 sm:flex-none !py-1.5 !px-2 !text-[11px]`}
                     >
                       <option value="new">Nouvelle</option>
                       <option value="reviewed">Traitée</option>

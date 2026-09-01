@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Home, Loader2, Plus, Trash2 } from "lucide-react";
-import type { HomeStat, PartnerCard } from "@/lib/types";
+import { Home, Loader2 } from "lucide-react";
+import type { PartnerCard } from "@/lib/types";
 import { siteConfig } from "@/data/siteConfig";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Field, PrimaryButton, GhostButton, inputClass } from "@/components/ui/form";
@@ -114,109 +114,6 @@ function TextSettingCard({
           </div>
         </>
       )}
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Home stats editor (renders as the stats strip under the homepage hero)
-// ---------------------------------------------------------------------------
-
-function StatsEditor() {
-  const [stats, setStats] = useState<HomeStat[] | null>(null);
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [saved, setSaved] = useState(false);
-
-  useEffect(() => {
-    const supabase = getSupabaseBrowserClient();
-    if (!supabase) return;
-    supabase
-      .from("site_settings")
-      .select("value")
-      .eq("key", "home_stats")
-      .maybeSingle()
-      .then(({ data }) => {
-        // No saved row yet → show the live defaults so they are editable,
-        // not a blank list that hides what the site currently renders.
-        if (data) setStats(((data as { value: HomeStat[] }).value ?? []).slice(0, 6));
-        else setStats(siteConfig.stats);
-      });
-  }, []);
-
-  const save = async () => {
-    setSaving(true);
-    setError(null);
-    const err = await upsertSetting("home_stats", stats ?? []);
-    setSaving(false);
-    if (err) {
-      setError(err);
-      return;
-    }
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
-  };
-
-  if (stats === null) {
-    return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-5">
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
-      </div>
-    );
-  }
-
-  return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h3 className="text-sm font-heading font-bold text-[#16233A]">Statistiques de la page d&apos;accueil</h3>
-      <p className="text-[11px] text-[#5C6672]">
-        Bandeau de chiffres affiché sous le hero de l&apos;accueil (max 6 — 4 idéalement). Vide = valeurs par défaut du site.
-      </p>
-      <div className="space-y-2">
-        {stats.map((stat, idx) => (
-          <div key={idx} className="grid grid-cols-[110px_1fr_auto] gap-2 items-center">
-            <input
-              type="text"
-              value={stat.value}
-              onChange={(e) => setStats(stats.map((s, i) => (i === idx ? { ...s, value: e.target.value } : s)))}
-              className={`${inputClass} !text-xs`}
-              aria-label={`Valeur ${idx + 1}`}
-              placeholder="1,500+"
-            />
-            <input
-              type="text"
-              value={stat.label}
-              onChange={(e) => setStats(stats.map((s, i) => (i === idx ? { ...s, label: e.target.value } : s)))}
-              className={`${inputClass} !text-xs`}
-              aria-label={`Libellé ${idx + 1}`}
-              placeholder="Étudiants & Communauté"
-            />
-            <button
-              onClick={() => setStats(stats.filter((_, i) => i !== idx))}
-              aria-label="Retirer la statistique"
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5F6774] hover:text-red-600"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        ))}
-      </div>
-      {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
-          {error}
-        </p>
-      )}
-      <div className="flex justify-between">
-        <GhostButton
-          onClick={() => stats.length < 6 && setStats([...stats, { value: "", label: "" }])}
-          className="!py-1.5 !text-[11px]"
-        >
-          <Plus className="w-3 h-3" />
-          <span>Ajouter</span>
-        </GhostButton>
-        <PrimaryButton onClick={save} disabled={saving} className="!py-2">
-          {saving ? "…" : saved ? "Enregistré ✓" : "Enregistrer"}
-        </PrimaryButton>
-      </div>
     </div>
   );
 }
@@ -428,6 +325,68 @@ function ActivityImagesCard() {
   );
 }
 
+/** Site wall toggle: when OFF, the main website is staff-only (middleware). */
+function WallToggleCard() {
+  const { value: wallOpen, loaded } = useSettingValue<boolean>("site_wall_open", false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const toggle = async () => {
+    setSaving(true);
+    setError(null);
+    const err = await upsertSetting("site_wall_open", !wallOpen);
+    setSaving(false);
+    if (err) {
+      setError(err);
+      return;
+    }
+    // Next page load re-evaluates the wall (middleware reads the setting).
+    window.location.reload();
+  };
+
+  return (
+    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-2">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="min-w-0">
+          <h3 className="text-sm font-heading font-bold text-[#16233A]">
+            Accès public du site {wallOpen ? "(ouvert)" : "(réservé au bureau)"}
+          </h3>
+          <p className="text-[11px] text-[#5C6672] leading-relaxed mt-0.5">
+            {wallOpen
+              ? "Le site principal est visible de tous. Basculer pour le refermer."
+              : "Seul le formulaire /candidature est public ; le reste du site exige un compte bureau ou admin."}
+          </p>
+        </div>
+        {!loaded ? (
+          <Loader2 className="w-4 h-4 text-[#755B18] animate-spin shrink-0" />
+        ) : (
+          <button
+            onClick={toggle}
+            disabled={saving}
+            role="switch"
+            aria-checked={wallOpen}
+            aria-label="Ouvrir le site au public"
+            className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+              wallOpen ? "bg-emerald-600" : "bg-[#16233A]"
+            } disabled:opacity-50`}
+          >
+            <span
+              className={`inline-block h-[18px] w-[18px] transform rounded-full bg-white shadow transition-transform ${
+                wallOpen ? "translate-x-[24px]" : "translate-x-[3px]"
+              }`}
+            />
+          </button>
+        )}
+      </div>
+      {error && (
+        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function HomeTab() {
   return (
     <div className="space-y-4">
@@ -435,6 +394,7 @@ export default function HomeTab() {
         <Home className="w-4 h-4 text-[#755B18]" />
         <p>Contenu éditorial de l&apos;accueil et de l&apos;en-tête — champ vide = valeur par défaut du site.</p>
       </div>
+      <WallToggleCard />
       <TextSettingCard
         title="Ligne éditoriale du hero (marquee)"
         settingKey="marquee_line"
@@ -461,7 +421,6 @@ export default function HomeTab() {
           placeholder="22 Nov 2025"
         />
       </div>
-      <StatsEditor />
       <ActivityImagesCard />
       <PartnersEditor />
       <TextSettingCard

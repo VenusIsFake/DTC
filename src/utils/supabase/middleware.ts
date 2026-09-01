@@ -42,6 +42,27 @@ function securityContext(request: NextRequest) {
   return { next }
 }
 
+// ---------------------------------------------------------------------------
+// Site wall (2026-09-01, at Venus's request): until the club opens the main
+// website, every path except the standalone application form is served only
+// to bureau/admin sessions — enforced here in middleware, before rendering,
+// not with any client-side trick. `/api/*` stays reachable (each route does
+// its own role checks and must answer JSON, not a redirect). The bureau can
+// lift the wall from the console (Accueil tab) via the `site_wall_open`
+// setting — no deploy needed.
+// ---------------------------------------------------------------------------
+
+const PUBLIC_PATHS = ["/candidature"];
+
+async function siteWallOpen(supabase: ReturnType<typeof createServerClient>): Promise<boolean> {
+  const { data } = await supabase
+    .from("site_settings")
+    .select("value")
+    .eq("key", "site_wall_open")
+    .maybeSingle();
+  return (data as { value?: unknown } | null)?.value === true;
+}
+
 export async function updateSession(request: NextRequest) {
   const { next } = securityContext(request)
 
@@ -74,7 +95,40 @@ export async function updateSession(request: NextRequest) {
 
   // Do not run code between createServerClient and supabase.auth.getUser()
   // IMPORTANT: DO NOT REMOVE auth.getUser()
-  await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  const path = request.nextUrl.pathname
+  const isPublicPath = PUBLIC_PATHS.some((p) => path === p || path.startsWith(p + "/"))
+
+  if (isPublicPath || path.startsWith("/api/")) {
+    return supabaseResponse
+  }
+
+  // Wall decision needs the visitor's role (my_profile RPC — role is not a
+  // column-granted field) and the console toggle.
+  const [profileResult, wallOpen] = await Promise.all([
+    user ? supabase.rpc("my_profile") : Promise.resolve({ data: null } as const),
+    siteWallOpen(supabase),
+  ])
+
+  if (wallOpen) {
+    return supabaseResponse
+  }
+
+  const profile = (profileResult.data as Array<{ role?: string; is_banned?: boolean }> | null)?.[0]
+  const isStaff =
+    !!profile && !profile.is_banned && (profile.role === "bureau" || profile.role === "admin")
+
+  if (!isStaff) {
+    const redirect = NextResponse.redirect(new URL("/candidature", request.url))
+    // Preserve the in-flight auth cookies set by the session refresh above.
+    supabaseResponse.cookies.getAll().forEach(({ name, value }) =>
+      redirect.cookies.set(name, value)
+    )
+    return redirect
+  }
 
   return supabaseResponse
 }

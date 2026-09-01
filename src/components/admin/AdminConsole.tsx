@@ -51,9 +51,27 @@ type TabId =
   | "about"
   | "candidatures";
 
-export default function AdminConsole({ adminName, role }: { adminName: string; role: Role }) {
+export default function AdminConsole({
+  adminName,
+  role,
+  initialTab,
+}: {
+  adminName: string;
+  role: Role;
+  initialTab?: string | null;
+}) {
   const tabs = TABS.filter((t) => role === "admin" || !t.adminOnly);
-  const [tab, setTab] = useState<TabId>(role === "admin" ? "users" : "annonces");
+  // Tab survives refresh via /admin?tab=… — server-validated initial value,
+  // client mirrors every switch into the URL (no navigation).
+  const defaultTab: TabId = role === "admin" ? "users" : "annonces";
+  const startTab = (tabs.find((t) => t.id === initialTab)?.id ?? defaultTab) as TabId;
+  const [tab, setTabState] = useState<TabId>(startTab);
+  const setTab = (next: TabId) => {
+    setTabState(next);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `/admin?tab=${next}`);
+    }
+  };
   const Active = tabs.find((t) => t.id === tab)?.component ?? AnnoncesIdeesTab;
 
   return (

@@ -37,12 +37,16 @@ function AccessDenied() {
   );
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
   if (!isSupabaseConfigured()) {
     return <SignInPrompt title="Console indisponible" description="La base de données n'est pas configurée." />;
   }
 
-  const profile = await getServerProfile();
+  const [profile, params] = await Promise.all([getServerProfile(), searchParams]);
   if (!profile) {
     return (
       <SignInPrompt
@@ -55,5 +59,11 @@ export default async function AdminPage() {
     return <AccessDenied />;
   }
 
-  return <AdminConsole adminName={profile.full_name || "Bureau"} role={profile.role} />;
+  return (
+    <AdminConsole
+      adminName={profile.full_name || "Bureau"}
+      role={profile.role}
+      initialTab={params.tab}
+    />
+  );
 }

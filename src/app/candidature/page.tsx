@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MailX, Megaphone } from "lucide-react";
 import { getOpenRecruitment, getServerProfile } from "@/lib/data";
 import CandidatureForm from "@/components/candidature/CandidatureForm";
+import BureauSignIn from "@/components/candidature/BureauSignIn";
 
 // Link-only form portal (no site chrome — see SiteChrome). Kept out of search
 // engines so it stays as private as the Google Form it replaces.
@@ -115,6 +116,7 @@ export default async function CandidaturePage() {
       <p className="text-center text-[10px] text-[#5C6672]">
         Formulaire officiel du Dentalk Club FMDC — réservé aux membres invités par le bureau.
       </p>
+      <BureauSignIn />
     </div>
   );
 }
