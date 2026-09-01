@@ -1353,3 +1353,72 @@ create trigger touch_updated_at
   for each row execute procedure public.set_updated_at_announcements();
 
 revoke execute on function public.set_updated_at_announcements() from public, anon, authenticated;
+
+-- ============================================================================
+-- v2.5 (2026-09-01, nuit) — wall hides DATA too, not just pages (see
+-- supabase/migrations/20260901_wall_content_lock.sql). While site_wall_open
+-- is not true, anonymous REST reads of public content return nothing;
+-- flipping the console toggle opens pages and data together. site_settings
+-- and recruitments/positions stay readable (middleware reads the wall key as
+-- anon; /candidature is the public exempt page). site_is_open() is
+-- PUBLIC-executable by design — anon-side policies call it (accepted WARN).
+-- ============================================================================
+
+create or replace function public.site_is_open()
+returns boolean
+language sql stable security definer set search_path = ''
+as $$
+  select coalesce(
+    (select true from public.site_settings s
+      where s.key = 'site_wall_open' and s.value = 'true'::jsonb),
+    false
+  )
+$$;
+
+alter policy "announcements_public_read" on public.announcements
+  using (((select public.site_is_open()) and status = 'published') or public.is_bureau_or_admin());
+
+alter policy "ideas_public_read" on public.ideas
+  using ((select public.site_is_open()));
+
+alter policy "votes_public_read" on public.votes
+  using ((select public.site_is_open()));
+
+alter policy "comments_public_read" on public.comments
+  using ((select public.site_is_open()));
+
+alter policy "podcast_public_read" on public.podcast_episodes
+  using (((select public.site_is_open()) and is_published) or public.is_bureau_or_admin());
+
+alter policy "tedx_public_read" on public.tedx_talks
+  using (((select public.site_is_open()) and is_published) or public.is_bureau_or_admin());
+
+alter policy "event_pages_public_read" on public.event_pages
+  using (((select public.site_is_open()) and status = 'published') or public.is_bureau_or_admin());
+
+alter policy "event_items_public_read" on public.event_page_items
+  using (
+    public.is_bureau_or_admin()
+    or (
+      (select public.site_is_open())
+      and exists (
+        select 1 from public.event_pages ep
+        where ep.id = event_page_id and ep.status = 'published'
+      )
+    )
+  );
+
+alter policy "mandates_public_read" on public.mandates
+  using ((select public.site_is_open()));
+
+alter policy "mandate_members_public_read" on public.mandate_members
+  using ((select public.site_is_open()));
+
+alter policy "gallery_public_read" on public.gallery_images
+  using (((select public.site_is_open()) and is_published) or public.is_bureau_or_admin());
+
+alter policy "about_public_read" on public.about_sections
+  using (((select public.site_is_open()) and is_published) or public.is_bureau_or_admin());
+
+alter policy "profiles_public_read" on public.profiles
+  using ((select public.site_is_open()));

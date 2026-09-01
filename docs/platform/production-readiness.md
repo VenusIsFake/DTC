@@ -164,3 +164,10 @@ authenticated-executable admin RPCs (role checked inside each body).
 **Still Venus-side:** Supabase **Pro plan** unlocks leaked-password protection (HaveIBeenPwned)
 — enable in Auth settings after upgrading; MFA optional for bureau/admin. Resend + Turnstile
 keys still pending (Turnstile would layer captcha on /candidature on top of the DB caps).
+
+**Complément v2.5 : le verrou s'étend aux données.** Tant que `site_wall_open` reste false,
+les lectures REST anonymes du contenu (annonces, idées, votes, commentaires, podcast, TEDx,
+événements, mandats, galerie, à-propos, noms de membres) renvoient vide — même clé anon, même
+RLS. La bascule console ouvre pages et données ensemble. Seuls `site_settings` (clé du mur)
+et `recruitments`/`positions` (portail /candidature) restent publics. Raison : formulaire en
+attente dans la console si besoin de préremplir avant l'ouverture — contenu invisible dehors.
