@@ -570,10 +570,10 @@ function ApplicationsList() {
                     </select>
                     <button
                       onClick={() => remove(item)}
-                      aria-label="Supprimer"
-                      className="w-9 h-9 shrink-0 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
+                      className="flex items-center gap-1.5 h-9 px-3 shrink-0 rounded-lg text-[11px] font-semibold text-red-600 border border-red-500/30 bg-red-500/5 hover:bg-red-500/15 transition-colors"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
+                      <span>Supprimer</span>
                     </button>
                   </div>
                 </div>
