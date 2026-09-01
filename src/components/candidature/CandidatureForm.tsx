@@ -165,7 +165,7 @@ export default function CandidatureForm({
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             className={inputClass}
-            placeholder="ex : Aya Jei"
+            placeholder="ex : Nom Prénom"
             autoComplete="name"
           />
         </Field>
