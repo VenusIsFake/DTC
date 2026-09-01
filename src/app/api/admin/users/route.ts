@@ -8,8 +8,17 @@ export const dynamic = "force-dynamic";
 
 // Readable, copy-pasteable temp credentials (no ambiguous chars).
 const ALPHABET = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789";
+// Rejection sampling: a plain `byte % length` would favor the first
+// (256 % length) indices — negligible risk, but free to get right.
+function randomIndex(length: number): number {
+  const limit = 256 - (256 % length);
+  for (;;) {
+    const byte = randomBytes(1)[0];
+    if (byte < limit) return byte % length;
+  }
+}
 function tempPassword(): string {
-  const body = Array.from(randomBytes(12), (b) => ALPHABET[b % ALPHABET.length]).join("");
+  const body = Array.from({ length: 12 }, () => ALPHABET[randomIndex(ALPHABET.length)]).join("");
   return `Dtc-${body.slice(0, 4)}-${body.slice(4, 8)}-${body.slice(8, 12)}`;
 }
 
@@ -72,9 +81,10 @@ export async function POST(request: NextRequest) {
       user_metadata: { full_name: fullName },
     });
     if (createError || !created?.user) {
+      console.error("users create:", createError);
       const message = /already|registered|exists/i.test(createError?.message ?? "")
         ? "Un compte existe déjà avec cet email."
-        : (createError?.message ?? "Création impossible.");
+        : "Création impossible.";
       return NextResponse.json({ error: message }, { status: 409 });
     }
     // handle_new_user already inserted the profile (role member) — set the real role.
@@ -83,7 +93,8 @@ export async function POST(request: NextRequest) {
       .update({ role, ...(fullName ? { full_name: fullName } : {}) })
       .eq("id", created.user.id);
     if (roleError) {
-      return NextResponse.json({ error: `Compte créé mais rôle non appliqué : ${roleError.message}` }, { status: 207 });
+      console.error("users role apply:", roleError);
+      return NextResponse.json({ error: "Compte créé mais rôle non appliqué." }, { status: 207 });
     }
     return NextResponse.json({ email, password });
   }
@@ -97,10 +108,20 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    // One admin must not be able to silently take over another admin's
+    // account (temp password is returned in the response). Demote first.
+    const { data: target } = await service.from("profiles").select("role").eq("id", userId).maybeSingle();
+    if (target?.role === "admin") {
+      return NextResponse.json(
+        { error: "Impossible de réinitialiser le mot de passe d'un autre administrateur — rétrogradez-le d'abord (rôle bureau)." },
+        { status: 403 }
+      );
+    }
     const password = tempPassword();
     const { error: updateError } = await service.auth.admin.updateUserById(userId, { password });
     if (updateError) {
-      return NextResponse.json({ error: updateError.message }, { status: 502 });
+      console.error("users reset_password:", updateError);
+      return NextResponse.json({ error: "Réinitialisation impossible." }, { status: 502 });
     }
     return NextResponse.json({ password });
   }
@@ -113,7 +134,8 @@ export async function POST(request: NextRequest) {
     }
     const { error: deleteError } = await service.auth.admin.deleteUser(userId);
     if (deleteError) {
-      return NextResponse.json({ error: deleteError.message }, { status: 502 });
+      console.error("users delete:", deleteError);
+      return NextResponse.json({ error: "Suppression impossible." }, { status: 502 });
     }
     // profiles row cascades (FK on delete cascade); authored content keeps
     // author_id set to null by its own FK policy.

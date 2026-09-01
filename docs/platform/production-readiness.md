@@ -125,3 +125,42 @@ availability badge when the service key is missing.
 - **Not visually replayed** (no bureau/admin browser session for the agent): console write flows
   are code- and type-verified only — first real use should happen with Venus present.
 - Still open: Resend + Turnstile keys (Venus), YouTube-import E2E with a bureau login.
+
+## 9. Security hardening (v2.4, 2026-09-01 soir — pre-launch audit)
+
+Full audit (two review agents + live Supabase advisors + anon REST probes). No CRITICAL;
+everything below is now live (migration `20260901_security_hardening.sql`, schema.sql synced).
+
+- **Candidature anti-abuse** — `applications` inserts: policy now pins `profile_id` to the
+  submitter (or null) and `status='new'`; trigger rejects a second submission with the same
+  name+phone per campaign (French message) and caps volume at 300/hour; unique index
+  `applications_one_per_identity` backstops races. Verified live: forged `status='accepted'`
+  → 42501, valid anon insert → 201, duplicate → French 400.
+- **Privilege-escalation two-layer defense** — `profiles_self_update` WITH CHECK now pins
+  `role`/`is_banned`/`email` via `self_role()`/`self_is_banned()`/`self_email()` (SECURITY
+  DEFINER one-liners) on top of the existing column grants.
+- **Email broadcast** — `announcements.emailed_at` send marker: same announcement cannot be
+  re-sent until edited again (409 with guidance); recipients exclude banned members; recipient
+  listing failure now returns JSON 500 instead of a thrown 500.
+- **Bureau members list / annuaire** — banned members excluded from `bureau_list_profiles()`
+  (recipients + Membres tab) and refused by `member_directory()`.
+- **club-media storage** — mime whitelist explicit (JPEG/PNG/WebP/GIF), SVG no longer accepted
+  (hosted-script vector on the Supabase origin).
+- **Vote privacy** — anon can still read vote *counts* (`idea_board` works, verified) but no
+  longer the `user_id` column (attribution harvest closed; Realtime follows the same
+  privileges).
+- **Author display fix** — anon got NULL author names on annonces/idées; new
+  `profiles_public_read` policy (column grants already scope anon to id/full_name/avatar_url).
+- **Users API** — one admin can no longer reset another admin's password (demote first);
+  Supabase error strings no longer passthrough (fixed French messages, raw errors server-side
+  console); temp-password generator uses rejection sampling (no modulo bias).
+- **Headers** — `Strict-Transport-Security` added in vercel.json (2y, includeSubDomains, preload).
+
+**Accepted advisor WARNs (do NOT "fix"):** `is_admin`/`is_bureau_or_admin`/`is_active_member`
+stay anon-executable — RLS policies on anon-readable tables call them and policy expressions
+run with the caller's privileges; revoking breaks every anonymous read. Same class for the
+authenticated-executable admin RPCs (role checked inside each body).
+
+**Still Venus-side:** Supabase **Pro plan** unlocks leaked-password protection (HaveIBeenPwned)
+— enable in Auth settings after upgrading; MFA optional for bureau/admin. Resend + Turnstile
+keys still pending (Turnstile would layer captcha on /candidature on top of the DB caps).

@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
 
   const { data: announcement } = await supabase
     .from("announcements")
-    .select("title, body, poster_url, event_date, location, status")
+    .select("title, body, poster_url, event_date, location, status, emailed_at, updated_at")
     .eq("id", announcementId)
     .maybeSingle();
   if (!announcement) {
@@ -109,10 +109,24 @@ export async function POST(request: NextRequest) {
   if (announcement.status !== "published") {
     return NextResponse.json({ error: "Publiez l'annonce avant de l'envoyer par email." }, { status: 400 });
   }
+  // Send marker: the same announcement cannot be re-sent until it is edited
+  // again (updated_at moves past emailed_at) — stops quota-draining loops.
+  if (
+    announcement.emailed_at &&
+    new Date(announcement.updated_at ?? 0) <= new Date(announcement.emailed_at)
+  ) {
+    return NextResponse.json(
+      { error: "Annonce déjà envoyée par email. Modifiez-la pour permettre un renvoi." },
+      { status: 409 }
+    );
+  }
 
-  // Recipients: every member email (bureau-list RPC re-checks bureau role in DB).
+  // Recipients: active member emails (bureau-list RPC re-checks bureau role in DB).
   const { data: recipients, error: recipientsError } = await supabase.rpc("bureau_list_profiles");
-  if (recipientsError) throw recipientsError;
+  if (recipientsError) {
+    console.error("email-broadcast recipients:", recipientsError);
+    return NextResponse.json({ error: "Impossible de lister les destinataires." }, { status: 500 });
+  }
   const emails = ((recipients as unknown as BroadcastEmailRow[] | null) ?? [])
     .map((r) => r.email)
     .filter((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e));
@@ -152,5 +166,12 @@ export async function POST(request: NextRequest) {
       { status: 502 }
     );
   }
+  // Stamp the send marker (best effort — a failure here only means a
+  // possible duplicate re-send, logged for the operator).
+  const { error: markError } = await supabase
+    .from("announcements")
+    .update({ emailed_at: new Date().toISOString() })
+    .eq("id", announcementId);
+  if (markError) console.error("email-broadcast emailed_at stamp:", markError);
   return NextResponse.json({ sent, failed_batches: failures.length });
 }
