@@ -132,6 +132,15 @@ export async function POST(request: NextRequest) {
     if (userId === profile.id) {
       return NextResponse.json({ error: "Impossible de supprimer votre propre compte." }, { status: 400 });
     }
+    // Mirror of the reset guard: one admin must not be able to remove
+    // another admin's account outright — demote first.
+    const { data: target } = await service.from("profiles").select("role").eq("id", userId).maybeSingle();
+    if (target?.role === "admin") {
+      return NextResponse.json(
+        { error: "Impossible de supprimer un autre administrateur — rétrogradez-le d'abord (rôle bureau)." },
+        { status: 403 }
+      );
+    }
     const { error: deleteError } = await service.auth.admin.deleteUser(userId);
     if (deleteError) {
       console.error("users delete:", deleteError);

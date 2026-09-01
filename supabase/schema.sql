@@ -1326,3 +1326,30 @@ drop policy if exists "profiles_public_read" on public.profiles;
 create policy "profiles_public_read" on public.profiles
   for select to anon
   using (true);
+
+-- ============================================================================
+-- v2.4.1 (2026-09-01, soir) — emailed_at stamp fix. The shared
+-- touch_updated_at trigger bumped updated_at after the broadcast route
+-- stamped emailed_at, so updated_at always stayed ahead and the re-send
+-- guard never fired. announcements now uses a dedicated trigger that skips
+-- the bump when ONLY emailed_at changed (content edits still bump).
+-- ============================================================================
+
+create or replace function public.set_updated_at_announcements()
+returns trigger
+language plpgsql set search_path = ''
+as $$
+begin
+  if new is distinct from old and new.emailed_at is not distinct from old.emailed_at then
+    new.updated_at = now();
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists touch_updated_at on public.announcements;
+create trigger touch_updated_at
+  before update on public.announcements
+  for each row execute procedure public.set_updated_at_announcements();
+
+revoke execute on function public.set_updated_at_announcements() from public, anon, authenticated;
