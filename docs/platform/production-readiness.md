@@ -5,7 +5,9 @@ entire site — mandats, members with photos, home content, podcast, events and 
 zero developer help and zero Supabase-dashboard work. Audit findings P0–P2 from 2026-08-31 are all
 closed; this document is the reference for what exists, where it lives, and how to operate it.
 
-Commits: `062c388 → be0dcfa` (sweep) + `f906fae` (account lifecycle). Schema: **v2.2**.
+Commits: `062c388 → be0dcfa` (sweep) + `f906fae` (account lifecycle) + `5f1be47 → 0d2ef0f`
+(candidatures bureau, console merges, site wall). Schema: **v2.5** (v2.3 recruitments +
+v2.4/v2.5 hardening).
 
 ---
 
@@ -43,6 +45,23 @@ the archived-mandat chips. Header intro and partner cards come from `site_settin
 - The **Utilisateurs** tab stays **admin-only** (role/ban powers + account lifecycle), enforced by
   RPCs server-side and hidden in the tab bar for bureau accounts.
 - Role change, ban, unban and every destructive action ask for confirmation.
+- **The active tab lives in the URL** (`/admin?tab=candidatures`): refreshing or sharing a console
+  link keeps you on the same tab (server-validated; bureau lands on Annonces by default).
+- Tab bar is **8 tabs** since 2026-09-01: « Annonces & Idées » and « À propos & Commissions » are
+  merged sections with an internal pill switch (the underlying editors are unchanged).
+
+### 2b. Site wall — pre-launch lock (« Accès public du site »)
+
+Until the club opens the main website, everything except `/candidature` is **bureau/admin-only,
+enforced in middleware** (`src/utils/supabase/middleware.ts`) — server-side redirect, not a
+client-side hide. `/api/*` stays reachable (each route does its own checks and answers JSON).
+Since v2.5 the lock extends to the **data**: anonymous REST reads of site content return empty
+while the wall is up (see §9). The wall is **fail-closed** (DB unreachable ⇒ wall stays).
+
+**Operating it:** console → **Accueil** tab → « Accès public du site » toggle. One click writes
+`site_settings.site_wall_open` (read on every request) — flipping it opens/closes pages **and**
+data instantly, no deploy. A discreet « Connexion bureau » button on the public form page opens
+the sign-in modal (the form is the only public page while walled).
 
 ## 3. Home content — the « Accueil » tab
 
@@ -54,7 +73,8 @@ New console tab editing `site_settings` KV rows. Empty field = static fallback f
 | `marquee_line` | Hero eyebrow line (uppercase) | `WE PRESENT TO YOU` |
 | `hero_tagline` | Hero quote | `siteConfig.tagline` |
 | `highlight_kicker` / `highlight_date` | TEDx section eyebrow | `Événement phare` / `22 Nov 2025` |
-| `home_stats` | Stats strip under the hero (grid, max 6) | `siteConfig.stats` |
+| `home_stats` | ⚠️ **removed 2026-09-01** — the homepage stats strip no longer renders (Venus request); the key stays dormant in DB and can be revived | — |
+| `site_wall_open` | **Site wall** (see §2b): false = whole site except `/candidature` is bureau/admin-only (pages **and** data) | `false` |
 | `sponsor` / `partner_club` | `/about` partner cards **+ footer column** | `siteConfig` values; **empty saved name = card removed** (footer column hides when both are empty) |
 | `activity_card_images` | Homepage « Écosystème » activity card images (`debates`/`workshops`/`team`) | built-in `/media` images; values are picked from published gallery images in the Accueil tab |
 | `about_intro` | `/about` header paragraph | hardcoded founding sentence |
@@ -171,3 +191,39 @@ les lectures REST anonymes du contenu (annonces, idées, votes, commentaires, po
 RLS. La bascule console ouvre pages et données ensemble. Seuls `site_settings` (clé du mur)
 et `recruitments`/`positions` (portail /candidature) restent publics. Raison : formulaire en
 attente dans la console si besoin de préremplir avant l'ouverture — contenu invisible dehors.
+
+## 10. Candidatures bureau — portail `/candidature` + onglet console (2026-09-01)
+
+Replaces the bureau's Google Form end to end. Schema **v2.3**
+(`supabase/migrations/20260901_recruitment_applications.sql`): `recruitments` (one campaign
+open at a time — trigger mirrors `single_current_mandate`), `recruitment_positions`,
+`applications` (name, year 1A–6A, phone, prior-responsibility, motivation, why-you,
+`profile_id` auto-linked for signed-in members, status `new/reviewed/accepted/rejected`).
+RLS: application **PII is bureau-read-only**; inserts accepted from anyone **only while the
+campaign is open** and only for a position of that campaign. Anti-abuse hardening lives in §9
+(identity pinning, duplicate + 300/h caps).
+
+**Public portal `/candidature`** — link-only, Google-Form-like isolation:
+
+- `SiteChrome` (root layout) drops navbar + footer for this prefix: same DTC identity (inert
+  brand mark), **no link or path into the main website**; `noindex` so the link stays unlisted.
+- Fields = the original Google Form questions; client validation (20-char minimum on long
+  answers) + **honeypot** anti-bot (Turnstile can layer on later — §9).
+- Logged-in members get name/phone prefilled; a discreet « Connexion bureau » button opens the
+  sign-in modal (the wall makes this the only public page — §2b).
+- Closed campaign or none → a neutral "no open call" card, no site links.
+
+**Console « Candidatures » tab:**
+
+- **Campaign editor** (prefilled live values): title, intro (paragraphs = blank line), one-click
+  open/close, positions CRUD. At most one campaign open; opening a new one auto-closes the old.
+- **Share box:** « Lien à envoyer aux membres » = `siteConfig.siteUrl`/candidature with a copy
+  button — hand this out, not the console URL.
+- **Candidatures reçues:** counter (n new), each row = name + year, full info line (position ·
+  phone · date · prior role), statut select (Nouvelle/Traitée/Retenue/Écartée), labeled red
+  **Supprimer** (irreversible confirm + surfaced DB errors), expandable answers, **CSV export**
+  (Excel-safe BOM + quoting).
+
+Operations cheat-sheet: open a call → toggle open + send the share link; close it → toggle
+closed (submissions stop at RLS level, nothing lost); after deliberation → mark statuts, export
+CSV, delete junk.

@@ -376,3 +376,10 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **Conséquence :** le code des routes (garde 409 broadcast, gardes admin reset/delete, messages d'erreur propres) n'était PAS en ligne depuis ~14h00 → 14h5x ; seul le SQL (migrations Supabase) était réellement actif.
 - **Résolution :** `npm run deploy` exécuté (arbre propre = HEAD da4672c exactement) → déploiement `dtc-qn3dgy3ij` Ready 49 s, aliasé sur dtc-fmdc.vercel.app. Smoke tests : 401 non-auth sur /api/admin/users + /api/admin/email-broadcast, mur 307 /annonces, /candidature 200, verrou données anon `[]`, HSTS présent.
 - **Règle pour tout agent :** sur ce repo, `git push` ne déploie jamais. Vérifier la fraîcheur du déploiement via `vercel ls` + l'âge, jamais par un header que Vercel injecte par défaut. Déployer = `npm run deploy` depuis un arbre propre.
+
+## 2026-09-01 (nuit, 3) — Hydratation documentaire + placeholder candidature
+
+- **Placeholder /candidature :** « ex : Aya Jei » (nom réel d'une speaker TEDx) → « ex : Nom Prénom » (436f98d, déployé CLI, vérifié en prod).
+- **Déploiement CLI uniquement :** `npm run deploy` = 436f98d Ready 54 s. Rappel consigné dans deployment.md : `git push` ne déploie pas (intégration Git Vercel inactive), arbre propre obligatoire, fraîcheur à vérifier via `vercel ls`.
+- **Docs resynchronisés :** `overview.md` (statut = muré pré-lancement, schéma v2.5 + détail des durcissements, portail candidature + anti-abus, next.config.mjs = server-mode), `docs/README.md` (architecture Next 15 server-mode + mur, §9 sécurité, avertissement push≠deploy), `docs/platform/architecture.md` (RLS v2.4–v2.5 : site_is_open(), anti-abus candidatures, privesc 2 couches, votes privacy, WARN advisors acceptés ; console 8 onglets + mur), `docs/platform/deployment.md` (push≠deploy + HSTS), `production-readiness.md` §9 + complément v2.5 (déjà faits).
+- **graphify-out :** TOUJOURS périmé — CLI 0.9.49 confirmé query-only (pas de commande build/update) et skill absent de toutes les plateformes locales ; reconstruction à faire dans une session disposant du skill graphify.

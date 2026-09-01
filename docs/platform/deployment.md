@@ -10,7 +10,7 @@ The club platform runs as a **standard Next.js server deployment on Vercel** (Ap
 npm run deploy        # = vercel --prod --yes
 ```
 
-Or push to `main` on GitHub and let Vercel's Git integration build it. All routes are server-rendered on demand (`ƒ`), so there is no prerendered bundle to optimize anymore. The Vercel project must expose the env vars in §2, otherwise the site gracefully falls back to the static `src/data` content and the member features stay hidden.
+Deploy with the CLI. ⚠️ **`git push` does NOT trigger a deployment** (verified 2026-09-01: the Vercel Git integration is not auto-building this repo — every production deployment on record came from the CLI). Pushing only updates GitHub; shipping requires `npm run deploy` from a **clean tree** (CLI ships the working directory, so uncommitted WIP would go out with it). Confirm deploy freshness via `vercel ls` (deployment age), never via headers Vercel injects itself (e.g. HSTS is added by Vercel regardless of `vercel.json`). All routes are server-rendered on demand (`ƒ`), so there is no prerendered bundle to optimize anymore. The Vercel project must expose the env vars in §2, otherwise the site gracefully falls back to the static `src/data` content and the member features stay hidden.
 
 > **The dev (VenusIsFake) deploys — agents never deploy without asking.**
 
@@ -84,7 +84,7 @@ All three ship in the code but stay **invisible/inactive without their env vars*
 * **Project:** `dtc` (team `venus55`), Next.js preset, no SSO protection.
 * **Domains `dentalkclub-fmdc.vercel.app` + `dtc-fmdc.vercel.app` are project-level domains** (2026-08-25): every `vercel --prod` deploy auto-aliases to them. Previously they were pinned to one deployment via a manual alias and silently stopped following new deploys.
 * **Environment variables are PRODUCTION-ONLY** (2026-08-25). Preview deployments build without Supabase/YouTube keys and serve the static-fallback content — by design, so no unreviewed preview URL can ever talk to the production database. ⚠️ Vercel CLI gotcha: `vercel env rm <name> <environment>` deletes the whole variable (all environments), not just one target — remove/re-add carefully.
-* **Security headers:** static headers (nosniff, XFO DENY, COOP/CORP, Referrer-Policy, Permissions-Policy) come from `vercel.json`; the **Content-Security-Policy is built per-request in `src/utils/supabase/middleware.ts` with a nonce** (no `unsafe-inline` in `script-src`). Keep both in sync if origins change.
+* **Security headers:** static headers (nosniff, XFO DENY, COOP/CORP, Referrer-Policy, Permissions-Policy, **Strict-Transport-Security** added 2026-09-01) come from `vercel.json`; the **Content-Security-Policy is built per-request in `src/utils/supabase/middleware.ts` with a nonce** (no `unsafe-inline` in `script-src`). Keep both in sync if origins change.
 * **`.vercelignore`** still excludes `.venv/`, `scripts/`, `docs/`, `graphify-out/`, `instagram/`, `rules.md`, `overview.md`, and now `supabase/`.
 * **Security headers + CSP** come from `vercel.json`; `connect-src` allows `https://*.supabase.co wss://*.supabase.co`, `img-src` allows `i.ytimg.com` + Supabase storage.
 

@@ -44,7 +44,7 @@ docs/
 
 ### 2. 💻 Web Platform Engineering
 * **[docs/platform/architecture.md](platform/architecture.md)**
-  * **Next.js 14+ App Router Architecture:** Static HTML export (`output: 'export'`), 5 core routes (`/`, `/events`, `/podcast`, `/gallery`, `/about`).
+  * **Next.js 15 App Router Architecture:** standard Vercel server deployment (static export retired 2026-08-25), public routes (`/`, `/events`, `/events/[slug]`, `/podcast`, `/gallery`, `/about`) + member space (`/annonces`, `/idees`, `/espace`, `/espace/annuaire`) + bureau console (`/admin`) + standalone `/candidature` portal; pre-launch **site wall** (bureau-only until `site_wall_open`).
   * **iOS / Safari Compatibility Remediation:** Hardware-accelerated CSS animations (`@keyframes fadeInSlideUp`) resolving initial SSR opacity-0 glitches, WebKit scrolling stability, and native iOS `webkitEnterFullscreen()`.
   * **Mobile Space-Efficiency:** Compact hero headers, elimination of vertical empty spaces, and 2-column mobile layouts.
   * **Component Breakdown:** `Navbar`, `Footer`, `Hero`, `StatsCounter`, `VideoPlayerModal`, `PodcastPlayer`, `InfographicViewer`, `ImageLightbox`.
@@ -53,8 +53,9 @@ docs/
   * **Architecture switch:** static export → standard Vercel server deployment (`vercel --prod`); RLS is the enforcement layer; static fallback for resilience. Includes the settled-decisions log, execution order, and Supabase MCP status/quirks for the implementing session.
 * **[docs/platform/production-readiness.md](platform/production-readiness.md)**
   * **Console production-readiness sweep (2026-08-31/09-01):** mandat member photos + account linking + one-click team import, console open to the bureau role, « Accueil » tab (marquee/slogan/stats/partners via `site_settings`), real podcast posters, console image uploads everywhere, full account lifecycle (invite / temp passwords / delete) with the server-only service-role key, key-missing badges, shared upload helper.
+  * **Pre-launch security hardening (2026-09-01, §9):** full audit (no critical) then fixes — candidature anti-abuse (dedup + flood cap + forged-status block), two-layer privesc guard on profiles, broadcast idempotency (`emailed_at`), banned-member filters, club-media SVG ban, vote attribution hidden, admin-on-admin reset/delete blocked, HSTS, and schema **v2.5** locking anonymous data reads behind the site wall.
 * **[docs/platform/deployment.md](platform/deployment.md)**
-  * **Deployment & Supabase Setup:** Server deployment (`npm run deploy` = `vercel --prod`), env vars (`NEXT_PUBLIC_SUPABASE_URL`/key, server-only `YOUTUBE_API_KEY`), Supabase schema/seed application, auth settings, admin bootstrap, domains.
+  * **Deployment & Supabase Setup:** Server deployment (`npm run deploy` = `vercel --prod`; ⚠️ `git push` does NOT deploy — Git integration not auto-building), env vars (`NEXT_PUBLIC_SUPABASE_URL`/key, server-only `YOUTUBE_API_KEY`), Supabase schema/seed application, auth settings, admin bootstrap, domains.
   * **Production Domains & DNS:** `https://dentalkclub-fmdc.vercel.app` & `https://dtc-fmdc.vercel.app`.
   * **Vercel Settings & SSO Configuration:** Public access enabled with zero login walls.
 
