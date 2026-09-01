@@ -13,6 +13,8 @@ import type {
   IdeaBoardItem,
   MandateWithMembers,
   Profile,
+  Recruitment,
+  RecruitmentPosition,
   SiteSettings,
   PodcastEpisodeRow,
   TedxTalkRow,
@@ -445,6 +447,37 @@ export async function getGalleryImages(): Promise<GalleryItem[]> {
       date: row.date_label || undefined,
     }));
   }, galleryItemsData);
+}
+
+// ---------------------------------------------------------------------------
+// Recruitment campaigns (/candidature)
+// ---------------------------------------------------------------------------
+
+export interface OpenRecruitment {
+  recruitment: Recruitment;
+  positions: RecruitmentPosition[];
+}
+
+/** Currently open campaign (at most one, enforced by DB trigger) or null. */
+export async function getOpenRecruitment(): Promise<OpenRecruitment | null> {
+  return withFallback(async () => {
+    const supabase = await createSupabaseServerClient();
+    if (!supabase) return null;
+    const { data, error } = await supabase
+      .from("recruitments")
+      .select("*")
+      .eq("is_open", true)
+      .limit(1)
+      .maybeSingle();
+    if (error || !data) return null;
+    const recruitment = data as Recruitment;
+    const { data: positions } = await supabase
+      .from("recruitment_positions")
+      .select("*")
+      .eq("recruitment_id", recruitment.id)
+      .order("sort", { ascending: true });
+    return { recruitment, positions: (positions ?? []) as RecruitmentPosition[] };
+  }, null);
 }
 
 export type { CommentBoardItem };

@@ -245,3 +245,47 @@ export interface AdminProfileRow {
   is_banned: boolean;
   created_at: string;
 }
+
+// ---------------------------------------------------------------------------
+// Bureau recruitment campaigns (/candidature + console "Candidatures" tab)
+// ---------------------------------------------------------------------------
+
+export type StudyYear = "1A" | "2A" | "3A" | "4A" | "5A" | "6A";
+export const STUDY_YEARS: StudyYear[] = ["1A", "2A", "3A", "4A", "5A", "6A"];
+
+export interface Recruitment {
+  id: string;
+  title: string;
+  intro: string;
+  is_open: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface RecruitmentPosition {
+  id: string;
+  recruitment_id: string;
+  title: string;
+  description: string;
+  sort: number;
+  created_at: string;
+}
+
+export type ApplicationStatus = "new" | "reviewed" | "accepted" | "rejected";
+
+export interface ApplicationRow {
+  id: string;
+  recruitment_id: string;
+  position_id: string | null;
+  full_name: string;
+  study_year: StudyYear;
+  phone: string;
+  had_responsibility: boolean;
+  motivation: string;
+  why_you: string;
+  profile_id: string | null;
+  status: ApplicationStatus;
+  created_at: string;
+  /** Joined via embedded `recruitment_positions` in the console query. */
+  position?: { title: string } | null;
+}

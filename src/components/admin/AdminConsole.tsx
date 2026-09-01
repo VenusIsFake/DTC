@@ -11,6 +11,7 @@ import {
   Building2,
   Images,
   Home,
+  ClipboardList,
 } from "lucide-react";
 import type { Role } from "@/lib/types";
 import UsersTab from "@/components/admin/UsersTab";
@@ -22,6 +23,7 @@ import AboutTab from "@/components/admin/AboutTab";
 import CommitteesTab from "@/components/admin/CommitteesTab";
 import GalleryTab from "@/components/admin/GalleryTab";
 import HomeTab from "@/components/admin/HomeTab";
+import RecruitmentsTab from "@/components/admin/RecruitmentsTab";
 
 interface TabDef {
   id: TabId;
@@ -42,6 +44,7 @@ const TABS: TabDef[] = [
   { id: "gallery", label: "Galerie", icon: Images, component: GalleryTab },
   { id: "about", label: "À propos", icon: FileText, component: AboutTab },
   { id: "committees", label: "Commissions & listes", icon: Building2, component: CommitteesTab },
+  { id: "candidatures", label: "Candidatures", icon: ClipboardList, component: RecruitmentsTab },
 ];
 
 type TabId =
@@ -53,7 +56,8 @@ type TabId =
   | "events"
   | "gallery"
   | "about"
-  | "committees";
+  | "committees"
+  | "candidatures";
 
 export default function AdminConsole({ adminName, role }: { adminName: string; role: Role }) {
   const tabs = TABS.filter((t) => role === "admin" || !t.adminOnly);

@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import "@/styles/globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteChrome from "@/components/SiteChrome";
 import AuthProvider from "@/components/auth/AuthProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { Analytics } from "@vercel/analytics/react";
@@ -100,14 +99,14 @@ export default async function RootLayout({
           }}
         />
         <AuthProvider>
-          <Navbar navItems={navItems} />
-          <main className="flex-grow">{children}</main>
-          <Footer
+          <SiteChrome
             navItems={navItems}
             tagline={settings.hero_tagline}
             sponsor={settings.sponsor}
             partnerClub={settings.partner_club}
-          />
+          >
+            {children}
+          </SiteChrome>
         </AuthProvider>
         <ServiceWorkerRegister />
       <Analytics />
