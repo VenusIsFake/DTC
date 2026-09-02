@@ -1,31 +1,34 @@
 # Python environment & scripts
-.venv/
-scripts/
+/.venv/
+/scripts/
 __pycache__/
 *.py
 *.pyc
 
 # Docs & Knowledge Graph
-docs/
-graphify-out/
-rules.md
-overview.md
+/docs/
+/graphify-out/
+/rules.md
+/overview.md
 
 # Instagram raw source library (web serves from public/media)
-instagram/
+/instagram/
 
 # Git & editor
-.git/
-.github/
-.vscode/
-.idea/
+/.git/
+/.github/
+/.vscode/
+/.idea/
 *.log
 
 # Dependencies & Build artifacts (managed by Vercel)
-node_modules/
-.next/
+/node_modules/
+/.next/
 
-# Database source of truth + local assets (never needed at runtime)
-supabase/
-assets/
+# Database source of truth + local assets (never needed at runtime).
+# Leading slash REQUIRED: unanchored "supabase/" also stripped
+# src/lib/supabase + src/utils/supabase from the upload and broke the
+# Vercel build (module not found) while local builds stayed green.
+/supabase/
+/assets/
 tsconfig.tsbuildinfo
