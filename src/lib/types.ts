@@ -138,11 +138,6 @@ export interface EventPageItem {
   created_at: string;
 }
 
-export interface HomeStat {
-  value: string;
-  label: string;
-}
-
 export interface PartnerCard {
   name: string;
   tagline: string;
@@ -151,7 +146,6 @@ export interface PartnerCard {
 export interface SiteSettings {
   events_visible: boolean;
   promo_years: number[];
-  home_stats?: HomeStat[];
   marquee_line?: string;
   hero_tagline?: string;
   highlight_kicker?: string;

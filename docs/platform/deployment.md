@@ -86,7 +86,7 @@ All three ship in the code but stay **invisible/inactive without their env vars*
 * **Environment variables are PRODUCTION-ONLY** (2026-08-25). Preview deployments build without Supabase/YouTube keys and serve the static-fallback content — by design, so no unreviewed preview URL can ever talk to the production database. ⚠️ Vercel CLI gotcha: `vercel env rm <name> <environment>` deletes the whole variable (all environments), not just one target — remove/re-add carefully.
 * **Security headers:** static headers (nosniff, XFO DENY, COOP/CORP, Referrer-Policy, Permissions-Policy, **Strict-Transport-Security** added 2026-09-01) come from `vercel.json`; the **Content-Security-Policy is built per-request in `src/utils/supabase/middleware.ts` with a nonce** (no `unsafe-inline` in `script-src`). Keep both in sync if origins change.
 * **`.vercelignore`** still excludes `.venv/`, `scripts/`, `docs/`, `graphify-out/`, `instagram/`, `rules.md`, `overview.md`, and now `supabase/`.
-* **Security headers + CSP** come from `vercel.json`; `connect-src` allows `https://*.supabase.co wss://*.supabase.co`, `img-src` allows `i.ytimg.com` + Supabase storage.
+* **CSP directive details** (built per request in the middleware, not vercel.json): `connect-src` allows `https://*.supabase.co wss://*.supabase.co`, `img-src` allows `i.ytimg.com` + Supabase storage; pasted media URLs outside that allowlist are rejected at save time (`mediaUrlError`).
 
 ---
 
@@ -95,4 +95,4 @@ All three ship in the code but stay **invisible/inactive without their env vars*
 * **RLS is the enforcement layer.** The `/admin` console is a hidden route guarded server-side by role + by Postgres RLS for the data itself. Public pages read published content; drafts are invisible outside the bureau.
 * **Static fallback:** every public page tries the database first and falls back to the static `src/data` seeds if Supabase is unreachable or the env vars are missing — the site can never blank out.
 * **Session refresh** runs in `src/middleware.ts` (official Supabase pattern), keeping server components' cookies fresh.
-* **Media:** the 82 MB of TEDx MP4s still ship from `public/media` (see `docs/media/gallery.md` for the offload roadmap); avatars and mandate infographics live in Supabase Storage buckets `avatars` / `club-media`.
+* **Media:** the ~31 MB of TEDx MP4s still ship from `public/media` (see `docs/media/gallery.md` for the offload roadmap); avatars and mandate infographics live in Supabase Storage buckets `avatars` / `club-media`.

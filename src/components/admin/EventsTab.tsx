@@ -5,6 +5,7 @@ import { CalendarDays, ChevronDown, ChevronUp, Eye, EyeOff, Loader2, Pencil, Plu
 import type { EventPage, EventPageItem, TedxTalkRow } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
+import { mediaUrlError } from "@/lib/format";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 import { Field, PrimaryButton, GhostButton, Badge, inputClass } from "@/components/ui/form";
 
@@ -115,6 +116,7 @@ function TedxCard() {
   const [error, setError] = useState<string | null>(null);
   const posterFileRef = useRef<HTMLInputElement>(null);
   const [uploadingPoster, setUploadingPoster] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -144,25 +146,35 @@ function TedxCard() {
     event.preventDefault();
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const payload = {
-      extract_number: Number(form.extract_number) || 1,
-      speaker: form.speaker.trim(),
-      topic: form.topic.trim(),
-      language: form.language,
-      video_url: form.video_url.trim(),
-      poster_url: form.poster_url.trim(),
-      instagram_url: form.instagram_url.trim(),
-      duration: form.duration.trim(),
-      description: form.description.trim(),
-      is_published: form.is_published,
-    };
-    const { error: dbError } = form.id
-      ? await supabase.from("tedx_talks").update(payload).eq("id", form.id)
-      : await supabase.from("tedx_talks").insert(payload);
-    setError(dbError?.message ?? null);
-    if (!dbError) {
-      setOpen(false);
-      load();
+    const posterError = mediaUrlError(form.poster_url);
+    if (posterError) {
+      setError(posterError);
+      return;
+    }
+    setSaving(true);
+    try {
+      const payload = {
+        extract_number: Number(form.extract_number) || 1,
+        speaker: form.speaker.trim(),
+        topic: form.topic.trim(),
+        language: form.language,
+        video_url: form.video_url.trim(),
+        poster_url: form.poster_url.trim(),
+        instagram_url: form.instagram_url.trim(),
+        duration: form.duration.trim(),
+        description: form.description.trim(),
+        is_published: form.is_published,
+      };
+      const { error: dbError } = form.id
+        ? await supabase.from("tedx_talks").update(payload).eq("id", form.id)
+        : await supabase.from("tedx_talks").insert(payload);
+      setError(dbError?.message ?? null);
+      if (!dbError) {
+        setOpen(false);
+        load();
+      }
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -339,7 +351,7 @@ function TedxCard() {
               {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
               <div className="flex justify-end gap-2">
                 <GhostButton type="button" onClick={() => setOpen(false)}>Annuler</GhostButton>
-                <PrimaryButton type="submit">Enregistrer</PrimaryButton>
+                <PrimaryButton type="submit" disabled={saving}>Enregistrer</PrimaryButton>
               </div>
             </form>
           </div>
@@ -387,6 +399,7 @@ function EventPagesCard() {
   const itemPosterRef = useRef<HTMLInputElement>(null);
   const [uploadingHero, setUploadingHero] = useState(false);
   const [uploadingItemPoster, setUploadingItemPoster] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -463,13 +476,23 @@ function EventPagesCard() {
       setError("Slug et titre requis.");
       return;
     }
-    const { error: dbError } = editing
-      ? await supabase.from("event_pages").update(payload).eq("id", editing.id)
-      : await supabase.from("event_pages").insert(payload);
-    setError(dbError?.message ?? null);
-    if (!dbError) {
-      setOpen(false);
-      load();
+    const heroError = mediaUrlError(payload.hero_poster);
+    if (heroError) {
+      setError(heroError);
+      return;
+    }
+    setSaving(true);
+    try {
+      const { error: dbError } = editing
+        ? await supabase.from("event_pages").update(payload).eq("id", editing.id)
+        : await supabase.from("event_pages").insert(payload);
+      setError(dbError?.message ?? null);
+      if (!dbError) {
+        setOpen(false);
+        load();
+      }
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -483,24 +506,34 @@ function EventPagesCard() {
   };
 
   const saveItem = async (page: EventPage) => {
-    if (!editingItem || !editingItem.title.trim()) return;
+    if (!editingItem || !editingItem.title.trim() || saving) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const payload = {
-      title: editingItem.title.trim(),
-      speaker: editingItem.speaker.trim(),
-      description: editingItem.description.trim(),
-      video_url: editingItem.video_url.trim(),
-      poster_url: editingItem.poster_url.trim(),
-    };
-    const existing = itemsByPage[page.id]?.length ?? 0;
-    const { error: dbError } = editingItem.id
-      ? await supabase.from("event_page_items").update(payload).eq("id", editingItem.id)
-      : await supabase.from("event_page_items").insert({ ...payload, event_page_id: page.id, sort: existing + 1 });
-    setError(dbError?.message ?? null);
-    if (!dbError) {
-      setEditingItem(null);
-      load();
+    const posterError = mediaUrlError(editingItem.poster_url);
+    if (posterError) {
+      setError(posterError);
+      return;
+    }
+    setSaving(true);
+    try {
+      const payload = {
+        title: editingItem.title.trim(),
+        speaker: editingItem.speaker.trim(),
+        description: editingItem.description.trim(),
+        video_url: editingItem.video_url.trim(),
+        poster_url: editingItem.poster_url.trim(),
+      };
+      const existing = itemsByPage[page.id]?.length ?? 0;
+      const { error: dbError } = editingItem.id
+        ? await supabase.from("event_page_items").update(payload).eq("id", editingItem.id)
+        : await supabase.from("event_page_items").insert({ ...payload, event_page_id: page.id, sort: existing + 1 });
+      setError(dbError?.message ?? null);
+      if (!dbError) {
+        setEditingItem(null);
+        load();
+      }
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -661,7 +694,7 @@ function EventPagesCard() {
                           <GhostButton type="button" onClick={() => setEditingItem(null)} className="!py-1.5 !text-[11px]">
                             Annuler
                           </GhostButton>
-                          <PrimaryButton type="button" onClick={() => saveItem(page)} className="!py-1.5 !text-[11px]">
+                          <PrimaryButton type="button" onClick={() => saveItem(page)} disabled={saving} className="!py-1.5 !text-[11px]">
                             {editingItem.id ? "Mettre à jour" : "Ajouter l'élément"}
                           </PrimaryButton>
                         </div>
@@ -777,7 +810,7 @@ function EventPagesCard() {
               {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
               <div className="flex justify-end gap-2">
                 <GhostButton type="button" onClick={() => setOpen(false)}>Annuler</GhostButton>
-                <PrimaryButton type="submit">Enregistrer</PrimaryButton>
+                <PrimaryButton type="submit" disabled={saving}>Enregistrer</PrimaryButton>
               </div>
             </form>
           </div>

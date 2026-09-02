@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Users,
   Megaphone,
@@ -72,6 +72,18 @@ export default function AdminConsole({
       window.history.replaceState(null, "", `/admin?tab=${next}`);
     }
   };
+  // Back/Forward change the URL without a navigation — follow it so the
+  // rendered tab never disagrees with the address bar.
+  useEffect(() => {
+    const onPopState = () => {
+      const param = new URLSearchParams(window.location.search).get("tab");
+      const resolved = (tabs.find((t) => t.id === param)?.id ?? defaultTab) as TabId;
+      setTabState(resolved);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const Active = tabs.find((t) => t.id === tab)?.component ?? AnnoncesIdeesTab;
 
   return (

@@ -30,6 +30,14 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
       setError("Donnez un titre à votre idée (3 caractères minimum).");
       return;
     }
+    if (title.trim().length > 200) {
+      setError("Le titre ne peut pas dépasser 200 caractères.");
+      return;
+    }
+    if (description.trim().length > 5000) {
+      setError("La description ne peut pas dépasser 5000 caractères.");
+      return;
+    }
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setSaving(true);
@@ -84,6 +92,7 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
               id="idea-title"
               type="text"
               required
+              maxLength={200}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className={inputClass}
@@ -95,6 +104,7 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
             <textarea
               id="idea-desc"
               rows={5}
+              maxLength={5000}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className={`${inputClass} resize-y`}

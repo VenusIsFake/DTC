@@ -78,13 +78,6 @@ async function fetchSiteSettings(): Promise<SiteSettings> {
       ) {
         settings.promo_years = entry.value as number[];
       }
-      if (entry.key === "home_stats" && Array.isArray(entry.value)) {
-        const stats = entry.value.filter(
-          (s): s is { value: string; label: string } =>
-            typeof s === "object" && s !== null && "value" in s && "label" in s
-        );
-        if (stats.length > 0) settings.home_stats = stats;
-      }
       if (typeof entry.value === "string" && entry.value.trim() !== "") {
         if (entry.key === "marquee_line") settings.marquee_line = entry.value.trim();
         if (entry.key === "hero_tagline") settings.hero_tagline = entry.value.trim();
@@ -269,11 +262,12 @@ export async function getEventPage(
     if (error) throw error;
     if (!data) return null;
     const page = data as EventPage;
-    const { data: items } = await supabase
+    const { data: items, error: itemsError } = await supabase
       .from("event_page_items")
       .select("*")
       .eq("event_page_id", page.id)
       .order("sort", { ascending: true });
+    if (itemsError) throw itemsError;
     return { page, items: (items ?? []) as EventPageItem[] };
   }, null);
 }

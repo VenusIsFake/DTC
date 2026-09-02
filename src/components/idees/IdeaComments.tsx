@@ -66,7 +66,12 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
     if (!window.confirm("Supprimer ce commentaire ?")) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("comments").delete().eq("id", comment.id);
+    const { error } = await supabase.from("comments").delete().eq("id", comment.id);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setError(null);
     await load();
     onCountChange(-1);
   };

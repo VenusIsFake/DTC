@@ -57,9 +57,20 @@ export default function AnnouncementsTab() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ announcement_id: item.id }),
       });
-      const payload = (await res.json()) as { sent?: number; error?: string };
+      const payload = (await res.json()) as {
+        sent?: number;
+        failed_batches?: number;
+        error?: string;
+      };
       if (!res.ok) throw new Error(payload.error ?? "Échec de l'envoi.");
-      setNotice(`Email envoyé à ${payload.sent} membre(s) ✓`);
+      if (payload.failed_batches && payload.failed_batches > 0) {
+        setNotice(
+          `Emails envoyés à ${payload.sent} membre(s) — ${payload.failed_batches} lot(s) en échec. ` +
+            "Les membres des lots en échec n'ont rien reçu ; vérifiez la clé Resend avant de retenter (après modification de l'annonce)."
+        );
+      } else {
+        setNotice(`Email envoyé à ${payload.sent} membre(s) ✓`);
+      }
     } catch (err) {
       setNotice(err instanceof Error ? err.message : "Échec de l'envoi.");
     } finally {

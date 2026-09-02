@@ -53,7 +53,7 @@ This document defines the rules, conventions, and operational standards for AI a
 - **Images:** keep `images: { unoptimized: true }` (remote Supabase/YouTube posters flow through it unchanged); optimization is roadmap.
 
 ### ⚠️ 7a. Next.js version policy (updated 2026-08-25 — UPGRADE LANDED)
-The project ran `next@14.2.35`, whose unpatched CVEs (Server Actions/rewrites SSRF, cache confusion) had fixes only in 15.5+. **On 2026-08-25 the dev approved and the app was upgraded to `next@15.5.23` + React 19 — `npm audit` is now clean and the CVE freeze below no longer applies.**
+The project ran `next@14.2.35`, whose unpatched CVEs (Server Actions/rewrites SSRF, cache confusion) had fixes only in 15.5+. **On 2026-08-25 the dev approved and the app was upgraded to `next@15.5.23` + React 19 (currently `15.5.24`) — `npm audit` is now clean and the CVE freeze below no longer applies.**
 
 Current policy:
 - Keep the app on patched majors; if `npm audit` surfaces new highs, fix or upgrade promptly — **never** bump to another 14.2.x.

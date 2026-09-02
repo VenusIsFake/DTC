@@ -54,21 +54,37 @@ function securityContext(request: NextRequest) {
 
 const PUBLIC_PATHS = ["/candidature"];
 
+// The wall key is one tiny row read on EVERY request — cache it briefly per
+// instance so the wall decision costs no extra DB round trip. 10s staleness
+// is fine: the toggle is a launch-day switch, not a hot path. A failed read
+// means "wall up" (fail-closed) and is cached too — a flapping DB should not
+// flap the wall.
+let wallCache: { open: boolean; at: number } | null = null;
+const WALL_CACHE_MS = 10_000;
+
 async function siteWallOpen(supabase: ReturnType<typeof createServerClient>): Promise<boolean> {
+  if (wallCache && Date.now() - wallCache.at < WALL_CACHE_MS) return wallCache.open;
   const { data } = await supabase
     .from("site_settings")
     .select("value")
     .eq("key", "site_wall_open")
     .maybeSingle();
-  return (data as { value?: unknown } | null)?.value === true;
+  const open = (data as { value?: unknown } | null)?.value === true;
+  wallCache = { open, at: Date.now() };
+  return open;
 }
 
 export async function updateSession(request: NextRequest) {
   const { next } = securityContext(request)
 
-  // Static-fallback invariant: without Supabase env vars the app must keep
-  // serving its public pages instead of erroring on every request.
+  // Static-fallback invariant: without Supabase env vars the dev app keeps
+  // serving its public pages. In production a missing env means a broken
+  // deployment — serving the full static site with the wall down is worse
+  // than a loud 503.
   if (!isSupabaseConfigured()) {
+    if (process.env.NODE_ENV === "production") {
+      return new NextResponse("Configuration serveur manquante.", { status: 503 });
+    }
     return next()
   }
 

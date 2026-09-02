@@ -6,7 +6,7 @@ import type { PodcastEpisodeRow } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
-import { youtubeWatchUrl } from "@/lib/format";
+import { youtubeWatchUrl, mediaUrlError } from "@/lib/format";
 import { Field, PrimaryButton, GhostButton, Badge, inputClass } from "@/components/ui/form";
 
 interface EpisodeForm {
@@ -111,6 +111,11 @@ function EditorModal({
     if (!supabase) return;
     if (!draft.youtube_id.trim() || !draft.guest.trim()) {
       setError("Invité et ID YouTube sont requis.");
+      return;
+    }
+    const posterError = mediaUrlError(draft.poster_image);
+    if (posterError) {
+      setError(posterError);
       return;
     }
     setSaving(true);

@@ -111,10 +111,27 @@ export async function POST(request: NextRequest) {
   }
   // Send marker: the same announcement cannot be re-sent until it is edited
   // again (updated_at moves past emailed_at) — stops quota-draining loops.
+  // Fast friendly check here; the atomic claim below actually enforces it.
   if (
     announcement.emailed_at &&
     new Date(announcement.updated_at ?? 0) <= new Date(announcement.emailed_at)
   ) {
+    return NextResponse.json(
+      { error: "Annonce déjà envoyée par email. Modifiez-la pour permettre un renvoi." },
+      { status: 409 }
+    );
+  }
+
+  // Atomic claim: stamp emailed_at only if not already claimed, so two
+  // concurrent broadcasts cannot both pass and double-email the member list.
+  const { data: claimed, error: claimError } = await supabase.rpc("claim_announcement_email", {
+    a_id: announcementId,
+  });
+  if (claimError) {
+    console.error("email-broadcast claim:", claimError);
+    return NextResponse.json({ error: "Impossible de verrouiller l'envoi." }, { status: 500 });
+  }
+  if (claimed !== true) {
     return NextResponse.json(
       { error: "Annonce déjà envoyée par email. Modifiez-la pour permettre un renvoi." },
       { status: 409 }
@@ -161,17 +178,20 @@ export async function POST(request: NextRequest) {
   }
 
   if (sent === 0) {
+    // Nothing reached anyone: release the claim so the operator can retry
+    // without editing the announcement first.
+    const { error: releaseError } = await supabase
+      .from("announcements")
+      .update({ emailed_at: null })
+      .eq("id", announcementId);
+    if (releaseError) console.error("email-broadcast claim release:", releaseError);
     return NextResponse.json(
       { error: `Échec de l'envoi (Resend ${failures[0] ?? "?"}). Vérifiez RESEND_API_KEY / EMAIL_FROM.` },
       { status: 502 }
     );
   }
-  // Stamp the send marker (best effort — a failure here only means a
-  // possible duplicate re-send, logged for the operator).
-  const { error: markError } = await supabase
-    .from("announcements")
-    .update({ emailed_at: new Date().toISOString() })
-    .eq("id", announcementId);
-  if (markError) console.error("email-broadcast emailed_at stamp:", markError);
+  // emailed_at was claimed before sending. On partial failure the claim
+  // stays: some members got the email, and re-sending would duplicate it —
+  // the response tells the console how many batches failed.
   return NextResponse.json({ sent, failed_batches: failures.length });
 }

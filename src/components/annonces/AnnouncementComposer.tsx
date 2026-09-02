@@ -7,6 +7,7 @@ import { useAuth } from "@/components/auth/AuthProvider";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
+import { mediaUrlError } from "@/lib/format";
 import { Field, PrimaryButton, GhostButton, inputClass } from "@/components/ui/form";
 
 export interface ComposerForm {
@@ -101,6 +102,19 @@ export default function AnnouncementComposer({
       setError("Le titre doit contenir au moins 3 caractères.");
       return;
     }
+    if (form.title.trim().length > 200) {
+      setError("Le titre ne peut pas dépasser 200 caractères.");
+      return;
+    }
+    if (form.body.trim().length > 5000) {
+      setError("Le message ne peut pas dépasser 5000 caractères.");
+      return;
+    }
+    const posterError = mediaUrlError(form.poster_url);
+    if (posterError) {
+      setError(posterError);
+      return;
+    }
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setSaving(true);
@@ -114,12 +128,12 @@ export default function AnnouncementComposer({
         location: form.location.trim(),
         is_pinned: form.is_pinned,
         status: form.status,
-        // RLS requires author_id = auth.uid() on insert.
-        author_id: user?.id ?? null,
       };
+      // author_id is set on insert only (RLS requires auth.uid()) — sending
+      // it on update would reassign the byline to whoever edits.
       const { error: dbError } = editing
         ? await supabase.from("announcements").update(payload).eq("id", editing.id)
-        : await supabase.from("announcements").insert(payload);
+        : await supabase.from("announcements").insert({ ...payload, author_id: user?.id ?? null });
       if (dbError) throw dbError;
       onSaved();
       onClose();
@@ -187,6 +201,7 @@ export default function AnnouncementComposer({
               id="ann-title"
               type="text"
               required
+              maxLength={200}
               value={form.title}
               onChange={(e) => update("title", e.target.value)}
               className={inputClass}
@@ -198,6 +213,7 @@ export default function AnnouncementComposer({
             <textarea
               id="ann-body"
               rows={5}
+              maxLength={5000}
               value={form.body}
               onChange={(e) => update("body", e.target.value)}
               className={`${inputClass} resize-y`}

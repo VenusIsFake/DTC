@@ -36,7 +36,12 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
   const refresh = useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data } = await supabase.from("idea_board").select("*").order("created_at", { ascending: false });
+    const { data, error } = await supabase
+      .from("idea_board")
+      .select("*")
+      .order("created_at", { ascending: false });
+    // A failed refresh must not wipe the board — keep the current items.
+    if (error) return;
     setItems((data as IdeaBoardItem[] | null) ?? []);
   }, []);
 

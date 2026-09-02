@@ -11,6 +11,7 @@ function CommitteesEditor() {
   const [editing, setEditing] = useState<Committee | null>(null);
   const [form, setForm] = useState({ name: "", description: "", sort: 1 });
   const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -34,20 +35,25 @@ function CommitteesEditor() {
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!form.name.trim()) return;
+    if (!form.name.trim() || saving) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const payload = { name: form.name.trim(), description: form.description.trim(), sort: Number(form.sort) || 1 };
-    const { error: dbError } = editing
-      ? await supabase.from("committees").update(payload).eq("id", editing.id)
-      : await supabase.from("committees").insert(payload);
-    if (dbError) {
-      setError(dbError.message);
-      return;
+    setSaving(true);
+    try {
+      const payload = { name: form.name.trim(), description: form.description.trim(), sort: Number(form.sort) || 1 };
+      const { error: dbError } = editing
+        ? await supabase.from("committees").update(payload).eq("id", editing.id)
+        : await supabase.from("committees").insert(payload);
+      if (dbError) {
+        setError(dbError.message);
+        return;
+      }
+      setError(null);
+      setEditing(null);
+      load();
+    } finally {
+      setSaving(false);
     }
-    setError(null);
-    setEditing(null);
-    load();
   };
 
   const remove = async (committee: Committee) => {
@@ -92,7 +98,7 @@ function CommitteesEditor() {
           </Field>
           <div className="flex justify-end gap-2">
             <GhostButton type="button" onClick={() => setEditing(null)}>Annuler</GhostButton>
-            <PrimaryButton type="submit">Enregistrer</PrimaryButton>
+            <PrimaryButton type="submit" disabled={saving}>Enregistrer</PrimaryButton>
           </div>
         </form>
       )}

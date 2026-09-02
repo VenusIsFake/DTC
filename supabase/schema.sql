@@ -803,7 +803,13 @@ create policy "avatars_self_write" on storage.objects
 drop policy if exists "avatars_self_update" on storage.objects;
 create policy "avatars_self_update" on storage.objects
   for update to authenticated
-  using (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+  using (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text)
+  with check (
+    bucket_id = 'avatars'
+    and (storage.foldername(name))[1] = auth.uid()::text
+    and coalesce((metadata->>'size')::bigint, 0) <= 5242880 -- 5 MB
+    and coalesce(metadata->>'mimetype', '') in ('image/jpeg', 'image/png', 'image/webp', 'image/gif')
+  );
 
 drop policy if exists "avatars_self_delete" on storage.objects;
 create policy "avatars_self_delete" on storage.objects
@@ -820,15 +826,21 @@ create policy "club_media_bureau_write" on storage.objects
   for insert to authenticated
   with check (
     bucket_id = 'club-media'
-    and public.is_bureau_or_admin()
+    and (select public.is_bureau_or_admin())
     and coalesce((metadata->>'size')::bigint, 0) <= 26214400 -- 25 MB
-    and coalesce(metadata->>'mimetype', '') like 'image/%'
+    and coalesce(metadata->>'mimetype', '') in ('image/jpeg', 'image/png', 'image/webp', 'image/gif')
   );
 
 drop policy if exists "club_media_bureau_update" on storage.objects;
 create policy "club_media_bureau_update" on storage.objects
   for update to authenticated
-  using (bucket_id = 'club-media' and public.is_bureau_or_admin());
+  using (bucket_id = 'club-media' and (select public.is_bureau_or_admin()))
+  with check (
+    bucket_id = 'club-media'
+    and (select public.is_bureau_or_admin())
+    and coalesce((metadata->>'size')::bigint, 0) <= 26214400 -- 25 MB
+    and coalesce(metadata->>'mimetype', '') in ('image/jpeg', 'image/png', 'image/webp', 'image/gif')
+  );
 
 drop policy if exists "club_media_bureau_delete" on storage.objects;
 create policy "club_media_bureau_delete" on storage.objects
@@ -1272,7 +1284,7 @@ create policy "applications_open_insert" on public.applications
         where p.id = position_id and p.recruitment_id = recruitment_id
       )
     )
-    and (profile_id is null or profile_id = auth.uid())
+    and (profile_id is null or profile_id = (select auth.uid()))
     and status = 'new'
   );
 
@@ -1281,6 +1293,9 @@ returns trigger
 language plpgsql security definer set search_path = ''
 as $$
 begin
+  -- anon/authenticated hold INSERT grants on created_at (PostgREST inserts
+  -- set it column-wise); a forged past timestamp would dodge the flood cap.
+  new.created_at := now();
   if exists (
     select 1 from public.applications a
     where a.recruitment_id = new.recruitment_id
@@ -1302,6 +1317,34 @@ create trigger guard_application_submit
   for each row execute procedure public.guard_application_submit();
 
 revoke execute on function public.guard_application_submit() from public, anon, authenticated;
+
+create index if not exists idx_applications_profile
+  on public.applications (profile_id);
+
+-- Atomic emailed_at claim: true = this caller may send the broadcast.
+-- Re-armable only by editing the announcement (updated_at > emailed_at).
+create or replace function public.claim_announcement_email(a_id uuid)
+returns boolean
+language plpgsql security definer set search_path = ''
+as $$
+declare
+  rows_updated bigint;
+begin
+  if not public.is_bureau_or_admin() then
+    raise exception 'Accès réservé au bureau';
+  end if;
+  update public.announcements
+  set emailed_at = now()
+  where id = a_id
+    and status = 'published'
+    and (emailed_at is null or updated_at > emailed_at);
+  get diagnostics rows_updated = row_count;
+  return rows_updated > 0;
+end;
+$$;
+
+revoke execute on function public.claim_announcement_email(uuid) from public, anon;
+grant execute on function public.claim_announcement_email(uuid) to authenticated;
 
 create unique index if not exists applications_one_per_identity
   on public.applications (recruitment_id, lower(full_name), phone);

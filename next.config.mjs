@@ -7,6 +7,14 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // The service worker must revalidate on every check so a VERSION
+        // bump propagates immediately, not after the browser's daily recheck.
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache" },
+        ],
+      },
+      {
         // Local media (TEDx reels, posters, team visuals): stable files, so a
         // 1-day fresh window + 7-day revalidate window cuts repeat downloads
         // without hiding a replaced file for long. The service worker

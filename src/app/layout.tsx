@@ -65,12 +65,18 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/logo.png",
-        width: 716,
-        height: 716,
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
         alt: "Dentalk Club FMDC Official Logo",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: ["/og-image.jpg"],
   },
 };
 

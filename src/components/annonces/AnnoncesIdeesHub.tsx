@@ -27,10 +27,15 @@ export default function AnnoncesIdeesHub({
   );
 
   useEffect(() => {
+    // Keep the tab and the URL saying the same thing: an explicit ?tab=
+    // wins, an absent param resets to the default (a bare /annonces link
+    // after /annonces?tab=idees must show the annonces tab again).
     if (tabParam === "idees" || tabParam === "annonces") {
       setActiveTab(tabParam);
+    } else {
+      setActiveTab(defaultTab);
     }
-  }, [tabParam]);
+  }, [tabParam, defaultTab]);
 
   const handleTabChange = (tab: "annonces" | "idees") => {
     setActiveTab(tab);

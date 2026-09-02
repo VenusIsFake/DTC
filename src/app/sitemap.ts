@@ -7,14 +7,14 @@ export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [settings, eventSlugs] = await Promise.all([getSiteSettings(), getPublishedEventSlugs()]);
 
-  const routes = ["", "/annonces", "/idees", "/podcast", "/gallery", "/about"];
+  // /idees intentionally absent — that route redirects to /annonces?tab=idees.
+  const routes = ["", "/annonces", "/podcast", "/gallery", "/about"];
   if (settings.events_visible) {
     routes.push("/events");
   }
 
   const entries: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${siteConfig.siteUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: route === "" ? 1 : 0.8,
   }));
@@ -24,7 +24,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const slug of eventSlugs) {
       entries.push({
         url: `${siteConfig.siteUrl}/events/${slug}`,
-        lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.7,
       });

@@ -29,6 +29,7 @@ function SectionsEditor() {
   const [editing, setEditing] = useState<AboutSection | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ key: "", sort_order: 1, title: "", body: "", is_published: true });
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -57,22 +58,27 @@ function SectionsEditor() {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setError(null);
-    const payload = {
-      key: form.key.trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-") || `section-${Date.now()}`,
-      sort_order: Number(form.sort_order) || 1,
-      title: form.title.trim(),
-      body: form.body,
-      is_published: form.is_published,
-    };
-    const { error: dbError } = editing
-      ? await supabase.from("about_sections").update(payload).eq("id", editing.id)
-      : await supabase.from("about_sections").insert(payload);
-    if (dbError) {
-      setError(dbError.message);
-      return;
+    setSaving(true);
+    try {
+      const payload = {
+        key: form.key.trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-") || `section-${Date.now()}`,
+        sort_order: Number(form.sort_order) || 1,
+        title: form.title.trim(),
+        body: form.body,
+        is_published: form.is_published,
+      };
+      const { error: dbError } = editing
+        ? await supabase.from("about_sections").update(payload).eq("id", editing.id)
+        : await supabase.from("about_sections").insert(payload);
+      if (dbError) {
+        setError(dbError.message);
+        return;
+      }
+      setEditing(null);
+      load();
+    } finally {
+      setSaving(false);
     }
-    setEditing(null);
-    load();
   };
 
   const togglePublished = async (section: AboutSection) => {
@@ -136,7 +142,7 @@ function SectionsEditor() {
           </label>
           <div className="flex justify-end gap-2">
             <GhostButton type="button" onClick={() => setEditing(null)}>Annuler</GhostButton>
-            <PrimaryButton type="submit">Enregistrer</PrimaryButton>
+            <PrimaryButton type="submit" disabled={saving}>Enregistrer</PrimaryButton>
           </div>
         </form>
       )}
@@ -198,6 +204,7 @@ function MandatesEditor() {
   const fileRef = useRef<HTMLInputElement>(null);
   const photoFileRef = useRef<HTMLInputElement>(null);
   const [pendingUploadMandate, setPendingUploadMandate] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
@@ -255,16 +262,21 @@ function MandatesEditor() {
 
   const createMandate = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!newLabel.trim()) return;
+    if (!newLabel.trim() || saving) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setNotice(null);
-    const { error: dbError } = await supabase
-      .from("mandates")
-      .insert({ year_label: newLabel.trim(), is_current: false });
-    if (fail(dbError, dbError ? friendlyDbError(dbError.message) : undefined)) return;
-    setNewLabel("");
-    load();
+    setSaving(true);
+    try {
+      const { error: dbError } = await supabase
+        .from("mandates")
+        .insert({ year_label: newLabel.trim(), is_current: false });
+      if (fail(dbError, dbError ? friendlyDbError(dbError.message) : undefined)) return;
+      setNewLabel("");
+      load();
+    } finally {
+      setSaving(false);
+    }
   };
 
   const setCurrent = async (mandate: Mandate) => {
@@ -324,26 +336,31 @@ function MandatesEditor() {
 
   const saveMember = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!memberForm || !memberForm.name.trim()) return;
+    if (!memberForm || !memberForm.name.trim() || saving) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setNotice(null);
-    const payload = {
-      mandate_id: memberForm.mandateId,
-      name: memberForm.name.trim(),
-      role: memberForm.role.trim() || "Membre",
-      profile_id: memberForm.profile_id || null,
-      photo_url: memberForm.photo_url.trim() || null,
-    };
-    const mandate = mandates?.find((m) => m.id === memberForm.mandateId);
-    const { error: dbError } = memberForm.id
-      ? await supabase.from("mandate_members").update(payload).eq("id", memberForm.id)
-      : await supabase
-          .from("mandate_members")
-          .insert({ ...payload, sort: (mandate?.members.length ?? 0) + 1 });
-    if (fail(dbError, dbError ? (/duplicate key/i.test(dbError.message) ? "Ce membre figure déjà dans le mandat." : dbError.message) : undefined)) return;
-    setMemberForm(null);
-    load();
+    setSaving(true);
+    try {
+      const payload = {
+        mandate_id: memberForm.mandateId,
+        name: memberForm.name.trim(),
+        role: memberForm.role.trim() || "Membre",
+        profile_id: memberForm.profile_id || null,
+        photo_url: memberForm.photo_url.trim() || null,
+      };
+      const mandate = mandates?.find((m) => m.id === memberForm.mandateId);
+      const { error: dbError } = memberForm.id
+        ? await supabase.from("mandate_members").update(payload).eq("id", memberForm.id)
+        : await supabase
+            .from("mandate_members")
+            .insert({ ...payload, sort: (mandate?.members.length ?? 0) + 1 });
+      if (fail(dbError, dbError ? (/duplicate key/i.test(dbError.message) ? "Ce membre figure déjà dans le mandat." : dbError.message) : undefined)) return;
+      setMemberForm(null);
+      load();
+    } finally {
+      setSaving(false);
+    }
   };
 
   const removeMember = async (member: MandateMember) => {
@@ -448,7 +465,7 @@ function MandatesEditor() {
             placeholder="ex : Mandat 2026–2027"
             className={`${inputClass} !py-1.5 !text-xs !w-44`}
           />
-          <GhostButton type="submit" className="!py-1.5 !text-[11px]">
+          <GhostButton type="submit" disabled={saving} className="!py-1.5 !text-[11px]">
             <Plus className="w-3 h-3" />
             <span>Créer</span>
           </GhostButton>
@@ -669,7 +686,7 @@ function MandatesEditor() {
                     </div>
                     <div className="flex justify-end gap-2">
                       <GhostButton type="button" onClick={() => setMemberForm(null)}>Annuler</GhostButton>
-                      <PrimaryButton type="submit">{memberForm.id ? "Mettre à jour" : "Ajouter"}</PrimaryButton>
+                      <PrimaryButton type="submit" disabled={saving}>{memberForm.id ? "Mettre à jour" : "Ajouter"}</PrimaryButton>
                     </div>
                   </form>
                 ) : (

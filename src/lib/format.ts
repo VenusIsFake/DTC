@@ -98,3 +98,24 @@ export function escapeHtml(text: string): string {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }
+
+/**
+ * Validate a pasted media URL against what the CSP img-src actually allows
+ * (self, i.ytimg.com, *.supabase.co). An off-allowlist URL renders as a
+ * silently broken image, so reject it at save time with a readable message.
+ * Returns null when the value is fine, an error message otherwise.
+ */
+export function mediaUrlError(url: string): string | null {
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith("/")) return null; // local /media/… paths
+  let parsed: URL;
+  try {
+    parsed = new URL(trimmed);
+  } catch {
+    return "URL invalide.";
+  }
+  const host = parsed.hostname;
+  if (host === "i.ytimg.com" || host.endsWith(".supabase.co")) return null;
+  return "URL non autorisée : importez le fichier (Supabase), utilisez un chemin /media/… ou une image YouTube.";
+}

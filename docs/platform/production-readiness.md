@@ -79,9 +79,6 @@ New console tab editing `site_settings` KV rows. Empty field = static fallback f
 | `activity_card_images` | Homepage « Écosystème » activity card images (`debates`/`workshops`/`team`) | built-in `/media` images; values are picked from published gallery images in the Accueil tab |
 | `about_intro` | `/about` header paragraph | hardcoded founding sentence |
 
-`home_stats` was previously write-only (edited but never rendered) — it now renders as the
-« Le club en chiffres » strip on the homepage.
-
 ## 4. Podcast
 
 - **Poster precedence:** the console-entered `poster_image` wins; otherwise the **YouTube

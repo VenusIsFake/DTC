@@ -51,6 +51,10 @@ export default function CandidatureForm({
       setError("Indiquez votre nom et prénom complets.");
       return;
     }
+    if (fullName.trim().length > 120) {
+      setError("Le nom ne peut pas dépasser 120 caractères.");
+      return;
+    }
     if (!studyYear) {
       setError("Sélectionnez votre année d'étude.");
       return;
@@ -58,6 +62,10 @@ export default function CandidatureForm({
     const digits = phone.replace(/[^\d+]/g, "");
     if (digits.length < 6) {
       setError("Indiquez un numéro de téléphone valide pour que le bureau puisse vous joindre.");
+      return;
+    }
+    if (phone.trim().length > 40) {
+      setError("Le numéro de téléphone est trop long.");
       return;
     }
     if (!hadResponsibility) {
@@ -68,8 +76,16 @@ export default function CandidatureForm({
       setError("Votre motivation et vision méritent une réponse longue et sérieuse (20 caractères minimum).");
       return;
     }
+    if (motivation.trim().length > 5000) {
+      setError("Le champ motivation ne peut pas dépasser 5000 caractères.");
+      return;
+    }
     if (whyYou.trim().length < 20) {
       setError("« Pourquoi vous et pas quelqu'un d'autre ? » — développez votre réponse (20 caractères minimum).");
+      return;
+    }
+    if (whyYou.trim().length > 5000) {
+      setError("Le champ « Pourquoi vous » ne peut pas dépasser 5000 caractères.");
       return;
     }
 
@@ -99,11 +115,14 @@ export default function CandidatureForm({
       if (dbError) throw dbError;
       setDone(true);
     } catch (err) {
-      setError(
-        err instanceof Error && err.message
-          ? `Échec de l'envoi : ${err.message}`
-          : "Échec de l'envoi. Vérifiez votre connexion et réessayez."
-      );
+      // Map the DB's dedup race to the same French message as its trigger;
+      // anything else stays generic so no constraint/table names leak.
+      const message = err instanceof Error ? err.message : "";
+      if (/duplicate key|unique/i.test(message)) {
+        setError("Une candidature avec ce nom et ce téléphone existe déjà pour cet appel.");
+      } else {
+        setError("Échec de l'envoi. Vérifiez votre connexion et réessayez.");
+      }
     } finally {
       setSaving(false);
     }
@@ -162,6 +181,7 @@ export default function CandidatureForm({
             id="cand-name"
             type="text"
             required
+            maxLength={120}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             className={inputClass}
@@ -194,6 +214,7 @@ export default function CandidatureForm({
           id="cand-phone"
           type="tel"
           required
+          maxLength={40}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className={inputClass}
@@ -244,6 +265,7 @@ export default function CandidatureForm({
           id="cand-motivation"
           rows={5}
           required
+          maxLength={5000}
           value={motivation}
           onChange={(e) => setMotivation(e.target.value)}
           className={`${inputClass} resize-y`}
@@ -256,6 +278,7 @@ export default function CandidatureForm({
           id="cand-why"
           rows={4}
           required
+          maxLength={5000}
           value={whyYou}
           onChange={(e) => setWhyYou(e.target.value)}
           className={`${inputClass} resize-y`}

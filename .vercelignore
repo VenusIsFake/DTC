@@ -24,3 +24,8 @@ instagram/
 # Dependencies & Build artifacts (managed by Vercel)
 node_modules/
 .next/
+
+# Database source of truth + local assets (never needed at runtime)
+supabase/
+assets/
+tsconfig.tsbuildinfo
