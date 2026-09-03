@@ -3,7 +3,7 @@
 // camelCase aliases are produced by the mappers in src/lib/data.ts for the
 // legacy static components).
 
-export type Role = "member" | "bureau" | "admin";
+export type Role = "guest" | "member" | "bureau" | "admin";
 
 export interface Profile {
   id: string;

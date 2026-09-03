@@ -412,8 +412,9 @@ export default function AuthModal({
 
         {(mode === "signin" || mode === "signup") && (
           <p className="text-center text-[10px] text-[#5F6774] leading-relaxed">
-            Inscription libre, réservée aux étudiants de la FMDC. En créant un compte vous acceptez
-            que le bureau du club modère les échanges.{" "}
+            Inscription libre, réservée aux étudiants de la FMDC. Votre compte démarre
+            en statut invité (consultation seule) : le bureau du club vous accorde
+            l&apos;accès membre après vérification.{" "}
             <Link href="/about" className="text-[#5C6672] underline underline-offset-2">
               En savoir plus
             </Link>

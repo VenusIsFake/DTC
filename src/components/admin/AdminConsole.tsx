@@ -25,13 +25,15 @@ interface TabDef {
   id: TabId;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
-  component: React.ComponentType;
-  /** Admin-only tab (user management) — hidden from bureau accounts. */
+  component: React.ComponentType<{ viewerRole?: Role }>;
+  /** Admin-only tab — hidden from bureau accounts (none today; kept for future use). */
   adminOnly?: boolean;
 }
 
 const TABS: TabDef[] = [
-  { id: "users", label: "Utilisateurs", icon: Users, component: UsersTab, adminOnly: true },
+  // Users tab is shared: admins get full account management, bureau members
+  // get the guest-approval view only (UsersTab checks viewerRole).
+  { id: "users", label: "Utilisateurs", icon: Users, component: UsersTab },
   { id: "home", label: "Accueil", icon: Home, component: HomeTab },
   { id: "annonces", label: "Annonces & Idées", icon: Megaphone, component: AnnoncesIdeesTab },
   { id: "podcast", label: "Podcast Studio", icon: Radio, component: PodcastTab },
@@ -124,7 +126,7 @@ export default function AdminConsole({
         })}
       </div>
 
-      <Active />
+      <Active viewerRole={role} />
     </div>
   );
 }

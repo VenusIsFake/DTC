@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { Check, Copy, KeyRound, Loader2, ShieldOff, ShieldCheck, Search, Trash2, UserPlus, X } from "lucide-react";
+import { Check, Copy, KeyRound, Loader2, ShieldOff, ShieldCheck, Search, Trash2, UserCheck, UserPlus, X } from "lucide-react";
 import type { AdminProfileRow, Role } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { formatRelative } from "@/lib/format";
@@ -10,12 +10,13 @@ import UserAvatar from "@/components/UserAvatar";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 
 const ROLE_LABELS: Record<Role, string> = {
+  guest: "Invité",
   member: "Membre",
   bureau: "Bureau",
   admin: "Administrateur",
 };
 
-const ROLE_RANK: Record<Role, number> = { admin: 0, bureau: 1, member: 2 };
+const ROLE_RANK: Record<Role, number> = { admin: 0, bureau: 1, member: 2, guest: 3 };
 
 type SortMode = "role" | "recent" | "name";
 
@@ -25,7 +26,10 @@ interface InviteForm {
   role: Role;
 }
 
-export default function UsersTab() {
+export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
+  // Admins manage everything; bureau members only see the accounts list and
+  // the guest approvals (member writes stay admin-only server-side too).
+  const isAdmin = viewerRole === "admin";
   const [users, setUsers] = useState<AdminProfileRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -40,13 +44,17 @@ export default function UsersTab() {
   const [copied, setCopied] = useState(false);
   const inviteDialogRef = useOverlayDialog<HTMLDivElement>(inviteOpen, () => setInviteOpen(false));
 
-  const load = async () => {
+  const load = React.useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data, error: rpcError } = await supabase.rpc("admin_list_profiles");
+    // bureau_list_profiles now carries role/is_banned/created_at — same row
+    // shape as the admin RPC, minus the admin-only write actions.
+    const { data, error: rpcError } = await supabase.rpc(
+      isAdmin ? "admin_list_profiles" : "bureau_list_profiles"
+    );
     if (rpcError) setError(rpcError.message);
     setUsers((data as AdminProfileRow[] | null) ?? []);
-  };
+  }, [isAdmin]);
 
   useEffect(() => {
     load();
@@ -55,7 +63,7 @@ export default function UsersTab() {
       .then((res) => (res.ok ? res.json() : null))
       .then((payload: { serviceKey?: boolean } | null) => setServiceReady(payload?.serviceKey ?? null))
       .catch(() => setServiceReady(null));
-  }, []);
+  }, [load]);
 
   const setRole = async (target: AdminProfileRow, role: Role) => {
     if (role === target.role) return;
@@ -70,6 +78,28 @@ export default function UsersTab() {
     if (!supabase) return;
     setBusyId(target.id);
     const { error: rpcError } = await supabase.rpc("admin_set_role", { target_id: target.id, new_role: role });
+    if (rpcError) setError(rpcError.message);
+    else await load();
+    setBusyId(null);
+  };
+
+  const approveGuest = async (target: AdminProfileRow, approve: boolean) => {
+    if (
+      !approve &&
+      !window.confirm(
+        `Refuser et supprimer le compte de ${target.full_name || target.email} ? Il pourra se réinscrire, mais ses identifiants actuels disparaîtront. Action irréversible.`
+      )
+    ) {
+      return;
+    }
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    setBusyId(target.id);
+    setError(null);
+    const { error: rpcError } = await supabase.rpc("approve_guest", {
+      target_id: target.id,
+      approve,
+    });
     if (rpcError) setError(rpcError.message);
     else await load();
     setBusyId(null);
@@ -217,7 +247,10 @@ export default function UsersTab() {
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
         <p className="text-xs text-[#5C6672]">
-          {users.length} compte{users.length > 1 ? "s" : ""} — rôles, bannissements et coordonnées.
+          {users.length} compte{users.length > 1 ? "s" : ""}
+          {users.some((u) => u.role === "guest") &&
+            ` — dont ${users.filter((u) => u.role === "guest").length} invité(s) en attente`}
+          {isAdmin ? " — rôles, bannissements et coordonnées." : ""}
         </p>
         <div className="flex items-center gap-2">
           <label htmlFor="users-sort" className="sr-only">Trier les comptes</label>
@@ -227,7 +260,7 @@ export default function UsersTab() {
             onChange={(e) => setSort(e.target.value as SortMode)}
             className={`${inputClass} !py-1.5 !px-2 !text-[11px] w-auto`}
           >
-            <option value="role">Tri : Rôle (Admin → Bureau → Membre)</option>
+            <option value="role">Tri : Rôle (Admin → Bureau → Membre → Invité)</option>
             <option value="recent">Tri : Récents</option>
             <option value="name">Tri : Nom A→Z</option>
           </select>
@@ -243,22 +276,24 @@ export default function UsersTab() {
               className={`${inputClass} pl-9 !py-1.5 !text-xs w-52`}
             />
           </div>
-          <button
-            onClick={() => {
-              setInviteError(null);
-              setInviteOpen(true);
-            }}
-            disabled={serviceReady === false}
-            title={serviceReady === false ? "Clé service_role manquante sur le serveur" : "Créer un compte et transmettre le mot de passe temporaire"}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95 disabled:opacity-50"
-          >
-            <UserPlus className="w-3.5 h-3.5" />
-            <span>Inviter</span>
-          </button>
+          {isAdmin && (
+            <button
+              onClick={() => {
+                setInviteError(null);
+                setInviteOpen(true);
+              }}
+              disabled={serviceReady === false}
+              title={serviceReady === false ? "Clé service_role manquante sur le serveur" : "Créer un compte et transmettre le mot de passe temporaire"}
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95 disabled:opacity-50"
+            >
+              <UserPlus className="w-3.5 h-3.5" />
+              <span>Inviter</span>
+            </button>
+          )}
         </div>
       </div>
 
-      {serviceReady === false && (
+      {isAdmin && serviceReady === false && (
         <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
           Invitations, réinitialisations et suppressions de comptes sont désactivées : la clé serveur
           SUPABASE_SERVICE_ROLE_KEY n&apos;est pas configurée.
@@ -309,6 +344,11 @@ export default function UsersTab() {
             <div className="min-w-0 flex-1">
               <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">
                 {u.full_name || "(sans nom)"}
+                {u.role === "guest" && (
+                  <Badge tone="gold" className="ml-2">
+                    Invité — en attente
+                  </Badge>
+                )}
                 {u.is_banned && (
                   <Badge tone="red" className="ml-2">
                     Banni
@@ -326,7 +366,25 @@ export default function UsersTab() {
             <div className="flex items-center gap-2 shrink-0">
               {busyId === u.id ? (
                 <Loader2 className="w-4 h-4 text-[#755B18] animate-spin" />
-              ) : (
+              ) : u.role === "guest" ? (
+                <>
+                  <button
+                    onClick={() => approveGuest(u, true)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold bg-emerald-700 text-white hover:brightness-110 transition-all active:scale-95"
+                  >
+                    <UserCheck className="w-3.5 h-3.5" />
+                    <span>Approuver</span>
+                  </button>
+                  <button
+                    onClick={() => approveGuest(u, false)}
+                    aria-label={`Refuser et supprimer le compte de ${u.full_name || u.email}`}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold border border-red-500/40 text-red-600 hover:bg-red-500/10 transition-all active:scale-95"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Refuser</span>
+                  </button>
+                </>
+              ) : isAdmin ? (
                 <>
                   <label className="sr-only" htmlFor={`role-${u.id}`}>
                     Rôle de {u.full_name}
@@ -340,6 +398,7 @@ export default function UsersTab() {
                     <option value="member">Membre</option>
                     <option value="bureau">Bureau</option>
                     <option value="admin">Admin</option>
+                    <option value="guest">Invité (lecture seule)</option>
                   </select>
                   <button
                     onClick={() => setBanned(u, !u.is_banned)}
@@ -372,6 +431,8 @@ export default function UsersTab() {
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </>
+              ) : (
+                <span className="text-[11px] text-[#5F6774]">{ROLE_LABELS[u.role]}</span>
               )}
             </div>
           </div>

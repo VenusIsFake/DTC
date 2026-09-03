@@ -34,6 +34,23 @@ export default async function AnnuairePage() {
     );
   }
 
+  // The annuaire lists validated members only — guests wait for approval.
+  if (profile.role === "guest") {
+    return (
+      <div className="pt-10 sm:pt-14 pb-16 px-4 max-w-xl mx-auto">
+        <div className="glass-card rounded-lg border border-[#755B18]/30 p-8 sm:p-10 text-center space-y-4">
+          <h1 className="text-xl sm:text-2xl font-heading font-semibold text-[#16233A]">
+            Annuaire des Membres
+          </h1>
+          <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed">
+            L&apos;annuaire est réservé aux membres validés du club. Votre compte est en
+            attente de validation par le bureau — vous serez notifié dès votre approbation.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   let entries: DirectoryEntry[] = [];
   let dbError = false;
   try {
