@@ -68,7 +68,7 @@ export default function Footer({
             <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="hover:text-[#D4AF37] transition-colors">
+                  <Link href={item.href} className="inline-flex items-center py-1.5 hover:text-[#D4AF37] transition-colors">
                     {item.label}
                   </Link>
                 </li>

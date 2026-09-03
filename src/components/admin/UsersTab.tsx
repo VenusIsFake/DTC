@@ -463,7 +463,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             }`}
           >
             <UserAvatar name={u.full_name} src={u.avatar_url} size={38} />
-            <div className="min-w-0 flex-1">
+            <div className="flex-1 min-w-[150px]">
               <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">
                 {u.full_name || "(sans nom)"}
                 {u.role === "guest" && (

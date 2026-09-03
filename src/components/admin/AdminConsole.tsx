@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Users,
   Megaphone,
@@ -72,6 +72,18 @@ export default function AdminConsole({
   const defaultTab: TabId = role === "admin" ? "users" : "annonces";
   const startTab = (tabs.find((t) => t.id === initialTab)?.id ?? defaultTab) as TabId;
   const [tab, setTabState] = useState<TabId>(startTab);
+  // Right-edge fade on the pill strip signals it keeps scrolling; hidden
+  // once the strip is at its end (or doesn't overflow at all).
+  const tabStripRef = useRef<HTMLDivElement>(null);
+  const [stripAtEnd, setStripAtEnd] = useState(true);
+  const updateStripFade = () => {
+    const el = tabStripRef.current;
+    if (el) setStripAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 8);
+  };
+  useEffect(() => {
+    updateStripFade();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab]);
   const setTab = (next: TabId) => {
     setTabState(next);
     if (typeof window !== "undefined") {
@@ -104,30 +116,40 @@ export default function AdminConsole({
       </div>
 
         {/* Tab bar (horizontal scroll on mobile) */}
-      <div
-        className="flex items-center gap-1.5 overflow-x-auto pb-1 -mx-1 px-1"
-        role="tablist"
-        aria-label="Sections de la console"
-      >
-        {tabs.map((option) => {
-          const isActive = tab === option.id;
-          return (
-            <button
-              key={option.id}
-              role="tab"
-              aria-selected={isActive}
-              onClick={() => setTab(option.id)}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
-                isActive
-                  ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30 shadow-md"
-                  : "text-[#5C6672] hover:text-[#16233A] border border-transparent hover:bg-[#EFECE4]"
-              }`}
-            >
-              <option.icon className="w-3.5 h-3.5" />
-              <span>{option.label}</span>
-            </button>
-          );
-        })}
+      <div className="relative">
+        <div
+          ref={tabStripRef}
+          onScroll={updateStripFade}
+          className="flex items-center gap-1.5 overflow-x-auto pb-1 -mx-1 px-1"
+          role="tablist"
+          aria-label="Sections de la console"
+        >
+          {tabs.map((option) => {
+            const isActive = tab === option.id;
+            return (
+              <button
+                key={option.id}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setTab(option.id)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
+                  isActive
+                    ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30 shadow-md"
+                    : "text-[#5C6672] hover:text-[#16233A] border border-transparent hover:bg-[#EFECE4]"
+                }`}
+              >
+                <option.icon className="w-3.5 h-3.5" />
+                <span>{option.label}</span>
+              </button>
+            );
+          })}
+        </div>
+        {!stripAtEnd && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#F7F5F0] to-transparent"
+          />
+        )}
       </div>
 
       <Active viewerRole={role} />

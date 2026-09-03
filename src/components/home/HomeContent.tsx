@@ -53,7 +53,7 @@ export default function HomeContent({
 
             <Link
               href="/events"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#16233A] border-b border-[#755B18] pb-0.5 hover:text-[#755B18] transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#16233A] border-b border-[#755B18] pb-0.5 hover:text-[#755B18] transition-colors shrink-0 py-2 -my-2"
             >
               <span>Tous les extraits ({talks.length})</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -165,7 +165,7 @@ export default function HomeContent({
             </p>
             <Link
               href={eventsVisible ? "/events" : "/annonces"}
-              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A]"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A] py-2 -my-2"
             >
               <span>{eventsVisible ? "Découvrir les formats" : "Voir les annonces"}</span>
               <ArrowRight className="w-3 h-3" />
@@ -191,7 +191,7 @@ export default function HomeContent({
             </p>
             <Link
               href="/annonces"
-              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A]"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A] py-2 -my-2"
             >
               <span>Voir les ateliers</span>
               <ArrowRight className="w-3 h-3" />
@@ -217,7 +217,7 @@ export default function HomeContent({
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A]"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#755B18] hover:text-[#16233A] py-2 -my-2"
             >
               <span>Rencontrer l&apos;équipe</span>
               <ArrowRight className="w-3 h-3" />
