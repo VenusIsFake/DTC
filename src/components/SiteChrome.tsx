@@ -9,8 +9,9 @@ import type { PartnerCard } from "@/lib/types";
 
 /**
  * Site chrome (navbar + footer) wrapper. Standalone surfaces shared by link
- * only — currently /candidature, the bureau application form — render with
- * no chrome and no path into the main website (Google-Form-like isolation).
+ * only — /candidature (bureau application form) and /invitation (one-time
+ * invite links) — render with no chrome and no path into the main website
+ * (Google-Form-like isolation).
  */
 export default function SiteChrome({
   navItems,
@@ -26,7 +27,11 @@ export default function SiteChrome({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  if (pathname.startsWith("/candidature")) {
+  const chromeless =
+    pathname.startsWith("/candidature") ||
+    pathname === "/invitation" ||
+    pathname.startsWith("/invitation/");
+  if (chromeless) {
     return <>{children}</>;
   }
   return (

@@ -7,6 +7,7 @@ import type { Committee, Profile, SiteSettings } from "@/lib/types";
 import { useAuth } from "@/components/auth/AuthProvider";
 import ProfileEditor from "@/components/espace/ProfileEditor";
 import ActivitiesPanel from "@/components/espace/ActivitiesPanel";
+import PasswordChangeCard from "@/components/espace/PasswordChangeCard";
 
 type Tab = "profil" | "activites";
 
@@ -72,7 +73,10 @@ export default function EspaceClient({
       </div>
 
       {tab === "profil" ? (
-        <ProfileEditor profile={profile} committees={committees} settings={settings} />
+        <div className="space-y-4 sm:space-y-6">
+          <ProfileEditor profile={profile} committees={committees} settings={settings} />
+          <PasswordChangeCard />
+        </div>
       ) : (
         <ActivitiesPanel />
       )}

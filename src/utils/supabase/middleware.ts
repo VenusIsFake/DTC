@@ -52,7 +52,9 @@ function securityContext(request: NextRequest) {
 // setting — no deploy needed.
 // ---------------------------------------------------------------------------
 
-const PUBLIC_PATHS = ["/candidature"];
+// /candidature = standalone application form; /invitation = one-time invite
+// links (account creation + bureau access while the wall is up).
+const PUBLIC_PATHS = ["/candidature", "/invitation"];
 
 // The wall key is one tiny row read on EVERY request — cache it briefly per
 // instance so the wall decision costs no extra DB round trip. 10s staleness

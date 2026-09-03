@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { Check, Copy, KeyRound, Loader2, ShieldOff, ShieldCheck, Search, Trash2, UserCheck, UserPlus, X } from "lucide-react";
+import { Check, Copy, KeyRound, Link2, Loader2, ShieldOff, ShieldCheck, Search, Trash2, UserCheck, UserPlus, X } from "lucide-react";
 import type { AdminProfileRow, Role } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-import { formatRelative } from "@/lib/format";
+import { formatDate, formatRelative } from "@/lib/format";
 import { Badge, Field, GhostButton, PrimaryButton, inputClass } from "@/components/ui/form";
 import UserAvatar from "@/components/UserAvatar";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
@@ -26,6 +26,17 @@ interface InviteForm {
   role: Role;
 }
 
+// One-time invitation links (list_invite_links RPC shape).
+interface InviteLinkRow {
+  id: string;
+  token: string;
+  role: Role;
+  created_at: string;
+  expires_at: string;
+  used_at: string | null;
+  used_by_name: string;
+}
+
 export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
   // Admins manage everything; bureau members only see the accounts list and
   // the guest approvals (member writes stay admin-only server-side too).
@@ -42,6 +53,16 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
   const [inviteError, setInviteError] = useState<string | null>(null);
   const [passwordResult, setPasswordResult] = useState<{ email: string; password: string } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [inviteLinks, setInviteLinks] = useState<InviteLinkRow[] | null>(null);
+  const [linkModalOpen, setLinkModalOpen] = useState(false);
+  const [linkRole, setLinkRole] = useState<Role>("bureau");
+  const [creatingLink, setCreatingLink] = useState(false);
+  const [linkError, setLinkError] = useState<string | null>(null);
+  const [createdUrl, setCreatedUrl] = useState<string | null>(null);
+  const [copiedUrl, setCopiedUrl] = useState(false);
+  const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
+  const [revokingLinkId, setRevokingLinkId] = useState<string | null>(null);
+  const linkDialogRef = useOverlayDialog<HTMLDivElement>(linkModalOpen, () => setLinkModalOpen(false));
   const inviteDialogRef = useOverlayDialog<HTMLDivElement>(inviteOpen, () => setInviteOpen(false));
 
   const load = React.useCallback(async () => {
@@ -56,14 +77,23 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
     setUsers((data as AdminProfileRow[] | null) ?? []);
   }, [isAdmin]);
 
+  const loadLinks = React.useCallback(async () => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    const { data, error: rpcError } = await supabase.rpc("list_invite_links");
+    if (rpcError) setError(rpcError.message);
+    setInviteLinks((data as InviteLinkRow[] | null) ?? []);
+  }, []);
+
   useEffect(() => {
     load();
+    loadLinks();
     // Which optional server capabilities are live (drives the invite/reset UI).
     fetch("/api/admin/config")
       .then((res) => (res.ok ? res.json() : null))
       .then((payload: { serviceKey?: boolean } | null) => setServiceReady(payload?.serviceKey ?? null))
       .catch(() => setServiceReady(null));
-  }, [load]);
+  }, [load, loadLinks]);
 
   const setRole = async (target: AdminProfileRow, role: Role) => {
     if (role === target.role) return;
@@ -81,6 +111,56 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
     if (rpcError) setError(rpcError.message);
     else await load();
     setBusyId(null);
+  };
+
+  const createLink = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setCreatingLink(true);
+    setLinkError(null);
+    try {
+      const supabase = getSupabaseBrowserClient();
+      if (!supabase) throw new Error("Base de données indisponible.");
+      const { data, error: rpcError } = await supabase.rpc("create_invite_link", {
+        new_role: linkRole,
+      });
+      if (rpcError || typeof data !== "string") throw new Error(rpcError?.message ?? "Création impossible.");
+      setCreatedUrl(`${window.location.origin}/invitation/${data}`);
+      setCopiedUrl(false);
+      setLinkModalOpen(false);
+      await loadLinks();
+    } catch (err) {
+      setLinkError(err instanceof Error ? err.message : "Création impossible.");
+    } finally {
+      setCreatingLink(false);
+    }
+  };
+
+  const copyUrl = async (url: string, mark: (done: boolean) => void) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      mark(true);
+      setTimeout(() => mark(false), 2000);
+    } catch {
+      // Clipboard blocked — the URL stays selectable for manual copy.
+    }
+  };
+
+  const revokeLink = async (link: InviteLinkRow) => {
+    if (
+      !window.confirm(
+        `Révoquer ce lien ${ROLE_LABELS[link.role] ?? link.role} ? Il ne pourra plus être utilisé (les accès déjà accordés restent en place).`
+      )
+    ) {
+      return;
+    }
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    setRevokingLinkId(link.id);
+    setError(null);
+    const { error: rpcError } = await supabase.rpc("revoke_invite_link", { link_id: link.id });
+    if (rpcError) setError(rpcError.message);
+    else await loadLinks();
+    setRevokingLinkId(null);
   };
 
   const approveGuest = async (target: AdminProfileRow, approve: boolean) => {
@@ -276,6 +356,19 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
               className={`${inputClass} pl-9 !py-1.5 !text-xs w-52`}
             />
           </div>
+          <button
+            onClick={() => {
+              setLinkError(null);
+              setCreatedUrl(null);
+              setLinkRole("bureau");
+              setLinkModalOpen(true);
+            }}
+            title="Créer un lien d'invitation à usage unique (fonctionne même site fermé)"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold border border-[#755B18]/40 text-[#755B18] hover:bg-[#755B18]/10 transition-all active:scale-95"
+          >
+            <Link2 className="w-3.5 h-3.5" />
+            <span>Lien d&apos;invitation</span>
+          </button>
           {isAdmin && (
             <button
               onClick={() => {
@@ -322,6 +415,33 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
           </div>
           <p className="text-[10px] text-[#5C6672]">
             Transmettez-le au membre (WhatsApp, en personne…) — il pourra le changer dans « Mon espace ».
+          </p>
+        </div>
+      )}
+
+      {createdUrl && (
+        <div className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-2">
+          <p className="text-xs font-bold text-emerald-800">
+            Lien d&apos;invitation créé — à usage unique, envoi direct (WhatsApp, mail…) :
+          </p>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <code className="px-3 py-2 rounded-lg bg-white border border-[#DCD7CB]/60 text-[11px] font-semibold text-[#16233A] select-all break-all max-w-full">
+              {createdUrl}
+            </code>
+            <GhostButton onClick={() => copyUrl(createdUrl, setCopiedUrl)} className="!py-1.5 !text-[11px]">
+              {copiedUrl ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+              <span>{copiedUrl ? "Copié ✓" : "Copier"}</span>
+            </GhostButton>
+            <button
+              onClick={() => setCreatedUrl(null)}
+              className="text-[10px] font-semibold text-[#5C6672] hover:text-[#16233A]"
+            >
+              Fermer
+            </button>
+          </div>
+          <p className="text-[10px] text-[#5C6672]">
+            La personne crée son compte via ce lien (même pendant que le site est fermé) et reçoit
+            directement le rôle choisi. Le lien meurt après une seule utilisation.
           </p>
         </div>
       )}
@@ -442,6 +562,86 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
         )}
       </div>
 
+      <section className="glass-card rounded-xl border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+        <div className="flex items-center gap-2">
+          <Link2 className="w-4 h-4 text-[#755B18]" />
+          <h3 className="text-sm font-heading font-bold text-[#16233A]">Liens d&apos;invitation</h3>
+        </div>
+        <p className="text-[11px] text-[#5F6774] leading-relaxed">
+          Un lien = une personne : il crée son compte depuis le lien (même site fermé) et reçoit le
+          rôle du lien. Usage unique, expiration automatique au bout de 30 jours.
+        </p>
+        {inviteLinks === null ? (
+          <Loader2 className="w-4 h-4 text-[#755B18] animate-spin" />
+        ) : inviteLinks.length === 0 ? (
+          <p className="text-xs text-[#5C6672] py-2 text-center">
+            Aucun lien pour l&apos;instant — créez-en un avec le bouton « Lien d&apos;invitation ».
+          </p>
+        ) : (
+          <div className="space-y-2">
+            {inviteLinks.map((link) => {
+              const used = link.used_at !== null;
+              const expired = !used && new Date(link.expires_at).getTime() < Date.now();
+              const active = !used && !expired;
+              return (
+                <div
+                  key={link.id}
+                  className="flex flex-wrap items-center gap-2.5 rounded-lg border border-[#DCD7CB]/40 bg-white/60 px-3 py-2"
+                >
+                  <Badge tone={used ? "gray" : expired ? "red" : "green"}>
+                    {used ? `Utilisé — ${link.used_by_name || "compte supprimé"}` : expired ? "Expiré" : "Disponible"}
+                  </Badge>
+                  <span className="text-[11px] font-semibold text-[#16233A]">
+                    {ROLE_LABELS[link.role] ?? link.role}
+                  </span>
+                  <span className="text-[10px] text-[#5F6774] truncate flex-1 min-w-[140px]">
+                    Créé {formatRelative(link.created_at)}
+                    {active && ` · expire le ${formatDate(link.expires_at)}`}
+                  </span>
+                  {active && !!link.token && (
+                    <div className="flex items-center gap-1.5">
+                      <GhostButton
+                        onClick={() =>
+                          copyUrl(`${window.location.origin}/invitation/${link.token}`, (done) =>
+                            setCopiedLinkId(done ? link.id : null)
+                          )
+                        }
+                        className="!py-1 !text-[10px]"
+                      >
+                        {copiedLinkId === link.id ? (
+                          <Check className="w-3 h-3" />
+                        ) : (
+                          <Copy className="w-3 h-3" />
+                        )}
+                        <span>{copiedLinkId === link.id ? "Copié ✓" : "Copier le lien"}</span>
+                      </GhostButton>
+                      <button
+                        onClick={() => revokeLink(link)}
+                        disabled={revokingLinkId === link.id}
+                        aria-label="Révoquer ce lien"
+                        title="Révoquer (plus utilisable)"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors disabled:opacity-40"
+                      >
+                        {revokingLinkId === link.id ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        ) : (
+                          <Trash2 className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+                    </div>
+                  )}
+                  {active && !link.token && (
+                    <span className="text-[10px] text-[#5F6774] italic">
+                      Lien admin — visible uniquement aux administrateurs
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
+
       {inviteOpen && (
         <div
           ref={inviteDialogRef}
@@ -511,6 +711,65 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                 </GhostButton>
                 <PrimaryButton type="submit" disabled={inviting}>
                   {inviting ? "Création…" : "Créer le compte"}
+                </PrimaryButton>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {linkModalOpen && (
+        <div
+          ref={linkDialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Créer un lien d'invitation"
+          className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
+        >
+          <div className="absolute inset-0" onClick={() => setLinkModalOpen(false)} aria-hidden="true" />
+          <div className="relative z-10 w-full max-w-md max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
+            <div className="flex items-center justify-between">
+              <h4 className="text-base font-heading font-bold text-[#16233A]">Lien d&apos;invitation</h4>
+              <button
+                onClick={() => setLinkModalOpen(false)}
+                aria-label="Fermer"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <form onSubmit={createLink} className="space-y-3">
+              <Field
+                label="Rôle accordé par le lien"
+                htmlFor="link-role"
+                hint="Le destinataire crée son compte depuis le lien et reçoit ce rôle immédiatement."
+              >
+                <select
+                  id="link-role"
+                  value={linkRole}
+                  onChange={(e) => setLinkRole(e.target.value as Role)}
+                  className={inputClass}
+                >
+                  <option value="bureau">Membre du bureau</option>
+                  <option value="member">Membre</option>
+                  {isAdmin && <option value="admin">Administrateur</option>}
+                </select>
+              </Field>
+              <p className="text-[10px] text-[#5C6672] leading-relaxed">
+                Le lien est à usage unique et fonctionne même pendant que le site est fermé — la
+                personne accédera au site dès son inscription.
+              </p>
+              {linkError && (
+                <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+                  {linkError}
+                </p>
+              )}
+              <div className="flex justify-end gap-2">
+                <GhostButton type="button" onClick={() => setLinkModalOpen(false)}>
+                  Annuler
+                </GhostButton>
+                <PrimaryButton type="submit" disabled={creatingLink}>
+                  {creatingLink ? "Création…" : "Créer le lien"}
                 </PrimaryButton>
               </div>
             </form>
