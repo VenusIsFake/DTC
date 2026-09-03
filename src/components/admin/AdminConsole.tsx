@@ -10,6 +10,7 @@ import {
   Images,
   Home,
   ClipboardList,
+  HandCoins,
 } from "lucide-react";
 import type { Role } from "@/lib/types";
 import UsersTab from "@/components/admin/UsersTab";
@@ -20,6 +21,7 @@ import AboutCommitteesTab from "@/components/admin/AboutCommitteesTab";
 import GalleryTab from "@/components/admin/GalleryTab";
 import HomeTab from "@/components/admin/HomeTab";
 import RecruitmentsTab from "@/components/admin/RecruitmentsTab";
+import MembershipTab from "@/components/admin/MembershipTab";
 
 interface TabDef {
   id: TabId;
@@ -35,6 +37,7 @@ const TABS: TabDef[] = [
   // get the guest-approval view only (UsersTab checks viewerRole).
   { id: "users", label: "Utilisateurs", icon: Users, component: UsersTab },
   { id: "home", label: "Accueil", icon: Home, component: HomeTab },
+  { id: "membership", label: "Adhésion", icon: HandCoins, component: MembershipTab },
   { id: "annonces", label: "Annonces & Idées", icon: Megaphone, component: AnnoncesIdeesTab },
   { id: "podcast", label: "Podcast Studio", icon: Radio, component: PodcastTab },
   { id: "events", label: "Événements", icon: CalendarDays, component: EventsTab },
@@ -46,6 +49,7 @@ const TABS: TabDef[] = [
 type TabId =
   | "users"
   | "home"
+  | "membership"
   | "annonces"
   | "podcast"
   | "events"

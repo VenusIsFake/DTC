@@ -12,6 +12,7 @@ import type {
   GalleryImageRow,
   IdeaBoardItem,
   MandateWithMembers,
+  MembershipSettings,
   Profile,
   Recruitment,
   RecruitmentPosition,
@@ -110,6 +111,74 @@ async function fetchSiteSettings(): Promise<SiteSettings> {
 // Memoized per request: the layout and several pages need the settings on
 // every render — this collapses them into a single Supabase round-trip.
 export const getSiteSettings = cache(fetchSiteSettings);
+
+// ---------------------------------------------------------------------------
+// Membership funnel settings (console "Adhésion" tab → site_settings)
+// ---------------------------------------------------------------------------
+
+const FALLBACK_MEMBERSHIP: MembershipSettings = {
+  enabled: false,
+  intro: "",
+  feeLabel: "",
+  bankEnabled: false,
+  bankDetails: "",
+  inPersonEnabled: false,
+  inPersonText: "",
+  whatsappNumber: "",
+  whatsappMessage: "",
+  pendingText: "",
+};
+
+async function fetchMembershipSettings(): Promise<MembershipSettings> {
+  return withFallback(async () => {
+    const supabase = await createSupabaseServerClient();
+    if (!supabase) return FALLBACK_MEMBERSHIP;
+    const { data, error } = await supabase
+      .from("site_settings")
+      .select("key, value")
+      .like("key", "membership\\_%");
+    if (error) throw error;
+    const settings = { ...FALLBACK_MEMBERSHIP };
+    for (const row of data ?? []) {
+      const entry = row as { key: string; value: unknown };
+      if (typeof entry.value === "boolean") {
+        if (entry.key === "membership_enabled") settings.enabled = entry.value;
+        if (entry.key === "membership_bank_enabled") settings.bankEnabled = entry.value;
+        if (entry.key === "membership_inperson_enabled") settings.inPersonEnabled = entry.value;
+        continue;
+      }
+      if (typeof entry.value !== "string") continue;
+      const text = entry.value.trim();
+      switch (entry.key) {
+        case "membership_intro":
+          settings.intro = text;
+          break;
+        case "membership_fee_label":
+          settings.feeLabel = text;
+          break;
+        case "membership_bank_details":
+          settings.bankDetails = text;
+          break;
+        case "membership_inperson_text":
+          settings.inPersonText = text;
+          break;
+        case "membership_whatsapp_number":
+          // wa.me wants international digits only — strip anything else.
+          settings.whatsappNumber = text.replace(/[^0-9]/g, "");
+          break;
+        case "membership_whatsapp_message":
+          settings.whatsappMessage = text;
+          break;
+        case "membership_pending_text":
+          settings.pendingText = text;
+          break;
+      }
+    }
+    return settings;
+  }, FALLBACK_MEMBERSHIP);
+}
+
+export const getMembershipSettings = cache(fetchMembershipSettings);
 
 // ---------------------------------------------------------------------------
 // Session (server components / route handlers)

@@ -330,6 +330,8 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
           {users.length} compte{users.length > 1 ? "s" : ""}
           {users.some((u) => u.role === "guest") &&
             ` — dont ${users.filter((u) => u.role === "guest").length} invité(s) en attente`}
+          {users.filter((u) => u.role === "guest" && u.membership_status === "pending").length > 0 &&
+            ` · ${users.filter((u) => u.role === "guest" && u.membership_status === "pending").length} dossier(s) d'adhésion reçu(s)`}
           {isAdmin ? " — rôles, bannissements et coordonnées." : ""}
         </p>
         <div className="flex items-center gap-2">
@@ -467,6 +469,11 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                 {u.role === "guest" && (
                   <Badge tone="gold" className="ml-2">
                     Invité — en attente
+                  </Badge>
+                )}
+                {u.role === "guest" && u.membership_status === "pending" && (
+                  <Badge tone="green" className="ml-2">
+                    Dossier d&apos;adhésion reçu
                   </Badge>
                 )}
                 {u.is_banned && (

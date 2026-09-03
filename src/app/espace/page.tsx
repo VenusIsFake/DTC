@@ -1,8 +1,9 @@
 import React from "react";
-import { getSiteSettings, getCommittees, getServerProfile } from "@/lib/data";
+import { getSiteSettings, getMembershipSettings, getCommittees, getServerProfile } from "@/lib/data";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import SignInPrompt from "@/components/auth/SignInPrompt";
 import EspaceClient from "@/components/espace/EspaceClient";
+import MembershipFlow from "@/components/espace/MembershipFlow";
 
 export const metadata = {
   title: "Mon Espace",
@@ -35,6 +36,14 @@ export default async function EspacePage() {
   // Self-registered accounts start as guests — they can look around the
   // public site, but the member space opens only after bureau approval.
   if (profile.role === "guest") {
+    // Membership funnel (console toggle): invite the guest to apply, fill
+    // their profile and see the payment instructions.
+    if (profile.membership_status !== "member") {
+      const [membership, siteSettings] = await Promise.all([getMembershipSettings(), getSiteSettings()]);
+      if (membership.enabled) {
+        return <MembershipFlow profile={profile} settings={membership} siteSettings={siteSettings} />;
+      }
+    }
     return (
       <div className="pt-10 sm:pt-14 pb-16 px-4 max-w-xl mx-auto">
         <div className="glass-card rounded-lg border border-[#755B18]/30 p-8 sm:p-10 text-center space-y-4">

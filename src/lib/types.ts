@@ -5,6 +5,9 @@
 
 export type Role = "guest" | "member" | "bureau" | "admin";
 
+/** Membership funnel state (guests only; 'member' is stamped on approval). */
+export type MembershipStatus = "none" | "pending" | "member";
+
 export interface Profile {
   id: string;
   full_name: string;
@@ -16,6 +19,7 @@ export interface Profile {
   avatar_url: string | null;
   bio: string;
   phone: string;
+  membership_status: MembershipStatus;
   created_at: string;
 }
 
@@ -161,6 +165,23 @@ export interface SiteSettings {
   };
 }
 
+/**
+ * Membership funnel copy + payment info — every field console-editable
+ * (site_settings, "Adhésion" tab). Empty optional strings = built-in default.
+ */
+export interface MembershipSettings {
+  enabled: boolean;
+  intro: string;
+  feeLabel: string;
+  bankEnabled: boolean;
+  bankDetails: string;
+  inPersonEnabled: boolean;
+  inPersonText: string;
+  whatsappNumber: string;
+  whatsappMessage: string;
+  pendingText: string;
+}
+
 export interface Mandate {
   id: string;
   year_label: string;
@@ -237,6 +258,7 @@ export interface AdminProfileRow {
   committee: string;
   role: Role;
   is_banned: boolean;
+  membership_status: MembershipStatus;
   created_at: string;
 }
 
