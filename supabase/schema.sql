@@ -277,7 +277,7 @@ declare t text;
 begin
   foreach t in array array[
     'announcements', 'ideas', 'podcast_episodes', 'tedx_talks',
-    'event_pages', 'about_sections', 'mandates'
+    'event_pages', 'about_sections'
   ]
   loop
     execute format('drop trigger if exists touch_updated_at on public.%I', t);
