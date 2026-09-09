@@ -1921,3 +1921,15 @@ end;
 $$;
 revoke execute on function public.admin_list_profiles() from public, anon;
 grant execute on function public.admin_list_profiles() to authenticated;
+
+-- ============================================================================
+-- v2.8.1 (2026-09-09) — mandates console blind behind the wall (v2.5 lock gave
+-- every other console-CRUD table the bureau bypass; mandates/mandate_members
+-- were missed — inserts succeeded silently, reloaded list came back empty).
+-- ============================================================================
+
+alter policy "mandates_public_read" on public.mandates
+  using ((select public.site_is_open()) or public.is_bureau_or_admin());
+
+alter policy "mandate_members_public_read" on public.mandate_members
+  using ((select public.site_is_open()) or public.is_bureau_or_admin());
