@@ -215,14 +215,17 @@ function MandatesEditor() {
         .select("*")
         .order("is_current", { ascending: false })
         .order("created_at", { ascending: false }),
-      supabase.from("mandate_members").select("*").order("sort"),
+      // Linked accounts: fall back to the profile avatar when no manual photo.
+      supabase.from("mandate_members").select("*, profile:profiles(avatar_url)").order("sort"),
     ]);
     if (mError) setError(mError.message);
     const grouped = (mandateRows ?? []) as Mandate[];
     setMandates(
       grouped.map((m) => ({
         ...m,
-        members: ((memberRows ?? []) as MandateMember[]).filter((mm) => mm.mandate_id === m.id),
+        members: ((memberRows ?? []) as (MandateMember & { profile?: { avatar_url: string | null } })[])
+          .filter((mm) => mm.mandate_id === m.id)
+          .map((mm) => ({ ...mm, photo_url: mm.photo_url || mm.profile?.avatar_url || null })),
       }))
     );
   };
@@ -342,12 +345,15 @@ function MandatesEditor() {
     setNotice(null);
     setSaving(true);
     try {
+      // No manual photo → take the linked account's avatar (stays re-syncable:
+      // the public page also falls back live via the profiles embed).
+      const linkedAvatar = profiles?.find((p) => p.id === memberForm.profile_id)?.avatar_url ?? null;
       const payload = {
         mandate_id: memberForm.mandateId,
         name: memberForm.name.trim(),
         role: memberForm.role.trim() || "Membre",
         profile_id: memberForm.profile_id || null,
-        photo_url: memberForm.photo_url.trim() || null,
+        photo_url: memberForm.photo_url.trim() || linkedAvatar,
       };
       const mandate = mandates?.find((m) => m.id === memberForm.mandateId);
       const nextSort = (mandate?.members ?? []).reduce((max, m) => Math.max(max, m.sort), 0) + 1;
@@ -625,6 +631,8 @@ function MandatesEditor() {
                               ...memberForm,
                               profile_id: id,
                               name: memberForm.name.trim() ? memberForm.name : (profile?.full_name ?? ""),
+                              // Linked account avatar as preview + saved fallback.
+                              photo_url: memberForm.photo_url.trim() ? memberForm.photo_url : (profile?.avatar_url ?? ""),
                             });
                           }}
                           className={inputClass}

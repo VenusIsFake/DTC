@@ -440,19 +440,24 @@ export async function getMandates(): Promise<MandateWithMembers[]> {
   return withFallback(async () => {
     const supabase = await createSupabaseServerClient();
     if (!supabase) return [FALLBACK_MANDATE];
-    // Single round-trip: members are fetched as an embedded collection.
+    // Single round-trip: members come with their linked profile's avatar so
+    // account photos stay in sync (manual photo_url still wins when set).
     const { data: mandates, error } = await supabase
       .from("mandates")
-      .select("*, mandate_members(*)")
+      .select("*, mandate_members(*, profile:profiles(avatar_url))")
       .order("is_current", { ascending: false })
       .order("created_at", { ascending: false });
     if (error) throw error;
     if (!mandates || mandates.length === 0) return [FALLBACK_MANDATE];
     return mandates.map((raw) => {
-      const mandate = raw as MandateWithMembers & { mandate_members?: MandateWithMembers["members"] };
+      const mandate = raw as MandateWithMembers & {
+        mandate_members?: (MandateWithMembers["members"][number] & { profile?: { avatar_url: string | null } })[];
+      };
       return {
         ...mandate,
-        members: [...(mandate.mandate_members ?? [])].sort((a, b) => a.sort - b.sort),
+        members: [...(mandate.mandate_members ?? [])]
+          .sort((a, b) => a.sort - b.sort)
+          .map((mm) => ({ ...mm, photo_url: mm.photo_url || mm.profile?.avatar_url || null })),
       };
     });
   }, [FALLBACK_MANDATE]);
