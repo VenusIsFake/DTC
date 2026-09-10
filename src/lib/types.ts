@@ -51,6 +51,7 @@ export interface Announcement {
 
 export interface AnnouncementBoardItem extends Announcement {
   author_name: string | null;
+  author_avatar: string | null;
   rsvp_count: number;
 }
 

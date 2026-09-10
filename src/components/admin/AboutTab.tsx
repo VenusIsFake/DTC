@@ -345,15 +345,14 @@ function MandatesEditor() {
     setNotice(null);
     setSaving(true);
     try {
-      // No manual photo → take the linked account's avatar (stays re-syncable:
-      // the public page also falls back live via the profiles embed).
-      const linkedAvatar = profiles?.find((p) => p.id === memberForm.profile_id)?.avatar_url ?? null;
+      // photo_url is for MANUAL photos only — linked accounts get their avatar
+      // live from profiles via the embed fallback (stays in sync on changes).
       const payload = {
         mandate_id: memberForm.mandateId,
         name: memberForm.name.trim(),
         role: memberForm.role.trim() || "Membre",
         profile_id: memberForm.profile_id || null,
-        photo_url: memberForm.photo_url.trim() || linkedAvatar,
+        photo_url: memberForm.photo_url.trim() || null,
       };
       const mandate = mandates?.find((m) => m.id === memberForm.mandateId);
       const nextSort = (mandate?.members ?? []).reduce((max, m) => Math.max(max, m.sort), 0) + 1;
@@ -631,8 +630,9 @@ function MandatesEditor() {
                               ...memberForm,
                               profile_id: id,
                               name: memberForm.name.trim() ? memberForm.name : (profile?.full_name ?? ""),
-                              // Linked account avatar as preview + saved fallback.
-                              photo_url: memberForm.photo_url.trim() ? memberForm.photo_url : (profile?.avatar_url ?? ""),
+                              // photo_url stays empty: the linked account's avatar
+                              // syncs live via the profiles embed fallback — a
+                              // snapshot copy here would freeze it forever.
                             });
                           }}
                           className={inputClass}

@@ -7,7 +7,7 @@ import type { Announcement, AnnouncementBoardItem } from "@/lib/types";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-import { formatDateTime, formatRelative, initials } from "@/lib/format";
+import { formatDateTime, formatRelative } from "@/lib/format";
 import { Badge } from "@/components/ui/form";
 import UserAvatar from "@/components/UserAvatar";
 import AnnouncementComposer from "@/components/annonces/AnnouncementComposer";
@@ -164,14 +164,14 @@ export default function AnnouncementsFeed({
       const [annRes, rsvpRes] = await Promise.all([
         supabase
           .from("announcements")
-          .select("*, author:profiles!announcements_author_id_fkey(full_name)")
+          .select("*, author:profiles!announcements_author_id_fkey(full_name, avatar_url)")
           .order("is_pinned", { ascending: false })
           .order("created_at", { ascending: false }),
         supabase.from("rsvps").select("announcement_id"),
       ]);
       if (annRes.error) throw annRes.error;
       const rows = (annRes.data ?? []) as unknown as (Announcement & {
-        author?: { full_name: string | null };
+        author?: { full_name: string | null; avatar_url: string | null };
       })[];
       const counts = new Map<string, number>();
       for (const r of (rsvpRes.data ?? []) as { announcement_id: string }[]) {
@@ -181,6 +181,7 @@ export default function AnnouncementsFeed({
         rows.map((row) => ({
           ...row,
           author_name: row.author?.full_name ?? null,
+          author_avatar: row.author?.avatar_url ?? null,
           rsvp_count: counts.get(row.id) ?? 0,
         }))
       );
@@ -447,9 +448,7 @@ export default function AnnouncementsFeed({
                 </span>
               )}
               <span className="flex items-center gap-1.5">
-                <span className="w-5 h-5 rounded-full bg-[#EFECE4] border border-[#DCD7CB]/50 inline-flex items-center justify-center text-[9px] font-bold text-[#755B18]">
-                  {initials(item.author_name)}
-                </span>
+                <UserAvatar name={item.author_name ?? "Bureau DTC"} src={item.author_avatar} size={20} />
                 {item.author_name ?? "Bureau DTC"} · <span suppressHydrationWarning>{formatRelative(item.created_at)}</span>
               </span>
             </div>

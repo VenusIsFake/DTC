@@ -421,6 +421,7 @@ begin
     from public.rsvps r
     join public.profiles p on p.id = r.user_id
     where r.announcement_id = a_id
+      and p.is_banned = false
     order by r.created_at;
 end;
 $$;
@@ -936,7 +937,9 @@ select
   a.id, a.kind, a.title, a.body, a.event_date, a.location, a.is_pinned,
   a.status, a.author_id, a.created_at, a.updated_at,
   p.full_name as author_name,
-  a.rsvp_count_cache as rsvp_count
+  a.rsvp_count_cache as rsvp_count,
+  a.poster_url,
+  p.avatar_url as author_avatar
 from public.announcements a
 left join public.profiles p on p.id = a.author_id
 where a.status = 'published';
