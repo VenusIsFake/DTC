@@ -149,7 +149,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                       <p className="text-xs font-bold text-[#16233A] truncate">{profile?.full_name || "Membre DTC"}</p>
                       <p className="text-[10px] text-[#5C6672] truncate">{profile?.email || user.email}</p>
                       {isBanned && (
-                        <p className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-red-600">
+                        <p className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-red-700">
                           <ShieldAlert className="w-3 h-3" /> Compte suspendu
                         </p>
                       )}
@@ -171,7 +171,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                         signOut();
                       }}
                       role="menuitem"
-                      className="w-full flex items-center gap-2 px-2.5 py-2 rounded-md text-xs font-medium text-[#5C6672] hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="w-full flex items-center gap-2 px-2.5 py-2 rounded-md text-xs font-medium text-[#5C6672] hover:bg-red-50 hover:text-red-700 transition-colors"
                     >
                       <LogOut className="w-3.5 h-3.5" />
                       <span>Déconnexion</span>
@@ -271,7 +271,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                     setIsOpen(false);
                     signOut();
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-[#5C6672] hover:bg-red-50 hover:text-red-600 transition-colors"
+                  className="w-full flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-[#5C6672] hover:bg-red-50 hover:text-red-700 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Déconnexion</span>

@@ -90,7 +90,7 @@ export default function Hero({
                     className="object-cover group-hover/thumb:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black/15 group-hover/thumb:bg-black/30 transition-colors flex items-center justify-center">
-                    <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/95 text-red-600 shadow-lg backdrop-blur-sm flex items-center justify-center group-hover/thumb:scale-110 group-hover/thumb:bg-red-600 group-hover/thumb:text-white transition-all">
+                    <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/95 text-red-700 shadow-lg backdrop-blur-sm flex items-center justify-center group-hover/thumb:scale-110 group-hover/thumb:bg-red-600 group-hover/thumb:text-white transition-all">
                       <Play className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-current translate-x-0.5" />
                     </div>
                   </div>

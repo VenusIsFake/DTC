@@ -226,7 +226,7 @@ function ArchivedMandate({ mandate }: { mandate: MandateWithMembers }) {
           <div className="relative aspect-video rounded-xl overflow-hidden border border-[#DCD7CB]/40">
             <Image
               src={mandate.infographic_url}
-              alt={`Organigramme ${mandate.year_label}`}
+              alt={`Organigramme du bureau exécutif ${mandate.year_label} — pôles et responsables (composition détaillée ci-dessous)`}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
               className="object-contain bg-black/40"

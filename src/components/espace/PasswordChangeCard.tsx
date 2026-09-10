@@ -71,7 +71,7 @@ export default function PasswordChangeCard() {
     <section className="glass-card rounded-xl border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-4">
       <div className="flex items-center gap-2">
         <KeyRound className="w-4 h-4 text-[#755B18]" />
-        <h3 className="text-sm font-heading font-bold text-[#16233A]">Mot de passe</h3>
+        <h2 className="text-sm font-heading font-bold text-[#16233A]">Mot de passe</h2>
       </div>
       <form onSubmit={submit} className="space-y-3">
         <Field label="Mot de passe actuel" htmlFor="current-password">
@@ -117,7 +117,7 @@ export default function PasswordChangeCard() {
             className={`text-xs rounded-lg px-3 py-2 border ${
               message.kind === "ok"
                 ? "text-emerald-700 bg-emerald-600/5 border-emerald-600/30"
-                : "text-red-600 bg-red-500/10 border-red-500/30"
+                : "text-red-700 bg-red-500/10 border-red-500/30"
             }`}
           >
             {message.text}

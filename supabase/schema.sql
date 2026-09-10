@@ -1145,7 +1145,7 @@ create policy "applications_open_insert" on public.applications
     and (
       position_id is null or exists (
         select 1 from public.recruitment_positions p
-        where p.id = position_id and p.recruitment_id = recruitment_id
+        where p.id = position_id and p.recruitment_id = applications.recruitment_id
       )
     )
   );
@@ -1281,7 +1281,7 @@ create policy "applications_open_insert" on public.applications
     and (
       position_id is null or exists (
         select 1 from public.recruitment_positions p
-        where p.id = position_id and p.recruitment_id = recruitment_id
+        where p.id = position_id and p.recruitment_id = applications.recruitment_id
       )
     )
     and (profile_id is null or profile_id = (select auth.uid()))
@@ -1933,3 +1933,19 @@ alter policy "mandates_public_read" on public.mandates
 
 alter policy "mandate_members_public_read" on public.mandate_members
   using ((select public.site_is_open()) or public.is_bureau_or_admin());
+
+-- ============================================================================
+-- v2.8.2 (2026-09-09) — applications position-campaign check was a tautology
+-- (unqualified recruitment_id inside the recruitment_positions p subquery
+-- bound to p → p.recruitment_id = p.recruitment_id = always true; an applicant
+-- could pair a position from another recruitment with an open campaign).
+-- Fixed above in both historical policy definitions. In prod the fix landed
+-- as ledger entries applications_position_campaign_fix +
+-- applications_policy_qualification_fix (first attempt fully-qualified the
+-- outer refs; final live form keeps unqualified outer refs and qualifies only
+-- the ambiguous inner comparison — REST-verified: valid pairing 201,
+-- mismatched pairing 42501). FK support indexes for invite_links (perf).
+-- ============================================================================
+
+create index if not exists invite_links_created_by_idx on public.invite_links (created_by);
+create index if not exists invite_links_used_by_idx on public.invite_links (used_by);

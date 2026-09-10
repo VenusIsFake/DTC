@@ -44,6 +44,7 @@ export default function GalleryClient({ initialItems }: { initialItems: GalleryI
           <button
             key={cat.key}
             onClick={() => setFilter(cat.key as CategoryFilter)}
+            aria-pressed={filter === cat.key}
             className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all ${
               filter === cat.key
                 ? "bg-[#755B18] text-[#F7F5F0] shadow-md shadow-[#755B18]/20 scale-105"
@@ -56,6 +57,7 @@ export default function GalleryClient({ initialItems }: { initialItems: GalleryI
       </div>
 
       {/* Media Grid */}
+      <h2 className="sr-only">Images de la galerie</h2>
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
         {filteredItems.map((item) => (
           <div

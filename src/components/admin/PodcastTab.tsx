@@ -6,7 +6,7 @@ import type { PodcastEpisodeRow } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
-import { youtubeWatchUrl, mediaUrlError } from "@/lib/format";
+import { youtubeWatchUrl, mediaUrlError, parseYouTubeId } from "@/lib/format";
 import { Field, PrimaryButton, GhostButton, Badge, inputClass } from "@/components/ui/form";
 
 interface EpisodeForm {
@@ -109,8 +109,13 @@ function EditorModal({
     setError(null);
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    if (!draft.youtube_id.trim() || !draft.guest.trim()) {
-      setError("Invité et ID YouTube sont requis.");
+    if (!draft.guest.trim()) {
+      setError("L'invité est requis.");
+      return;
+    }
+    const youtubeId = parseYouTubeId(draft.youtube_id);
+    if (!youtubeId) {
+      setError("ID YouTube invalide — collez l'identifiant (11 caractères) ou le lien de la vidéo.");
       return;
     }
     const posterError = mediaUrlError(draft.poster_image);
@@ -126,7 +131,7 @@ function EditorModal({
         guest: draft.guest.trim(),
         role: draft.role.trim(),
         release_date: draft.release_date.trim(),
-        youtube_id: draft.youtube_id.trim(),
+        youtube_id: youtubeId,
         duration: draft.duration.trim(),
         synopsis: draft.synopsis.trim(),
         takeaways: draft.takeaways
@@ -336,7 +341,7 @@ function EditorModal({
           </div>
 
           {error && (
-            <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
               {error}
             </p>
           )}
@@ -363,6 +368,7 @@ export default function PodcastTab() {
   const [editorOpen, setEditorOpen] = useState(false);
   const [editorForm, setEditorForm] = useState<EpisodeForm | null>(null);
   const [youtubeReady, setYoutubeReady] = useState<boolean | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Which optional integrations are live server-side (clear badge when not).
   useEffect(() => {
@@ -375,10 +381,15 @@ export default function PodcastTab() {
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data } = await supabase
+    const { data, error: loadError } = await supabase
       .from("podcast_episodes")
       .select("*")
       .order("episode_number", { ascending: false });
+    if (loadError) {
+      setError(loadError.message);
+      return;
+    }
+    setError(null);
     setEpisodes((data as PodcastEpisodeRow[] | null) ?? []);
   };
 
@@ -432,7 +443,11 @@ export default function PodcastTab() {
   const togglePublished = async (row: PodcastEpisodeRow) => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("podcast_episodes").update({ is_published: !row.is_published }).eq("id", row.id);
+    const { error: dbError } = await supabase
+      .from("podcast_episodes")
+      .update({ is_published: !row.is_published })
+      .eq("id", row.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -440,7 +455,8 @@ export default function PodcastTab() {
     if (!window.confirm(`Supprimer l'épisode ${row.episode_number} (${row.guest}) ?`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("podcast_episodes").delete().eq("id", row.id);
+    const { error: dbError } = await supabase.from("podcast_episodes").delete().eq("id", row.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -448,10 +464,10 @@ export default function PodcastTab() {
     <div className="space-y-4">
       {/* Import box */}
       <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <Youtube className="w-4 h-4 text-red-600" />
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+          <Youtube className="w-4 h-4 text-[#FF0000]" aria-hidden="true" />
           Importer depuis YouTube
-        </h3>
+        </h2>
         <p className="text-[11px] text-[#5C6672] leading-relaxed">
           Collez l&apos;URL de la vidéo : titre, miniature, durée et date sont récupérés automatiquement,
           vous n&apos;avez plus qu&apos;à ajuster et publier.
@@ -481,8 +497,13 @@ export default function PodcastTab() {
           </PrimaryButton>
         </form>
         {importError && (
-          <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
             {importError}
+          </p>
+        )}
+        {error && (
+          <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            {error}
           </p>
         )}
       </div>
@@ -520,7 +541,7 @@ export default function PodcastTab() {
                     setEditorForm(toForm(row));
                     setEditorOpen(true);
                   }}
-                  aria-label="Modifier"
+                  aria-label={`Modifier — épisode ${row.episode_number} (${row.guest})`}
                   className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
@@ -533,8 +554,8 @@ export default function PodcastTab() {
                 </button>
                 <button
                   onClick={() => remove(row)}
-                  aria-label="Supprimer"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
+                  aria-label={`Supprimer — épisode ${row.episode_number} (${row.guest})`}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>

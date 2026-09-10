@@ -121,7 +121,14 @@ const STATUS_LABELS: Record<string, string> = {
   archived: "Archivée",
 };
 
-export default function AnnouncementsFeed({ initialItems }: { initialItems: AnnouncementBoardItem[] }) {
+export default function AnnouncementsFeed({
+  initialItems,
+  onCountChange,
+}: {
+  initialItems: AnnouncementBoardItem[];
+  /** Hub pill badge: report the live list length whenever it changes. */
+  onCountChange?: (count: number) => void;
+}) {
   const { user, isBureau, isAdmin, openAuth } = useAuth();
   const [items, setItems] = useState<AnnouncementBoardItem[]>(initialItems);
   const [myRsvps, setMyRsvps] = useState<Set<string>>(new Set());
@@ -130,6 +137,10 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
   const [editing, setEditing] = useState<Announcement | null>(null);
   const [attendeesFor, setAttendeesFor] = useState<AnnouncementBoardItem | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    onCountChange?.(items.length);
+  }, [items, onCountChange]);
 
   // Public feed: board view (published only). Bureau: full table + RSVP counts.
   // The embed needs the explicit FK hint: announcements→profiles is reachable
@@ -334,7 +345,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
       )}
 
       {notice && (
-        <p role="status" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="status" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {notice}
         </p>
       )}
@@ -394,7 +405,7 @@ export default function AnnouncementsFeed({ initialItems }: { initialItems: Anno
                     <button
                       onClick={() => remove(item)}
                       aria-label="Supprimer"
-                      className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
+                      className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

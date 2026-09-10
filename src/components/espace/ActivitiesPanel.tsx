@@ -111,10 +111,10 @@ export default function ActivitiesPanel() {
       {isAdmin && stats && (
         <div className="glass-card rounded-lg border border-[#755B18]/40 p-4 sm:p-6 space-y-3">
           <div className="flex items-center justify-between gap-3">
-            <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+            <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
               <ShieldCheck className="w-4 h-4 text-[#755B18]" />
               Panneau administrateur
-            </h3>
+            </h2>
             <Link
               href="/admin"
               className="text-[11px] font-bold text-[#755B18] hover:text-[#755B18] transition-colors"
@@ -143,10 +143,10 @@ export default function ActivitiesPanel() {
 
       {/* My ideas */}
       <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <Lightbulb className="w-4 h-4 text-[#755B18]" />
           Mes idées ({activity.ideas.length})
-        </h3>
+        </h2>
         {activity.ideas.length === 0 && (
           <p className="text-xs text-[#5C6672]">
             Aucune idée proposée.{" "}
@@ -170,10 +170,10 @@ export default function ActivitiesPanel() {
 
       {/* My votes */}
       <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <ArrowBigUp className="w-4 h-4 text-[#755B18]" />
           Mes votes ({activity.votedIdeas.length})
-        </h3>
+        </h2>
         {activity.votedIdeas.length === 0 && (
           <p className="text-xs text-[#5C6672]">
             Aucun vote pour l&apos;instant.{" "}
@@ -194,10 +194,10 @@ export default function ActivitiesPanel() {
 
       {/* My RSVPs */}
       <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <CalendarDays className="w-4 h-4 text-[#755B18]" />
           Mes participations ({activity.rsvps.length})
-        </h3>
+        </h2>
         {activity.rsvps.length === 0 && (
           <p className="text-xs text-[#5C6672]">
             Aucune participation confirmée.{" "}

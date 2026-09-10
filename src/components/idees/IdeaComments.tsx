@@ -22,11 +22,17 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
       setComments([]);
       return;
     }
-    const { data } = await supabase
+    const { data, error: loadError } = await supabase
       .from("comment_board")
       .select("*")
       .eq("idea_id", ideaId)
       .order("created_at", { ascending: true });
+    // A failed load must not masquerade as "no comments yet" — keep null so
+    // the UI shows the error instead of an inviting empty thread.
+    if (loadError) {
+      setError("Commentaires indisponibles — réessayez d'ouvrir le fil.");
+      return;
+    }
     setComments((data as CommentBoardItem[] | null) ?? []);
   };
 
@@ -96,7 +102,7 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
                 <button
                   onClick={() => remove(comment)}
                   aria-label="Supprimer le commentaire"
-                  className="ml-auto text-[#5F6774] hover:text-red-600 transition-colors"
+                  className="ml-auto text-[#5F6774] hover:text-red-700 transition-colors"
                 >
                   <Trash2 className="w-3 h-3" />
                 </button>
@@ -118,7 +124,7 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
           onChange={(e) => setDraft(e.target.value)}
           maxLength={2000}
           placeholder={user ? "Ajouter un commentaire constructif…" : "Se connecter pour commenter…"}
-          className="flex-1 px-3 py-2 rounded-full bg-white border border-[#DCD7CB]/50 text-xs text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18]/60"
+          className="flex-1 px-3 py-2 rounded-full bg-white border border-[#DCD7CB] text-xs text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18] focus:ring-2 focus:ring-[#755B18]/60"
         />
         <button
           type="submit"
@@ -129,7 +135,11 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
           {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
         </button>
       </form>
-      {error && <p className="text-[11px] text-red-600">{error}</p>}
+      {error && (
+        <p role="alert" className="text-[11px] text-red-700">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

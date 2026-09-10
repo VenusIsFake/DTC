@@ -17,7 +17,7 @@ function AccessDenied() {
   return (
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 max-w-xl mx-auto">
       <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 sm:p-12 text-center space-y-4">
-        <div className="inline-flex p-3 rounded-lg bg-red-500/15 text-red-600">
+        <div className="inline-flex p-3 rounded-lg bg-red-500/15 text-red-700">
           <ShieldCheck className="w-6 h-6" />
         </div>
         <h1 className="text-xl sm:text-2xl font-heading font-semibold text-[#16233A]">Accès refusé</h1>

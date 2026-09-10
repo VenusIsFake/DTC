@@ -25,6 +25,10 @@ export default function AnnoncesIdeesHub({
   const [activeTab, setActiveTab] = useState<"annonces" | "idees">(
     tabParam === "idees" ? "idees" : defaultTab
   );
+  // Live counts: the feeds own their lists after mount (create/vote/refresh),
+  // so they report the length back and the pills never go stale.
+  const [announcementsCount, setAnnouncementsCount] = useState(initialAnnouncements.length);
+  const [ideasCount, setIdeasCount] = useState(initialIdeas.length);
 
   useEffect(() => {
     // Keep the tab and the URL saying the same thing: an explicit ?tab=
@@ -78,6 +82,7 @@ export default function AnnoncesIdeesHub({
           <button
             type="button"
             onClick={() => handleTabChange("annonces")}
+            aria-pressed={activeTab === "annonces"}
             className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "annonces"
                 ? "bg-white text-[#16233A] font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-[#DCD7CB]/70 scale-[1.02] z-10"
@@ -94,7 +99,7 @@ export default function AnnoncesIdeesHub({
             <span className="tracking-tight whitespace-nowrap">
               Annonces &amp; Ateliers
             </span>
-            {initialAnnouncements.length > 0 && (
+            {announcementsCount > 0 && (
               <span
                 className={`transition-colors duration-300 px-2 py-0.5 rounded-full text-[10px] font-bold ${
                   activeTab === "annonces"
@@ -102,7 +107,7 @@ export default function AnnoncesIdeesHub({
                     : "bg-[#DCD7CB]/60 text-[#5C6672]"
                 }`}
               >
-                {initialAnnouncements.length}
+                {announcementsCount}
               </span>
             )}
           </button>
@@ -111,6 +116,7 @@ export default function AnnoncesIdeesHub({
           <button
             type="button"
             onClick={() => handleTabChange("idees")}
+            aria-pressed={activeTab === "idees"}
             className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "idees"
                 ? "bg-white text-[#16233A] font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-[#DCD7CB]/70 scale-[1.02] z-10"
@@ -127,7 +133,7 @@ export default function AnnoncesIdeesHub({
             <span className="tracking-tight whitespace-nowrap">
               Boîte à Idées
             </span>
-            {initialIdeas.length > 0 && (
+            {ideasCount > 0 && (
               <span
                 className={`transition-colors duration-300 px-2 py-0.5 rounded-full text-[10px] font-bold ${
                   activeTab === "idees"
@@ -135,7 +141,7 @@ export default function AnnoncesIdeesHub({
                     : "bg-[#DCD7CB]/60 text-[#5C6672]"
                 }`}
               >
-                {initialIdeas.length}
+                {ideasCount}
               </span>
             )}
           </button>
@@ -147,7 +153,7 @@ export default function AnnoncesIdeesHub({
         <div className="pt-2">
           {activeTab === "annonces" ? (
             <div className="space-y-6">
-              <AnnouncementsFeed initialItems={initialAnnouncements} />
+              <AnnouncementsFeed initialItems={initialAnnouncements} onCountChange={setAnnouncementsCount} />
               <p className="flex items-center justify-center gap-1.5 text-[11px] text-[#5F6774] pt-2">
                 <CalendarDays className="w-3.5 h-3.5" />
                 <span>
@@ -156,7 +162,7 @@ export default function AnnoncesIdeesHub({
               </p>
             </div>
           ) : (
-            <IdeasBoard initialItems={initialIdeas} />
+            <IdeasBoard initialItems={initialIdeas} onCountChange={setIdeasCount} />
           )}
         </div>
       </Reveal>

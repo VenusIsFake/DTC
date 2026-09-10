@@ -199,7 +199,7 @@ export default function ProfileEditor({
           className={`text-xs rounded-lg px-3 py-2 border ${
             message.kind === "ok"
               ? "text-emerald-700 bg-emerald-600/10 border-emerald-600/30"
-              : "text-red-600 bg-red-500/10 border-red-500/30"
+              : "text-red-700 bg-red-500/10 border-red-500/30"
           }`}
         >
           {message.text}

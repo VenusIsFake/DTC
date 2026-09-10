@@ -38,7 +38,7 @@ function translateError(message: string): string {
 }
 
 const inputClass =
-  "w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DCD7CB]/50 text-sm text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18]/60 focus:ring-2 focus:ring-[#755B18]/20";
+  "w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DCD7CB] text-sm text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18] focus:ring-2 focus:ring-[#755B18]/60";
 
 export default function AuthModal({
   isOpen,
@@ -366,7 +366,7 @@ export default function AuthModal({
             )}
 
             {error && (
-              <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+              <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
                 {error}
               </p>
             )}

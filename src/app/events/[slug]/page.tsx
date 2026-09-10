@@ -46,6 +46,9 @@ export default async function EventLandingPage({ params }: Params) {
     notFound();
   }
   const { page, items } = result;
+  // With a hero poster the bottom band is dark navy (opaque gradient) — the
+  // ink palette would fall to ~1.2:1 there, so switch to the light palette.
+  const hasHero = Boolean(page.hero_poster);
 
   return (
     <div className="pb-10 sm:pb-20">
@@ -67,19 +70,35 @@ export default async function EventLandingPage({ params }: Params) {
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-8 sm:pb-14 space-y-3 pt-16">
           <Link
             href="/events"
-            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-[#5C6672] hover:text-[#755B18] transition-colors"
+            className={`inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold transition-colors ${
+              hasHero ? "text-[#C9CFD9] hover:text-[#D4AF37]" : "text-[#5C6672] hover:text-[#755B18]"
+            }`}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Tous les événements</span>
           </Link>
-          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
+          <p
+            className={`text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase ${
+              hasHero ? "text-[#D4AF37]" : "text-[#755B18]"
+            }`}
+          >
             Événement DTC
           </p>
-          <h1 className="font-heading font-semibold text-3xl sm:text-6xl text-[#16233A] leading-tight tracking-tight">
+          <h1
+            className={`font-heading font-semibold text-3xl sm:text-6xl leading-tight tracking-tight ${
+              hasHero ? "text-[#F7F5F0]" : "text-[#16233A]"
+            }`}
+          >
             {page.title}
           </h1>
           {page.tagline && (
-            <p className="text-sm sm:text-xl text-[#3D4A58] max-w-3xl leading-relaxed">{page.tagline}</p>
+            <p
+              className={`text-sm sm:text-xl max-w-3xl leading-relaxed ${
+                hasHero ? "text-[#C9CFD9]" : "text-[#3D4A58]"
+              }`}
+            >
+              {page.tagline}
+            </p>
           )}
         </div>
       </header>

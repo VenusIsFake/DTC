@@ -65,9 +65,9 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
               <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] sm:text-xs font-bold bg-[#755B18]/15 text-[#755B18] border border-[#755B18]/30">
                 <span>Épisode {selectedEp.episodeNumber}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-[#16233A] leading-tight tracking-tight">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-[#16233A] leading-tight tracking-tight">
                 {selectedEp.guest}
-              </h3>
+              </h2>
               <p className="text-xs sm:text-sm font-semibold text-[#755B18] leading-snug">
                 {selectedEp.role}
               </p>
@@ -79,9 +79,9 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
 
             {/* Key Clinical & Academic Takeaways */}
             <div className="space-y-1.5 sm:space-y-2 pt-2 border-t border-[#DCD7CB]/30">
-              <h4 className="text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider text-[#3D4A58]">
+              <h3 className="text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider text-[#3D4A58]">
                 Points Clés & Enseignements
-              </h4>
+              </h3>
               <ul className="space-y-1.5">
                 {selectedEp.takeaways.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#3D4A58] leading-relaxed">
@@ -109,9 +109,9 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
 
       {/* Episode Selector Grid */}
       <div className="space-y-3 sm:space-y-4">
-        <h3 className="text-base sm:text-lg font-heading font-bold text-[#16233A] flex items-center gap-2">
+        <h2 className="text-base sm:text-lg font-heading font-bold text-[#16233A] flex items-center gap-2">
           <span>Tous les Épisodes Let&apos;s Talk</span>
-        </h3>
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
           {episodes.map((ep) => {
@@ -150,9 +150,9 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                   <span className="text-[10px] sm:text-[11px] font-bold text-[#755B18] block">
                     ÉPISODE {ep.episodeNumber}
                   </span>
-                  <h4 className="text-xs sm:text-sm font-semibold text-[#16233A] truncate">
+                  <h3 className="text-xs sm:text-sm font-semibold text-[#16233A] truncate">
                     {ep.guest}
-                  </h4>
+                  </h3>
                   <p className="text-[10px] sm:text-xs text-[#5C6672] truncate">{ep.releaseDate}</p>
                 </div>
 

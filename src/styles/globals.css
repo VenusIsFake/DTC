@@ -185,7 +185,8 @@
   .animate-fadeIn,
   .animate-fade-in-up,
   .animate-modal-in,
-  .animate-drop-in {
+  .animate-drop-in,
+  .animate-pulse {
     animation: none;
     -webkit-animation: none;
   }

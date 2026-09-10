@@ -396,7 +396,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       )}
 
       {passwordResult && (
-        <div className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-2">
+        <div role="status" className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-2">
           <p className="text-xs font-bold text-emerald-800">
             Mot de passe temporaire pour {passwordResult.email} — affiché une seule fois :
           </p>
@@ -422,7 +422,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       )}
 
       {createdUrl && (
-        <div className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-2">
+        <div role="status" className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-2">
           <p className="text-xs font-bold text-emerald-800">
             Lien d&apos;invitation créé — à usage unique, envoi direct (WhatsApp, mail…) :
           </p>
@@ -449,7 +449,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       )}
 
       {error && (
-        <p className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2" role="alert">
+        <p className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2" role="alert">
           {error}
         </p>
       )}
@@ -505,7 +505,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                   <button
                     onClick={() => approveGuest(u, false)}
                     aria-label={`Refuser et supprimer le compte de ${u.full_name || u.email}`}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold border border-red-500/40 text-red-600 hover:bg-red-500/10 transition-all active:scale-95"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold border border-red-500/40 text-red-700 hover:bg-red-500/10 transition-all active:scale-95"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     <span>Refuser</span>
@@ -534,7 +534,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                     className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
                       u.is_banned
                         ? "text-emerald-700 hover:bg-emerald-600/10"
-                        : "text-[#5C6672] hover:text-red-600 hover:bg-red-500/10"
+                        : "text-[#5C6672] hover:text-red-700 hover:bg-red-500/10"
                     }`}
                   >
                     {u.is_banned ? <ShieldCheck className="w-4 h-4" /> : <ShieldOff className="w-4 h-4" />}
@@ -553,7 +553,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                     aria-label={`Supprimer le compte de ${u.full_name || u.email}`}
                     title="Supprimer le compte"
                     disabled={serviceReady === false}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors disabled:opacity-40"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -572,7 +572,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       <section className="glass-card rounded-xl border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
         <div className="flex items-center gap-2">
           <Link2 className="w-4 h-4 text-[#755B18]" />
-          <h3 className="text-sm font-heading font-bold text-[#16233A]">Liens d&apos;invitation</h3>
+          <h2 className="text-sm font-heading font-bold text-[#16233A]">Liens d&apos;invitation</h2>
         </div>
         <p className="text-[11px] text-[#5F6774] leading-relaxed">
           Un lien = une personne : il crée son compte depuis le lien (même site fermé) et reçoit le
@@ -627,7 +627,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                         disabled={revokingLinkId === link.id}
                         aria-label="Révoquer ce lien"
                         title="Révoquer (plus utilisable)"
-                        className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors disabled:opacity-40"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
                       >
                         {revokingLinkId === link.id ? (
                           <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -660,7 +660,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
           <div className="absolute inset-0" onClick={() => setInviteOpen(false)} aria-hidden="true" />
           <div className="relative z-10 w-full max-w-md max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h4 className="text-base font-heading font-bold text-[#16233A]">Inviter un membre</h4>
+              <h2 className="text-base font-heading font-bold text-[#16233A]">Inviter un membre</h2>
               <button
                 onClick={() => setInviteOpen(false)}
                 aria-label="Fermer"
@@ -708,7 +708,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                 membre, il le changera à sa première connexion depuis « Mon espace ».
               </p>
               {inviteError && (
-                <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+                <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
                   {inviteError}
                 </p>
               )}
@@ -736,7 +736,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
           <div className="absolute inset-0" onClick={() => setLinkModalOpen(false)} aria-hidden="true" />
           <div className="relative z-10 w-full max-w-md max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h4 className="text-base font-heading font-bold text-[#16233A]">Lien d&apos;invitation</h4>
+              <h2 className="text-base font-heading font-bold text-[#16233A]">Lien d&apos;invitation</h2>
               <button
                 onClick={() => setLinkModalOpen(false)}
                 aria-label="Fermer"
@@ -767,7 +767,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                 personne accédera au site dès son inscription.
               </p>
               {linkError && (
-                <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+                <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
                   {linkError}
                 </p>
               )}

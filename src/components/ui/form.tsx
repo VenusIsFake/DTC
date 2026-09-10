@@ -5,7 +5,7 @@ import React from "react";
 /** Shared form styling bits for club-platform modals & admin console. */
 
 export const inputClass =
-  "w-full px-3 py-2 rounded-lg bg-white border border-[#DCD7CB]/50 text-sm text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18]/60 focus:ring-2 focus:ring-[#755B18]/20 disabled:opacity-50";
+  "w-full px-3 py-2 rounded-lg bg-white border border-[#DCD7CB] text-sm text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18] focus:ring-2 focus:ring-[#755B18]/60 disabled:opacity-50";
 
 export function Field({
   label,

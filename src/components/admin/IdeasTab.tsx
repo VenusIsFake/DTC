@@ -16,11 +16,20 @@ const STATUS_LABELS: Record<IdeaStatus, { label: string; tone: "blue" | "gold" |
 
 export default function IdeasTab() {
   const [items, setItems] = useState<IdeaBoardItem[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data } = await supabase.from("idea_board").select("*").order("created_at", { ascending: false });
+    const { data, error: loadError } = await supabase
+      .from("idea_board")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (loadError) {
+      setError(loadError.message);
+      return;
+    }
+    setError(null);
     setItems((data as IdeaBoardItem[] | null) ?? []);
   };
 
@@ -31,7 +40,8 @@ export default function IdeasTab() {
   const setStatus = async (item: IdeaBoardItem, status: IdeaStatus) => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("ideas").update({ status }).eq("id", item.id);
+    const { error: dbError } = await supabase.from("ideas").update({ status }).eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -39,20 +49,32 @@ export default function IdeasTab() {
     if (!window.confirm(`Supprimer l'idée « ${item.title} » et tous ses votes/commentaires ?`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("ideas").delete().eq("id", item.id);
+    const { error: dbError } = await supabase.from("ideas").delete().eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
   if (items === null) {
     return (
       <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
+        {error ? (
+          <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            Chargement impossible : {error}
+          </p>
+        ) : (
+          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
+        )}
       </div>
     );
   }
 
   return (
     <div className="space-y-2">
+      {error && (
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
       <p className="text-xs text-[#5C6672]">
         {items.length} idée{items.length > 1 ? "s" : ""} — changement de statut visible publiquement (badges).
       </p>
@@ -87,8 +109,8 @@ export default function IdeasTab() {
             </select>
             <button
               onClick={() => remove(item)}
-              aria-label="Supprimer"
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
+              aria-label={`Supprimer — ${item.title}`}
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>

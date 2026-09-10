@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { STUDY_YEARS, type StudyYear } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -39,6 +39,10 @@ export default function CandidatureForm({
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
+  const successRef = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (done) successRef.current?.focus();
+  }, [done]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -130,11 +134,11 @@ export default function CandidatureForm({
 
   if (done) {
     return (
-      <div className="glass-card rounded-xl border border-[#755B18]/30 p-8 sm:p-10 text-center space-y-3.5">
+      <div className="glass-card rounded-xl border border-[#755B18]/30 p-8 sm:p-10 text-center space-y-3.5" role="status">
         <div className="inline-flex p-3 rounded-full bg-emerald-500/15 text-emerald-600">
           <CheckCircle2 className="w-7 h-7" />
         </div>
-        <h2 className="text-lg sm:text-xl font-heading font-bold text-[#16233A]">
+        <h2 ref={successRef} tabIndex={-1} className="text-lg sm:text-xl font-heading font-bold text-[#16233A] focus:outline-none">
           Candidature envoyée
         </h2>
         <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed max-w-md mx-auto">
@@ -302,7 +306,7 @@ export default function CandidatureForm({
       {error && (
         <p
           role="alert"
-          className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
+          className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
         >
           {error}
         </p>

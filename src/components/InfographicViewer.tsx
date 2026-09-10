@@ -126,7 +126,7 @@ export default function InfographicViewer({
         >
           <Image
             src={imageUrl}
-            alt={`${label} — Bureau Exécutif Dentalk Club FMDC`}
+            alt={`Organigramme du bureau exécutif ${label} — pôles et responsables (composition détaillée ci-dessous)`}
             fill
             sizes="(max-width: 1024px) 100vw, 768px"
             className="object-contain group-hover:scale-[1.02] transition-transform duration-300"
@@ -194,7 +194,27 @@ export default function InfographicViewer({
 
           <div
             ref={stageRef}
-            className={`relative z-10 w-full max-w-5xl max-h-[88dvh] aspect-square overflow-hidden flex items-center justify-center p-2 ${
+            tabIndex={0}
+            role="application"
+            aria-label={
+              zoomLevel > 1
+                ? "Image agrandie — flèches du clavier pour déplacer, ou faire glisser à la souris"
+                : "Image en plein écran — boutons + et − pour zoomer"
+            }
+            onKeyDown={(e) => {
+              // Keyboard alternative to drag-panning (SC 2.5.7).
+              if (zoomLevel <= 1) return;
+              const step = 40;
+              const next = clampPosition(
+                position.x + (e.key === "ArrowRight" ? -step : e.key === "ArrowLeft" ? step : 0),
+                position.y + (e.key === "ArrowDown" ? -step : e.key === "ArrowUp" ? step : 0)
+              );
+              if (next.x !== position.x || next.y !== position.y) {
+                e.preventDefault();
+                setPosition(next);
+              }
+            }}
+            className={`relative z-10 w-full max-w-5xl max-h-[88dvh] aspect-square overflow-hidden flex items-center justify-center p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18] ${
               zoomLevel > 1 ? (isDragging ? "cursor-grabbing" : "cursor-grab") : "cursor-default"
             }`}
             style={{ touchAction: zoomLevel > 1 ? "none" : "auto" }}
@@ -216,7 +236,7 @@ export default function InfographicViewer({
             >
               <Image
                 src={imageUrl}
-                alt={`${label} — Bureau Exécutif plein écran`}
+                alt={`${label} — Organigramme du bureau exécutif, vue plein écran`}
                 fill
                 sizes="100vw"
                 className="object-contain pointer-events-none"

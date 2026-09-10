@@ -43,9 +43,9 @@ export default async function PodcastPage() {
               <Camera className="w-3.5 h-3.5" />
               <span>Coulisses & Production Studio</span>
             </div>
-            <h3 className="text-lg sm:text-2xl font-heading font-bold text-[#16233A]">
+            <h2 className="text-lg sm:text-2xl font-heading font-bold text-[#16233A]">
               Dans les coulisses de l&apos;enregistrement
-            </h3>
+            </h2>
           </div>
         </div>
 

@@ -44,10 +44,10 @@ function VisibilityCard() {
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <CalendarDays className="w-4 h-4 text-[#755B18]" />
           Visibilité de la section « TEDx & Débats »
-        </h3>
+        </h2>
         <p className="text-[11px] text-[#5C6672] mt-0.5">
           Masquer retire le lien de navigation, redirige /events vers l&apos;accueil et l&apos;exclut du
           sitemap — la section disparaît réellement.
@@ -121,7 +121,11 @@ function TedxCard() {
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data } = await supabase.from("tedx_talks").select("*").order("extract_number");
+    const { data, error: loadError } = await supabase.from("tedx_talks").select("*").order("extract_number");
+    if (loadError) {
+      setError(loadError.message);
+      return;
+    }
     setTalks((data as TedxTalkRow[] | null) ?? []);
   };
 
@@ -201,7 +205,7 @@ function TedxCard() {
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h3 className="text-sm font-heading font-bold text-[#16233A]">TEDxFMDC — talks ({talks?.length ?? "…"})</h3>
+        <h2 className="text-sm font-heading font-bold text-[#16233A]">TEDxFMDC — talks ({talks?.length ?? "…"})</h2>
         <button
           onClick={() => {
             setForm({ ...EMPTY_TEDX, extract_number: (talks?.at(-1)?.extract_number ?? 0) + 1 });
@@ -216,7 +220,7 @@ function TedxCard() {
       </div>
 
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -253,7 +257,7 @@ function TedxCard() {
               <button
                 onClick={() => remove(row)}
                 aria-label="Supprimer"
-                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600"
+                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700"
               >
                 <Trash2 className="w-3 h-3" />
               </button>
@@ -273,9 +277,9 @@ function TedxCard() {
           <div className="absolute inset-0" onClick={() => setOpen(false)} aria-hidden="true" />
           <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h4 className="text-base font-heading font-bold text-[#16233A]">
+              <h2 className="text-base font-heading font-bold text-[#16233A]">
                 {form.id ? "Modifier le talk" : "Nouveau talk"}
-              </h4>
+              </h2>
               <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]">
                 <X className="w-4 h-4" />
               </button>
@@ -348,7 +352,7 @@ function TedxCard() {
                 <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#755B18]" />
                 <span>Publié</span>
               </label>
-              {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
+              {error && <p role="alert" className="text-xs text-red-700">{error}</p>}
               <div className="flex justify-end gap-2">
                 <GhostButton type="button" onClick={() => setOpen(false)}>Annuler</GhostButton>
                 <PrimaryButton type="submit" disabled={saving}>Enregistrer</PrimaryButton>
@@ -404,10 +408,14 @@ function EventPagesCard() {
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const [{ data: pageData }, { data: itemData }] = await Promise.all([
+    const [{ data: pageData, error: pageError }, { data: itemData }] = await Promise.all([
       supabase.from("event_pages").select("*").order("created_at", { ascending: false }),
       supabase.from("event_page_items").select("*").order("sort"),
     ]);
+    if (pageError) {
+      setError(pageError.message);
+      return;
+    }
     const pageRows = (pageData ?? []) as EventPage[];
     const itemRows = (itemData ?? []) as EventPageItem[];
     const grouped: Record<string, EventPageItem[]> = {};
@@ -452,7 +460,7 @@ function EventPagesCard() {
     setError(null);
     try {
       const url = await uploadClubImage(file, "events");
-      setEditingItem({ ...editingItem, poster_url: url });
+      setEditingItem((prev) => (prev ? { ...prev, poster_url: url } : prev));
     } catch (err) {
       setError(clubUploadErrorMessage(err));
     } finally {
@@ -550,7 +558,7 @@ function EventPagesCard() {
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
         <div>
-          <h3 className="text-sm font-heading font-bold text-[#16233A]">Pages d&apos;événement ({pages?.length ?? "…"})</h3>
+          <h2 className="text-sm font-heading font-bold text-[#16233A]">Pages d&apos;événement ({pages?.length ?? "…"})</h2>
           <p className="text-[11px] text-[#5C6672]">Pages vitrines dynamiques servies sur /events/[slug].</p>
         </div>
         <button
@@ -563,7 +571,7 @@ function EventPagesCard() {
       </div>
 
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -599,7 +607,7 @@ function EventPagesCard() {
                   <button onClick={() => openEditor(page)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
                     <Pencil className="w-3 h-3" />
                   </button>
-                  <button onClick={() => remove(page)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
+                  <button onClick={() => remove(page)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
                     <Trash2 className="w-3 h-3" />
                   </button>
                 </div>
@@ -631,7 +639,7 @@ function EventPagesCard() {
                         >
                           <Pencil className="w-3 h-3" />
                         </button>
-                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#5F6774] hover:text-red-600">
+                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#5F6774] hover:text-red-700">
                           <Trash2 className="w-3 h-3" />
                         </button>
                       </div>
@@ -758,9 +766,9 @@ function EventPagesCard() {
           <div className="absolute inset-0" onClick={() => setOpen(false)} aria-hidden="true" />
           <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h4 className="text-base font-heading font-bold text-[#16233A]">
+              <h2 className="text-base font-heading font-bold text-[#16233A]">
                 {editing ? "Modifier la page" : "Nouvelle page d'événement"}
-              </h4>
+              </h2>
               <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]">
                 <X className="w-4 h-4" />
               </button>
@@ -807,7 +815,7 @@ function EventPagesCard() {
               <Field label="Description" htmlFor="epage-desc">
                 <textarea id="epage-desc" rows={4} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputClass} resize-y`} />
               </Field>
-              {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
+              {error && <p role="alert" className="text-xs text-red-700">{error}</p>}
               <div className="flex justify-end gap-2">
                 <GhostButton type="button" onClick={() => setOpen(false)}>Annuler</GhostButton>
                 <PrimaryButton type="submit" disabled={saving}>Enregistrer</PrimaryButton>

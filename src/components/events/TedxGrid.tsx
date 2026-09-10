@@ -39,11 +39,12 @@ export default function TedxGrid({ talks }: { talks: TedxTalk[] }) {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-3.5 sm:p-6">
-            <div className="text-[#16233A] space-y-0.5 sm:space-y-1">
-              <span className="text-[10px] sm:text-xs font-semibold text-[#755B18] uppercase tracking-[0.14em]">
+            {/* Overlay sits on near-black at the bottom — light palette only (~1.2:1 with ink). */}
+            <div className="space-y-0.5 sm:space-y-1">
+              <span className="text-[10px] sm:text-xs font-semibold text-[#D4AF37] uppercase tracking-[0.14em]">
                 Scène Officielle TEDxFMDC
               </span>
-              <h3 className="text-sm sm:text-xl font-heading font-bold">
+              <h3 className="text-sm sm:text-xl font-heading font-bold text-[#F7F5F0]">
                 {talks.length} Orateurs Étudiants · Extraits Vidéo Officiels
               </h3>
             </div>

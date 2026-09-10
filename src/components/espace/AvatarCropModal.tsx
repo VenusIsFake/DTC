@@ -324,7 +324,19 @@ export default function AvatarCropModal({
         {/* Interactive Cropper Area */}
         <div className="flex flex-col items-center justify-center">
           <div
-            className={`relative rounded-lg overflow-hidden bg-[#070D1E] border border-[#DCD7CB]/60 select-none ${
+            tabIndex={0}
+            role="application"
+            aria-label="Zone de recadrage — flèches du clavier pour déplacer l'image, molette ou curseur pour zoomer"
+            onKeyDown={(e) => {
+              // Keyboard alternative to drag-panning (SC 2.5.7).
+              const step = 10;
+              const dx = e.key === "ArrowRight" ? step : e.key === "ArrowLeft" ? -step : 0;
+              const dy = e.key === "ArrowDown" ? step : e.key === "ArrowUp" ? -step : 0;
+              if (dx === 0 && dy === 0) return;
+              e.preventDefault();
+              setPan((prev) => getClampedPan({ x: prev.x + dx, y: prev.y + dy }, zoom));
+            }}
+            className={`relative rounded-lg overflow-hidden bg-[#070D1E] border border-[#DCD7CB]/60 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18] ${
               isDragging ? "cursor-grabbing" : "cursor-grab"
             } touch-none`}
             style={{ width: `${VIEWPORT_SIZE}px`, height: `${VIEWPORT_SIZE}px` }}
@@ -480,7 +492,7 @@ export default function AvatarCropModal({
         {error && (
           <p
             role="alert"
-            className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
+            className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
           >
             {error}
           </p>

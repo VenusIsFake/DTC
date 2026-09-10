@@ -194,7 +194,7 @@ export default function MembershipFlow({
             />
           </Field>
           {error && (
-            <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
               {error}
             </p>
           )}
@@ -309,14 +309,14 @@ export default function MembershipFlow({
             </GhostButton>
             <button
               onClick={cancelRequest}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-semibold text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-semibold text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
             >
               <XCircle className="w-3.5 h-3.5" />
               <span>Retirer ma demande</span>
             </button>
           </div>
           {error && (
-            <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
               {error}
             </p>
           )}

@@ -72,7 +72,7 @@ function TextCard({
 
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h3 className="text-sm font-heading font-bold text-[#16233A]">{title}</h3>
+      <h2 className="text-sm font-heading font-bold text-[#16233A]">{title}</h2>
       {!loaded ? (
         <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
       ) : (
@@ -99,7 +99,7 @@ function TextCard({
             )}
           </Field>
           {error && (
-            <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
               {error}
             </p>
           )}
@@ -146,7 +146,7 @@ function ToggleCard({
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-2">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="min-w-0">
-          <h3 className="text-sm font-heading font-bold text-[#16233A]">{on ? titleOn : titleOff}</h3>
+          <h2 className="text-sm font-heading font-bold text-[#16233A]">{on ? titleOn : titleOff}</h2>
           <p className="text-[11px] text-[#5C6672] leading-relaxed mt-0.5">{description}</p>
         </div>
         {!loaded ? (
@@ -171,7 +171,7 @@ function ToggleCard({
         )}
       </div>
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -225,7 +225,7 @@ function WhatsAppCard() {
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center gap-1.5">
         <MessageCircle className="w-4 h-4 text-[#25D366]" />
-        <h3 className="text-sm font-heading font-bold text-[#16233A]">Bouton WhatsApp</h3>
+        <h2 className="text-sm font-heading font-bold text-[#16233A]">Bouton WhatsApp</h2>
       </div>
       <p className="text-[11px] text-[#5C6672] leading-relaxed">
         Affiché sur la page de paiement des candidats : un appui ouvre WhatsApp avec un
@@ -276,7 +276,7 @@ function WhatsAppCard() {
         </p>
       )}
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -371,7 +371,7 @@ export default function MembershipTab() {
       />
 
       <div className="glass-card rounded-lg border border-[#755B18]/30 bg-[#755B18]/5 p-4 sm:p-5 space-y-2">
-        <h3 className="text-sm font-heading font-bold text-[#16233A]">Comment ça marche côté bureau</h3>
+        <h2 className="text-sm font-heading font-bold text-[#16233A]">Comment ça marche côté bureau</h2>
         <ol className="text-[11px] text-[#3D4A58] leading-relaxed list-decimal list-inside space-y-1">
           <li>La personne crée son compte (invité) et remplit son dossier depuis « Mon espace ».</li>
           <li>

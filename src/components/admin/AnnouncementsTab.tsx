@@ -19,6 +19,7 @@ export default function AnnouncementsTab() {
   const [composerOpen, setComposerOpen] = useState(false);
   const [editing, setEditing] = useState<Announcement | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [emailing, setEmailing] = useState<string | null>(null);
   const [resendReady, setResendReady] = useState<boolean | null>(null);
 
@@ -33,11 +34,16 @@ export default function AnnouncementsTab() {
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data } = await supabase
+    const { data, error: loadError } = await supabase
       .from("announcements")
       .select("*")
       .order("is_pinned", { ascending: false })
       .order("created_at", { ascending: false });
+    if (loadError) {
+      setError(loadError.message);
+      return;
+    }
+    setError(null);
     setItems((data as Announcement[] | null) ?? []);
   };
 
@@ -82,14 +88,19 @@ export default function AnnouncementsTab() {
   const togglePin = async (item: Announcement) => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("announcements").update({ is_pinned: !item.is_pinned }).eq("id", item.id);
+    const { error: dbError } = await supabase
+      .from("announcements")
+      .update({ is_pinned: !item.is_pinned })
+      .eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
   const setStatus = async (item: Announcement, status: Announcement["status"]) => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("announcements").update({ status }).eq("id", item.id);
+    const { error: dbError } = await supabase.from("announcements").update({ status }).eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -97,7 +108,8 @@ export default function AnnouncementsTab() {
     if (!window.confirm(`Supprimer « ${item.title} » ?`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("announcements").delete().eq("id", item.id);
+    const { error: dbError } = await supabase.from("announcements").delete().eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -130,6 +142,12 @@ export default function AnnouncementsTab() {
         </div>
       )}
 
+      {error && (
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
+
       {notice && (
         <p role="status" className="text-xs text-[#3D4A58] bg-[#EFECE4]/80 border border-[#DCD7CB]/40 rounded-lg px-3 py-2">
           {notice}
@@ -158,7 +176,7 @@ export default function AnnouncementsTab() {
                 <button
                   onClick={() => broadcast(item)}
                   disabled={item.status !== "published" || emailing === item.id}
-                  aria-label="Notifier par email"
+                  aria-label={`Notifier par email — ${item.title}`}
                   title={
                     item.status === "published"
                       ? "Envoyer par email à tous les membres"
@@ -174,7 +192,7 @@ export default function AnnouncementsTab() {
                 </button>
                 <button
                   onClick={() => togglePin(item)}
-                  aria-label={item.is_pinned ? "Désépingler" : "Épingler"}
+                  aria-label={`${item.is_pinned ? "Désépingler" : "Épingler"} — ${item.title}`}
                   className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                 >
                   {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
@@ -184,15 +202,15 @@ export default function AnnouncementsTab() {
                     setEditing(item);
                     setComposerOpen(true);
                   }}
-                  aria-label="Modifier"
+                  aria-label={`Modifier — ${item.title}`}
                   className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => remove(item)}
-                  aria-label="Supprimer"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
+                  aria-label={`Supprimer — ${item.title}`}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>

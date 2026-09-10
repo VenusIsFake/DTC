@@ -22,7 +22,14 @@ const WEEK_MS = 7 * 24 * 3600 * 1000;
 
 type SortMode = "top" | "new";
 
-export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardItem[] }) {
+export default function IdeasBoard({
+  initialItems,
+  onCountChange,
+}: {
+  initialItems: IdeaBoardItem[];
+  /** Hub pill badge: report the live list length whenever it changes. */
+  onCountChange?: (count: number) => void;
+}) {
   const { user, isBureau, openAuth } = useAuth();
   const [items, setItems] = useState<IdeaBoardItem[]>(initialItems);
   const [myVotes, setMyVotes] = useState<Set<string>>(new Set());
@@ -32,6 +39,10 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
   const [expanded, setExpanded] = useState<string | null>(null);
   const [pitchOpen, setPitchOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    onCountChange?.(items.length);
+  }, [items, onCountChange]);
 
   const refresh = useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
@@ -212,7 +223,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
       </div>
 
       {notice && (
-        <p role="status" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="status" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {notice}
         </p>
       )}
@@ -300,7 +311,7 @@ export default function IdeasBoard({ initialItems }: { initialItems: IdeaBoardIt
                       <button
                         onClick={() => removeIdea(item)}
                         aria-label="Supprimer l'idée"
-                        className="text-[#5F6774] hover:text-red-600 transition-colors"
+                        className="text-[#5F6774] hover:text-red-700 transition-colors"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>

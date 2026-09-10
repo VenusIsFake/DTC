@@ -74,7 +74,7 @@ function TextSettingCard({
 
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h3 className="text-sm font-heading font-bold text-[#16233A]">{title}</h3>
+      <h2 className="text-sm font-heading font-bold text-[#16233A]">{title}</h2>
       {!loaded ? (
         <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
       ) : (
@@ -103,7 +103,7 @@ function TextSettingCard({
             </Field>
           )}
           {error && (
-            <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+            <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
               {error}
             </p>
           )}
@@ -166,7 +166,7 @@ function PartnersEditor() {
 
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h3 className="text-sm font-heading font-bold text-[#16233A]">Partenaires & soutiens</h3>
+      <h2 className="text-sm font-heading font-bold text-[#16233A]">Partenaires & soutiens</h2>
       <p className="text-[11px] text-[#5C6672]">
         Cartes affichées sur la page À propos et dans le pied de page. Vider le nom et enregistrer
         retire la carte du site.
@@ -197,7 +197,7 @@ function PartnersEditor() {
         </div>
       ))}
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -267,7 +267,7 @@ function ActivityImagesCard() {
 
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h3 className="text-sm font-heading font-bold text-[#16233A]">Images des cartes d&apos;activité (accueil)</h3>
+      <h2 className="text-sm font-heading font-bold text-[#16233A]">Images des cartes d&apos;activité (accueil)</h2>
       <p className="text-[11px] text-[#5C6672]">
         Choisissez pour chaque carte une image publiée dans la galerie. « Par défaut » garde
         l&apos;image actuelle du site.
@@ -312,7 +312,7 @@ function ActivityImagesCard() {
         </p>
       )}
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -348,9 +348,9 @@ function WallToggleCard() {
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-2">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="min-w-0">
-          <h3 className="text-sm font-heading font-bold text-[#16233A]">
+          <h2 className="text-sm font-heading font-bold text-[#16233A]">
             Accès public du site {wallOpen ? "(ouvert)" : "(réservé au bureau)"}
-          </h3>
+          </h2>
           <p className="text-[11px] text-[#5C6672] leading-relaxed mt-0.5">
             {wallOpen
               ? "Le site principal est visible de tous. Basculer pour le refermer."
@@ -379,7 +379,7 @@ function WallToggleCard() {
         )}
       </div>
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}

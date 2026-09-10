@@ -110,7 +110,7 @@ export default function InvitationClient({
     return wrap(
       <>
         <div className="flex justify-center">
-          <div className="p-3 rounded-lg bg-red-500/15 text-red-600">
+          <div className="p-3 rounded-lg bg-red-500/15 text-red-700">
             <MailX className="w-6 h-6" />
           </div>
         </div>
@@ -185,7 +185,7 @@ export default function InvitationClient({
           club. Vous êtes connecté — activez-le pour ce compte.
         </p>
         {error && (
-          <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
             {error}
           </p>
         )}
@@ -246,7 +246,7 @@ export default function InvitationClient({
           />
         </Field>
         {error && (
-          <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
             {error}
           </p>
         )}

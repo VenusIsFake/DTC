@@ -16,7 +16,11 @@ function CommitteesEditor() {
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data } = await supabase.from("committees").select("*").order("sort");
+    const { data, error: loadError } = await supabase.from("committees").select("*").order("sort");
+    if (loadError) {
+      setError(loadError.message);
+      return;
+    }
     setCommittees((data as Committee[] | null) ?? []);
   };
 
@@ -60,17 +64,21 @@ function CommitteesEditor() {
     if (!window.confirm(`Supprimer la commission « ${committee.name} » ? Les profils liés perdront cette commission.`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("committees").delete().eq("id", committee.id);
+    const { error: dbError } = await supabase.from("committees").delete().eq("id", committee.id);
+    if (dbError) {
+      setError(dbError.message);
+      return;
+    }
     load();
   };
 
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <Building2 className="w-4 h-4 text-[#755B18]" />
           Commissions ({committees?.length ?? "…"})
-        </h3>
+        </h2>
         <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95">
           <Plus className="w-3 h-3" />
           <span>Commission</span>
@@ -78,7 +86,7 @@ function CommitteesEditor() {
       </div>
 
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -117,7 +125,7 @@ function CommitteesEditor() {
               <button onClick={() => startEdit(committee)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
                 <Pencil className="w-3 h-3" />
               </button>
-              <button onClick={() => remove(committee)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
+              <button onClick={() => remove(committee)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
                 <Trash2 className="w-3 h-3" />
               </button>
             </div>
@@ -132,6 +140,7 @@ function PromoYearsEditor() {
   const [raw, setRaw] = useState("");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
@@ -141,21 +150,37 @@ function PromoYearsEditor() {
       .select("value")
       .eq("key", "promo_years")
       .maybeSingle()
-      .then(({ data }) => {
+      .then(({ data, error: loadError }) => {
+        if (loadError) setError(loadError.message);
         if (data) setRaw(((data as { value: number[] }).value ?? []).join(", "));
       });
   }, []);
 
   const save = async () => {
-    const years = raw
-      .split(/[,;\s]+/)
-      .map((s) => Number(s.trim()))
-      .filter((n) => Number.isInteger(n) && n > 1990 && n < 2100);
+    const years = Array.from(
+      new Set(
+        raw
+          .split(/[,;\s]+/)
+          .map((s) => Number(s.trim()))
+          .filter((n) => Number.isInteger(n) && n > 1990 && n < 2100)
+      )
+    );
+    if (years.length === 0) {
+      setError("Aucune année valide — indiquez des années entre 1991 et 2099 (ex : 2024, 2025, 2026).");
+      return;
+    }
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     setSaving(true);
-    await supabase.from("site_settings").upsert({ key: "promo_years", value: years }, { onConflict: "key" });
+    const { error: dbError } = await supabase
+      .from("site_settings")
+      .upsert({ key: "promo_years", value: years }, { onConflict: "key" });
     setSaving(false);
+    if (dbError) {
+      setError(dbError.message);
+      return;
+    }
+    setError(null);
     setSaved(true);
     setRaw(years.join(", "));
     setTimeout(() => setSaved(false), 2000);
@@ -163,17 +188,25 @@ function PromoYearsEditor() {
 
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h3 className="text-sm font-heading font-bold text-[#16233A]">Liste des années (promos)</h3>
+      <h2 className="text-sm font-heading font-bold text-[#16233A]">Liste des années (promos)</h2>
       <p className="text-[11px] text-[#5C6672]">
         Années proposées dans le sélecteur « Promo » du profil membre. Séparez par des virgules.
       </p>
+      {error && (
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
       <div className="flex flex-col sm:flex-row gap-2">
         <label htmlFor="promo-years" className="sr-only">Années promo</label>
         <input
           id="promo-years"
           type="text"
           value={raw}
-          onChange={(e) => setRaw(e.target.value)}
+          onChange={(e) => {
+            setRaw(e.target.value);
+            if (error) setError(null);
+          }}
           placeholder="2024, 2025, 2026"
           className={`${inputClass} flex-1`}
         />

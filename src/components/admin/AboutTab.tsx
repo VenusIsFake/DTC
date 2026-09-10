@@ -104,10 +104,10 @@ function SectionsEditor() {
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <FileText className="w-4 h-4 text-[#755B18]" />
           Sections « À propos »
-        </h3>
+        </h2>
         <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95">
           <Plus className="w-3 h-3" />
           <span>Section</span>
@@ -115,7 +115,7 @@ function SectionsEditor() {
       </div>
 
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -166,7 +166,7 @@ function SectionsEditor() {
               <button onClick={() => startEdit(section)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
                 <Pencil className="w-3 h-3" />
               </button>
-              <button onClick={() => remove(section)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
+              <button onClick={() => remove(section)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
                 <Trash2 className="w-3 h-3" />
               </button>
             </div>
@@ -350,11 +350,10 @@ function MandatesEditor() {
         photo_url: memberForm.photo_url.trim() || null,
       };
       const mandate = mandates?.find((m) => m.id === memberForm.mandateId);
+      const nextSort = (mandate?.members ?? []).reduce((max, m) => Math.max(max, m.sort), 0) + 1;
       const { error: dbError } = memberForm.id
         ? await supabase.from("mandate_members").update(payload).eq("id", memberForm.id)
-        : await supabase
-            .from("mandate_members")
-            .insert({ ...payload, sort: (mandate?.members.length ?? 0) + 1 });
+        : await supabase.from("mandate_members").insert({ ...payload, sort: nextSort });
       if (fail(dbError, dbError ? (/duplicate key/i.test(dbError.message) ? "Ce membre figure déjà dans le mandat." : dbError.message) : undefined)) return;
       setMemberForm(null);
       load();
@@ -373,21 +372,28 @@ function MandatesEditor() {
     load();
   };
 
-  /** Swap sort values with the visible neighbour (sorted list order = display order). */
+  /** Swap with the visible neighbour by renumbering the whole list — stays correct even when legacy duplicate sort values exist. */
   const moveMember = async (mandateId: string, memberId: string, dir: -1 | 1) => {
     const mandate = mandates?.find((m) => m.id === mandateId);
     const list = [...(mandate?.members ?? [])].sort((a, b) => a.sort - b.sort);
     const idx = list.findIndex((m) => m.id === memberId);
-    const neighbour = list[idx + dir];
+    const target = idx + dir;
     const member = list[idx];
-    if (!mandate || !member || !neighbour) return;
+    if (!mandate || !member || target < 0 || target >= list.length) return;
+    const reordered = [...list];
+    reordered.splice(target, 0, reordered.splice(idx, 1)[0]);
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const [a, b] = await Promise.all([
-      supabase.from("mandate_members").update({ sort: neighbour.sort }).eq("id", member.id),
-      supabase.from("mandate_members").update({ sort: member.sort }).eq("id", neighbour.id),
-    ]);
-    fail(a.error ?? b.error);
+    const { error: dbError } = await supabase.from("mandate_members").upsert(
+      reordered.map((m, i) => ({
+        id: m.id,
+        mandate_id: mandateId,
+        name: m.name,
+        role: m.role,
+        sort: i + 1,
+      }))
+    );
+    fail(dbError);
     load();
   };
 
@@ -399,6 +405,7 @@ function MandatesEditor() {
     if (!source || source.members.length === 0) return;
     const existing = new Set(mandate.members.map((m) => m.name.trim().toLowerCase()));
     const byName = new Map((profiles ?? []).map((p) => [p.full_name.trim().toLowerCase(), p.id]));
+    const baseSort = mandate.members.reduce((max, m) => Math.max(max, m.sort), 0);
     const rows = source.members
       .filter((m) => !existing.has(m.name.trim().toLowerCase()))
       .map((m, i) => ({
@@ -407,7 +414,7 @@ function MandatesEditor() {
         role: m.role,
         photo_url: m.photo_url,
         profile_id: m.profile_id ?? byName.get(m.name.trim().toLowerCase()) ?? null,
-        sort: mandate.members.length + i + 1,
+        sort: baseSort + i + 1,
       }));
     if (rows.length === 0) {
       setNotice("Toute l'équipe de l'autre mandat est déjà présente ici.");
@@ -428,7 +435,7 @@ function MandatesEditor() {
     setError(null);
     try {
       const url = await uploadClubImage(file, `mandates/${memberForm.mandateId}`);
-      setMemberForm({ ...memberForm, photo_url: url });
+      setMemberForm((prev) => (prev ? { ...prev, photo_url: url } : prev));
     } catch (err) {
       setError(clubUploadErrorMessage(err));
     } finally {
@@ -451,10 +458,10 @@ function MandatesEditor() {
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <Crown className="w-4 h-4 text-[#755B18]" />
           Mandats & organigrammes
-        </h3>
+        </h2>
         <form onSubmit={createMandate} className="flex gap-2">
           <label htmlFor="mandate-label" className="sr-only">Nouveau mandat</label>
           <input
@@ -485,12 +492,12 @@ function MandatesEditor() {
       />
 
       {error && (
-        <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
       {notice && (
-        <p className="text-xs text-emerald-700 bg-emerald-600/10 border border-emerald-600/30 rounded-lg px-3 py-2">
+        <p role="status" className="text-xs text-emerald-700 bg-emerald-600/10 border border-emerald-600/30 rounded-lg px-3 py-2">
           {notice}
         </p>
       )}
@@ -544,7 +551,7 @@ function MandatesEditor() {
                       {uploadingFor === mandate.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
                       <span>Infographie</span>
                     </button>
-                    <button onClick={() => removeMandate(mandate)} aria-label="Supprimer le mandat" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600">
+                    <button onClick={() => removeMandate(mandate)} aria-label="Supprimer le mandat" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
                       <Trash2 className="w-3 h-3" />
                     </button>
                   </div>
@@ -592,7 +599,7 @@ function MandatesEditor() {
                       <button
                         onClick={() => removeMember(member)}
                         aria-label={`Retirer ${member.name}`}
-                        className="w-6 h-6 flex items-center justify-center rounded text-[#5C6672] hover:text-red-600"
+                        className="w-6 h-6 flex items-center justify-center rounded text-[#5C6672] hover:text-red-700"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
@@ -678,7 +685,7 @@ function MandatesEditor() {
                         <button
                           type="button"
                           onClick={() => setMemberForm({ ...memberForm, photo_url: "" })}
-                          className="text-[10px] font-semibold text-[#5C6672] hover:text-red-600"
+                          className="text-[10px] font-semibold text-[#5C6672] hover:text-red-700"
                         >
                           Retirer la photo
                         </button>

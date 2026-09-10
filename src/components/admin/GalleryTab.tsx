@@ -247,7 +247,7 @@ function EditorModal({
         </label>
 
         {error && (
-          <p role="alert" className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
             {error}
           </p>
         )}
@@ -267,15 +267,21 @@ export default function GalleryTab() {
   const [items, setItems] = useState<GalleryImageRow[] | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [draft, setDraft] = useState<Draft | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const load = async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { data } = await supabase
+    const { data, error: loadError } = await supabase
       .from("gallery_images")
       .select("*")
       .order("sort", { ascending: true })
       .order("created_at", { ascending: true });
+    if (loadError) {
+      setError(loadError.message);
+      return;
+    }
+    setError(null);
     setItems((data as GalleryImageRow[] | null) ?? []);
   };
 
@@ -286,7 +292,11 @@ export default function GalleryTab() {
   const togglePublish = async (item: GalleryImageRow) => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("gallery_images").update({ is_published: !item.is_published }).eq("id", item.id);
+    const { error: dbError } = await supabase
+      .from("gallery_images")
+      .update({ is_published: !item.is_published })
+      .eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -294,7 +304,8 @@ export default function GalleryTab() {
     if (!window.confirm(`Supprimer « ${item.title} » de la galerie ?`)) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("gallery_images").delete().eq("id", item.id);
+    const { error: dbError } = await supabase.from("gallery_images").delete().eq("id", item.id);
+    if (dbError) setError(dbError.message);
     load();
   };
 
@@ -313,6 +324,12 @@ export default function GalleryTab() {
           <span>Ajouter</span>
         </button>
       </div>
+
+      {error && (
+        <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
 
       {items === null && (
         <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
@@ -345,7 +362,7 @@ export default function GalleryTab() {
             <div className="flex items-center gap-1">
               <button
                 onClick={() => togglePublish(item)}
-                aria-label={item.is_published ? "Dépublier" : "Publier"}
+                aria-label={`${item.is_published ? "Dépublier" : "Publier"} — ${item.title}`}
                 className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
               >
                 {item.is_published ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -364,15 +381,15 @@ export default function GalleryTab() {
                   });
                   setEditorOpen(true);
                 }}
-                aria-label="Modifier"
+                aria-label={`Modifier — ${item.title}`}
                 className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
               >
                 <Pencil className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => remove(item)}
-                aria-label="Supprimer"
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600 hover:bg-red-500/10 transition-colors"
+                aria-label={`Supprimer — ${item.title}`}
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>

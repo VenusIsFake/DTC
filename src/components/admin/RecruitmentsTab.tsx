@@ -55,6 +55,8 @@ function CampaignEditor() {
   const [addingPosition, setAddingPosition] = useState(false);
   const [positionForm, setPositionForm] = useState({ title: "", description: "" });
   const [linkCopied, setLinkCopied] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [savingPosition, setSavingPosition] = useState(false);
 
   const copyShareLink = async () => {
     try {
@@ -100,19 +102,25 @@ function CampaignEditor() {
   }, []);
 
   const createCampaign = async () => {
+    if (creating) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { error: dbError } = await supabase.from("recruitments").insert({
-      title: "Appel à candidatures — Bureau",
-      intro: "Expliquez ici l'appel à candidatures adressé aux membres…",
-      is_open: false,
-    });
-    if (dbError) {
-      setError(dbError.message);
-      return;
+    setCreating(true);
+    try {
+      const { error: dbError } = await supabase.from("recruitments").insert({
+        title: "Appel à candidatures — Bureau",
+        intro: "Expliquez ici l'appel à candidatures adressé aux membres…",
+        is_open: false,
+      });
+      if (dbError) {
+        setError(dbError.message);
+        return;
+      }
+      setError(null);
+      await load();
+    } finally {
+      setCreating(false);
     }
-    setError(null);
-    await load();
   };
 
   const save = async () => {
@@ -167,29 +175,34 @@ function CampaignEditor() {
 
   const submitPosition = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!campaign || positionForm.title.trim().length < 2) return;
+    if (!campaign || positionForm.title.trim().length < 2 || savingPosition) return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const { error: dbError } =
-      editingPosition && !addingPosition
-        ? await supabase
-            .from("recruitment_positions")
-            .update({ title: positionForm.title.trim(), description: positionForm.description.trim() })
-            .eq("id", editingPosition.id)
-        : await supabase.from("recruitment_positions").insert({
-            recruitment_id: campaign.id,
-            title: positionForm.title.trim(),
-            description: positionForm.description.trim(),
-            sort: (positions?.at(-1)?.sort ?? 0) + 1,
-          });
-    if (dbError) {
-      setError(dbError.message);
-      return;
+    setSavingPosition(true);
+    try {
+      const { error: dbError } =
+        editingPosition && !addingPosition
+          ? await supabase
+              .from("recruitment_positions")
+              .update({ title: positionForm.title.trim(), description: positionForm.description.trim() })
+              .eq("id", editingPosition.id)
+          : await supabase.from("recruitment_positions").insert({
+              recruitment_id: campaign.id,
+              title: positionForm.title.trim(),
+              description: positionForm.description.trim(),
+              sort: (positions?.at(-1)?.sort ?? 0) + 1,
+            });
+      if (dbError) {
+        setError(dbError.message);
+        return;
+      }
+      setError(null);
+      setEditingPosition(null);
+      setAddingPosition(false);
+      await load();
+    } finally {
+      setSavingPosition(false);
     }
-    setError(null);
-    setEditingPosition(null);
-    setAddingPosition(false);
-    await load();
   };
 
   const removePosition = async (position: RecruitmentPosition) => {
@@ -201,7 +214,8 @@ function CampaignEditor() {
       return;
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("recruitment_positions").delete().eq("id", position.id);
+    const { error: dbError } = await supabase.from("recruitment_positions").delete().eq("id", position.id);
+    if (dbError) setError(dbError.message);
     await load();
   };
 
@@ -216,20 +230,20 @@ function CampaignEditor() {
   if (!campaign) {
     return (
       <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-6 sm:p-8 space-y-4 text-center">
-        <h3 className="flex items-center justify-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center justify-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <ClipboardList className="w-4 h-4 text-[#755B18]" />
           Aucune campagne de candidatures
-        </h3>
+        </h2>
         <p className="text-xs text-[#5C6672] max-w-md mx-auto">
           Créez une campagne pour ouvrir le formulaire /candidature aux membres : titre, texte
           d&apos;appel, postes ouverts — tout est modifiable ici.
         </p>
-        <PrimaryButton onClick={createCampaign}>
-          <Plus className="w-3.5 h-3.5" />
+        <PrimaryButton onClick={createCampaign} disabled={creating}>
+          {creating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Plus className="w-3.5 h-3.5" />}
           Nouvelle campagne
         </PrimaryButton>
         {error && (
-          <p role="alert" className="text-xs text-red-600">
+          <p role="alert" className="text-xs text-red-700">
             {error}
           </p>
         )}
@@ -240,10 +254,10 @@ function CampaignEditor() {
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-4">
       <div className="flex items-center justify-between gap-2.5 flex-wrap">
-        <h3 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
           <ClipboardList className="w-4 h-4 text-[#755B18]" />
           Campagne « {campaign.title} »
-        </h3>
+        </h2>
         <div className="flex items-center gap-2">
           <Badge tone={campaign.is_open ? "green" : "gray"}>
             {campaign.is_open ? "Ouverte" : "Fermée"}
@@ -258,17 +272,20 @@ function CampaignEditor() {
       {error && (
         <p
           role="alert"
-          className="text-xs text-red-600 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
+          className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2"
         >
           {error}
         </p>
       )}
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 p-2.5 rounded-lg bg-[#EFECE4]/60 border border-[#DCD7CB]/30">
-        <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-[#755B18] shrink-0">
-          <Link2 className="w-3 h-3" />
+        <label
+          htmlFor="rec-share-url"
+          className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-[#755B18] shrink-0"
+        >
+          <Link2 className="w-3 h-3" aria-hidden="true" />
           Lien à envoyer aux membres
-        </span>
+        </label>
         <input
           id="rec-share-url"
           type="text"
@@ -310,9 +327,9 @@ function CampaignEditor() {
 
       <div className="space-y-2.5 pt-2 border-t border-[#DCD7CB]/50">
         <div className="flex items-center justify-between gap-2">
-          <h4 className="text-xs font-bold text-[#16233A] uppercase tracking-wide">
+          <h2 className="text-xs font-bold text-[#16233A] uppercase tracking-wide">
             Postes ouverts ({positions?.length ?? 0})
-          </h4>
+          </h2>
           <button
             onClick={() => startPositionEdit(null)}
             className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95"
@@ -357,7 +374,9 @@ function CampaignEditor() {
               >
                 Annuler
               </GhostButton>
-              <PrimaryButton type="submit">Enregistrer</PrimaryButton>
+              <PrimaryButton type="submit" disabled={savingPosition}>
+                {savingPosition ? "Enregistrement…" : "Enregistrer"}
+              </PrimaryButton>
             </div>
           </form>
         )}
@@ -387,7 +406,7 @@ function CampaignEditor() {
                 <button
                   onClick={() => removePosition(position)}
                   aria-label="Supprimer"
-                  className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-600"
+                  className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700"
                 >
                   <Trash2 className="w-3 h-3" />
                 </button>
@@ -427,7 +446,12 @@ function ApplicationsList() {
   const setStatus = async (item: ApplicationRow, status: ApplicationStatus) => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    await supabase.from("applications").update({ status }).eq("id", item.id);
+    const { error } = await supabase.from("applications").update({ status }).eq("id", item.id);
+    if (error) {
+      window.alert(`Statut non modifié : ${error.message}`);
+      load();
+      return;
+    }
     load();
   };
 
@@ -495,7 +519,7 @@ function ApplicationsList() {
   return (
     <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5 flex-wrap">
-        <h3 className="text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="text-sm font-heading font-bold text-[#16233A]">
           Candidatures reçues ({items?.length ?? "…"}
           {items && newCount > 0 ? (
             <span className="text-[#755B18]">
@@ -504,7 +528,7 @@ function ApplicationsList() {
             </span>
           ) : null}
           )
-        </h3>
+        </h2>
         {items && items.length > 0 && (
           <GhostButton onClick={exportCsv}>
             <Download className="w-3.5 h-3.5" />
@@ -570,7 +594,7 @@ function ApplicationsList() {
                     </select>
                     <button
                       onClick={() => remove(item)}
-                      className="flex items-center gap-1.5 h-9 px-3 shrink-0 rounded-lg text-[11px] font-semibold text-red-600 border border-red-500/30 bg-red-500/5 hover:bg-red-500/15 transition-colors"
+                      className="flex items-center gap-1.5 h-9 px-3 shrink-0 rounded-lg text-[11px] font-semibold text-red-700 border border-red-500/30 bg-red-500/5 hover:bg-red-500/15 transition-colors"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                       <span>Supprimer</span>
