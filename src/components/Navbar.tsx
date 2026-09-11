@@ -73,7 +73,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
         <Link href="/" className="flex items-center gap-2.5 group shrink-0">
           <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#DCD7CB] group-hover:border-[#755B18] transition-colors shrink-0">
             <Image
-              src="/logo.png"
+              src="/logo.png?v=2026"
               alt="Dentalk Club FMDC Logo"
               fill
               sizes="36px"

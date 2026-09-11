@@ -20,7 +20,7 @@
  * Bump VERSION whenever this logic changes — old caches are dropped on
  * activate (see rules.md §10).
  */
-const VERSION = "2026-08-25.2";
+const VERSION = "2026-09-11.1";
 const STATIC_CACHE = `dtc-static-${VERSION}`; // _next/static, fonts
 const MEDIA_CACHE = `dtc-media-${VERSION}`; // images, posters, local media
 

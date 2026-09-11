@@ -511,3 +511,11 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **Incident edge Vercel (contourné) :** mi-session, TOUTES les IPs anycast du domaine custom (ancien set 34.x/54.x ET 64.29.17.x/216.198.79.x) ont tarpitté en TCP-connect depuis vantage local ET datacenter, tandis que `*.vercel.app` (set 66.33.60.x/76.76.21.x) répondait et que les URLs de déploiement servaient le HTML en 1,6 s — fonctions saines, couche DNS/anycast fautive. Fix durable : zone Vercel DNS réécrite — apex en `ALIAS → cname.vercel-dns.com` (aplati auto vers le set sain), `www` + `vx72kq9` en `CNAME → cname.vercel-dns.com` ; retiré les records système/ALIAS pointant les cibles `vercel-dns-017` défaillantes. `www` fonctionne pour la PREMIÈRE fois (308→apex). Coût : si Vercel change un jour la cible canonique, nos CNAME suivent (auto-résolutif) — c'était le but.
 - **`dtc-lilac.vercel.app`** (3e porte historique oubliée) → 308 vers apex, parité avec `dtc-fmdc`.
 - **Vérifs :** juge agent pass (illisible + chromeless) ; deploy URLs 200/307 ; matrice complète dans la session. tsc 0.
+
+## 2026-09-11 (3) — remediation cache logo (v2.9.3b)
+
+**Venus voit encore l'ANCIEN logo sur le site déployé. Cause : SW `MEDIA_CACHE` stale-while-revalidate sert `/logo.png` périmé (cache navigateur, pas déploiement — checksum servi = nouveau fichier).**
+
+- **Fix :** `sw.js` `VERSION` → `2026-09-11.1` (activate purge les vieux caches) ; navbar + footer `src="/logo.png?v=2026"` (cache-key miss immédiat) ; `og-image.jpg` renommé `og-image-2026.jpg` + refs layout mises à jour (les plateformes sociales respotent fraîchement).
+- **Pièges diagnostic :** page d'accueil = mur 307 → /candidature CHROMELESS (zéro navbar) → grepper le HTML loggué-out ne prouve rien ; `next/image` encode les query (`%3F`) → grep littéral muet ; `curl size_download` varie selon l'encodage transfer — comparer en md5. Preuve de déploiement frais : `og-image-2026.jpg` dans le head de /candidature + `sw.js` VERSION servi.
+- tsc 0, deploy vert.

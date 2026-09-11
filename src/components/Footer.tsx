@@ -35,7 +35,7 @@ export default function Footer({
             <div className="flex items-center gap-2.5">
               <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#3D4A58]">
                 <Image
-                  src="/logo.png"
+                  src="/logo.png?v=2026"
                   alt="DTC Logo"
                   fill
                   sizes="40px"
