@@ -16,7 +16,7 @@ export const siteConfig = {
    * after replacing an asset — all cacheable URLs derive from it via
    * assetUrl(), so one commit re-points every browser and the service worker.
    */
-  assetVersion: "2026c",
+  assetVersion: "2026d",
   /** Social share card (only place the text-lockup logo appears). */
   ogImage: "/og-image-2026.jpg",
   /** Cache-busted URL for a public/ asset, e.g. assetUrl("/logo.png"). */
