@@ -61,7 +61,7 @@ All three ship in the code but stay **invisible/inactive without their env vars*
 1. **Create the project** on the free tier at supabase.com.
 2. **Apply the schema:** SQL Editor → paste & run `supabase/schema.sql` (tables, RLS policies, security-definer RPCs, views, storage buckets, default settings).
 3. **Seed content:** SQL Editor → paste & run `supabase/seed.sql` (5 commissions, Mandat 2025–2026 + 12 members, 4 podcast episodes, 8 TEDx talks, 3 "À propos" sections). Mirrors the static `src/data` files so the DB-driven site renders identically to the old static site on day one.
-4. **Auth settings:** Authentication → Providers → Email: **disable "Confirm email"**. Authentication → URL Configuration → Site URL: `https://dentalkclub-fmdc.vercel.app`.
+4. **Auth settings:** Authentication → Providers → Email: **enable "Confirm email"** (since 2026-09-11 — unverified signups were reaching the guest-approval queue; bureau approves by name/email, so email ownership must be proven first). Authentication → URL Configuration → Site URL: `https://dentalkclubfmdc.com`.
    Security toggles status (verified live 2026-08-25):
    - **Leaked password protection: PRO PLAN ONLY** — Supabase returns `HTTP 402 "available on Pro Plans and up"` on the free tier (API, CLI and dashboard alike). Compensating control: **minimum password length 8 is enforced server-side and verified functionally**; the signup UI also warns against reused passwords.
    - **Minimum password length: 8** — already live server-side (verified: 6-char signup rejected with `weak_password`).
@@ -77,12 +77,12 @@ All three ship in the code but stay **invisible/inactive without their env vars*
 
 | Domain Type | Live URL |
 | :--- | :--- |
-| **Primary Production Domain** | **https://dentalkclub-fmdc.vercel.app** |
-| **Short Domain Alias** | https://dtc-fmdc.vercel.app |
-| **Direct Project URL** | https://dtc-lilac.vercel.app |
+| **Primary Production Domain** | **https://dentalkclubfmdc.com** (apex; www 308→apex) |
+| **Legacy Aliases (308 → apex)** | https://dtc-fmdc.vercel.app, https://dtc-lilac.vercel.app |
+| **Retired (404, dead on purpose)** | https://dentalkclub-fmdc.vercel.app |
 
 * **Project:** `dtc` (team `venus55`), Next.js preset, no SSO protection.
-* **Domains `dentalkclub-fmdc.vercel.app` + `dtc-fmdc.vercel.app` are project-level domains** (2026-08-25): every `vercel --prod` deploy auto-aliases to them. Previously they were pinned to one deployment via a manual alias and silently stopped following new deploys.
+* **Historical (2026-08-25):** `dentalkclub-fmdc.vercel.app` + `dtc-fmdc.vercel.app` were made project-level domains so deploys auto-aliased to them. Superseded 2026-09-11 by the custom domain; the old hosts now 308→apex (and `dentalkclub-fmdc` is 404-killed in middleware).
 * **Environment variables are PRODUCTION-ONLY** (2026-08-25). Preview deployments build without Supabase/YouTube keys and serve the static-fallback content — by design, so no unreviewed preview URL can ever talk to the production database. ⚠️ Vercel CLI gotcha: `vercel env rm <name> <environment>` deletes the whole variable (all environments), not just one target — remove/re-add carefully.
 * **Security headers:** static headers (nosniff, XFO DENY, COOP/CORP, Referrer-Policy, Permissions-Policy, **Strict-Transport-Security** added 2026-09-01) come from `vercel.json`; the **Content-Security-Policy is built per-request in `src/utils/supabase/middleware.ts` with a nonce** (no `unsafe-inline` in `script-src`). Keep both in sync if origins change.
 * **`.vercelignore`** still excludes `.venv/`, `scripts/`, `docs/`, `graphify-out/`, `instagram/`, `rules.md`, `overview.md`, and now `supabase/`.

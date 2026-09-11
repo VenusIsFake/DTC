@@ -21,6 +21,11 @@ __pycache__/
 /.idea/
 *.log
 
+# Secrets must never ride in the upload bundle (gitignore does not govern
+# `vercel deploy` — this file does).
+.env
+.env.*
+
 # Dependencies & Build artifacts (managed by Vercel)
 /node_modules/
 /.next/

@@ -693,8 +693,26 @@ create policy "event_page_items_bureau_delete" on public.event_page_items
   for delete to authenticated
   using (public.is_bureau_or_admin());
 
+-- Anonymous reads are scoped to the non-sensitive keys public pages render
+-- (see migrations/20260911_settings_public_read_scope.sql). membership_* keys
+-- stay authenticated-only; site_wall_open stays anon-readable because the
+-- middleware reads it with the anon key (fail-closed).
 create policy "settings_public_read" on public.site_settings
-  for select to anon, authenticated
+  for select to anon
+  using (
+    key in (
+      'site_wall_open',
+      'events_visible',
+      'home_stats',
+      'promo_years',
+      'activity_card_images',
+      'sponsor',
+      'partner_club'
+    )
+  );
+
+create policy "settings_member_read" on public.site_settings
+  for select to authenticated
   using (true);
 
 create policy "site_settings_bureau_insert" on public.site_settings

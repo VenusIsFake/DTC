@@ -56,7 +56,7 @@ docs/
   * **Pre-launch security hardening (2026-09-01, §9):** full audit (no critical) then fixes — candidature anti-abuse (dedup + flood cap + forged-status block), two-layer privesc guard on profiles, broadcast idempotency (`emailed_at`), banned-member filters, club-media SVG ban, vote attribution hidden, admin-on-admin reset/delete blocked, HSTS, and schema **v2.5** locking anonymous data reads behind the site wall.
 * **[docs/platform/deployment.md](platform/deployment.md)**
   * **Deployment & Supabase Setup:** Server deployment (`npm run deploy` = `vercel --prod`; ⚠️ `git push` does NOT deploy — Git integration not auto-building), env vars (`NEXT_PUBLIC_SUPABASE_URL`/key, server-only `YOUTUBE_API_KEY`), Supabase schema/seed application, auth settings, admin bootstrap, domains.
-  * **Production Domains & DNS:** `https://dentalkclub-fmdc.vercel.app` & `https://dtc-fmdc.vercel.app`.
+  * **Production Domains & DNS:** `https://dentalkclubfmdc.com` (apex, live since 2026-09-11; legacy `*.vercel.app` hosts 308→apex, `dentalkclub-fmdc.vercel.app` retired/dead).
   * **Vercel Settings & SSO Configuration:** Public access enabled with zero login walls.
 
 ---

@@ -8,7 +8,8 @@ import BureauSignIn from "@/components/candidature/BureauSignIn";
 // Link-only form portal (no site chrome — see SiteChrome). Kept out of search
 // engines so it stays as private as the Google Form it replaces.
 export const metadata = {
-  title: "Candidature — Dentalk Club FMDC",
+  // absolute: the root template would otherwise append the brand a second time
+  title: { absolute: "Candidature — Dentalk Club FMDC" },
   description:
     "Formulaire officiel de candidature au bureau du Dentalk Club FMDC (lien partagé par le bureau).",
   robots: { index: false, follow: false },

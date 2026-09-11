@@ -22,7 +22,7 @@ Every content type follows the same lifecycle: **draft → published → archive
 - Content = typed modules in `src/data/` (`siteConfig.ts`, `podcastData.ts`, `tedxData.ts`, `galleryData.ts`), consumed directly by components.
 - Interactivity pattern to copy: server page shell + client island (see `/podcast`); all modals **must** use `src/hooks/useOverlayDialog.ts` (iOS-safe scroll lock + focus trap).
 - `next.config.mjs`: `output: "export"`, `images: { unoptimized: true }`. `vercel.json`: security headers + strict CSP (`connect-src 'self'` — blocks Supabase today; §3 fixes).
-- Deploy today: `npm run fast-deploy` → `https://dentalkclub-fmdc.vercel.app` (Vercel Hobby). **The user deploys — never deploy without asking.**
+- Deploy today: `npm run deploy` → `https://dentalkclubfmdc.com`. **The user deploys — never deploy without asking.** (Historical note: this line said `npm run fast-deploy`; that script never existed — `deploy` is the only deploy command.)
 - Git: repo exists, branch `main`, remote `origin → https://github.com/VenusIsFake/DTC.git`, one commit. (Older docs/memory saying "not a git repo" are outdated.)
 - Only runtime deps: `next`, `react`, `react-dom`, `lucide-react`.
 

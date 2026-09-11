@@ -34,6 +34,15 @@ const organizationJsonLd = {
   sameAs: [siteConfig.instagramUrl, siteConfig.youtubeChannelUrl],
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  alternateName: siteConfig.acronym,
+  url: siteConfig.siteUrl,
+  inLanguage: "fr",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
@@ -54,6 +63,18 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Dentalk Club FMDC" }],
   creator: "Dentalk Club FMDC",
+  // Explicit bustable URLs instead of app/icon file conventions (which can't
+  // carry a query string): the ?v= forces every browser — including ones that
+  // pinned the pre-2026 logo in their favicon DB — to refetch after a bump.
+  // public/favicon.ico mirrors the same fresh asset for bare /favicon.ico probes.
+  icons: {
+    shortcut: "/favicon.ico?v=2026c",
+    icon: [
+      { url: "/favicon.png?v=2026c", sizes: "32x32", type: "image/png" },
+      { url: "/icon-512.png?v=2026c", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png?v=2026c",
+  },
   alternates: {
     canonical: "/",
   },
@@ -105,7 +126,7 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             // Escape "<" so no value can ever close the script tag early.
-            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+            __html: JSON.stringify([organizationJsonLd, websiteJsonLd]).replace(/</g, "\\u003c"),
           }}
         />
         <AuthProvider>

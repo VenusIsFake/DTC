@@ -21,6 +21,10 @@ export async function middleware(request: NextRequest) {
     // secret page only lives on the backstage host — main domain gets nothing
     return NextResponse.rewrite(new URL('/', request.url))
   }
+  // Overwrite (never trust an inbound value): a client-sent x-secret-page: 1
+  // would otherwise strip the site chrome on any page. Mutating the request
+  // headers is enough — updateSession forwards them to the rendered page.
+  request.headers.set('x-secret-page', '0')
   return await updateSession(request)
 }
 

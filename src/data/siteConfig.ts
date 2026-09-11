@@ -6,7 +6,7 @@ export interface NavItem {
 export const siteConfig = {
   name: "Dentalk Club FMDC",
   acronym: "DTC",
-  tagline: "Let your voice be heard with endless echoes.",
+  tagline: "Que ta voix résonne en échos sans fin.",
   description: "Club d'éloquence, débats et événements académiques de la Faculté de Médecine Dentaire de Casablanca (FMDC - UH2C).",
   siteUrl: "https://dentalkclubfmdc.com",
   foundingDate: "Novembre 2024",

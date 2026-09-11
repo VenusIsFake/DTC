@@ -5,7 +5,7 @@ import type { Profile } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dentalkclub-fmdc.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dentalkclubfmdc.com";
 
 interface BroadcastEmailRow {
   email: string;
