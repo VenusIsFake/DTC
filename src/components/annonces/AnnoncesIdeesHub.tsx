@@ -58,17 +58,17 @@ export default function AnnoncesIdeesHub({
     <div className="space-y-6 sm:space-y-10">
       {/* Dynamic Header Banner */}
       <div className="max-w-2xl mx-auto space-y-2 sm:space-y-4 text-center">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-dtc-gold">
           {activeTab === "annonces"
             ? "La vie du club, en direct"
             : "Boîte à idées collaborative"}
         </p>
 
-        <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">
+        <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-dtc-ink tracking-tight">
           {activeTab === "annonces" ? "Annonces & Ateliers" : "Les Idées du Club"}
         </h1>
 
-        <p className="text-xs sm:text-base text-[#5C6672] leading-relaxed">
+        <p className="text-xs sm:text-base text-dtc-inkMuted leading-relaxed">
           {activeTab === "annonces"
             ? "Les prochains ateliers d'éloquence, débats et informations officielles du bureau. Connectez-vous pour confirmer votre participation."
             : "Pitchez, votez, commentez : les meilleures idées du mois inspirent les prochains ateliers et débats. Un vote par personne et par idée."}
@@ -77,7 +77,7 @@ export default function AnnoncesIdeesHub({
 
       {/* Dynamic Segmented Tab Switcher with Active Expansion */}
       <div className="flex items-center justify-center">
-        <div className="bg-[#EFECE4]/90 p-1.5 rounded-2xl border border-[#DCD7CB]/60 inline-flex items-center gap-1.5 shadow-sm">
+        <div className="bg-dtc-wash/90 p-1.5 rounded-2xl border border-dtc-line/60 inline-flex items-center gap-1.5 shadow-sm">
           {/* Annonces & Ateliers Tab */}
           <button
             type="button"
@@ -85,15 +85,15 @@ export default function AnnoncesIdeesHub({
             aria-pressed={activeTab === "annonces"}
             className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "annonces"
-                ? "bg-white text-[#16233A] font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-[#DCD7CB]/70 scale-[1.02] z-10"
-                : "text-[#5C6672] hover:text-[#16233A] hover:bg-white/50 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium scale-95 opacity-80 hover:opacity-100"
+                ? "bg-white text-dtc-ink font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-dtc-line/70 scale-[1.02] z-10"
+                : "text-dtc-inkMuted hover:text-dtc-ink hover:bg-white/50 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium scale-95 opacity-80 hover:opacity-100"
             }`}
           >
             <Megaphone
               className={`transition-transform duration-300 ${
                 activeTab === "annonces"
-                  ? "w-4 h-4 text-[#755B18] scale-110"
-                  : "w-3.5 h-3.5 text-[#5C6672]"
+                  ? "w-4 h-4 text-dtc-gold scale-110"
+                  : "w-3.5 h-3.5 text-dtc-inkMuted"
               }`}
             />
             <span className="tracking-tight whitespace-nowrap">
@@ -103,8 +103,8 @@ export default function AnnoncesIdeesHub({
               <span
                 className={`transition-colors duration-300 px-2 py-0.5 rounded-full text-[10px] font-bold ${
                   activeTab === "annonces"
-                    ? "bg-[#755B18]/15 text-[#755B18]"
-                    : "bg-[#DCD7CB]/60 text-[#5C6672]"
+                    ? "bg-dtc-gold/15 text-dtc-gold"
+                    : "bg-dtc-line/60 text-dtc-inkMuted"
                 }`}
               >
                 {announcementsCount}
@@ -119,15 +119,15 @@ export default function AnnoncesIdeesHub({
             aria-pressed={activeTab === "idees"}
             className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "idees"
-                ? "bg-white text-[#16233A] font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-[#DCD7CB]/70 scale-[1.02] z-10"
-                : "text-[#5C6672] hover:text-[#16233A] hover:bg-white/50 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium scale-95 opacity-80 hover:opacity-100"
+                ? "bg-white text-dtc-ink font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-dtc-line/70 scale-[1.02] z-10"
+                : "text-dtc-inkMuted hover:text-dtc-ink hover:bg-white/50 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium scale-95 opacity-80 hover:opacity-100"
             }`}
           >
             <Lightbulb
               className={`transition-transform duration-300 ${
                 activeTab === "idees"
-                  ? "w-4 h-4 text-[#755B18] scale-110"
-                  : "w-3.5 h-3.5 text-[#5C6672]"
+                  ? "w-4 h-4 text-dtc-gold scale-110"
+                  : "w-3.5 h-3.5 text-dtc-inkMuted"
               }`}
             />
             <span className="tracking-tight whitespace-nowrap">
@@ -137,8 +137,8 @@ export default function AnnoncesIdeesHub({
               <span
                 className={`transition-colors duration-300 px-2 py-0.5 rounded-full text-[10px] font-bold ${
                   activeTab === "idees"
-                    ? "bg-[#755B18]/15 text-[#755B18]"
-                    : "bg-[#DCD7CB]/60 text-[#5C6672]"
+                    ? "bg-dtc-gold/15 text-dtc-gold"
+                    : "bg-dtc-line/60 text-dtc-inkMuted"
                 }`}
               >
                 {ideasCount}
@@ -154,7 +154,7 @@ export default function AnnoncesIdeesHub({
           {activeTab === "annonces" ? (
             <div className="space-y-6">
               <AnnouncementsFeed initialItems={initialAnnouncements} onCountChange={setAnnouncementsCount} />
-              <p className="flex items-center justify-center gap-1.5 text-[11px] text-[#5F6774] pt-2">
+              <p className="flex items-center justify-center gap-1.5 text-[11px] text-dtc-inkSoft pt-2">
                 <CalendarDays className="w-3.5 h-3.5" />
                 <span>
                   Les ateliers ont lieu à la FMDC Casablanca — la salle est précisée dans chaque annonce.

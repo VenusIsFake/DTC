@@ -42,13 +42,13 @@ function VisibilityCard() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
       <div>
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <CalendarDays className="w-4 h-4 text-[#755B18]" />
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <CalendarDays className="w-4 h-4 text-dtc-gold" />
           Visibilité de la section « TEDx & Débats »
         </h2>
-        <p className="text-[11px] text-[#5C6672] mt-0.5">
+        <p className="text-[11px] text-dtc-inkMuted mt-0.5">
           Masquer retire le lien de navigation, redirige /events vers l&apos;accueil et l&apos;exclut du
           sitemap — la section disparaît réellement.
         </p>
@@ -203,16 +203,16 @@ function TedxCard() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h2 className="text-sm font-heading font-bold text-[#16233A]">TEDxFMDC — talks ({talks?.length ?? "…"})</h2>
+        <h2 className="text-sm font-heading font-bold text-dtc-ink">TEDxFMDC — talks ({talks?.length ?? "…"})</h2>
         <button
           onClick={() => {
             setForm({ ...EMPTY_TEDX, extract_number: (talks?.at(-1)?.extract_number ?? 0) + 1 });
             setError(null);
             setOpen(true);
           }}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 active:scale-95"
         >
           <Plus className="w-3 h-3" />
           <span>Talk</span>
@@ -226,22 +226,22 @@ function TedxCard() {
       )}
 
       {talks === null ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {talks.length === 0 && (
-            <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+            <p className="text-[11px] text-dtc-gold bg-dtc-gold/10 border border-dtc-gold/30 rounded-lg px-3 py-2">
               Aucun talk en base — la page /events affiche les extraits statiques intégrés.
             </p>
           )}
           {talks.map((row) => (
-            <div key={row.id} className="flex items-center gap-2.5 p-2 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-[10px] font-bold text-[#755B18] w-7 shrink-0">#{row.extract_number}</span>
+            <div key={row.id} className="flex items-center gap-2.5 p-2 rounded-lg bg-dtc-wash/40 border border-dtc-line/25">
+              <span className="text-[10px] font-bold text-dtc-gold w-7 shrink-0">#{row.extract_number}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold text-[#16233A] truncate">
+                <p className="text-xs font-semibold text-dtc-ink truncate">
                   {row.speaker} {!row.is_published && <Badge tone="gray">Masqué</Badge>}
                 </p>
-                <p className="text-[10px] text-[#5C6672] truncate">{row.topic}</p>
+                <p className="text-[10px] text-dtc-inkMuted truncate">{row.topic}</p>
               </div>
               <button
                 onClick={() => {
@@ -250,14 +250,14 @@ function TedxCard() {
                   setOpen(true);
                 }}
                 aria-label="Modifier"
-                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]"
+                className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold"
               >
                 <Pencil className="w-3 h-3" />
               </button>
               <button
                 onClick={() => remove(row)}
                 aria-label="Supprimer"
-                className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700"
+                className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700"
               >
                 <Trash2 className="w-3 h-3" />
               </button>
@@ -275,12 +275,12 @@ function TedxCard() {
           className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
+          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-heading font-bold text-[#16233A]">
+              <h2 className="text-base font-heading font-bold text-dtc-ink">
                 {form.id ? "Modifier le talk" : "Nouveau talk"}
               </h2>
-              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]">
+              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -348,8 +348,8 @@ function TedxCard() {
               <Field label="Description" htmlFor="tedx-desc">
                 <textarea id="tedx-desc" rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputClass} resize-y`} />
               </Field>
-              <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
-                <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#755B18]" />
+              <label className="flex items-center gap-2 text-xs text-dtc-lineDark cursor-pointer select-none">
+                <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-dtc-gold" />
                 <span>Publié</span>
               </label>
               {error && <p role="alert" className="text-xs text-red-700">{error}</p>}
@@ -555,15 +555,15 @@ function EventPagesCard() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
         <div>
-          <h2 className="text-sm font-heading font-bold text-[#16233A]">Pages d&apos;événement ({pages?.length ?? "…"})</h2>
-          <p className="text-[11px] text-[#5C6672]">Pages vitrines dynamiques servies sur /events/[slug].</p>
+          <h2 className="text-sm font-heading font-bold text-dtc-ink">Pages d&apos;événement ({pages?.length ?? "…"})</h2>
+          <p className="text-[11px] text-dtc-inkMuted">Pages vitrines dynamiques servies sur /events/[slug].</p>
         </div>
         <button
           onClick={() => openEditor(null)}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 active:scale-95"
         >
           <Plus className="w-3 h-3" />
           <span>Page</span>
@@ -577,50 +577,50 @@ function EventPagesCard() {
       )}
 
       {pages === null ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {pages.map((page) => {
             const isExpanded = expanded === page.id;
             return (
-              <div key={page.id} className="rounded-xl bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
+              <div key={page.id} className="rounded-xl bg-dtc-wash/40 border border-dtc-line/25">
                 <div className="flex items-center gap-2.5 p-2.5">
                   <button
                     onClick={() => setExpanded(isExpanded ? null : page.id)}
                     aria-expanded={isExpanded}
-                    className="flex items-center gap-1 text-[#5F6774] hover:text-[#755B18]"
+                    className="flex items-center gap-1 text-dtc-inkSoft hover:text-dtc-gold"
                     aria-label={isExpanded ? "Replier" : "Déplier"}
                   >
                     {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-semibold text-[#16233A] truncate">
-                      {page.title} <span className="text-[#5F6774] font-normal">/events/{page.slug}</span>
+                    <p className="text-xs font-semibold text-dtc-ink truncate">
+                      {page.title} <span className="text-dtc-inkSoft font-normal">/events/{page.slug}</span>
                     </p>
-                    <p className="text-[10px] text-[#5C6672]">
+                    <p className="text-[10px] text-dtc-inkMuted">
                       {itemsByPage[page.id]?.length ?? 0} élément(s)
                     </p>
                   </div>
                   <Badge tone={page.status === "published" ? "green" : page.status === "draft" ? "gold" : "gray"}>
                     {page.status === "published" ? "Publiée" : page.status === "draft" ? "Brouillon" : "Archivée"}
                   </Badge>
-                  <button onClick={() => openEditor(page)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
+                  <button onClick={() => openEditor(page)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold">
                     <Pencil className="w-3 h-3" />
                   </button>
-                  <button onClick={() => remove(page)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
+                  <button onClick={() => remove(page)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700">
                     <Trash2 className="w-3 h-3" />
                   </button>
                 </div>
 
                 {isExpanded && (
-                  <div className="px-3 pb-3 space-y-2 border-t border-[#DCD7CB]/25 pt-2.5">
+                  <div className="px-3 pb-3 space-y-2 border-t border-dtc-line/25 pt-2.5">
                     {(itemsByPage[page.id] ?? []).map((item) => (
-                      <div key={item.id} className="flex items-center gap-2 p-2 rounded-lg bg-white/60 border border-[#DCD7CB]/20">
+                      <div key={item.id} className="flex items-center gap-2 p-2 rounded-lg bg-white/60 border border-dtc-line/20">
                         <div className="min-w-0 flex-1">
-                          <p className="text-[11px] font-semibold text-[#16233A] truncate">
-                            {item.title} {item.speaker && <span className="text-[#755B18]">— {item.speaker}</span>}
+                          <p className="text-[11px] font-semibold text-dtc-ink truncate">
+                            {item.title} {item.speaker && <span className="text-dtc-gold">— {item.speaker}</span>}
                           </p>
-                          <p className="text-[10px] text-[#5F6774] truncate">{item.video_url || item.poster_url || "—"}</p>
+                          <p className="text-[10px] text-dtc-inkSoft truncate">{item.video_url || item.poster_url || "—"}</p>
                         </div>
                         <button
                           onClick={() =>
@@ -635,18 +635,18 @@ function EventPagesCard() {
                             })
                           }
                           aria-label="Modifier l'élément"
-                          className="w-6 h-6 flex items-center justify-center rounded text-[#5F6774] hover:text-[#755B18]"
+                          className="w-6 h-6 flex items-center justify-center rounded text-dtc-inkSoft hover:text-dtc-gold"
                         >
                           <Pencil className="w-3 h-3" />
                         </button>
-                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-[#5F6774] hover:text-red-700">
+                        <button onClick={() => removeItem(item)} aria-label="Supprimer l'élément" className="w-6 h-6 flex items-center justify-center rounded text-dtc-inkSoft hover:text-red-700">
                           <Trash2 className="w-3 h-3" />
                         </button>
                       </div>
                     ))}
 
                     {editingItem?.pageId === page.id ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2.5 rounded-lg border border-dashed border-[#755B18]/40 bg-white/40">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2.5 rounded-lg border border-dashed border-dtc-gold/40 bg-white/40">
                         <input
                           type="text"
                           value={editingItem.title}
@@ -725,7 +725,7 @@ function EventPagesCard() {
             );
           })}
           {pages.length === 0 && (
-            <p className="text-xs text-[#5C6672] text-center py-4">
+            <p className="text-xs text-dtc-inkMuted text-center py-4">
               Aucune page — créez « la page du TEDx de l&apos;année prochaine » ici.
             </p>
           )}
@@ -764,12 +764,12 @@ function EventPagesCard() {
           className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
+          <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-heading font-bold text-[#16233A]">
+              <h2 className="text-base font-heading font-bold text-dtc-ink">
                 {editing ? "Modifier la page" : "Nouvelle page d'événement"}
               </h2>
-              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]">
+              <button onClick={() => setOpen(false)} aria-label="Fermer" className="w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink">
                 <X className="w-4 h-4" />
               </button>
             </div>

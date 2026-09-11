@@ -100,13 +100,13 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
         role="dialog"
         aria-modal="true"
         aria-label={talk.topic}
-        className="relative z-10 w-full max-w-2xl bg-[#F7F5F0] border border-[#DCD7CB]/80 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90dvh] my-auto"
+        className="relative z-10 w-full max-w-2xl bg-dtc-paper border border-dtc-line/80 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90dvh] my-auto"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
           data-autofocus
-          className="absolute top-3 right-3 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-black/75 text-white hover:text-[#755B18] hover:bg-black border border-white/20 shadow-xl backdrop-blur-md transition-all focus-visible:ring-2 focus-visible:ring-[#755B18] cursor-pointer"
+          className="absolute top-3 right-3 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-black/75 text-white hover:text-dtc-gold hover:bg-black border border-white/20 shadow-xl backdrop-blur-md transition-all focus-visible:ring-2 focus-visible:ring-dtc-gold cursor-pointer"
           aria-label="Fermer"
         >
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -134,7 +134,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
           <div className="absolute bottom-0 inset-x-0 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-center justify-between opacity-90 group-hover:opacity-100 transition-opacity">
             <button
               onClick={togglePlay}
-              className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-[#D4AF37] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
+              className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-dtc-goldBright transition-colors focus-visible:ring-2 focus-visible:ring-dtc-gold"
               aria-label={isPlaying ? "Pause" : "Lecture"}
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-current" />}
@@ -143,7 +143,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
             <div className="flex items-center gap-1.5">
               <button
                 onClick={toggleMute}
-                className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-[#D4AF37] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-dtc-goldBright transition-colors focus-visible:ring-2 focus-visible:ring-dtc-gold"
                 aria-label={isMuted ? "Activer le son" : "Couper le son"}
               >
                 {isMuted ? <VolumeX className="w-5 h-5 text-amber-400" /> : <Volume2 className="w-5 h-5" />}
@@ -151,7 +151,7 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
 
               <button
                 onClick={toggleFullscreen}
-                className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-[#D4AF37] transition-colors focus-visible:ring-2 focus-visible:ring-[#755B18]"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:text-dtc-goldBright transition-colors focus-visible:ring-2 focus-visible:ring-dtc-gold"
                 aria-label="Plein écran"
               >
                 <Maximize className="w-5 h-5" />
@@ -164,39 +164,39 @@ export default function VideoPlayerModal({ talk, onClose }: VideoPlayerModalProp
         <div className="w-full md:w-1/2 p-4 sm:p-6 flex flex-col justify-between overflow-y-auto space-y-3 sm:space-y-4">
           <div className="space-y-2 sm:space-y-3">
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold bg-[#755B18]/20 text-[#755B18] border border-[#755B18]/30">
+              <span className="px-2.5 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold bg-dtc-gold/20 text-dtc-gold border border-dtc-gold/30">
                 TEDxFMDC · Extrait {talk.extractNumber}/8
               </span>
-              <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#EFECE4] text-[#5C6672]">
+              <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-dtc-wash text-dtc-inkMuted">
                 {talk.language}
               </span>
             </div>
 
-            <h2 className="text-lg sm:text-xl font-heading font-bold text-[#16233A] leading-snug">
+            <h2 className="text-lg sm:text-xl font-heading font-bold text-dtc-ink leading-snug">
               {talk.topic}
             </h2>
 
-            <div className="text-xs sm:text-sm font-semibold text-[#3D4A58]">
-              Orateur: <span className="text-[#755B18]">{talk.speaker}</span>
+            <div className="text-xs sm:text-sm font-semibold text-dtc-lineDark">
+              Orateur: <span className="text-dtc-gold">{talk.speaker}</span>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed">
+            <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed">
               {talk.description}
             </p>
           </div>
 
-          <div className="pt-3 sm:pt-4 border-t border-[#DCD7CB]/30 space-y-2.5">
+          <div className="pt-3 sm:pt-4 border-t border-dtc-line/30 space-y-2.5">
             <a
               href={talk.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#EFECE4] hover:bg-[#EFECE4]/80 text-[#16233A] hover:text-[#755B18] border border-[#DCD7CB]/40 text-xs font-semibold transition-all shadow-sm active:scale-95"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-dtc-wash hover:bg-dtc-wash/80 text-dtc-ink hover:text-dtc-gold border border-dtc-line/40 text-xs font-semibold transition-all shadow-sm active:scale-95"
             >
               <span>Voir le Reel officiel sur Instagram</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
 
-            <p className="text-[10px] sm:text-[11px] text-center text-[#5C6672]">
+            <p className="text-[10px] sm:text-[11px] text-center text-dtc-inkMuted">
               Enregistré en direct à l&apos;Amphithéâtre FMDC Casablanca · 22 Nov 2025
             </p>
           </div>

@@ -9,6 +9,20 @@ export const siteConfig = {
   tagline: "Que ta voix résonne en échos sans fin.",
   description: "Club d'éloquence, débats et événements académiques de la Faculté de Médecine Dentaire de Casablanca (FMDC - UH2C).",
   siteUrl: "https://dentalkclubfmdc.com",
+  /** Backstage host — middleware rewrites it to /secret with the site chrome stripped. */
+  secretHost: "vx72kq9.dentalkclubfmdc.com",
+  /**
+   * Cache-bust version for brand assets (logo + every icon). Bump ONCE here
+   * after replacing an asset — all cacheable URLs derive from it via
+   * assetUrl(), so one commit re-points every browser and the service worker.
+   */
+  assetVersion: "2026c",
+  /** Social share card (only place the text-lockup logo appears). */
+  ogImage: "/og-image-2026.jpg",
+  /** Cache-busted URL for a public/ asset, e.g. assetUrl("/logo.png"). */
+  assetUrl(path: string) {
+    return `${path}?v=${this.assetVersion}`;
+  },
   foundingDate: "Novembre 2024",
   university: "Université Hassan II de Casablanca",
   faculty: "Faculté de Médecine Dentaire de Casablanca",

@@ -56,13 +56,13 @@ export default function IdeasTab() {
 
   if (items === null) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
         {error ? (
           <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
             Chargement impossible : {error}
           </p>
         ) : (
-          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
+          <Loader2 className="w-5 h-5 text-dtc-gold animate-spin mx-auto" />
         )}
       </div>
     );
@@ -75,7 +75,7 @@ export default function IdeasTab() {
           {error}
         </p>
       )}
-      <p className="text-xs text-[#5C6672]">
+      <p className="text-xs text-dtc-inkMuted">
         {items.length} idée{items.length > 1 ? "s" : ""} — changement de statut visible publiquement (badges).
       </p>
       {items.map((item) => {
@@ -83,11 +83,11 @@ export default function IdeasTab() {
         return (
           <div
             key={item.id}
-            className="glass-card rounded-xl border border-[#DCD7CB]/40 p-3 flex flex-wrap items-center gap-2.5"
+            className="glass-card rounded-xl border border-dtc-line/40 p-3 flex flex-wrap items-center gap-2.5"
           >
             <div className="min-w-0 flex-1">
-              <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">{item.title}</p>
-              <p className="text-[10px] text-[#5C6672]">
+              <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate">{item.title}</p>
+              <p className="text-[10px] text-dtc-inkMuted">
                 {item.author_name ?? "Membre"} · {formatRelative(item.created_at)} · {item.vote_count} votes ·{" "}
                 {item.comment_count} commentaires
               </p>
@@ -110,7 +110,7 @@ export default function IdeasTab() {
             <button
               onClick={() => remove(item)}
               aria-label={`Supprimer — ${item.title}`}
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -118,7 +118,7 @@ export default function IdeasTab() {
         );
       })}
       {items.length === 0 && (
-        <p className="text-xs text-[#5C6672] text-center py-6">Aucune idée soumise pour le moment.</p>
+        <p className="text-xs text-dtc-inkMuted text-center py-6">Aucune idée soumise pour le moment.</p>
       )}
     </div>
   );

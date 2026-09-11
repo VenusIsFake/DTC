@@ -107,10 +107,10 @@ export default function AdminConsole({
   return (
     <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-4 sm:space-y-6">
       <div className="space-y-1.5">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-dtc-gold">
           Console DTC — {adminName} · {role === "admin" ? "Admin" : "Bureau"}
         </p>
-        <h1 className="font-heading font-semibold text-2xl sm:text-4xl text-[#16233A] tracking-tight">
+        <h1 className="font-heading font-semibold text-2xl sm:text-4xl text-dtc-ink tracking-tight">
           Administration du Club
         </h1>
       </div>
@@ -134,8 +134,8 @@ export default function AdminConsole({
                 onClick={() => setTab(option.id)}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                   isActive
-                    ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30 shadow-md"
-                    : "text-[#5C6672] hover:text-[#16233A] border border-transparent hover:bg-[#EFECE4]"
+                    ? "bg-dtc-wash text-dtc-gold border border-dtc-gold/30 shadow-md"
+                    : "text-dtc-inkMuted hover:text-dtc-ink border border-transparent hover:bg-dtc-wash"
                 }`}
               >
                 <option.icon className="w-3.5 h-3.5" />
@@ -147,7 +147,7 @@ export default function AdminConsole({
         {!stripAtEnd && (
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#F7F5F0] to-transparent"
+            className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-dtc-paper to-transparent"
           />
         )}
       </div>

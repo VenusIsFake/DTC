@@ -28,7 +28,7 @@ const organizationJsonLd = {
   name: siteConfig.name,
   alternateName: siteConfig.acronym,
   url: siteConfig.siteUrl,
-  logo: `${siteConfig.siteUrl}/logo.png?v=2026c`,
+  logo: `${siteConfig.siteUrl}${siteConfig.assetUrl("/logo.png")}`,
   foundingDate: "2024-11",
   description: siteConfig.description,
   sameAs: [siteConfig.instagramUrl, siteConfig.youtubeChannelUrl],
@@ -63,17 +63,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Dentalk Club FMDC" }],
   creator: "Dentalk Club FMDC",
-  // Explicit bustable URLs instead of app/icon file conventions (which can't
-  // carry a query string): the ?v= forces every browser — including ones that
-  // pinned the pre-2026 logo in their favicon DB — to refetch after a bump.
-  // public/favicon.ico mirrors the same fresh asset for bare /favicon.ico probes.
+  // Icon URLs derive from siteConfig.assetUrl — bump assetVersion there (one
+  // place) to invalidate every browser + the service worker at once.
   icons: {
-    shortcut: "/favicon.ico?v=2026c",
+    shortcut: siteConfig.assetUrl("/favicon.ico"),
     icon: [
-      { url: "/favicon.png?v=2026c", sizes: "32x32", type: "image/png" },
-      { url: "/icon-512.png?v=2026c", sizes: "512x512", type: "image/png" },
+      { url: siteConfig.assetUrl("/favicon.png"), sizes: "32x32", type: "image/png" },
+      { url: siteConfig.assetUrl("/icon-512.png"), sizes: "512x512", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.png?v=2026c",
+    apple: siteConfig.assetUrl("/apple-touch-icon.png"),
   },
   alternates: {
     canonical: "/",
@@ -87,7 +85,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/og-image-2026.jpg",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
         alt: "Dentalk Club FMDC Official Logo",
@@ -98,7 +96,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/og-image-2026.jpg"],
+    images: [siteConfig.ogImage],
   },
 };
 
@@ -121,7 +119,7 @@ export default async function RootLayout({
 
   return (
     <html lang="fr" className={`${inter.variable} ${display.variable}`}>
-      <body className="bg-[#F7F5F0] text-[#16233A] min-h-screen flex flex-col antialiased selection:bg-[#755B18]/20 selection:text-[#16233A]">
+      <body className="bg-dtc-paper text-dtc-ink min-h-screen flex flex-col antialiased selection:bg-dtc-gold/20 selection:text-dtc-ink">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -100,7 +100,7 @@ export default function ProfileEditor({
   };
 
   return (
-    <form onSubmit={handleSave} className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-7 space-y-5">
+    <form onSubmit={handleSave} className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-7 space-y-5">
       {/* Avatar */}
       <div className="flex items-center gap-4">
         <div className="relative">
@@ -113,11 +113,11 @@ export default function ProfileEditor({
           />
         </div>
         <div className="space-y-1.5">
-          <p className="text-sm font-semibold text-[#16233A]">Photo de profil</p>
-          <p className="text-[11px] text-[#5C6672]">
+          <p className="text-sm font-semibold text-dtc-ink">Photo de profil</p>
+          <p className="text-[11px] text-dtc-inkMuted">
             Visible par les membres dans l&apos;annuaire. Choisissez et cadrez votre photo.
           </p>
-          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-semibold border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#755B18]/50 hover:text-[#755B18] cursor-pointer transition-all">
+          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-semibold border border-dtc-line/60 text-dtc-lineDark hover:border-dtc-gold/50 hover:text-dtc-gold cursor-pointer transition-all">
             <input
               ref={fileInputRef}
               type="file"

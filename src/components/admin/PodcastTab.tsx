@@ -167,16 +167,16 @@ function EditorModal({
       className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-2xl max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-4 shadow-lg">
+      <div className="relative z-10 w-full max-w-2xl max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-7 space-y-4 shadow-lg">
         <div className="flex items-center justify-between">
-          <h2 className="flex items-center gap-2 text-lg font-heading font-bold text-[#16233A]">
-            <Radio className="w-5 h-5 text-[#755B18]" />
+          <h2 className="flex items-center gap-2 text-lg font-heading font-bold text-dtc-ink">
+            <Radio className="w-5 h-5 text-dtc-gold" />
             {draft.id ? "Modifier l'épisode" : "Nouvel épisode"}
           </h2>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -319,23 +319,23 @@ function EditorModal({
           </Field>
 
           <div className="flex flex-wrap gap-5">
-            <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
+            <label className="flex items-center gap-2 text-xs text-dtc-lineDark cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={draft.is_published}
                 onChange={(e) => update("is_published", e.target.checked)}
-                className="w-4 h-4 accent-[#755B18]"
+                className="w-4 h-4 accent-dtc-gold"
               />
               <span>Publié</span>
             </label>
-            <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
+            <label className="flex items-center gap-2 text-xs text-dtc-lineDark cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={draft.is_featured}
                 onChange={(e) => update("is_featured", e.target.checked)}
-                className="w-4 h-4 accent-[#755B18]"
+                className="w-4 h-4 accent-dtc-gold"
               />
-              <Sparkles className="w-3.5 h-3.5 text-[#755B18]" />
+              <Sparkles className="w-3.5 h-3.5 text-dtc-gold" />
               <span>À la une</span>
             </label>
           </div>
@@ -463,17 +463,17 @@ export default function PodcastTab() {
   return (
     <div className="space-y-4">
       {/* Import box */}
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
           <Youtube className="w-4 h-4 text-[#FF0000]" aria-hidden="true" />
           Importer depuis YouTube
         </h2>
-        <p className="text-[11px] text-[#5C6672] leading-relaxed">
+        <p className="text-[11px] text-dtc-inkMuted leading-relaxed">
           Collez l&apos;URL de la vidéo : titre, miniature, durée et date sont récupérés automatiquement,
           vous n&apos;avez plus qu&apos;à ajuster et publier.
         </p>
         {youtubeReady === false && (
-          <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+          <p className="text-[11px] text-dtc-gold bg-dtc-gold/10 border border-dtc-gold/30 rounded-lg px-3 py-2">
             Import automatique désactivé : la clé serveur YOUTUBE_API_KEY n&apos;est pas configurée.
             La création manuelle d&apos;un épisode ci-dessous reste disponible.
           </p>
@@ -510,18 +510,18 @@ export default function PodcastTab() {
 
       {/* Episode list */}
       {episodes === null ? (
-        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
+        <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
+          <Loader2 className="w-5 h-5 text-dtc-gold animate-spin mx-auto" />
         </div>
       ) : (
         <div className="space-y-2">
           {episodes.map((row) => (
             <div
               key={row.id}
-              className="glass-card rounded-xl border border-[#DCD7CB]/40 p-3 flex flex-wrap items-center gap-2.5"
+              className="glass-card rounded-xl border border-dtc-line/40 p-3 flex flex-wrap items-center gap-2.5"
             >
               <div className="min-w-0 flex-1">
-                <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">
+                <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate">
                   ÉP. {row.episode_number} — {row.guest}
                   {row.is_featured && <Badge tone="gold" className="ml-2">À la une</Badge>}
                   {!row.is_published && <Badge tone="gray" className="ml-2">Brouillon</Badge>}
@@ -530,7 +530,7 @@ export default function PodcastTab() {
                   href={youtubeWatchUrl(row.youtube_id)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] text-[#5C6672] hover:text-[#755B18] truncate block"
+                  className="text-[10px] text-dtc-inkMuted hover:text-dtc-gold truncate block"
                 >
                   {row.release_date || "—"} · {row.duration || "—"} · youtube.com/watch?v={row.youtube_id}
                 </a>
@@ -542,20 +542,20 @@ export default function PodcastTab() {
                     setEditorOpen(true);
                   }}
                   aria-label={`Modifier — épisode ${row.episode_number} (${row.guest})`}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => togglePublished(row)}
-                  className="px-2.5 py-1.5 rounded-lg text-[10px] font-semibold border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#755B18]/50 hover:text-[#755B18] transition-all"
+                  className="px-2.5 py-1.5 rounded-lg text-[10px] font-semibold border border-dtc-line/60 text-dtc-lineDark hover:border-dtc-gold/50 hover:text-dtc-gold transition-all"
                 >
                   {row.is_published ? "Dépublier" : "Publier"}
                 </button>
                 <button
                   onClick={() => remove(row)}
                   aria-label={`Supprimer — épisode ${row.episode_number} (${row.guest})`}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -563,7 +563,7 @@ export default function PodcastTab() {
             </div>
           ))}
           {episodes.length === 0 && (
-            <p className="text-xs text-[#5C6672] text-center py-6">
+            <p className="text-xs text-dtc-inkMuted text-center py-6">
               Aucun épisode en base — importez le premier depuis YouTube.
             </p>
           )}

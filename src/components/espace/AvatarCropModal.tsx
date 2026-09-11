@@ -300,21 +300,21 @@ export default function AvatarCropModal({
     >
       <div className="absolute inset-0" onClick={submitting ? undefined : onClose} aria-hidden="true" />
 
-      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-5 shadow-lg overflow-hidden">
+      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-7 space-y-5 shadow-lg overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="space-y-0.5">
-            <h2 className="text-lg sm:text-xl font-heading font-semibold text-[#16233A]">
+            <h2 className="text-lg sm:text-xl font-heading font-semibold text-dtc-ink">
               Cadrer votre <span className="gold-gradient-text">photo</span>
             </h2>
-            <p className="text-[11px] text-[#5C6672]">
+            <p className="text-[11px] text-dtc-inkMuted">
               Glissez pour repositionner et zoomez pour ajuster le cadrage.
             </p>
           </div>
           <button
             onClick={onClose}
             disabled={submitting}
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors disabled:opacity-50"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink transition-colors disabled:opacity-50"
             aria-label="Fermer"
           >
             <X className="w-4 h-4" />
@@ -336,7 +336,7 @@ export default function AvatarCropModal({
               e.preventDefault();
               setPan((prev) => getClampedPan({ x: prev.x + dx, y: prev.y + dy }, zoom));
             }}
-            className={`relative rounded-lg overflow-hidden bg-[#070D1E] border border-[#DCD7CB]/60 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#755B18] ${
+            className={`relative rounded-lg overflow-hidden bg-[#070D1E] border border-dtc-line/60 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dtc-gold ${
               isDragging ? "cursor-grabbing" : "cursor-grab"
             } touch-none`}
             style={{ width: `${VIEWPORT_SIZE}px`, height: `${VIEWPORT_SIZE}px` }}
@@ -422,10 +422,10 @@ export default function AvatarCropModal({
         </div>
 
         {/* Controls: Zoom & Real-time Mini Preview */}
-        <div className="flex items-center gap-4 bg-white/70 border border-[#DCD7CB]/40 rounded-lg p-3">
+        <div className="flex items-center gap-4 bg-white/70 border border-dtc-line/40 rounded-lg p-3">
           {/* Mini Live Preview */}
           <div className="flex flex-col items-center gap-1 shrink-0">
-            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#755B18] bg-[#EFECE4] shadow-md shadow-[#755B18]/15">
+            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-dtc-gold bg-dtc-wash shadow-md shadow-dtc-gold/15">
               <canvas
                 ref={previewCanvasRef}
                 width={72}
@@ -433,21 +433,21 @@ export default function AvatarCropModal({
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-[9px] font-semibold text-[#5C6672]">Aperçu</span>
+            <span className="text-[9px] font-semibold text-dtc-inkMuted">Aperçu</span>
           </div>
 
           {/* Zoom Slider and Quick Buttons */}
           <div className="flex-1 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px] font-semibold text-[#3D4A58]">
+            <div className="flex items-center justify-between text-[11px] font-semibold text-dtc-lineDark">
               <span>Zoom</span>
-              <span className="text-[#755B18] font-mono">{Math.round(zoom * 100)}%</span>
+              <span className="text-dtc-gold font-mono">{Math.round(zoom * 100)}%</span>
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => handleZoomChange(zoom - 0.2)}
                 disabled={zoom <= 1.0 || submitting}
-                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#16233A] disabled:opacity-30 transition-all active:scale-95"
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-dtc-wash text-dtc-inkMuted hover:text-dtc-ink disabled:opacity-30 transition-all active:scale-95"
                 aria-label="Dézoomer"
               >
                 <ZoomOut className="w-3.5 h-3.5" />
@@ -461,7 +461,7 @@ export default function AvatarCropModal({
                 value={zoom}
                 onChange={(e) => handleZoomChange(parseFloat(e.target.value))}
                 disabled={submitting}
-                className="flex-1 h-1.5 bg-[#EFECE4] rounded-lg appearance-none cursor-pointer accent-[#755B18]"
+                className="flex-1 h-1.5 bg-dtc-wash rounded-lg appearance-none cursor-pointer accent-dtc-gold"
                 aria-label="Niveau de zoom"
               />
 
@@ -469,7 +469,7 @@ export default function AvatarCropModal({
                 type="button"
                 onClick={() => handleZoomChange(zoom + 0.2)}
                 disabled={zoom >= 3.0 || submitting}
-                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#16233A] disabled:opacity-30 transition-all active:scale-95"
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-dtc-wash text-dtc-inkMuted hover:text-dtc-ink disabled:opacity-30 transition-all active:scale-95"
                 aria-label="Zoomer"
               >
                 <ZoomIn className="w-3.5 h-3.5" />
@@ -479,7 +479,7 @@ export default function AvatarCropModal({
                 type="button"
                 onClick={handleReset}
                 disabled={submitting || (zoom === 1.0 && pan.x === 0 && pan.y === 0)}
-                className="w-7 h-7 flex items-center justify-center rounded-full bg-[#EFECE4] text-[#5C6672] hover:text-[#755B18] disabled:opacity-30 transition-all active:scale-95 ml-0.5"
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-dtc-wash text-dtc-inkMuted hover:text-dtc-gold disabled:opacity-30 transition-all active:scale-95 ml-0.5"
                 title="Réinitialiser le cadrage"
                 aria-label="Réinitialiser le cadrage"
               >

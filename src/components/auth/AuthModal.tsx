@@ -38,7 +38,7 @@ function translateError(message: string): string {
 }
 
 const inputClass =
-  "w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DCD7CB] text-sm text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18] focus:ring-2 focus:ring-[#755B18]/60";
+  "w-full px-3.5 py-2.5 rounded-xl bg-white border border-dtc-line text-sm text-dtc-ink placeholder:text-dtc-inkSoft focus:outline-none focus:border-dtc-gold focus:ring-2 focus:ring-dtc-gold/60";
 
 export default function AuthModal({
   isOpen,
@@ -193,26 +193,26 @@ export default function AuthModal({
       )}
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
 
-      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-[#DCD7CB]/50 p-6 sm:p-8 space-y-5 shadow-lg max-h-[92vh] overflow-y-auto animate-modal-in">
+      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-dtc-line/50 p-6 sm:p-8 space-y-5 shadow-lg max-h-[92vh] overflow-y-auto animate-modal-in">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
+          className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink transition-colors"
           aria-label="Fermer"
         >
           <X className="w-4 h-4" />
         </button>
 
         <div className="space-y-1 text-center">
-          <h2 className="text-xl sm:text-2xl font-heading font-semibold text-[#16233A]">
+          <h2 className="text-xl sm:text-2xl font-heading font-semibold text-dtc-ink">
             {t.head}
             <span className="gold-gradient-text">{t.gold}</span>
           </h2>
-          <p className="text-xs text-[#5C6672]">{t.sub}</p>
+          <p className="text-xs text-dtc-inkMuted">{t.sub}</p>
         </div>
 
         {/* Mode tabs (sign in / sign up only) */}
         {(mode === "signin" || mode === "signup") && (
-          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-white/80 border border-[#DCD7CB]/40" role="tablist">
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-white/80 border border-dtc-line/40" role="tablist">
             {(
               [
                 { id: "signin", label: "Connexion" },
@@ -229,8 +229,8 @@ export default function AuthModal({
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
                   mode === tab.id
-                    ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30"
-                    : "text-[#5C6672] hover:text-[#16233A]"
+                    ? "bg-dtc-wash text-dtc-gold border border-dtc-gold/30"
+                    : "text-dtc-inkMuted hover:text-dtc-ink"
                 }`}
               >
                 {tab.label}
@@ -241,18 +241,18 @@ export default function AuthModal({
 
         {(mode === "forgot" || mode === "signup") && sent ? (
           <div className="space-y-4 text-center py-2">
-            <div className="mx-auto w-12 h-12 rounded-full bg-[#755B18]/10 border border-[#755B18]/30 flex items-center justify-center">
-              <MailCheck className="w-5 h-5 text-[#755B18]" />
+            <div className="mx-auto w-12 h-12 rounded-full bg-dtc-gold/10 border border-dtc-gold/30 flex items-center justify-center">
+              <MailCheck className="w-5 h-5 text-dtc-gold" />
             </div>
             {mode === "signup" ? (
-              <p className="text-sm text-[#3D4A58]">
-                Compte créé pour <span className="text-[#16233A] font-semibold">{email}</span> ! Un
+              <p className="text-sm text-dtc-lineDark">
+                Compte créé pour <span className="text-dtc-ink font-semibold">{email}</span> ! Un
                 email de confirmation vient de partir&nbsp;: ouvrez-le, cliquez sur le lien pour
                 activer votre compte, puis connectez-vous.
               </p>
             ) : (
-              <p className="text-sm text-[#3D4A58]">
-                Si un compte existe pour <span className="text-[#16233A] font-semibold">{email}</span>, un
+              <p className="text-sm text-dtc-lineDark">
+                Si un compte existe pour <span className="text-dtc-ink font-semibold">{email}</span>, un
                 email de réinitialisation vient de partir. Ouvrez-le et cliquez sur le lien pour
                 choisir un nouveau mot de passe.
               </p>
@@ -262,7 +262,7 @@ export default function AuthModal({
                 setMode("signin");
                 setSent(false);
               }}
-              className="text-xs font-semibold text-[#755B18] hover:underline underline-offset-2"
+              className="text-xs font-semibold text-dtc-gold hover:underline underline-offset-2"
             >
               Retour à la connexion
             </button>
@@ -277,7 +277,7 @@ export default function AuthModal({
                   setError(null);
                   setSent(false);
                 }}
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#5C6672] hover:text-[#755B18] transition-colors"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-dtc-inkMuted hover:text-dtc-gold transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>{mode === "newpassword" ? "Retour à la connexion" : "Retour"}</span>
@@ -286,7 +286,7 @@ export default function AuthModal({
 
             {mode === "signup" && (
               <div className="space-y-1">
-                <label htmlFor="auth-fullname" className="text-[11px] font-semibold text-[#3D4A58] block">
+                <label htmlFor="auth-fullname" className="text-[11px] font-semibold text-dtc-lineDark block">
                   Nom complet
                 </label>
                 <input
@@ -304,7 +304,7 @@ export default function AuthModal({
 
             {mode !== "newpassword" && (
               <div className="space-y-1">
-                <label htmlFor="auth-email" className="text-[11px] font-semibold text-[#3D4A58] block">
+                <label htmlFor="auth-email" className="text-[11px] font-semibold text-dtc-lineDark block">
                   Email
                 </label>
                 <input
@@ -322,7 +322,7 @@ export default function AuthModal({
 
             {(mode === "signin" || mode === "signup" || mode === "newpassword") && (
               <div className="space-y-1">
-                <label htmlFor="auth-password" className="text-[11px] font-semibold text-[#3D4A58] block">
+                <label htmlFor="auth-password" className="text-[11px] font-semibold text-dtc-lineDark block">
                   {mode === "newpassword" ? "Nouveau mot de passe" : "Mot de passe"}
                 </label>
                 <input
@@ -337,14 +337,14 @@ export default function AuthModal({
                   placeholder="••••••••"
                 />
                 {mode === "signup" && (
-                  <p className="text-[10px] text-[#5F6774]">8 caractères minimum, évitez les mots de passe déjà utilisés ailleurs.</p>
+                  <p className="text-[10px] text-dtc-inkSoft">8 caractères minimum, évitez les mots de passe déjà utilisés ailleurs.</p>
                 )}
               </div>
             )}
 
             {mode === "newpassword" && (
               <div className="space-y-1">
-                <label htmlFor="auth-confirm" className="text-[11px] font-semibold text-[#3D4A58] block">
+                <label htmlFor="auth-confirm" className="text-[11px] font-semibold text-dtc-lineDark block">
                   Confirmer le mot de passe
                 </label>
                 <input
@@ -375,7 +375,7 @@ export default function AuthModal({
               type="submit"
               disabled={submitting}
               data-autofocus
-              className="w-full flex items-center justify-center gap-1.5 px-4 py-3 rounded-md font-bold text-sm bg-[#16233A] text-[#F7F5F0] hover:bg-[#233753] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-1.5 px-4 py-3 rounded-md font-bold text-sm bg-dtc-ink text-dtc-paper hover:bg-dtc-steel transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {mode === "signin" && <LogIn className="w-4 h-4" />}
               {mode === "signup" && <UserPlus className="w-4 h-4" />}
@@ -404,18 +404,18 @@ export default function AuthModal({
               setError(null);
               setSent(false);
             }}
-            className="w-full text-center text-[11px] font-semibold text-[#5C6672] hover:text-[#755B18] transition-colors"
+            className="w-full text-center text-[11px] font-semibold text-dtc-inkMuted hover:text-dtc-gold transition-colors"
           >
             Mot de passe oublié ?
           </button>
         )}
 
         {(mode === "signin" || mode === "signup") && (
-          <p className="text-center text-[10px] text-[#5F6774] leading-relaxed">
+          <p className="text-center text-[10px] text-dtc-inkSoft leading-relaxed">
             Inscription libre, réservée aux étudiants de la FMDC. Votre compte démarre
             en statut invité (consultation seule) : le bureau du club vous accorde
             l&apos;accès membre après vérification.{" "}
-            <Link href="/about" className="text-[#5C6672] underline underline-offset-2">
+            <Link href="/about" className="text-dtc-inkMuted underline underline-offset-2">
               En savoir plus
             </Link>
           </p>

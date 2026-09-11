@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { escapeHtml, formatDateTime } from "@/lib/format";
+import { siteConfig } from "@/data/siteConfig";
 import type { Profile } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dentalkclubfmdc.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.siteUrl;
 
 interface BroadcastEmailRow {
   email: string;

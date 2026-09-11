@@ -100,7 +100,7 @@ export default function InvitationClient({
 
   const wrap = (children: React.ReactNode) => (
     <div className="pt-10 sm:pt-16 pb-16 px-4 max-w-md mx-auto">
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-6 sm:p-8 space-y-5">
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-6 sm:p-8 space-y-5">
         {children}
       </div>
     </div>
@@ -114,10 +114,10 @@ export default function InvitationClient({
             <MailX className="w-6 h-6" />
           </div>
         </div>
-        <h1 className="text-xl font-heading font-semibold text-[#16233A] text-center">
+        <h1 className="text-xl font-heading font-semibold text-dtc-ink text-center">
           Lien indisponible
         </h1>
-        <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed text-center">
+        <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed text-center">
           {status === "used" &&
             "Ce lien d'invitation a déjà été utilisé — chaque lien ne fonctionne qu'une seule fois. Demandez un nouveau lien au bureau du club."}
           {status === "expired" &&
@@ -134,14 +134,14 @@ export default function InvitationClient({
     return wrap(
       <>
         <div className="flex justify-center">
-          <div className={`p-3 rounded-lg ${already ? "bg-[#755B18]/15 text-[#755B18]" : "bg-emerald-600/15 text-emerald-700"}`}>
+          <div className={`p-3 rounded-lg ${already ? "bg-dtc-gold/15 text-dtc-gold" : "bg-emerald-600/15 text-emerald-700"}`}>
             {already ? <ShieldCheck className="w-6 h-6" /> : <CheckCircle2 className="w-6 h-6" />}
           </div>
         </div>
-        <h1 className="text-xl font-heading font-semibold text-[#16233A] text-center">
+        <h1 className="text-xl font-heading font-semibold text-dtc-ink text-center">
           {already ? "Vous avez déjà accès" : "Invitation activée ✓"}
         </h1>
-        <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed text-center">
+        <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed text-center">
           {already
             ? "Votre compte dispose déjà de ce niveau d'accès (ou plus) — le lien reste utilisable par son véritable destinataire."
             : `Bienvenue au DTC ! Votre compte dispose maintenant de l'accès « ${ROLE_LABELS[result] ?? result} ». Vous pouvez quitter cette page et vous connecter au site normalement.`}
@@ -152,14 +152,14 @@ export default function InvitationClient({
             (already && (profile?.role === "bureau" || profile?.role === "admin"))) && (
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 transition-all"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 transition-all"
             >
               Ouvrir la console
             </Link>
           )}
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md text-xs font-bold border border-[#755B18]/50 text-[#755B18] hover:bg-[#755B18]/10 transition-all"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md text-xs font-bold border border-dtc-gold/50 text-dtc-gold hover:bg-dtc-gold/10 transition-all"
           >
             Aller au site
           </Link>
@@ -173,14 +173,14 @@ export default function InvitationClient({
     return wrap(
       <>
         <div className="flex justify-center">
-          <div className="p-3 rounded-lg bg-[#755B18]/15 text-[#755B18]">
+          <div className="p-3 rounded-lg bg-dtc-gold/15 text-dtc-gold">
             <ShieldCheck className="w-6 h-6" />
           </div>
         </div>
-        <h1 className="text-xl font-heading font-semibold text-[#16233A] text-center">
+        <h1 className="text-xl font-heading font-semibold text-dtc-ink text-center">
           Invitation DTC
         </h1>
-        <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed text-center">
+        <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed text-center">
           Ce lien vous accorde l&apos;accès « {ROLE_LABELS[okRole ?? ""] ?? "membre"} » au site du
           club. Vous êtes connecté — activez-le pour ce compte.
         </p>
@@ -199,13 +199,13 @@ export default function InvitationClient({
   return wrap(
     <>
       <div className="flex justify-center">
-        <div className="p-3 rounded-lg bg-[#755B18]/15 text-[#755B18]">
+        <div className="p-3 rounded-lg bg-dtc-gold/15 text-dtc-gold">
           <ShieldCheck className="w-6 h-6" />
         </div>
       </div>
       <div className="text-center space-y-1">
-        <h1 className="text-xl font-heading font-semibold text-[#16233A]">Invitation DTC</h1>
-        <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed">
+        <h1 className="text-xl font-heading font-semibold text-dtc-ink">Invitation DTC</h1>
+        <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed">
           Créez votre compte : il recevra directement l&apos;accès «{" "}
           {ROLE_LABELS[okRole ?? ""] ?? "membre"} ».
         </p>

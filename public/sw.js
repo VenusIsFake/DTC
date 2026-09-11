@@ -18,7 +18,9 @@
  *    responses cannot be stored in the Cache API.
  *
  * Bump VERSION whenever this logic changes — old caches are dropped on
- * activate (see rules.md §10).
+ * activate (see rules.md §10). When swapping a brand asset (logo/icons),
+ * ALSO bump src/data/siteConfig.ts `assetVersion` — the ?v= there changes
+ * the cache key so every browser refetches immediately.
  */
 const VERSION = "2026-09-11.1";
 const STATIC_CACHE = `dtc-static-${VERSION}`; // _next/static, fonts

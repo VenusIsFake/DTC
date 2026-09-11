@@ -126,15 +126,15 @@ function EditorModal({
       className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-lg glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-4 shadow-lg max-h-[92vh] overflow-y-auto">
+      <div className="relative z-10 w-full max-w-lg glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-6 space-y-4 shadow-lg max-h-[92vh] overflow-y-auto">
         <div className="flex items-start justify-between gap-3">
-          <h2 className="text-base font-heading font-bold text-[#16233A]">
+          <h2 className="text-base font-heading font-bold text-dtc-ink">
             {form.id ? "Modifier" : "Nouvelle image"}
           </h2>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
+            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -202,7 +202,7 @@ function EditorModal({
           <img
             src={form.image_url}
             alt="Aperçu"
-            className="w-full aspect-[4/3] object-cover rounded-xl border border-[#DCD7CB]/50"
+            className="w-full aspect-[4/3] object-cover rounded-xl border border-dtc-line/50"
           />
         )}
 
@@ -236,12 +236,12 @@ function EditorModal({
           </Field>
         </div>
 
-        <label className="flex items-center gap-2 text-xs font-semibold text-[#3D4A58] cursor-pointer">
+        <label className="flex items-center gap-2 text-xs font-semibold text-dtc-lineDark cursor-pointer">
           <input
             type="checkbox"
             checked={form.is_published}
             onChange={(e) => set("is_published", e.target.checked)}
-            className="accent-[#755B18]"
+            className="accent-dtc-gold"
           />
           Publiée (visible sur la galerie publique)
         </label>
@@ -312,13 +312,13 @@ export default function GalleryTab() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <p className="text-xs text-[#5C6672]">La galerie publique — images, affiches, moments du club.</p>
+        <p className="text-xs text-dtc-inkMuted">La galerie publique — images, affiches, moments du club.</p>
         <button
           onClick={() => {
             setDraft(null);
             setEditorOpen(true);
           }}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 shadow-md shadow-dtc-gold/20 transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Ajouter</span>
@@ -332,8 +332,8 @@ export default function GalleryTab() {
       )}
 
       {items === null && (
-        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
+        <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
+          <Loader2 className="w-5 h-5 text-dtc-gold animate-spin mx-auto" />
         </div>
       )}
 
@@ -341,17 +341,17 @@ export default function GalleryTab() {
         {items?.map((item) => (
           <div
             key={item.id}
-            className="glass-card rounded-xl border border-[#DCD7CB]/40 p-3 flex flex-wrap items-center gap-2.5"
+            className="glass-card rounded-xl border border-dtc-line/40 p-3 flex flex-wrap items-center gap-2.5"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={item.image_url}
               alt=""
-              className="w-14 h-11 rounded-lg object-cover border border-[#DCD7CB]/50 shrink-0"
+              className="w-14 h-11 rounded-lg object-cover border border-dtc-line/50 shrink-0"
             />
             <div className="min-w-0 flex-1">
-              <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">{item.title}</p>
-              <p className="text-[10px] text-[#5C6672] truncate">
+              <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate">{item.title}</p>
+              <p className="text-[10px] text-dtc-inkMuted truncate">
                 {item.category_label} · ordre {item.sort}
                 {item.date_label ? ` · ${item.date_label}` : ""}
               </p>
@@ -363,7 +363,7 @@ export default function GalleryTab() {
               <button
                 onClick={() => togglePublish(item)}
                 aria-label={`${item.is_published ? "Dépublier" : "Publier"} — ${item.title}`}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
               >
                 {item.is_published ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
               </button>
@@ -382,14 +382,14 @@ export default function GalleryTab() {
                   setEditorOpen(true);
                 }}
                 aria-label={`Modifier — ${item.title}`}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
               >
                 <Pencil className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => remove(item)}
                 aria-label={`Supprimer — ${item.title}`}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -397,7 +397,7 @@ export default function GalleryTab() {
           </div>
         ))}
         {items?.length === 0 && (
-          <p className="text-xs text-[#5C6672] text-center py-6 flex items-center justify-center gap-1.5">
+          <p className="text-xs text-dtc-inkMuted text-center py-6 flex items-center justify-center gap-1.5">
             <ImagePlus className="w-3.5 h-3.5" />
             Galerie vide côté base — le site affiche encore les images statiques intégrées.
           </p>

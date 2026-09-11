@@ -65,37 +65,37 @@ function AttendeesModal({
       className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-4 shadow-lg">
+      <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-6 space-y-4 shadow-lg">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h2 className="text-base font-heading font-bold text-[#16233A] leading-snug">{announcement.title}</h2>
-            <p className="text-xs text-[#5C6672] mt-0.5">
+            <h2 className="text-base font-heading font-bold text-dtc-ink leading-snug">{announcement.title}</h2>
+            <p className="text-xs text-dtc-inkMuted mt-0.5">
               {announcement.rsvp_count} participant{announcement.rsvp_count > 1 ? "s" : ""}
             </p>
           </div>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
+            className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         <div className="space-y-2 max-h-[55dvh] overflow-y-auto pr-1">
-          {loading && <p className="text-xs text-[#5C6672]">Chargement…</p>}
+          {loading && <p className="text-xs text-dtc-inkMuted">Chargement…</p>}
           {!loading && attendees.length === 0 && (
-            <p className="text-xs text-[#5C6672]">Aucun participant pour le moment.</p>
+            <p className="text-xs text-dtc-inkMuted">Aucun participant pour le moment.</p>
           )}
           {attendees.map((a) => (
             <div
               key={a.user_id}
-              className="flex items-center gap-3 p-2.5 rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30"
+              className="flex items-center gap-3 p-2.5 rounded-xl bg-dtc-wash/50 border border-dtc-line/30"
             >
               <UserAvatar name={a.full_name} src={a.avatar_url} size={34} />
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-[#16233A] truncate">{a.full_name || "Membre"}</p>
-                {a.promo && <p className="text-[10px] text-[#5C6672]">Promo {a.promo}</p>}
+                <p className="text-xs font-semibold text-dtc-ink truncate">{a.full_name || "Membre"}</p>
+                {a.promo && <p className="text-[10px] text-dtc-inkMuted">Promo {a.promo}</p>}
               </div>
             </div>
           ))}
@@ -331,13 +331,13 @@ export default function AnnouncementsFeed({
     <div className="space-y-4 sm:space-y-5">
       {isBureau && (
         <div className="flex items-center justify-between gap-3">
-          <p className="text-xs text-[#5C6672] flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#755B18] animate-pulse" />
+          <p className="text-xs text-dtc-inkMuted flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-dtc-gold animate-pulse" />
             Mode bureau : créez les annonces des prochains ateliers.
           </p>
           <button
             onClick={() => openComposer(null)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 shadow-md shadow-dtc-gold/20 transition-all active:scale-95"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Nouvelle annonce</span>
@@ -351,10 +351,10 @@ export default function AnnouncementsFeed({
         </p>
       )}
 
-      {items.length === 0 && (        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 sm:p-12 text-center space-y-2">
-          <CalendarDays className="w-8 h-8 text-[#DCD7CB] mx-auto" />
-          <p className="text-sm font-semibold text-[#16233A]">Aucune annonce pour le moment</p>
-          <p className="text-xs text-[#5C6672]">
+      {items.length === 0 && (        <div className="glass-card rounded-lg border border-dtc-line/40 p-8 sm:p-12 text-center space-y-2">
+          <CalendarDays className="w-8 h-8 text-dtc-line mx-auto" />
+          <p className="text-sm font-semibold text-dtc-ink">Aucune annonce pour le moment</p>
+          <p className="text-xs text-dtc-inkMuted">
             Les ateliers hebdomadaires et informations du club apparaîtront ici en priorité.
           </p>
         </div>
@@ -368,7 +368,7 @@ export default function AnnouncementsFeed({
           <article
             key={item.id}
             className={`glass-card rounded-lg border p-4 sm:p-6 space-y-3 ${
-              item.is_pinned ? "border-[#755B18]/40" : "border-[#DCD7CB]/40"
+              item.is_pinned ? "border-dtc-gold/40" : "border-dtc-line/40"
             }`}
           >
             <div className="flex items-start justify-between gap-3">
@@ -391,14 +391,14 @@ export default function AnnouncementsFeed({
                   <button
                     onClick={() => togglePin(item)}
                     aria-label={item.is_pinned ? "Désépingler" : "Épingler"}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
                   >
                     {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
                   </button>
                   <button
                     onClick={() => openComposer(item)}
                     aria-label="Modifier"
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
                   >
                     <Pencil className="w-3.5 h-3.5" />
                   </button>
@@ -406,7 +406,7 @@ export default function AnnouncementsFeed({
                     <button
                       onClick={() => remove(item)}
                       aria-label="Supprimer"
-                      className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
+                      className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -416,7 +416,7 @@ export default function AnnouncementsFeed({
             </div>
 
             {item.poster_url && (
-              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#DCD7CB]/40 bg-black">
+              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-dtc-line/40 bg-black">
                 <Image
                   src={item.poster_url}
                   alt={`Affiche — ${item.title}`}
@@ -428,22 +428,22 @@ export default function AnnouncementsFeed({
             )}
 
             <div className="space-y-1.5">
-              <h2 className="text-base sm:text-xl font-heading font-bold text-[#16233A] leading-snug">{item.title}</h2>
+              <h2 className="text-base sm:text-xl font-heading font-bold text-dtc-ink leading-snug">{item.title}</h2>
               {item.body && (
-                <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed whitespace-pre-line">{item.body}</p>
+                <p className="text-xs sm:text-sm text-dtc-lineDark leading-relaxed whitespace-pre-line">{item.body}</p>
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-[#5C6672]">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-dtc-inkMuted">
               {item.event_date && (
                 <span className="flex items-center gap-1.5 font-medium">
-                  <CalendarDays className="w-3.5 h-3.5 text-[#755B18]" />
+                  <CalendarDays className="w-3.5 h-3.5 text-dtc-gold" />
                   {formatDateTime(item.event_date)}
                 </span>
               )}
               {item.location && (
                 <span className="flex items-center gap-1.5 font-medium">
-                  <MapPin className="w-3.5 h-3.5 text-[#755B18]" />
+                  <MapPin className="w-3.5 h-3.5 text-dtc-gold" />
                   {item.location}
                 </span>
               )}
@@ -453,7 +453,7 @@ export default function AnnouncementsFeed({
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#DCD7CB]/25">
+            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-dtc-line/25">
               {isAtelier && item.status === "published" && (
                 <button
                   onClick={() => toggleRsvp(item)}
@@ -461,15 +461,15 @@ export default function AnnouncementsFeed({
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold transition-all active:scale-95 disabled:opacity-60 ${
                     joined
                       ? "bg-emerald-600/10 text-emerald-700 border border-emerald-600/40 hover:bg-emerald-500/25"
-                      : "bg-[#755B18]/15 text-[#755B18] border border-[#755B18]/40 hover:bg-[#755B18]/25"
+                      : "bg-dtc-gold/15 text-dtc-gold border border-dtc-gold/40 hover:bg-dtc-gold/25"
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full ${joined ? "bg-emerald-600" : "bg-[#755B18]"}`} />
+                  <span className={`w-2 h-2 rounded-full ${joined ? "bg-emerald-600" : "bg-dtc-gold"}`} />
                   {joined ? "Je participe ✓" : user ? "Je participe" : "Se connecter pour participer"}
                 </button>
               )}
               {isAtelier && (
-                <span className="text-[11px] text-[#5C6672] font-medium px-1">
+                <span className="text-[11px] text-dtc-inkMuted font-medium px-1">
                   {item.rsvp_count} participant{item.rsvp_count > 1 ? "s" : ""}
                 </span>
               )}
@@ -477,7 +477,7 @@ export default function AnnouncementsFeed({
                 {isBureau && isAtelier && item.rsvp_count > 0 && (
                   <button
                     onClick={() => setAttendeesFor(item)}
-                    className="flex items-center gap-1 text-[11px] font-semibold text-[#755B18] hover:text-[#755B18] transition-colors"
+                    className="flex items-center gap-1 text-[11px] font-semibold text-dtc-gold hover:text-dtc-gold transition-colors"
                   >
                     <Users className="w-3.5 h-3.5" />
                     <span>Liste</span>
@@ -486,7 +486,7 @@ export default function AnnouncementsFeed({
                 {isBureau && item.status !== "archived" && (
                   <button
                     onClick={() => setStatus(item, item.status === "published" ? "archived" : "published")}
-                    className="text-[11px] font-medium text-[#5F6774] hover:text-[#5C6672] transition-colors"
+                    className="text-[11px] font-medium text-dtc-inkSoft hover:text-dtc-inkMuted transition-colors"
                   >
                     {item.status === "published" ? "Archiver" : "Publier"}
                   </button>
@@ -494,7 +494,7 @@ export default function AnnouncementsFeed({
                 {isBureau && item.status === "archived" && (
                   <button
                     onClick={() => setStatus(item, "published")}
-                    className="text-[11px] font-medium text-[#5F6774] hover:text-[#5C6672] transition-colors"
+                    className="text-[11px] font-medium text-dtc-inkSoft hover:text-dtc-inkMuted transition-colors"
                   >
                     Republier
                   </button>

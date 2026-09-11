@@ -87,28 +87,28 @@ export default function MembershipFlow({
   return (
     <div className="pt-10 sm:pt-14 pb-16 px-4 max-w-2xl mx-auto space-y-5">
       <div className="space-y-1.5 text-center">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-dtc-gold">
           Espace Membre
         </p>
-        <h1 className="text-xl sm:text-2xl font-heading font-semibold text-[#16233A]">
+        <h1 className="text-xl sm:text-2xl font-heading font-semibold text-dtc-ink">
           Bienvenue au DTC{profile.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""} !
         </h1>
       </div>
 
       {/* Step 1 — opt-in */}
       {phase === "intro" && (
-        <div className="glass-card rounded-lg border border-[#755B18]/30 p-6 sm:p-8 space-y-4 text-center">
-          <div className="mx-auto w-12 h-12 rounded-full bg-[#755B18]/10 border border-[#755B18]/30 flex items-center justify-center">
-            <HandCoins className="w-5 h-5 text-[#755B18]" />
+        <div className="glass-card rounded-lg border border-dtc-gold/30 p-6 sm:p-8 space-y-4 text-center">
+          <div className="mx-auto w-12 h-12 rounded-full bg-dtc-gold/10 border border-dtc-gold/30 flex items-center justify-center">
+            <HandCoins className="w-5 h-5 text-dtc-gold" />
           </div>
-          <h2 className="text-lg font-heading font-semibold text-[#16233A]">Devenir membre du Dentalk Club</h2>
-          <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed">
+          <h2 className="text-lg font-heading font-semibold text-dtc-ink">Devenir membre du Dentalk Club</h2>
+          <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed">
             {settings.intro ||
               "Rejoignez le club : votes, idées, RSVP aux ateliers, annuaire des membres et participations aux événements. Votre compte reste en observation tant que votre adhésion n'est pas finalisée."}
           </p>
           {settings.feeLabel && (
-            <p className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#EFECE4] border border-[#755B18]/30 text-sm font-bold text-[#16233A]">
-              <BadgeCheck className="w-4 h-4 text-[#755B18]" />
+            <p className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-dtc-wash border border-dtc-gold/30 text-sm font-bold text-dtc-ink">
+              <BadgeCheck className="w-4 h-4 text-dtc-gold" />
               Cotisation : {settings.feeLabel}
             </p>
           )}
@@ -122,7 +122,7 @@ export default function MembershipFlow({
               <PenLine className="w-4 h-4" />
               <span>Oui, je veux adhérer</span>
             </PrimaryButton>
-            <p className="text-[10px] text-[#5F6774] max-w-xs leading-relaxed">
+            <p className="text-[10px] text-dtc-inkSoft max-w-xs leading-relaxed">
               Vous pourrez aussi parcourir librement le site public en attendant.
             </p>
           </div>
@@ -131,10 +131,10 @@ export default function MembershipFlow({
 
       {/* Step 2 — profile form */}
       {phase === "form" && (
-        <form onSubmit={submit} className="glass-card rounded-lg border border-[#DCD7CB]/40 p-5 sm:p-7 space-y-4">
+        <form onSubmit={submit} className="glass-card rounded-lg border border-dtc-line/40 p-5 sm:p-7 space-y-4">
           <div className="space-y-1">
-            <h2 className="text-base font-heading font-bold text-[#16233A]">Votre dossier d&apos;adhésion</h2>
-            <p className="text-[11px] text-[#5C6672]">
+            <h2 className="text-base font-heading font-bold text-dtc-ink">Votre dossier d&apos;adhésion</h2>
+            <p className="text-[11px] text-dtc-inkMuted">
               Ces informations permettent au bureau de valider votre adhésion.
             </p>
           </div>
@@ -205,7 +205,7 @@ export default function MembershipFlow({
                 setError(null);
                 setPhase(profile.membership_status === "pending" ? "pending" : "intro");
               }}
-              className="text-[11px] font-semibold text-[#5C6672] hover:text-[#16233A] transition-colors"
+              className="text-[11px] font-semibold text-dtc-inkMuted hover:text-dtc-ink transition-colors"
             >
               ← Retour
             </button>
@@ -223,32 +223,32 @@ export default function MembershipFlow({
           <div className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-5 sm:p-6 space-y-3">
             <div className="flex items-center gap-2">
               <BadgeCheck className="w-5 h-5 text-emerald-700" />
-              <h2 className="text-base font-heading font-bold text-[#16233A]">Dossier envoyé</h2>
+              <h2 className="text-base font-heading font-bold text-dtc-ink">Dossier envoyé</h2>
             </div>
-            <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed">
+            <p className="text-xs sm:text-sm text-dtc-lineDark leading-relaxed">
               {settings.pendingText ||
                 "Dernière étape : réglez la cotisation. Le bureau active votre accès membre dès réception du paiement."}
             </p>
           </div>
 
-          <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-5 sm:p-6 space-y-4">
+          <div className="glass-card rounded-lg border border-dtc-line/40 p-5 sm:p-6 space-y-4">
             {settings.feeLabel && (
-              <div className="flex items-center justify-between gap-3 flex-wrap rounded-xl bg-[#EFECE4] border border-[#755B18]/30 px-4 py-3">
-                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#5C6672]">
-                  <Banknote className="w-4 h-4 text-[#755B18]" />
+              <div className="flex items-center justify-between gap-3 flex-wrap rounded-xl bg-dtc-wash border border-dtc-gold/30 px-4 py-3">
+                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-dtc-inkMuted">
+                  <Banknote className="w-4 h-4 text-dtc-gold" />
                   Montant à payer
                 </span>
-                <span className="text-lg font-heading font-bold text-[#16233A]">{settings.feeLabel}</span>
+                <span className="text-lg font-heading font-bold text-dtc-ink">{settings.feeLabel}</span>
               </div>
             )}
 
             {settings.bankEnabled && settings.bankDetails && (
               <div className="space-y-2">
-                <p className="text-[11px] font-bold text-[#755B18]">Par virement / versement bancaire</p>
-                <div className="rounded-xl bg-white/70 border border-[#DCD7CB]/50 px-4 py-3">
+                <p className="text-[11px] font-bold text-dtc-gold">Par virement / versement bancaire</p>
+                <div className="rounded-xl bg-white/70 border border-dtc-line/50 px-4 py-3">
                   {settings.bankDetails.split("\n").map((line, i) =>
                     line.trim() ? (
-                      <p key={i} className="text-xs text-[#16233A] font-mono select-all break-all leading-relaxed">
+                      <p key={i} className="text-xs text-dtc-ink font-mono select-all break-all leading-relaxed">
                         {line}
                       </p>
                     ) : null
@@ -259,8 +259,8 @@ export default function MembershipFlow({
 
             {settings.inPersonEnabled && settings.inPersonText && (
               <div className="space-y-2">
-                <p className="text-[11px] font-bold text-[#755B18]">En main propre</p>
-                <p className="text-xs text-[#3D4A58] leading-relaxed rounded-xl bg-white/70 border border-[#DCD7CB]/50 px-4 py-3 whitespace-pre-line">
+                <p className="text-[11px] font-bold text-dtc-gold">En main propre</p>
+                <p className="text-xs text-dtc-lineDark leading-relaxed rounded-xl bg-white/70 border border-dtc-line/50 px-4 py-3 whitespace-pre-line">
                   {settings.inPersonText}
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default function MembershipFlow({
               !settings.inPersonEnabled &&
               !whatsappHref &&
               !settings.feeLabel && (
-                <p className="flex items-center gap-1.5 text-xs text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+                <p className="flex items-center gap-1.5 text-xs text-dtc-gold bg-dtc-gold/10 border border-dtc-gold/30 rounded-lg px-3 py-2">
                   <CircleAlert className="w-3.5 h-3.5 shrink-0" />
                   Les modalités de paiement seront publiées par le bureau très bientôt.
                 </p>
@@ -287,7 +287,7 @@ export default function MembershipFlow({
                   <MessageCircle className="w-4 h-4" />
                   <span>Contacter le bureau sur WhatsApp</span>
                 </a>
-                <p className="text-[10px] text-[#5F6774] text-center">
+                <p className="text-[10px] text-dtc-inkSoft text-center">
                   {settings.whatsappMessage
                     ? "Un message pré-rempli s'ouvre — il ne reste qu'à l'envoyer."
                     : "WhatsApp s'ouvre avec le numéro du bureau."}
@@ -309,7 +309,7 @@ export default function MembershipFlow({
             </GhostButton>
             <button
               onClick={cancelRequest}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-semibold text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-semibold text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
             >
               <XCircle className="w-3.5 h-3.5" />
               <span>Retirer ma demande</span>
@@ -323,7 +323,7 @@ export default function MembershipFlow({
         </div>
       )}
 
-      <p className="text-center text-[10px] text-[#5F6774] leading-relaxed">
+      <p className="text-center text-[10px] text-dtc-inkSoft leading-relaxed">
         Le bureau du club vérifie chaque adhésion : votre accès membre s&apos;activera automatiquement après
         validation.
       </p>

@@ -316,9 +316,9 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
 
   if (users === null) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
-        <p className="text-xs text-[#5C6672] mt-2">Chargement des comptes…</p>
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
+        <Loader2 className="w-5 h-5 text-dtc-gold animate-spin mx-auto" />
+        <p className="text-xs text-dtc-inkMuted mt-2">Chargement des comptes…</p>
       </div>
     );
   }
@@ -326,7 +326,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <p className="text-xs text-[#5C6672]">
+        <p className="text-xs text-dtc-inkMuted">
           {users.length} compte{users.length > 1 ? "s" : ""}
           {users.some((u) => u.role === "guest") &&
             ` — dont ${users.filter((u) => u.role === "guest").length} invité(s) en attente`}
@@ -347,7 +347,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             <option value="name">Tri : Nom A→Z</option>
           </select>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#5F6774]" aria-hidden="true" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-dtc-inkSoft" aria-hidden="true" />
             <label htmlFor="users-search" className="sr-only">Rechercher un compte</label>
             <input
               id="users-search"
@@ -366,7 +366,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
               setLinkModalOpen(true);
             }}
             title="Créer un lien d'invitation à usage unique (fonctionne même site fermé)"
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold border border-[#755B18]/40 text-[#755B18] hover:bg-[#755B18]/10 transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold border border-dtc-gold/40 text-dtc-gold hover:bg-dtc-gold/10 transition-all active:scale-95"
           >
             <Link2 className="w-3.5 h-3.5" />
             <span>Lien d&apos;invitation</span>
@@ -379,7 +379,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
               }}
               disabled={serviceReady === false}
               title={serviceReady === false ? "Clé service_role manquante sur le serveur" : "Créer un compte et transmettre le mot de passe temporaire"}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95 disabled:opacity-50"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 shadow-md shadow-dtc-gold/20 transition-all active:scale-95 disabled:opacity-50"
             >
               <UserPlus className="w-3.5 h-3.5" />
               <span>Inviter</span>
@@ -389,7 +389,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       </div>
 
       {isAdmin && serviceReady === false && (
-        <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+        <p className="text-[11px] text-dtc-gold bg-dtc-gold/10 border border-dtc-gold/30 rounded-lg px-3 py-2">
           Invitations, réinitialisations et suppressions de comptes sont désactivées : la clé serveur
           SUPABASE_SERVICE_ROLE_KEY n&apos;est pas configurée.
         </p>
@@ -401,7 +401,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             Mot de passe temporaire pour {passwordResult.email} — affiché une seule fois :
           </p>
           <div className="flex flex-wrap items-center gap-2.5">
-            <code className="px-3 py-2 rounded-lg bg-white border border-[#DCD7CB]/60 text-sm font-bold tracking-wider text-[#16233A] select-all">
+            <code className="px-3 py-2 rounded-lg bg-white border border-dtc-line/60 text-sm font-bold tracking-wider text-dtc-ink select-all">
               {passwordResult.password}
             </code>
             <GhostButton onClick={copyPassword} className="!py-1.5 !text-[11px]">
@@ -410,12 +410,12 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             </GhostButton>
             <button
               onClick={() => setPasswordResult(null)}
-              className="text-[10px] font-semibold text-[#5C6672] hover:text-[#16233A]"
+              className="text-[10px] font-semibold text-dtc-inkMuted hover:text-dtc-ink"
             >
               Fermer
             </button>
           </div>
-          <p className="text-[10px] text-[#5C6672]">
+          <p className="text-[10px] text-dtc-inkMuted">
             Transmettez-le au membre (WhatsApp, en personne…) — il pourra le changer dans « Mon espace ».
           </p>
         </div>
@@ -427,7 +427,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             Lien d&apos;invitation créé — à usage unique, envoi direct (WhatsApp, mail…) :
           </p>
           <div className="flex flex-wrap items-center gap-2.5">
-            <code className="px-3 py-2 rounded-lg bg-white border border-[#DCD7CB]/60 text-[11px] font-semibold text-[#16233A] select-all break-all max-w-full">
+            <code className="px-3 py-2 rounded-lg bg-white border border-dtc-line/60 text-[11px] font-semibold text-dtc-ink select-all break-all max-w-full">
               {createdUrl}
             </code>
             <GhostButton onClick={() => copyUrl(createdUrl, setCopiedUrl)} className="!py-1.5 !text-[11px]">
@@ -436,12 +436,12 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             </GhostButton>
             <button
               onClick={() => setCreatedUrl(null)}
-              className="text-[10px] font-semibold text-[#5C6672] hover:text-[#16233A]"
+              className="text-[10px] font-semibold text-dtc-inkMuted hover:text-dtc-ink"
             >
               Fermer
             </button>
           </div>
-          <p className="text-[10px] text-[#5C6672]">
+          <p className="text-[10px] text-dtc-inkMuted">
             La personne crée son compte via ce lien (même pendant que le site est fermé) et reçoit
             directement le rôle choisi. Le lien meurt après une seule utilisation.
           </p>
@@ -459,12 +459,12 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
           <div
             key={u.id}
             className={`glass-card rounded-xl border p-3 sm:p-4 flex flex-wrap items-center gap-3 ${
-              u.is_banned ? "border-red-500/30 opacity-75" : "border-[#DCD7CB]/40"
+              u.is_banned ? "border-red-500/30 opacity-75" : "border-dtc-line/40"
             }`}
           >
             <UserAvatar name={u.full_name} src={u.avatar_url} size={38} />
             <div className="flex-1 min-w-[150px]">
-              <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">
+              <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate">
                 {u.full_name || "(sans nom)"}
                 {u.role === "guest" && (
                   <Badge tone="gold" className="ml-2">
@@ -482,17 +482,17 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                   </Badge>
                 )}
               </p>
-              <p className="text-[11px] text-[#5C6672] truncate">
+              <p className="text-[11px] text-dtc-inkMuted truncate">
                 {u.email}
                 {u.phone ? ` · ${u.phone}` : ""}
                 {u.promo ? ` · Promo ${u.promo}` : ""}
                 {u.committee ? ` · ${u.committee}` : ""}
               </p>
-              <p className="text-[10px] text-[#5F6774]">Inscrit {formatRelative(u.created_at)}</p>
+              <p className="text-[10px] text-dtc-inkSoft">Inscrit {formatRelative(u.created_at)}</p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {busyId === u.id ? (
-                <Loader2 className="w-4 h-4 text-[#755B18] animate-spin" />
+                <Loader2 className="w-4 h-4 text-dtc-gold animate-spin" />
               ) : u.role === "guest" ? (
                 <>
                   <button
@@ -534,7 +534,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                     className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
                       u.is_banned
                         ? "text-emerald-700 hover:bg-emerald-600/10"
-                        : "text-[#5C6672] hover:text-red-700 hover:bg-red-500/10"
+                        : "text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10"
                     }`}
                   >
                     {u.is_banned ? <ShieldCheck className="w-4 h-4" /> : <ShieldOff className="w-4 h-4" />}
@@ -544,7 +544,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                     aria-label={`Réinitialiser le mot de passe de ${u.full_name || u.email}`}
                     title="Mot de passe temporaire"
                     disabled={serviceReady === false}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors disabled:opacity-40"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors disabled:opacity-40"
                   >
                     <KeyRound className="w-4 h-4" />
                   </button>
@@ -553,35 +553,35 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                     aria-label={`Supprimer le compte de ${u.full_name || u.email}`}
                     title="Supprimer le compte"
                     disabled={serviceReady === false}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </>
               ) : (
-                <span className="text-[11px] text-[#5F6774]">{ROLE_LABELS[u.role]}</span>
+                <span className="text-[11px] text-dtc-inkSoft">{ROLE_LABELS[u.role]}</span>
               )}
             </div>
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="text-xs text-[#5C6672] text-center py-6">Aucun compte ne correspond.</p>
+          <p className="text-xs text-dtc-inkMuted text-center py-6">Aucun compte ne correspond.</p>
         )}
       </div>
 
-      <section className="glass-card rounded-xl border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+      <section className="glass-card rounded-xl border border-dtc-line/40 p-4 sm:p-5 space-y-3">
         <div className="flex items-center gap-2">
-          <Link2 className="w-4 h-4 text-[#755B18]" />
-          <h2 className="text-sm font-heading font-bold text-[#16233A]">Liens d&apos;invitation</h2>
+          <Link2 className="w-4 h-4 text-dtc-gold" />
+          <h2 className="text-sm font-heading font-bold text-dtc-ink">Liens d&apos;invitation</h2>
         </div>
-        <p className="text-[11px] text-[#5F6774] leading-relaxed">
+        <p className="text-[11px] text-dtc-inkSoft leading-relaxed">
           Un lien = une personne : il crée son compte depuis le lien (même site fermé) et reçoit le
           rôle du lien. Usage unique, expiration automatique au bout de 30 jours.
         </p>
         {inviteLinks === null ? (
-          <Loader2 className="w-4 h-4 text-[#755B18] animate-spin" />
+          <Loader2 className="w-4 h-4 text-dtc-gold animate-spin" />
         ) : inviteLinks.length === 0 ? (
-          <p className="text-xs text-[#5C6672] py-2 text-center">
+          <p className="text-xs text-dtc-inkMuted py-2 text-center">
             Aucun lien pour l&apos;instant — créez-en un avec le bouton « Lien d&apos;invitation ».
           </p>
         ) : (
@@ -593,15 +593,15 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
               return (
                 <div
                   key={link.id}
-                  className="flex flex-wrap items-center gap-2.5 rounded-lg border border-[#DCD7CB]/40 bg-white/60 px-3 py-2"
+                  className="flex flex-wrap items-center gap-2.5 rounded-lg border border-dtc-line/40 bg-white/60 px-3 py-2"
                 >
                   <Badge tone={used ? "gray" : expired ? "red" : "green"}>
                     {used ? `Utilisé — ${link.used_by_name || "compte supprimé"}` : expired ? "Expiré" : "Disponible"}
                   </Badge>
-                  <span className="text-[11px] font-semibold text-[#16233A]">
+                  <span className="text-[11px] font-semibold text-dtc-ink">
                     {ROLE_LABELS[link.role] ?? link.role}
                   </span>
-                  <span className="text-[10px] text-[#5F6774] truncate flex-1 min-w-[140px]">
+                  <span className="text-[10px] text-dtc-inkSoft truncate flex-1 min-w-[140px]">
                     Créé {formatRelative(link.created_at)}
                     {active && ` · expire le ${formatDate(link.expires_at)}`}
                   </span>
@@ -627,7 +627,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                         disabled={revokingLinkId === link.id}
                         aria-label="Révoquer ce lien"
                         title="Révoquer (plus utilisable)"
-                        className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
                       >
                         {revokingLinkId === link.id ? (
                           <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -638,7 +638,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                     </div>
                   )}
                   {active && !link.token && (
-                    <span className="text-[10px] text-[#5F6774] italic">
+                    <span className="text-[10px] text-dtc-inkSoft italic">
                       Lien admin — visible uniquement aux administrateurs
                     </span>
                   )}
@@ -658,13 +658,13 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
           className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setInviteOpen(false)} aria-hidden="true" />
-          <div className="relative z-10 w-full max-w-md max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
+          <div className="relative z-10 w-full max-w-md max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-heading font-bold text-[#16233A]">Inviter un membre</h2>
+              <h2 className="text-base font-heading font-bold text-dtc-ink">Inviter un membre</h2>
               <button
                 onClick={() => setInviteOpen(false)}
                 aria-label="Fermer"
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -703,7 +703,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                   <option value="admin">Administrateur</option>
                 </select>
               </Field>
-              <p className="text-[10px] text-[#5C6672] leading-relaxed">
+              <p className="text-[10px] text-dtc-inkMuted leading-relaxed">
                 Un mot de passe temporaire sera généré et affiché une seule fois — transmettez-le au
                 membre, il le changera à sa première connexion depuis « Mon espace ».
               </p>
@@ -734,13 +734,13 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
           className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setLinkModalOpen(false)} aria-hidden="true" />
-          <div className="relative z-10 w-full max-w-md max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
+          <div className="relative z-10 w-full max-w-md max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-6 space-y-3.5 shadow-lg">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-heading font-bold text-[#16233A]">Lien d&apos;invitation</h2>
+              <h2 className="text-base font-heading font-bold text-dtc-ink">Lien d&apos;invitation</h2>
               <button
                 onClick={() => setLinkModalOpen(false)}
                 aria-label="Fermer"
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A]"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -762,7 +762,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                   {isAdmin && <option value="admin">Administrateur</option>}
                 </select>
               </Field>
-              <p className="text-[10px] text-[#5C6672] leading-relaxed">
+              <p className="text-[10px] text-dtc-inkMuted leading-relaxed">
                 Le lien est à usage unique et fonctionne même pendant que le site est fermé — la
                 personne accédera au site dès son inscription.
               </p>

@@ -221,20 +221,20 @@ function CampaignEditor() {
 
   if (!loaded) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
+        <Loader2 className="w-5 h-5 text-dtc-gold animate-spin mx-auto" />
       </div>
     );
   }
 
   if (!campaign) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-6 sm:p-8 space-y-4 text-center">
-        <h2 className="flex items-center justify-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <ClipboardList className="w-4 h-4 text-[#755B18]" />
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-6 sm:p-8 space-y-4 text-center">
+        <h2 className="flex items-center justify-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <ClipboardList className="w-4 h-4 text-dtc-gold" />
           Aucune campagne de candidatures
         </h2>
-        <p className="text-xs text-[#5C6672] max-w-md mx-auto">
+        <p className="text-xs text-dtc-inkMuted max-w-md mx-auto">
           Créez une campagne pour ouvrir le formulaire /candidature aux membres : titre, texte
           d&apos;appel, postes ouverts — tout est modifiable ici.
         </p>
@@ -252,10 +252,10 @@ function CampaignEditor() {
   }
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-4">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-4">
       <div className="flex items-center justify-between gap-2.5 flex-wrap">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <ClipboardList className="w-4 h-4 text-[#755B18]" />
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <ClipboardList className="w-4 h-4 text-dtc-gold" />
           Campagne « {campaign.title} »
         </h2>
         <div className="flex items-center gap-2">
@@ -278,10 +278,10 @@ function CampaignEditor() {
         </p>
       )}
 
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2 p-2.5 rounded-lg bg-[#EFECE4]/60 border border-[#DCD7CB]/30">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 p-2.5 rounded-lg bg-dtc-wash/60 border border-dtc-line/30">
         <label
           htmlFor="rec-share-url"
-          className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-[#755B18] shrink-0"
+          className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-dtc-gold shrink-0"
         >
           <Link2 className="w-3 h-3" aria-hidden="true" />
           Lien à envoyer aux membres
@@ -325,14 +325,14 @@ function CampaignEditor() {
         </div>
       </div>
 
-      <div className="space-y-2.5 pt-2 border-t border-[#DCD7CB]/50">
+      <div className="space-y-2.5 pt-2 border-t border-dtc-line/50">
         <div className="flex items-center justify-between gap-2">
-          <h2 className="text-xs font-bold text-[#16233A] uppercase tracking-wide">
+          <h2 className="text-xs font-bold text-dtc-ink uppercase tracking-wide">
             Postes ouverts ({positions?.length ?? 0})
           </h2>
           <button
             onClick={() => startPositionEdit(null)}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 active:scale-95"
           >
             <Plus className="w-3 h-3" />
             <span>Poste</span>
@@ -342,7 +342,7 @@ function CampaignEditor() {
         {editingPosition && (
           <form
             onSubmit={submitPosition}
-            className="space-y-3 p-3 rounded-xl bg-white/60 border border-[#755B18]/25"
+            className="space-y-3 p-3 rounded-xl bg-white/60 border border-dtc-gold/25"
           >
             <Field label="Intitulé du poste" htmlFor="pos-title">
               <input
@@ -382,38 +382,38 @@ function CampaignEditor() {
         )}
 
         {positions === null ? (
-          <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+          <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
         ) : (
           <div className="space-y-1.5">
             {positions.map((position) => (
               <div
                 key={position.id}
-                className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25"
+                className="flex items-center gap-2.5 p-2.5 rounded-lg bg-dtc-wash/40 border border-dtc-line/25"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-semibold text-[#16233A] truncate">{position.title}</p>
+                  <p className="text-xs font-semibold text-dtc-ink truncate">{position.title}</p>
                   {position.description && (
-                    <p className="text-[10px] text-[#5F6774] truncate">{position.description}</p>
+                    <p className="text-[10px] text-dtc-inkSoft truncate">{position.description}</p>
                   )}
                 </div>
                 <button
                   onClick={() => startPositionEdit(position)}
                   aria-label="Modifier"
-                  className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]"
+                  className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold"
                 >
                   <Pencil className="w-3 h-3" />
                 </button>
                 <button
                   onClick={() => removePosition(position)}
                   aria-label="Supprimer"
-                  className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700"
+                  className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700"
                 >
                   <Trash2 className="w-3 h-3" />
                 </button>
               </div>
             ))}
             {positions.length === 0 && (
-              <p className="text-xs text-[#5C6672] py-2">
+              <p className="text-xs text-dtc-inkMuted py-2">
                 Aucun poste — ajoutez au moins un poste pour que le formulaire soit complet.
               </p>
             )}
@@ -517,12 +517,12 @@ function ApplicationsList() {
   const newCount = items?.filter((i) => i.status === "new").length ?? 0;
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5 flex-wrap">
-        <h2 className="text-sm font-heading font-bold text-[#16233A]">
+        <h2 className="text-sm font-heading font-bold text-dtc-ink">
           Candidatures reçues ({items?.length ?? "…"}
           {items && newCount > 0 ? (
-            <span className="text-[#755B18]">
+            <span className="text-dtc-gold">
               {" "}
               · {newCount} nouvelle{newCount > 1 ? "s" : ""}
             </span>
@@ -538,9 +538,9 @@ function ApplicationsList() {
       </div>
 
       {items === null ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : items.length === 0 ? (
-        <p className="text-xs text-[#5C6672] text-center py-4">
+        <p className="text-xs text-dtc-inkMuted text-center py-4">
           Aucune candidature pour le moment — elles apparaîtront ici dès qu&apos;un membre
           enverra le formulaire.
         </p>
@@ -552,27 +552,27 @@ function ApplicationsList() {
             return (
               <div
                 key={item.id}
-                className="rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25 overflow-hidden"
+                className="rounded-lg bg-dtc-wash/40 border border-dtc-line/25 overflow-hidden"
               >
                 <div className="p-2.5 sm:p-3 space-y-2">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setExpanded(isOpen ? null : item.id)}
                       aria-expanded={isOpen}
-                      className="flex items-center shrink-0 text-[#5C6672] hover:text-[#16233A] transition-colors"
+                      className="flex items-center shrink-0 text-dtc-inkMuted hover:text-dtc-ink transition-colors"
                       aria-label={isOpen ? "Réduire la candidature" : "Développer la candidature"}
                     >
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`}
                       />
                     </button>
-                    <p className="min-w-0 flex-1 text-xs sm:text-sm font-bold text-[#16233A] truncate">
+                    <p className="min-w-0 flex-1 text-xs sm:text-sm font-bold text-dtc-ink truncate">
                       {item.full_name}
-                      <span className="ml-1.5 font-semibold text-[#755B18]">{item.study_year}</span>
+                      <span className="ml-1.5 font-semibold text-dtc-gold">{item.study_year}</span>
                     </p>
                     <Badge tone={meta.tone}>{meta.label}</Badge>
                   </div>
-                  <p className="text-[10px] sm:text-[11px] text-[#5C6672] leading-relaxed">
+                  <p className="text-[10px] sm:text-[11px] text-dtc-inkMuted leading-relaxed">
                     {item.position?.title ?? "Poste supprimé"} · {item.phone} ·{" "}
                     {formatDateTime(item.created_at)}
                     {item.had_responsibility ? " · déjà responsable" : " · 1er poste"}
@@ -603,24 +603,24 @@ function ApplicationsList() {
                 </div>
 
                 {isOpen && (
-                  <div className="px-3.5 pb-3 pt-1 space-y-2.5 border-t border-[#DCD7CB]/30 bg-white/50">
+                  <div className="px-3.5 pb-3 pt-1 space-y-2.5 border-t border-dtc-line/30 bg-white/50">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wide text-[#755B18]">
+                      <p className="text-[10px] font-bold uppercase tracking-wide text-dtc-gold">
                         Motivation et vision pour le club
                       </p>
-                      <p className="text-xs text-[#3D4A58] whitespace-pre-wrap leading-relaxed mt-0.5">
+                      <p className="text-xs text-dtc-lineDark whitespace-pre-wrap leading-relaxed mt-0.5">
                         {item.motivation}
                       </p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wide text-[#755B18]">
+                      <p className="text-[10px] font-bold uppercase tracking-wide text-dtc-gold">
                         Pourquoi vous et pas quelqu&apos;un d&apos;autre ?
                       </p>
-                      <p className="text-xs text-[#3D4A58] whitespace-pre-wrap leading-relaxed mt-0.5">
+                      <p className="text-xs text-dtc-lineDark whitespace-pre-wrap leading-relaxed mt-0.5">
                         {item.why_you}
                       </p>
                     </div>
-                    <p className="text-[10px] text-[#5C6672]">
+                    <p className="text-[10px] text-dtc-inkMuted">
                       {item.had_responsibility
                         ? "A déjà occupé un poste de responsabilité."
                         : "Premier poste de responsabilité."}

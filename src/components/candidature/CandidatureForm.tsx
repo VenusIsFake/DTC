@@ -134,14 +134,14 @@ export default function CandidatureForm({
 
   if (done) {
     return (
-      <div className="glass-card rounded-xl border border-[#755B18]/30 p-8 sm:p-10 text-center space-y-3.5" role="status">
+      <div className="glass-card rounded-xl border border-dtc-gold/30 p-8 sm:p-10 text-center space-y-3.5" role="status">
         <div className="inline-flex p-3 rounded-full bg-emerald-500/15 text-emerald-600">
           <CheckCircle2 className="w-7 h-7" />
         </div>
-        <h2 ref={successRef} tabIndex={-1} className="text-lg sm:text-xl font-heading font-bold text-[#16233A] focus:outline-none">
+        <h2 ref={successRef} tabIndex={-1} className="text-lg sm:text-xl font-heading font-bold text-dtc-ink focus:outline-none">
           Candidature envoyée
         </h2>
-        <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed max-w-md mx-auto">
+        <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed max-w-md mx-auto">
           Merci {fullName.trim().split(" ")[0]} ! Le bureau a bien reçu votre candidature et
           reviendra vers vous par téléphone. Bonne chance !
         </p>
@@ -152,13 +152,13 @@ export default function CandidatureForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="glass-card rounded-xl border border-[#DCD7CB]/50 p-4 sm:p-7 space-y-4 shadow-sm"
+      className="glass-card rounded-xl border border-dtc-line/50 p-4 sm:p-7 space-y-4 shadow-sm"
       noValidate
     >
-      <h2 className="text-base sm:text-lg font-heading font-bold text-[#16233A]">
+      <h2 className="text-base sm:text-lg font-heading font-bold text-dtc-ink">
         Formulaire de candidature
       </h2>
-      <p className="text-[11px] text-[#5C6672]">
+      <p className="text-[11px] text-dtc-inkMuted">
         Tous les champs sont requis. Réponses sérieuses attendues — le bureau lit chaque candidature.
       </p>
 
@@ -228,7 +228,7 @@ export default function CandidatureForm({
       </Field>
 
       <fieldset className="space-y-1.5">
-        <legend className="text-[11px] font-semibold text-[#3D4A58]">
+        <legend className="text-[11px] font-semibold text-dtc-lineDark">
           Avez-vous déjà occupé un poste de responsabilité dans une association ou un club ?
         </legend>
         <div className="flex gap-2">
@@ -242,8 +242,8 @@ export default function CandidatureForm({
               key={option.value}
               className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border cursor-pointer text-sm font-semibold transition-colors ${
                 hadResponsibility === option.value
-                  ? "border-[#755B18]/60 bg-[#755B18]/10 text-[#755B18]"
-                  : "border-[#DCD7CB]/60 bg-white text-[#3D4A58] hover:border-[#755B18]/40"
+                  ? "border-dtc-gold/60 bg-dtc-gold/10 text-dtc-gold"
+                  : "border-dtc-line/60 bg-white text-dtc-lineDark hover:border-dtc-gold/40"
               }`}
             >
               <input

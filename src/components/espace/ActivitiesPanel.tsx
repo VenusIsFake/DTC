@@ -98,9 +98,9 @@ export default function ActivitiesPanel() {
 
   if (!activity) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-        <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
-        <p className="text-xs text-[#5C6672] mt-2">Chargement de vos activités…</p>
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
+        <Loader2 className="w-5 h-5 text-dtc-gold animate-spin mx-auto" />
+        <p className="text-xs text-dtc-inkMuted mt-2">Chargement de vos activités…</p>
       </div>
     );
   }
@@ -109,31 +109,31 @@ export default function ActivitiesPanel() {
     <div className="space-y-4 sm:space-y-5">
       {/* Admin quick panel */}
       {isAdmin && stats && (
-        <div className="glass-card rounded-lg border border-[#755B18]/40 p-4 sm:p-6 space-y-3">
+        <div className="glass-card rounded-lg border border-dtc-gold/40 p-4 sm:p-6 space-y-3">
           <div className="flex items-center justify-between gap-3">
-            <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-              <ShieldCheck className="w-4 h-4 text-[#755B18]" />
+            <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+              <ShieldCheck className="w-4 h-4 text-dtc-gold" />
               Panneau administrateur
             </h2>
             <Link
               href="/admin"
-              className="text-[11px] font-bold text-[#755B18] hover:text-[#755B18] transition-colors"
+              className="text-[11px] font-bold text-dtc-gold hover:text-dtc-gold transition-colors"
             >
               Ouvrir la console →
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-            <div className="p-3 rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30 space-y-0.5">
-              <span className="text-[10px] text-[#5C6672] block">Comptes membres</span>
-              <span className="text-lg font-semibold text-[#16233A]">{stats.members}</span>
+            <div className="p-3 rounded-xl bg-dtc-wash/50 border border-dtc-line/30 space-y-0.5">
+              <span className="text-[10px] text-dtc-inkMuted block">Comptes membres</span>
+              <span className="text-lg font-semibold text-dtc-ink">{stats.members}</span>
             </div>
-            <div className="p-3 rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30 space-y-0.5">
-              <span className="text-[10px] text-[#5C6672] block">Idées ouvertes</span>
-              <span className="text-lg font-semibold text-[#16233A]">{stats.openIdeas}</span>
+            <div className="p-3 rounded-xl bg-dtc-wash/50 border border-dtc-line/30 space-y-0.5">
+              <span className="text-[10px] text-dtc-inkMuted block">Idées ouvertes</span>
+              <span className="text-lg font-semibold text-dtc-ink">{stats.openIdeas}</span>
             </div>
-            <div className="p-3 rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30 space-y-0.5 col-span-2 sm:col-span-1">
-              <span className="text-[10px] text-[#5C6672] block">Prochain atelier</span>
-              <span className="text-xs font-bold text-[#16233A] leading-tight block truncate">
+            <div className="p-3 rounded-xl bg-dtc-wash/50 border border-dtc-line/30 space-y-0.5 col-span-2 sm:col-span-1">
+              <span className="text-[10px] text-dtc-inkMuted block">Prochain atelier</span>
+              <span className="text-xs font-bold text-dtc-ink leading-tight block truncate">
                 {stats.nextAtelier ? stats.nextAtelier.title : "Aucun planifié"}
               </span>
             </div>
@@ -142,26 +142,26 @@ export default function ActivitiesPanel() {
       )}
 
       {/* My ideas */}
-      <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <Lightbulb className="w-4 h-4 text-[#755B18]" />
+      <section className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-6 space-y-3">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <Lightbulb className="w-4 h-4 text-dtc-gold" />
           Mes idées ({activity.ideas.length})
         </h2>
         {activity.ideas.length === 0 && (
-          <p className="text-xs text-[#5C6672]">
+          <p className="text-xs text-dtc-inkMuted">
             Aucune idée proposée.{" "}
-            <Link href="/idees" className="text-[#755B18] font-semibold hover:underline underline-offset-2">
+            <Link href="/idees" className="text-dtc-gold font-semibold hover:underline underline-offset-2">
               Pitcher ma première idée
             </Link>
           </p>
         )}
         <ul className="space-y-2">
           {activity.ideas.map((idea) => (
-            <li key={idea.id} className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-xs font-semibold text-[#16233A] truncate">{idea.title}</span>
+            <li key={idea.id} className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-dtc-wash/40 border border-dtc-line/25">
+              <span className="text-xs font-semibold text-dtc-ink truncate">{idea.title}</span>
               <span className="flex items-center gap-2 shrink-0">
                 <Badge tone="gold">{idea.vote_count} vote{idea.vote_count > 1 ? "s" : ""}</Badge>
-                <span className="text-[10px] text-[#5F6774]"><span suppressHydrationWarning>{formatRelative(idea.created_at)}</span></span>
+                <span className="text-[10px] text-dtc-inkSoft"><span suppressHydrationWarning>{formatRelative(idea.created_at)}</span></span>
               </span>
             </li>
           ))}
@@ -169,54 +169,54 @@ export default function ActivitiesPanel() {
       </section>
 
       {/* My votes */}
-      <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <ArrowBigUp className="w-4 h-4 text-[#755B18]" />
+      <section className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-6 space-y-3">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <ArrowBigUp className="w-4 h-4 text-dtc-gold" />
           Mes votes ({activity.votedIdeas.length})
         </h2>
         {activity.votedIdeas.length === 0 && (
-          <p className="text-xs text-[#5C6672]">
+          <p className="text-xs text-dtc-inkMuted">
             Aucun vote pour l&apos;instant.{" "}
-            <Link href="/idees" className="text-[#755B18] font-semibold hover:underline underline-offset-2">
+            <Link href="/idees" className="text-dtc-gold font-semibold hover:underline underline-offset-2">
               Découvrir les idées du club
             </Link>
           </p>
         )}
         <ul className="space-y-2">
           {activity.votedIdeas.map((idea) => (
-            <li key={idea.id} className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-xs font-semibold text-[#16233A] truncate">{idea.title}</span>
-              <span className="text-[10px] text-[#5F6774] shrink-0">{idea.vote_count} votes</span>
+            <li key={idea.id} className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-dtc-wash/40 border border-dtc-line/25">
+              <span className="text-xs font-semibold text-dtc-ink truncate">{idea.title}</span>
+              <span className="text-[10px] text-dtc-inkSoft shrink-0">{idea.vote_count} votes</span>
             </li>
           ))}
         </ul>
       </section>
 
       {/* My RSVPs */}
-      <section className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-3">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <CalendarDays className="w-4 h-4 text-[#755B18]" />
+      <section className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-6 space-y-3">
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <CalendarDays className="w-4 h-4 text-dtc-gold" />
           Mes participations ({activity.rsvps.length})
         </h2>
         {activity.rsvps.length === 0 && (
-          <p className="text-xs text-[#5C6672]">
+          <p className="text-xs text-dtc-inkMuted">
             Aucune participation confirmée.{" "}
-            <Link href="/annonces" className="text-[#755B18] font-semibold hover:underline underline-offset-2">
+            <Link href="/annonces" className="text-dtc-gold font-semibold hover:underline underline-offset-2">
               Voir les prochains ateliers
             </Link>
           </p>
         )}
         <ul className="space-y-2">
           {activity.rsvps.map((rsvp) => (
-            <li key={rsvp.id} className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-xs font-semibold text-[#16233A] truncate">{rsvp.title}</span>
-              <span className="text-[10px] text-[#5C6672] shrink-0">{formatDateTime(rsvp.event_date) || "—"}</span>
+            <li key={rsvp.id} className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-dtc-wash/40 border border-dtc-line/25">
+              <span className="text-xs font-semibold text-dtc-ink truncate">{rsvp.title}</span>
+              <span className="text-[10px] text-dtc-inkMuted shrink-0">{formatDateTime(rsvp.event_date) || "—"}</span>
             </li>
           ))}
         </ul>
       </section>
 
-      <p className="flex items-center justify-center gap-1.5 text-[11px] text-[#5F6774]">
+      <p className="flex items-center justify-center gap-1.5 text-[11px] text-dtc-inkSoft">
         <Activity className="w-3.5 h-3.5" />
         Votre historique personnel — visible uniquement par vous.
       </p>

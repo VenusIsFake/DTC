@@ -53,7 +53,7 @@ export default async function EventLandingPage({ params }: Params) {
   return (
     <div className="pb-10 sm:pb-20">
       {/* Hero (aspect-based height: no artificial viewport sizing on mobile) */}
-      <header className="relative w-full aspect-[16/11] sm:aspect-[21/9] min-h-[320px] sm:min-h-[420px] flex items-end bg-[#F7F5F0]">
+      <header className="relative w-full aspect-[16/11] sm:aspect-[21/9] min-h-[320px] sm:min-h-[420px] flex items-end bg-dtc-paper">
         {page.hero_poster && (
           <>
             <Image
@@ -64,14 +64,14 @@ export default async function EventLandingPage({ params }: Params) {
               className="object-cover opacity-60"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dtc-navy-deep via-dtc-navy-deep/60 to-transparent" />
           </>
         )}
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-8 sm:pb-14 space-y-3 pt-16">
           <Link
             href="/events"
             className={`inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold transition-colors ${
-              hasHero ? "text-[#C9CFD9] hover:text-[#D4AF37]" : "text-[#5C6672] hover:text-[#755B18]"
+              hasHero ? "text-dtc-silver hover:text-dtc-goldBright" : "text-dtc-inkMuted hover:text-dtc-gold"
             }`}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
@@ -79,14 +79,14 @@ export default async function EventLandingPage({ params }: Params) {
           </Link>
           <p
             className={`text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase ${
-              hasHero ? "text-[#D4AF37]" : "text-[#755B18]"
+              hasHero ? "text-dtc-goldBright" : "text-dtc-gold"
             }`}
           >
             Événement DTC
           </p>
           <h1
             className={`font-heading font-semibold text-3xl sm:text-6xl leading-tight tracking-tight ${
-              hasHero ? "text-[#F7F5F0]" : "text-[#16233A]"
+              hasHero ? "text-dtc-paper" : "text-dtc-ink"
             }`}
           >
             {page.title}
@@ -94,7 +94,7 @@ export default async function EventLandingPage({ params }: Params) {
           {page.tagline && (
             <p
               className={`text-sm sm:text-xl max-w-3xl leading-relaxed ${
-                hasHero ? "text-[#C9CFD9]" : "text-[#3D4A58]"
+                hasHero ? "text-dtc-silver" : "text-dtc-lineDark"
               }`}
             >
               {page.tagline}
@@ -106,8 +106,8 @@ export default async function EventLandingPage({ params }: Params) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-14 pt-8 sm:pt-12">
         {/* Description */}
         {page.description && (
-          <section className="glass-card p-4 sm:p-10 rounded-lg border border-[#DCD7CB]/40 max-w-4xl mx-auto">
-            <p className="text-xs sm:text-base text-[#3D4A58] leading-relaxed whitespace-pre-line">
+          <section className="glass-card p-4 sm:p-10 rounded-lg border border-dtc-line/40 max-w-4xl mx-auto">
+            <p className="text-xs sm:text-base text-dtc-lineDark leading-relaxed whitespace-pre-line">
               {page.description}
             </p>
           </section>
@@ -116,11 +116,11 @@ export default async function EventLandingPage({ params }: Params) {
         {/* Talks / videos */}
         {items.length > 0 && (
           <section className="space-y-4 sm:space-y-8">
-            <div className="border-b border-[#DCD7CB]/30 pb-3 sm:pb-4">
-              <h2 className="text-xl sm:text-3xl font-heading font-bold text-[#16233A]">
+            <div className="border-b border-dtc-line/30 pb-3 sm:pb-4">
+              <h2 className="text-xl sm:text-3xl font-heading font-bold text-dtc-ink">
                 Programmation & <span className="gold-gradient-text">Vidéos</span>
               </h2>
-              <p className="text-xs sm:text-sm text-[#5C6672] mt-1">
+              <p className="text-xs sm:text-sm text-dtc-inkMuted mt-1">
                 {items.length} intervention{items.length > 1 ? "s" : ""} — cliquez pour lancer la vidéo.
               </p>
             </div>

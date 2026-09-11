@@ -68,10 +68,10 @@ export default function PasswordChangeCard() {
   };
 
   return (
-    <section className="glass-card rounded-xl border border-[#DCD7CB]/40 p-4 sm:p-6 space-y-4">
+    <section className="glass-card rounded-xl border border-dtc-line/40 p-4 sm:p-6 space-y-4">
       <div className="flex items-center gap-2">
-        <KeyRound className="w-4 h-4 text-[#755B18]" />
-        <h2 className="text-sm font-heading font-bold text-[#16233A]">Mot de passe</h2>
+        <KeyRound className="w-4 h-4 text-dtc-gold" />
+        <h2 className="text-sm font-heading font-bold text-dtc-ink">Mot de passe</h2>
       </div>
       <form onSubmit={submit} className="space-y-3">
         <Field label="Mot de passe actuel" htmlFor="current-password">

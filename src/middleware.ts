@@ -1,7 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
+import { siteConfig } from '@/data/siteConfig'
 
-const SECRET_HOST = 'vx72kq9.dentalkclubfmdc.com'
+const SECRET_HOST = siteConfig.secretHost
 const DEAD_HOST = 'dentalkclub-fmdc.vercel.app'
 
 export async function middleware(request: NextRequest) {

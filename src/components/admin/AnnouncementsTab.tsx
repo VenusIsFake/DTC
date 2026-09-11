@@ -116,13 +116,13 @@ export default function AnnouncementsTab() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <p className="text-xs text-[#5C6672]">Cycle de vie : brouillon → publiée → archivée.</p>
+        <p className="text-xs text-dtc-inkMuted">Cycle de vie : brouillon → publiée → archivée.</p>
         <button
           onClick={() => {
             setEditing(null);
             setComposerOpen(true);
           }}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 shadow-md shadow-dtc-gold/20 transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Nouvelle</span>
@@ -130,15 +130,15 @@ export default function AnnouncementsTab() {
       </div>
 
       {resendReady === false && (
-        <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+        <p className="text-[11px] text-dtc-gold bg-dtc-gold/10 border border-dtc-gold/30 rounded-lg px-3 py-2">
           Envoi d&apos;emails désactivé : la clé serveur RESEND_API_KEY n&apos;est pas configurée.
           Les annonces restent publiables sur le site — seul l&apos;email de masse est inactif.
         </p>
       )}
 
       {items === null && (
-        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-          <Loader2 className="w-5 h-5 text-[#755B18] animate-spin mx-auto" />
+        <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
+          <Loader2 className="w-5 h-5 text-dtc-gold animate-spin mx-auto" />
         </div>
       )}
 
@@ -149,7 +149,7 @@ export default function AnnouncementsTab() {
       )}
 
       {notice && (
-        <p role="status" className="text-xs text-[#3D4A58] bg-[#EFECE4]/80 border border-[#DCD7CB]/40 rounded-lg px-3 py-2">
+        <p role="status" className="text-xs text-dtc-lineDark bg-dtc-wash/80 border border-dtc-line/40 rounded-lg px-3 py-2">
           {notice}
         </p>
       )}
@@ -160,14 +160,14 @@ export default function AnnouncementsTab() {
           return (
             <div
               key={item.id}
-              className="glass-card rounded-xl border border-[#DCD7CB]/40 p-3 flex flex-wrap items-center gap-2.5"
+              className="glass-card rounded-xl border border-dtc-line/40 p-3 flex flex-wrap items-center gap-2.5"
             >
               <div className="min-w-0 flex-1">
-                <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate flex items-center gap-2">
-                  {item.is_pinned && <Pin className="w-3 h-3 text-[#755B18] shrink-0" />}
+                <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate flex items-center gap-2">
+                  {item.is_pinned && <Pin className="w-3 h-3 text-dtc-gold shrink-0" />}
                   {item.title}
                 </p>
-                <p className="text-[10px] text-[#5C6672]">
+                <p className="text-[10px] text-dtc-inkMuted">
                   {item.kind === "atelier" ? "Atelier" : "Annonce"} · {formatRelative(item.created_at)}
                 </p>
               </div>
@@ -182,7 +182,7 @@ export default function AnnouncementsTab() {
                       ? "Envoyer par email à tous les membres"
                       : "Publiez d'abord l'annonce"
                   }
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors disabled:opacity-40 disabled:hover:text-[#5C6672] disabled:hover:bg-transparent"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors disabled:opacity-40 disabled:hover:text-dtc-inkMuted disabled:hover:bg-transparent"
                 >
                   {emailing === item.id ? (
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -193,7 +193,7 @@ export default function AnnouncementsTab() {
                 <button
                   onClick={() => togglePin(item)}
                   aria-label={`${item.is_pinned ? "Désépingler" : "Épingler"} — ${item.title}`}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
                 >
                   {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
                 </button>
@@ -203,14 +203,14 @@ export default function AnnouncementsTab() {
                     setComposerOpen(true);
                   }}
                   aria-label={`Modifier — ${item.title}`}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18] hover:bg-[#EFECE4] transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => remove(item)}
                   aria-label={`Supprimer — ${item.title}`}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700 hover:bg-red-500/10 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -234,7 +234,7 @@ export default function AnnouncementsTab() {
           );
         })}
         {items?.length === 0 && (
-          <p className="text-xs text-[#5C6672] text-center py-6">Aucune annonce — créez la première !</p>
+          <p className="text-xs text-dtc-inkMuted text-center py-6">Aucune annonce — créez la première !</p>
         )}
       </div>
 

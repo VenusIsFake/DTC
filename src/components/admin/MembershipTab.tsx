@@ -71,10 +71,10 @@ function TextCard({
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h2 className="text-sm font-heading font-bold text-[#16233A]">{title}</h2>
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
+      <h2 className="text-sm font-heading font-bold text-dtc-ink">{title}</h2>
       {!loaded ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : (
         <>
           <Field label={label} htmlFor={settingKey} hint={hint}>
@@ -143,14 +143,14 @@ function ToggleCard({
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-2">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-2">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="min-w-0">
-          <h2 className="text-sm font-heading font-bold text-[#16233A]">{on ? titleOn : titleOff}</h2>
-          <p className="text-[11px] text-[#5C6672] leading-relaxed mt-0.5">{description}</p>
+          <h2 className="text-sm font-heading font-bold text-dtc-ink">{on ? titleOn : titleOff}</h2>
+          <p className="text-[11px] text-dtc-inkMuted leading-relaxed mt-0.5">{description}</p>
         </div>
         {!loaded ? (
-          <Loader2 className="w-4 h-4 text-[#755B18] animate-spin shrink-0" />
+          <Loader2 className="w-4 h-4 text-dtc-gold animate-spin shrink-0" />
         ) : (
           <button
             onClick={toggle}
@@ -159,7 +159,7 @@ function ToggleCard({
             aria-checked={on}
             aria-label={titleOn}
             className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
-              on ? "bg-emerald-600" : "bg-[#16233A]"
+              on ? "bg-emerald-600" : "bg-dtc-ink"
             } disabled:opacity-50`}
           >
             <span
@@ -210,8 +210,8 @@ function WhatsAppCard() {
 
   if (!number.loaded || !message.loaded) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-5">
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-5">
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       </div>
     );
   }
@@ -222,12 +222,12 @@ function WhatsAppCard() {
     : null;
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center gap-1.5">
         <MessageCircle className="w-4 h-4 text-[#25D366]" />
-        <h2 className="text-sm font-heading font-bold text-[#16233A]">Bouton WhatsApp</h2>
+        <h2 className="text-sm font-heading font-bold text-dtc-ink">Bouton WhatsApp</h2>
       </div>
-      <p className="text-[11px] text-[#5C6672] leading-relaxed">
+      <p className="text-[11px] text-dtc-inkMuted leading-relaxed">
         Affiché sur la page de paiement des candidats : un appui ouvre WhatsApp avec un
         message pré-rempli vers ce numéro.
       </p>
@@ -263,13 +263,13 @@ function WhatsAppCard() {
         </Field>
       </div>
       {testHref && (
-        <p className="text-[10px] text-[#5F6774]">
+        <p className="text-[10px] text-dtc-inkSoft">
           Aperçu :{" "}
           <a
             href={testHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-0.5 text-[#755B18] font-semibold hover:underline underline-offset-2"
+            className="inline-flex items-center gap-0.5 text-dtc-gold font-semibold hover:underline underline-offset-2"
           >
             tester le lien <ExternalLink className="w-3 h-3" />
           </a>
@@ -292,8 +292,8 @@ function WhatsAppCard() {
 export default function MembershipTab() {
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-1.5 text-xs text-[#5C6672]">
-        <HandCoins className="w-4 h-4 text-[#755B18]" />
+      <div className="flex items-center gap-1.5 text-xs text-dtc-inkMuted">
+        <HandCoins className="w-4 h-4 text-dtc-gold" />
         <p>
           Parcours d&apos;adhésion des nouveaux comptes : texte d&apos;invitation, cotisation,
           moyens de paiement et contact WhatsApp — tout se règle ici.
@@ -370,9 +370,9 @@ export default function MembershipTab() {
         placeholder="Dernière étape : réglez la cotisation. Le bureau active votre accès membre dès réception du paiement."
       />
 
-      <div className="glass-card rounded-lg border border-[#755B18]/30 bg-[#755B18]/5 p-4 sm:p-5 space-y-2">
-        <h2 className="text-sm font-heading font-bold text-[#16233A]">Comment ça marche côté bureau</h2>
-        <ol className="text-[11px] text-[#3D4A58] leading-relaxed list-decimal list-inside space-y-1">
+      <div className="glass-card rounded-lg border border-dtc-gold/30 bg-dtc-gold/5 p-4 sm:p-5 space-y-2">
+        <h2 className="text-sm font-heading font-bold text-dtc-ink">Comment ça marche côté bureau</h2>
+        <ol className="text-[11px] text-dtc-lineDark leading-relaxed list-decimal list-inside space-y-1">
           <li>La personne crée son compte (invité) et remplit son dossier depuis « Mon espace ».</li>
           <li>
             Elle apparaît dans l&apos;onglet Utilisateurs avec le badge « Dossier reçu » ; elle voit

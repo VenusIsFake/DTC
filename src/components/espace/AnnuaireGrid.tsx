@@ -30,11 +30,11 @@ export default function AnnuaireGrid({
   return (
     <div className="pt-8 sm:pt-12 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-5 sm:space-y-8">
       <div className="space-y-2">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">Membres du club</p>
-        <h1 className="font-heading font-semibold text-3xl sm:text-4xl text-[#16233A] tracking-tight">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-dtc-gold">Membres du club</p>
+        <h1 className="font-heading font-semibold text-3xl sm:text-4xl text-dtc-ink tracking-tight">
           Annuaire DTC
         </h1>
-        <p className="text-xs sm:text-sm text-[#5C6672]">
+        <p className="text-xs sm:text-sm text-dtc-inkMuted">
           {entries.length} membre{entries.length > 1 ? "s" : ""} · visibilité réservée aux comptes connectés.
           Les coordonnées restent accessibles au bureau uniquement.
         </p>
@@ -48,7 +48,7 @@ export default function AnnuaireGrid({
       )}
 
       <div className="relative max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#5F6774]" aria-hidden="true" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-dtc-inkSoft" aria-hidden="true" />
         <label htmlFor="annuaire-search" className="sr-only">
           Rechercher un membre
         </label>
@@ -63,12 +63,12 @@ export default function AnnuaireGrid({
       </div>
 
       {filtered.length === 0 ? (
-        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 text-center">
-          <Users className="w-8 h-8 text-[#DCD7CB] mx-auto" />
-          <p className="text-sm font-semibold text-[#16233A] mt-2">
+        <div className="glass-card rounded-lg border border-dtc-line/40 p-8 text-center">
+          <Users className="w-8 h-8 text-dtc-line mx-auto" />
+          <p className="text-sm font-semibold text-dtc-ink mt-2">
             {entries.length === 0 ? "Aucun membre inscrit pour le moment" : "Aucun résultat"}
           </p>
-          <p className="text-xs text-[#5C6672] mt-1">
+          <p className="text-xs text-dtc-inkMuted mt-1">
             {entries.length === 0
               ? "Les membres qui complètent leur profil apparaissent automatiquement ici."
               : "Essayez un autre nom ou une autre promo."}
@@ -79,15 +79,15 @@ export default function AnnuaireGrid({
           {filtered.map((entry) => (
             <div
               key={entry.id}
-              className="glass-card rounded-xl sm:rounded-lg border border-[#DCD7CB]/40 p-3.5 sm:p-4 flex flex-col items-center text-center space-y-2"
+              className="glass-card rounded-xl sm:rounded-lg border border-dtc-line/40 p-3.5 sm:p-4 flex flex-col items-center text-center space-y-2"
             >
               <UserAvatar name={entry.full_name} src={entry.avatar_url} size={56} />
               <div className="space-y-0.5 min-w-0 w-full">
-                <p className="text-xs sm:text-sm font-bold text-[#16233A] truncate">{entry.full_name || "Membre"}</p>
-                <p className="text-[10px] text-[#755B18] font-semibold truncate">
+                <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate">{entry.full_name || "Membre"}</p>
+                <p className="text-[10px] text-dtc-gold font-semibold truncate">
                   {entry.promo ? `Promo ${entry.promo}` : "Promo —"}
                 </p>
-                <p className="text-[10px] text-[#5C6672] truncate">{entry.committee || "Sans commission"}</p>
+                <p className="text-[10px] text-dtc-inkMuted truncate">{entry.committee || "Sans commission"}</p>
               </div>
             </div>
           ))}

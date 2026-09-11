@@ -73,13 +73,13 @@ function CommitteesEditor() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <Building2 className="w-4 h-4 text-[#755B18]" />
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <Building2 className="w-4 h-4 text-dtc-gold" />
           Commissions ({committees?.length ?? "…"})
         </h2>
-        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95">
+        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 active:scale-95">
           <Plus className="w-3 h-3" />
           <span>Commission</span>
         </button>
@@ -92,7 +92,7 @@ function CommitteesEditor() {
       )}
 
       {editing && (
-        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-[#755B18]/25">
+        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-dtc-gold/25">
           <div className="grid grid-cols-[1fr_90px] gap-3">
             <Field label="Nom" htmlFor="committee-name">
               <input id="committee-name" type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
@@ -112,20 +112,20 @@ function CommitteesEditor() {
       )}
 
       {committees === null ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {committees.map((committee) => (
-            <div key={committee.id} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-[10px] font-bold text-[#755B18] w-5 shrink-0">{committee.sort}</span>
+            <div key={committee.id} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-dtc-wash/40 border border-dtc-line/25">
+              <span className="text-[10px] font-bold text-dtc-gold w-5 shrink-0">{committee.sort}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold text-[#16233A] truncate">{committee.name}</p>
-                <p className="text-[10px] text-[#5F6774] truncate">{committee.description}</p>
+                <p className="text-xs font-semibold text-dtc-ink truncate">{committee.name}</p>
+                <p className="text-[10px] text-dtc-inkSoft truncate">{committee.description}</p>
               </div>
-              <button onClick={() => startEdit(committee)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
+              <button onClick={() => startEdit(committee)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold">
                 <Pencil className="w-3 h-3" />
               </button>
-              <button onClick={() => remove(committee)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
+              <button onClick={() => remove(committee)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700">
                 <Trash2 className="w-3 h-3" />
               </button>
             </div>
@@ -187,9 +187,9 @@ function PromoYearsEditor() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h2 className="text-sm font-heading font-bold text-[#16233A]">Liste des années (promos)</h2>
-      <p className="text-[11px] text-[#5C6672]">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
+      <h2 className="text-sm font-heading font-bold text-dtc-ink">Liste des années (promos)</h2>
+      <p className="text-[11px] text-dtc-inkMuted">
         Années proposées dans le sélecteur « Promo » du profil membre. Séparez par des virgules.
       </p>
       {error && (

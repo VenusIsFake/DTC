@@ -5,7 +5,7 @@ import React from "react";
 /** Shared form styling bits for club-platform modals & admin console. */
 
 export const inputClass =
-  "w-full px-3 py-2 rounded-lg bg-white border border-[#DCD7CB] text-sm text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18] focus:ring-2 focus:ring-[#755B18]/60 disabled:opacity-50";
+  "w-full px-3 py-2 rounded-lg bg-white border border-dtc-line text-sm text-dtc-ink placeholder:text-dtc-inkSoft focus:outline-none focus:border-dtc-gold focus:ring-2 focus:ring-dtc-gold/60 disabled:opacity-50";
 
 export function Field({
   label,
@@ -20,11 +20,11 @@ export function Field({
 }) {
   return (
     <div className="space-y-1">
-      <label htmlFor={htmlFor} className="text-[11px] font-semibold text-[#3D4A58] block">
+      <label htmlFor={htmlFor} className="text-[11px] font-semibold text-dtc-lineDark block">
         {label}
       </label>
       {children}
-      {hint && <p className="text-[10px] text-[#5F6774]">{hint}</p>}
+      {hint && <p className="text-[10px] text-dtc-inkSoft">{hint}</p>}
     </div>
   );
 }
@@ -36,7 +36,7 @@ export function PrimaryButton({
   return (
     <button
       {...props}
-      className={`inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md font-bold text-xs sm:text-sm bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
+      className={`inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md font-bold text-xs sm:text-sm bg-dtc-gold text-dtc-paper hover:brightness-110 shadow-md shadow-dtc-gold/20 transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
     >
       {children}
     </button>
@@ -50,7 +50,7 @@ export function GhostButton({
   return (
     <button
       {...props}
-      className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-md font-semibold text-xs border border-[#DCD7CB]/60 text-[#3D4A58] hover:border-[#755B18]/50 hover:text-[#755B18] transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
+      className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-md font-semibold text-xs border border-dtc-line/60 text-dtc-lineDark hover:border-dtc-gold/50 hover:text-dtc-gold transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed ${props.className ?? ""}`}
     >
       {children}
     </button>
@@ -58,7 +58,7 @@ export function GhostButton({
 }
 
 const badgeStyles: Record<string, string> = {
-  gold: "bg-[#755B18]/15 text-[#755B18] border-[#755B18]/30",
+  gold: "bg-dtc-gold/15 text-dtc-gold border-dtc-gold/30",
   blue: "bg-blue-600/10 text-blue-700 border-blue-500/30",
   green: "bg-emerald-600/10 text-emerald-700 border-emerald-600/30",
   red: "bg-red-500/15 text-red-700 border-red-500/30",

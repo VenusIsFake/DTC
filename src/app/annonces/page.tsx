@@ -19,7 +19,7 @@ export default async function AnnoncesPage() {
 
   return (
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-      <Suspense fallback={<div className="h-48 flex items-center justify-center text-xs text-[#5C6672]">Chargement...</div>}>
+      <Suspense fallback={<div className="h-48 flex items-center justify-center text-xs text-dtc-inkMuted">Chargement...</div>}>
         <AnnoncesIdeesHub
           initialAnnouncements={announcements}
           initialIdeas={ideas}

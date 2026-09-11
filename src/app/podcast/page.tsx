@@ -23,10 +23,10 @@ export default async function PodcastPage() {
           <Radio className="w-3.5 h-3.5" />
           <span>Un podcast par les étudiants, pour les étudiants</span>
         </p>
-        <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-[#16233A] tracking-tight">
+        <h1 className="font-heading font-semibold text-3xl sm:text-5xl text-dtc-ink tracking-tight">
           Let&apos;s Talk Podcast
         </h1>
-        <p className="text-xs sm:text-base text-[#5C6672] leading-relaxed">
+        <p className="text-xs sm:text-base text-dtc-inkMuted leading-relaxed">
           Entretiens approfondis avec des professeurs d&apos;exception, cliniciens chevronnés et leaders d&apos;opinion de la médecine dentaire.
         </p>
       </div>
@@ -36,21 +36,21 @@ export default async function PodcastPage() {
 
       {/* Behind The Scenes & Studio Production */}
       <Reveal>
-      <section className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-[#DCD7CB]/50 shadow-sm space-y-4 sm:space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 border-b border-[#DCD7CB]/30 pb-3 sm:pb-4">
+      <section className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-dtc-line/50 shadow-sm space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 border-b border-dtc-line/30 pb-3 sm:pb-4">
           <div className="space-y-0.5 sm:space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#755B18]">
+            <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-dtc-gold">
               <Camera className="w-3.5 h-3.5" />
               <span>Coulisses & Production Studio</span>
             </div>
-            <h2 className="text-lg sm:text-2xl font-heading font-bold text-[#16233A]">
+            <h2 className="text-lg sm:text-2xl font-heading font-bold text-dtc-ink">
               Dans les coulisses de l&apos;enregistrement
             </h2>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 items-start">
-          <div className="relative aspect-video rounded-lg sm:rounded-xl overflow-hidden border border-[#DCD7CB]/60 shadow-sm">
+          <div className="relative aspect-video rounded-lg sm:rounded-xl overflow-hidden border border-dtc-line/60 shadow-sm">
             <Image
               src="/media/podcasts/studio_bts_viewfinder.jpg"
               alt="Moniteur Studio Let's Talk"
@@ -61,20 +61,20 @@ export default async function PodcastPage() {
           </div>
 
           <div className="space-y-2.5 sm:space-y-4">
-            <h4 className="text-base sm:text-lg font-heading font-bold text-[#16233A]">
+            <h4 className="text-base sm:text-lg font-heading font-bold text-dtc-ink">
               Une production audio-visuelle rigoureuse
             </h4>
-            <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed">
+            <p className="text-xs sm:text-sm text-dtc-lineDark leading-relaxed">
               Chaque épisode est tourné dans des conditions professionnelles avec régie multi-caméras DSLR, microphones de studio cardioïdes et éclairage cinématique sous la direction du Pôle Média de DTC.
             </p>
             <div className="pt-1 flex flex-wrap gap-2.5 sm:gap-4 text-xs">
-              <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30">
-                <span className="text-[#5C6672] block text-[10px] sm:text-xs">Co-Production</span>
-                <span className="font-semibold text-[#16233A] text-[11px] sm:text-xs">DTC × Club Social Dentaire</span>
+              <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-dtc-wash/50 border border-dtc-line/30">
+                <span className="text-dtc-inkMuted block text-[10px] sm:text-xs">Co-Production</span>
+                <span className="font-semibold text-dtc-ink text-[11px] sm:text-xs">DTC × Club Social Dentaire</span>
               </div>
-              <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/30">
-                <span className="text-[#5C6672] block text-[10px] sm:text-xs">Partenaire & Sponsor</span>
-                <span className="font-semibold text-[#755B18] text-[11px] sm:text-xs">Flex Dental</span>
+              <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-dtc-wash/50 border border-dtc-line/30">
+                <span className="text-dtc-inkMuted block text-[10px] sm:text-xs">Partenaire & Sponsor</span>
+                <span className="font-semibold text-dtc-gold text-[11px] sm:text-xs">Flex Dental</span>
               </div>
             </div>
           </div>

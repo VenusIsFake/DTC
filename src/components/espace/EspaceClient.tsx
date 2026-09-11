@@ -27,10 +27,10 @@ export default function EspaceClient({
     <div className="pt-10 sm:pt-14 pb-10 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-5 sm:space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#755B18]">
+        <p className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-dtc-gold">
           Espace Membre
         </p>
-        <h1 className="font-heading font-semibold text-3xl sm:text-4xl text-[#16233A] tracking-tight">
+        <h1 className="font-heading font-semibold text-3xl sm:text-4xl text-dtc-ink tracking-tight">
           Bonjour, {profile.full_name?.split(" ")[0] || "membre"}
         </h1>
         {isBanned && (
@@ -42,7 +42,7 @@ export default function EspaceClient({
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1 p-1 rounded-md bg-white border border-[#DCD7CB] w-fit">
+      <div className="flex items-center gap-1 p-1 rounded-md bg-white border border-dtc-line w-fit">
         {(
           [
             { id: "profil", label: "Mon profil", icon: User },
@@ -55,8 +55,8 @@ export default function EspaceClient({
             aria-pressed={tab === option.id}
             className={`flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-[11px] sm:text-xs font-semibold transition-colors ${
               tab === option.id
-                ? "bg-[#EFECE4] text-[#755B18]"
-                : "text-[#5C6672] hover:text-[#16233A]"
+                ? "bg-dtc-wash text-dtc-gold"
+                : "text-dtc-inkMuted hover:text-dtc-ink"
             }`}
           >
             <option.icon className="w-3.5 h-3.5" />
@@ -65,7 +65,7 @@ export default function EspaceClient({
         ))}
         <Link
           href="/espace/annuaire"
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-[11px] sm:text-xs font-semibold text-[#5C6672] hover:text-[#16233A] transition-colors"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-[11px] sm:text-xs font-semibold text-dtc-inkMuted hover:text-dtc-ink transition-colors"
         >
           <Users className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Annuaire</span>
@@ -82,13 +82,13 @@ export default function EspaceClient({
       )}
 
       {isBureau && tab === "profil" && (
-        <p className="text-[11px] text-[#5F6774] text-center">
+        <p className="text-[11px] text-dtc-inkSoft text-center">
           Membre du bureau : vos outils de gestion se trouvent directement dans les fils{" "}
-          <Link href="/annonces" className="text-[#755B18] hover:underline underline-offset-2">
+          <Link href="/annonces" className="text-dtc-gold hover:underline underline-offset-2">
             Annonces
           </Link>{" "}
           et{" "}
-          <Link href="/idees" className="text-[#755B18] hover:underline underline-offset-2">
+          <Link href="/idees" className="text-dtc-gold hover:underline underline-offset-2">
             Idées
           </Link>
           .

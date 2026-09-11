@@ -102,13 +102,13 @@ function SectionsEditor() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2.5">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <FileText className="w-4 h-4 text-[#755B18]" />
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <FileText className="w-4 h-4 text-dtc-gold" />
           Sections « À propos »
         </h2>
-        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 active:scale-95">
+        <button onClick={() => startEdit(null)} className="flex items-center gap-1 px-3 py-1.5 rounded-md text-[11px] font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 active:scale-95">
           <Plus className="w-3 h-3" />
           <span>Section</span>
         </button>
@@ -121,7 +121,7 @@ function SectionsEditor() {
       )}
 
       {editing && (
-        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-[#755B18]/25">
+        <form onSubmit={submit} className="space-y-3 p-3 rounded-xl bg-white/60 border border-dtc-gold/25">
           <div className="grid grid-cols-2 gap-3">
             <Field label="Clé (identifiant)" htmlFor="about-key">
               <input id="about-key" type="text" value={form.key} onChange={(e) => setForm({ ...form, key: e.target.value })} className={inputClass} disabled={Boolean(editing.id)} />
@@ -136,8 +136,8 @@ function SectionsEditor() {
           <Field label="Contenu" htmlFor="about-body" hint="Texte simple — sauts de ligne conservés. Jamais de HTML brut.">
             <textarea id="about-body" rows={6} value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} className={`${inputClass} resize-y`} />
           </Field>
-          <label className="flex items-center gap-2 text-xs text-[#3D4A58] cursor-pointer select-none">
-            <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-[#755B18]" />
+          <label className="flex items-center gap-2 text-xs text-dtc-lineDark cursor-pointer select-none">
+            <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 accent-dtc-gold" />
             <span>Publiée</span>
           </label>
           <div className="flex justify-end gap-2">
@@ -148,25 +148,25 @@ function SectionsEditor() {
       )}
 
       {sections === null ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : (
         <div className="space-y-1.5">
           {sections.map((section) => (
-            <div key={section.id} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#EFECE4]/40 border border-[#DCD7CB]/25">
-              <span className="text-[10px] font-bold text-[#755B18] w-5 shrink-0">{section.sort_order}</span>
+            <div key={section.id} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-dtc-wash/40 border border-dtc-line/25">
+              <span className="text-[10px] font-bold text-dtc-gold w-5 shrink-0">{section.sort_order}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold text-[#16233A] truncate">
+                <p className="text-xs font-semibold text-dtc-ink truncate">
                   {section.title} {!section.is_published && <Badge tone="gray">Masquée</Badge>}
                 </p>
-                <p className="text-[10px] text-[#5F6774] truncate">{section.key}</p>
+                <p className="text-[10px] text-dtc-inkSoft truncate">{section.key}</p>
               </div>
-              <button onClick={() => togglePublished(section)} className="text-[10px] font-semibold text-[#5C6672] hover:text-[#755B18] shrink-0">
+              <button onClick={() => togglePublished(section)} className="text-[10px] font-semibold text-dtc-inkMuted hover:text-dtc-gold shrink-0">
                 {section.is_published ? "Masquer" : "Afficher"}
               </button>
-              <button onClick={() => startEdit(section)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-[#755B18]">
+              <button onClick={() => startEdit(section)} aria-label="Modifier" className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold">
                 <Pencil className="w-3 h-3" />
               </button>
-              <button onClick={() => remove(section)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
+              <button onClick={() => remove(section)} aria-label="Supprimer" className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700">
                 <Trash2 className="w-3 h-3" />
               </button>
             </div>
@@ -461,10 +461,10 @@ function MandatesEditor() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-[#16233A]">
-          <Crown className="w-4 h-4 text-[#755B18]" />
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <Crown className="w-4 h-4 text-dtc-gold" />
           Mandats & organigrammes
         </h2>
         <form onSubmit={createMandate} className="flex gap-2">
@@ -508,11 +508,11 @@ function MandatesEditor() {
       )}
 
       {mandates === null ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : (
         <div className="space-y-2">
           {mandates.length === 0 && (
-            <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+            <p className="text-[11px] text-dtc-gold bg-dtc-gold/10 border border-dtc-gold/30 rounded-lg px-3 py-2">
               Aucun mandat en base — le site public affiche le mandat statique de secours (2025–2026).
             </p>
           )}
@@ -523,25 +523,25 @@ function MandatesEditor() {
               <div
                 key={mandate.id}
                 className={`rounded-xl border p-3 space-y-2 ${
-                  mandate.is_current ? "border-[#755B18]/40 bg-[#755B18]/5" : "border-[#DCD7CB]/30 bg-[#EFECE4]/30"
+                  mandate.is_current ? "border-dtc-gold/40 bg-dtc-gold/5" : "border-dtc-line/30 bg-dtc-wash/30"
                 }`}
               >
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-xs font-bold text-[#16233A]">{mandate.year_label}</p>
+                  <p className="text-xs font-bold text-dtc-ink">{mandate.year_label}</p>
                   {mandate.is_current && <Badge tone="gold">Courant</Badge>}
                   <div className="ml-auto flex items-center gap-1.5">
                     {hasOtherMandate && (
                       <button
                         onClick={() => importPrevious(mandate)}
                         title="Reprendre l'équipe du mandat précédent (rôles et photos conservés)"
-                        className="flex items-center gap-1 text-[10px] font-semibold text-[#5C6672] hover:text-[#755B18]"
+                        className="flex items-center gap-1 text-[10px] font-semibold text-dtc-inkMuted hover:text-dtc-gold"
                       >
                         <UserPlus className="w-3 h-3" />
                         <span>Importer l&apos;équipe précédente</span>
                       </button>
                     )}
                     {!mandate.is_current && (
-                      <button onClick={() => setCurrent(mandate)} className="text-[10px] font-semibold text-[#755B18] hover:underline">
+                      <button onClick={() => setCurrent(mandate)} className="text-[10px] font-semibold text-dtc-gold hover:underline">
                         Définir courant
                       </button>
                     )}
@@ -550,39 +550,39 @@ function MandatesEditor() {
                         setPendingUploadMandate(mandate.id);
                         fileRef.current?.click();
                       }}
-                      className="flex items-center gap-1 text-[10px] font-semibold text-[#5C6672] hover:text-[#755B18]"
+                      className="flex items-center gap-1 text-[10px] font-semibold text-dtc-inkMuted hover:text-dtc-gold"
                       disabled={uploadingFor === mandate.id}
                     >
                       {uploadingFor === mandate.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
                       <span>Infographie</span>
                     </button>
-                    <button onClick={() => removeMandate(mandate)} aria-label="Supprimer le mandat" className="w-7 h-7 flex items-center justify-center rounded-lg text-[#5C6672] hover:text-red-700">
+                    <button onClick={() => removeMandate(mandate)} aria-label="Supprimer le mandat" className="w-7 h-7 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700">
                       <Trash2 className="w-3 h-3" />
                     </button>
                   </div>
                 </div>
-                <p className="text-[10px] text-[#5F6774] truncate">
+                <p className="text-[10px] text-dtc-inkSoft truncate">
                   {mandate.infographic_url || "Aucune infographie"} · {mandate.members.length} membres
                 </p>
 
                 <div className="space-y-1">
                   {sortedMembers.map((member, idx) => (
-                    <div key={member.id} className="flex items-center gap-2 p-1.5 rounded-lg bg-white/70 border border-[#DCD7CB]/30">
+                    <div key={member.id} className="flex items-center gap-2 p-1.5 rounded-lg bg-white/70 border border-dtc-line/30">
                       <UserAvatar name={member.name} src={member.photo_url} size={30} />
                       <div className="min-w-0 flex-1">
-                        <p className="text-[11px] font-semibold text-[#16233A] truncate">
+                        <p className="text-[11px] font-semibold text-dtc-ink truncate">
                           {member.name}
                           {member.profile_id && (
                             <Badge tone="gray" className="ml-1.5">compte lié</Badge>
                           )}
                         </p>
-                        <p className="text-[10px] text-[#755B18] truncate">{member.role}</p>
+                        <p className="text-[10px] text-dtc-gold truncate">{member.role}</p>
                       </div>
                       <button
                         onClick={() => moveMember(mandate.id, member.id, -1)}
                         disabled={idx === 0}
                         aria-label={`Monter ${member.name}`}
-                        className="w-6 h-6 flex items-center justify-center rounded text-[#5C6672] hover:text-[#755B18] disabled:opacity-30"
+                        className="w-6 h-6 flex items-center justify-center rounded text-dtc-inkMuted hover:text-dtc-gold disabled:opacity-30"
                       >
                         <ArrowUp className="w-3 h-3" />
                       </button>
@@ -590,21 +590,21 @@ function MandatesEditor() {
                         onClick={() => moveMember(mandate.id, member.id, 1)}
                         disabled={idx === sortedMembers.length - 1}
                         aria-label={`Descendre ${member.name}`}
-                        className="w-6 h-6 flex items-center justify-center rounded text-[#5C6672] hover:text-[#755B18] disabled:opacity-30"
+                        className="w-6 h-6 flex items-center justify-center rounded text-dtc-inkMuted hover:text-dtc-gold disabled:opacity-30"
                       >
                         <ArrowDown className="w-3 h-3" />
                       </button>
                       <button
                         onClick={() => startMemberEdit(mandate.id, member)}
                         aria-label={`Modifier ${member.name}`}
-                        className="w-6 h-6 flex items-center justify-center rounded text-[#5C6672] hover:text-[#755B18]"
+                        className="w-6 h-6 flex items-center justify-center rounded text-dtc-inkMuted hover:text-dtc-gold"
                       >
                         <Pencil className="w-3 h-3" />
                       </button>
                       <button
                         onClick={() => removeMember(member)}
                         aria-label={`Retirer ${member.name}`}
-                        className="w-6 h-6 flex items-center justify-center rounded text-[#5C6672] hover:text-red-700"
+                        className="w-6 h-6 flex items-center justify-center rounded text-dtc-inkMuted hover:text-red-700"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
@@ -613,7 +613,7 @@ function MandatesEditor() {
                 </div>
 
                 {memberForm?.mandateId === mandate.id ? (
-                  <form onSubmit={saveMember} className="space-y-2.5 p-3 rounded-xl bg-white/60 border border-[#755B18]/25">
+                  <form onSubmit={saveMember} className="space-y-2.5 p-3 rounded-xl bg-white/60 border border-dtc-gold/25">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       <Field
                         label="Compte du club (optionnel)"
@@ -693,7 +693,7 @@ function MandatesEditor() {
                         <button
                           type="button"
                           onClick={() => setMemberForm({ ...memberForm, photo_url: "" })}
-                          className="text-[10px] font-semibold text-[#5C6672] hover:text-red-700"
+                          className="text-[10px] font-semibold text-dtc-inkMuted hover:text-red-700"
                         >
                           Retirer la photo
                         </button>

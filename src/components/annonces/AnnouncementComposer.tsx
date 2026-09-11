@@ -155,15 +155,15 @@ export default function AnnouncementComposer({
       className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-4 shadow-lg">
+      <div className="relative z-10 w-full max-w-lg max-h-[92dvh] overflow-y-auto glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-7 space-y-4 shadow-lg">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-heading font-bold text-[#16233A]">
+          <h2 className="text-lg font-heading font-bold text-dtc-ink">
             {editing ? "Modifier l'annonce" : "Nouvelle annonce"}
           </h2>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -259,7 +259,7 @@ export default function AnnouncementComposer({
           </Field>
 
           {form.poster_url && (
-            <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#DCD7CB]/50">
+            <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-dtc-line/50">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={form.poster_url} alt="Aperçu de l'affiche" className="w-full h-full object-cover" />
               <button
@@ -295,14 +295,14 @@ export default function AnnouncementComposer({
             </Field>
           </div>
 
-          <label className="flex items-center gap-2.5 text-xs text-[#3D4A58] cursor-pointer select-none">
+          <label className="flex items-center gap-2.5 text-xs text-dtc-lineDark cursor-pointer select-none">
             <input
               type="checkbox"
               checked={form.is_pinned}
               onChange={(e) => update("is_pinned", e.target.checked)}
-              className="w-4 h-4 accent-[#755B18]"
+              className="w-4 h-4 accent-dtc-gold"
             />
-            <Pin className="w-3.5 h-3.5 text-[#755B18]" />
+            <Pin className="w-3.5 h-3.5 text-dtc-gold" />
             <span>Épingler en haut du fil</span>
           </label>
 

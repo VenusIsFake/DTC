@@ -24,23 +24,23 @@ export default function Hero({
     <section className="px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-6 pb-0">
       <div className="max-w-6xl mx-auto space-y-2.5 sm:space-y-4">
         {/* Cinematic Brand Header Lockup */}
-        <div className="border-b border-[#DCD7CB]/50 pb-2.5 sm:pb-3.5 space-y-1.5 sm:space-y-2">
+        <div className="border-b border-dtc-line/50 pb-2.5 sm:pb-3.5 space-y-1.5 sm:space-y-2">
           {/* Editorial Marquee Line */}
           <div className="flex items-center gap-2.5 sm:gap-3.5">
-            <span className="w-6 sm:w-10 h-px bg-[#755B18]/70 shrink-0" />
-            <span className="text-[10.5px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[#755B18] font-mono">
+            <span className="w-6 sm:w-10 h-px bg-dtc-gold/70 shrink-0" />
+            <span className="text-[10.5px] sm:text-xs font-bold tracking-[0.22em] uppercase text-dtc-gold font-mono">
               {marqueeLine?.trim() || "WE PRESENT TO YOU"}
             </span>
-            <span className="flex-1 h-px bg-gradient-to-r from-[#755B18]/50 via-[#DCD7CB]/40 to-transparent" />
+            <span className="flex-1 h-px bg-gradient-to-r from-dtc-gold/50 via-dtc-line/40 to-transparent" />
           </div>
 
           {/* Title & Slogan Row */}
           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
-            <h1 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-[#16233A] tracking-tight leading-tight">
-              Dentalk <span className="text-[#755B18]">Club</span>
+            <h1 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-dtc-ink tracking-tight leading-tight">
+              Dentalk <span className="text-dtc-gold">Club</span>
             </h1>
 
-            <p className="font-heading italic text-xs sm:text-sm md:text-base text-[#3D4A58]">
+            <p className="font-heading italic text-xs sm:text-sm md:text-base text-dtc-lineDark">
               &laquo;&nbsp;{tagline?.trim() || siteConfig.tagline}&nbsp;&raquo;
             </p>
           </div>
@@ -48,9 +48,9 @@ export default function Hero({
 
         {/* Featured Dernière Sortie Spotlight Card (Mobile Optimized) */}
         {featuredEpisode && (
-          <div className="glass-card p-3 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl border border-[#DCD7CB]/60 shadow-sm space-y-2.5 sm:space-y-3.5 group">
+          <div className="glass-card p-3 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl border border-dtc-line/60 shadow-sm space-y-2.5 sm:space-y-3.5 group">
             {/* Card Header Bar */}
-            <div className="flex items-center justify-between gap-1.5 border-b border-[#DCD7CB]/40 pb-2">
+            <div className="flex items-center justify-between gap-1.5 border-b border-dtc-line/40 pb-2">
               <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-red-700 uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-600 animate-pulse shrink-0" />
                 <Radio className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
@@ -58,9 +58,9 @@ export default function Hero({
                 <span className="hidden sm:inline">Dernière Sortie · Épisode {featuredEpisode.episodeNumber}</span>
               </div>
 
-              <div className="flex items-center gap-1.5 sm:gap-3 text-[10px] sm:text-xs text-[#5C6672] font-medium shrink-0">
+              <div className="flex items-center gap-1.5 sm:gap-3 text-[10px] sm:text-xs text-dtc-inkMuted font-medium shrink-0">
                 <span className="inline-flex items-center gap-1">
-                  <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#755B18]" />
+                  <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-dtc-gold" />
                   <span>{featuredEpisode.releaseDate}</span>
                 </span>
               </div>
@@ -72,7 +72,7 @@ export default function Hero({
               <div className="lg:col-span-6">
                 <Link
                   href="/podcast"
-                  className="relative aspect-video w-full rounded-lg sm:rounded-xl overflow-hidden bg-black/90 border border-[#DCD7CB]/60 shadow-sm group/thumb block"
+                  className="relative aspect-video w-full rounded-lg sm:rounded-xl overflow-hidden bg-black/90 border border-dtc-line/60 shadow-sm group/thumb block"
                 >
                   <Image
                     src={imgSrc}
@@ -106,25 +106,25 @@ export default function Hero({
               {/* Episode Details */}
               <div className="lg:col-span-6 space-y-1.5 sm:space-y-2.5">
                 <div className="space-y-0.5">
-                  <span className="inline-block text-[9px] sm:text-[11px] font-bold text-[#755B18] uppercase tracking-wider">
+                  <span className="inline-block text-[9px] sm:text-[11px] font-bold text-dtc-gold uppercase tracking-wider">
                     Let&apos;s Talk Podcast
                   </span>
-                  <h2 className="text-base sm:text-xl lg:text-2xl font-heading font-semibold text-[#16233A] leading-snug tracking-tight">
+                  <h2 className="text-base sm:text-xl lg:text-2xl font-heading font-semibold text-dtc-ink leading-snug tracking-tight">
                     {featuredEpisode.guest}
                   </h2>
-                  <p className="text-[10.5px] sm:text-xs font-semibold text-[#755B18] line-clamp-1 sm:line-clamp-none">
+                  <p className="text-[10.5px] sm:text-xs font-semibold text-dtc-gold line-clamp-1 sm:line-clamp-none">
                     {featuredEpisode.role}
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed line-clamp-2 sm:line-clamp-none">
+                <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed line-clamp-2 sm:line-clamp-none">
                   {featuredEpisode.synopsis}
                 </p>
 
                 <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-2.5 pt-1">
                   <Link
                     href="/podcast"
-                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs bg-[#16233A] text-[#F7F5F0] hover:bg-[#233753] transition-all shadow-sm text-center"
+                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs bg-dtc-ink text-dtc-paper hover:bg-dtc-steel transition-all shadow-sm text-center"
                   >
                     <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
                     <span className="sm:hidden">Écouter</span>
@@ -133,7 +133,7 @@ export default function Hero({
 
                   <Link
                     href={eventsVisible ? "/events" : "/annonces"}
-                    className="inline-flex items-center justify-center gap-1 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg font-semibold text-xs text-[#16233A] bg-[#EFECE4]/60 border border-[#DCD7CB] hover:bg-[#EFECE4] transition-colors text-center"
+                    className="inline-flex items-center justify-center gap-1 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg font-semibold text-xs text-dtc-ink bg-dtc-wash/60 border border-dtc-line hover:bg-dtc-wash transition-colors text-center"
                   >
                     <span>{eventsVisible ? "TEDx & Débats" : "Annonces & Idées"}</span>
                     <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />

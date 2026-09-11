@@ -66,22 +66,22 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
       className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-lg glass-card rounded-lg border border-[#DCD7CB]/50 p-5 sm:p-7 space-y-4 shadow-lg">
+      <div className="relative z-10 w-full max-w-lg glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-7 space-y-4 shadow-lg">
         <div className="flex items-center justify-between">
-          <h2 className="flex items-center gap-2 text-lg font-heading font-bold text-[#16233A]">
-            <Lightbulb className="w-5 h-5 text-[#755B18]" />
+          <h2 className="flex items-center gap-2 text-lg font-heading font-bold text-dtc-ink">
+            <Lightbulb className="w-5 h-5 text-dtc-gold" />
             Proposer une idée
           </h2>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EFECE4]/80 text-[#5C6672] hover:text-[#16233A] transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash/80 text-dtc-inkMuted hover:text-dtc-ink transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <p className="text-xs text-[#5C6672] leading-relaxed">
+        <p className="text-xs text-dtc-inkMuted leading-relaxed">
           Thèmes de débat, formats d&apos;atelier, invités du podcast, événements… toutes les idées
           sont bienvenues. La communauté vote, le bureau étudie.
         </p>

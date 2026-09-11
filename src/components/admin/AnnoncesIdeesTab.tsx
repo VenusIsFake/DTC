@@ -31,8 +31,8 @@ export default function AnnoncesIdeesTab() {
               onClick={() => setSection(option.id)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold whitespace-nowrap transition-all ${
                 isActive
-                  ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30 shadow-sm"
-                  : "text-[#5C6672] hover:text-[#16233A] border border-transparent hover:bg-[#EFECE4]"
+                  ? "bg-dtc-wash text-dtc-gold border border-dtc-gold/30 shadow-sm"
+                  : "text-dtc-inkMuted hover:text-dtc-ink border border-transparent hover:bg-dtc-wash"
               }`}
             >
               <option.icon className="w-3.5 h-3.5" />

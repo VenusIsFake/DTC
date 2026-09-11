@@ -46,11 +46,11 @@ export default async function EspacePage() {
     }
     return (
       <div className="pt-10 sm:pt-14 pb-16 px-4 max-w-xl mx-auto">
-        <div className="glass-card rounded-lg border border-[#755B18]/30 p-8 sm:p-10 text-center space-y-4">
-          <h1 className="text-xl sm:text-2xl font-heading font-semibold text-[#16233A]">
+        <div className="glass-card rounded-lg border border-dtc-gold/30 p-8 sm:p-10 text-center space-y-4">
+          <h1 className="text-xl sm:text-2xl font-heading font-semibold text-dtc-ink">
             Compte en attente de validation
           </h1>
-          <p className="text-xs sm:text-sm text-[#5C6672] leading-relaxed">
+          <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed">
             Bienvenue au DTC ! Votre compte a bien été créé, mais l&apos;accès à l&apos;espace
             membre est accordé par le bureau du club après vérification. Vous pouvez
             consulter librement les pages publiques du site en attendant — le bureau est

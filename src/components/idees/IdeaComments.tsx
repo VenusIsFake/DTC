@@ -83,32 +83,32 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
   };
 
   return (
-    <div className="space-y-3 pt-3 border-t border-[#DCD7CB]/30">
-      {comments === null && <p className="text-xs text-[#5C6672]">Chargement des commentaires…</p>}
+    <div className="space-y-3 pt-3 border-t border-dtc-line/30">
+      {comments === null && <p className="text-xs text-dtc-inkMuted">Chargement des commentaires…</p>}
       {comments !== null && comments.length === 0 && (
-        <p className="text-xs text-[#5F6774]">Soyez le premier à commenter cette idée.</p>
+        <p className="text-xs text-dtc-inkSoft">Soyez le premier à commenter cette idée.</p>
       )}
 
       {comments?.map((comment) => (
         <div key={comment.id} className="flex items-start gap-2.5">
           <UserAvatar name={comment.author_name} src={comment.author_avatar} size={28} />
-          <div className="flex-1 min-w-0 p-2.5 rounded-xl bg-[#EFECE4]/50 border border-[#DCD7CB]/25">
+          <div className="flex-1 min-w-0 p-2.5 rounded-xl bg-dtc-wash/50 border border-dtc-line/25">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[11px] font-bold text-[#16233A] truncate">
+              <span className="text-[11px] font-bold text-dtc-ink truncate">
                 {comment.author_name ?? "Membre"}
               </span>
-              <span className="text-[10px] text-[#5F6774]"><span suppressHydrationWarning>{formatRelative(comment.created_at)}</span></span>
+              <span className="text-[10px] text-dtc-inkSoft"><span suppressHydrationWarning>{formatRelative(comment.created_at)}</span></span>
               {(isBureau || comment.author_id === user?.id) && (
                 <button
                   onClick={() => remove(comment)}
                   aria-label="Supprimer le commentaire"
-                  className="ml-auto text-[#5F6774] hover:text-red-700 transition-colors"
+                  className="ml-auto text-dtc-inkSoft hover:text-red-700 transition-colors"
                 >
                   <Trash2 className="w-3 h-3" />
                 </button>
               )}
             </div>
-            <p className="text-xs text-[#3D4A58] leading-relaxed mt-0.5 whitespace-pre-line">{comment.body}</p>
+            <p className="text-xs text-dtc-lineDark leading-relaxed mt-0.5 whitespace-pre-line">{comment.body}</p>
           </div>
         </div>
       ))}
@@ -124,13 +124,13 @@ export default function IdeaComments({ ideaId, onCountChange }: { ideaId: string
           onChange={(e) => setDraft(e.target.value)}
           maxLength={2000}
           placeholder={user ? "Ajouter un commentaire constructif…" : "Se connecter pour commenter…"}
-          className="flex-1 px-3 py-2 rounded-full bg-white border border-[#DCD7CB] text-xs text-[#16233A] placeholder:text-[#5F6774] focus:outline-none focus:border-[#755B18] focus:ring-2 focus:ring-[#755B18]/60"
+          className="flex-1 px-3 py-2 rounded-full bg-white border border-dtc-line text-xs text-dtc-ink placeholder:text-dtc-inkSoft focus:outline-none focus:border-dtc-gold focus:ring-2 focus:ring-dtc-gold/60"
         />
         <button
           type="submit"
           disabled={sending || !draft.trim()}
           aria-label="Envoyer le commentaire"
-          className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-[#755B18]/15 border border-[#755B18]/40 text-[#755B18] hover:bg-[#755B18]/25 transition-all active:scale-95 disabled:opacity-50"
+          className="w-9 h-9 shrink-0 flex items-center justify-center rounded-full bg-dtc-gold/15 border border-dtc-gold/40 text-dtc-gold hover:bg-dtc-gold/25 transition-all active:scale-95 disabled:opacity-50"
         >
           {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
         </button>

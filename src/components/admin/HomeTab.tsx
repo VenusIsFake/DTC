@@ -73,10 +73,10 @@ function TextSettingCard({
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h2 className="text-sm font-heading font-bold text-[#16233A]">{title}</h2>
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
+      <h2 className="text-sm font-heading font-bold text-dtc-ink">{title}</h2>
       {!loaded ? (
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       ) : (
         <>
           {multiline ? (
@@ -153,8 +153,8 @@ function PartnersEditor() {
 
   if (!sponsor.loaded || !partner.loaded) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-5">
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-5">
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       </div>
     );
   }
@@ -165,15 +165,15 @@ function PartnersEditor() {
   ];
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h2 className="text-sm font-heading font-bold text-[#16233A]">Partenaires & soutiens</h2>
-      <p className="text-[11px] text-[#5C6672]">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
+      <h2 className="text-sm font-heading font-bold text-dtc-ink">Partenaires & soutiens</h2>
+      <p className="text-[11px] text-dtc-inkMuted">
         Cartes affichées sur la page À propos et dans le pied de page. Vider le nom et enregistrer
         retire la carte du site.
       </p>
       {rows.map((row) => (
-        <div key={row.title} className="space-y-2 p-3 rounded-xl bg-white/60 border border-[#DCD7CB]/40">
-          <p className="text-[11px] font-bold text-[#755B18]">{row.title}</p>
+        <div key={row.title} className="space-y-2 p-3 rounded-xl bg-white/60 border border-dtc-line/40">
+          <p className="text-[11px] font-bold text-dtc-gold">{row.title}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <Field label="Nom" htmlFor={`partner-name-${row.title}`}>
               <input
@@ -259,16 +259,16 @@ function ActivityImagesCard() {
 
   if (!images.loaded || gallery === null) {
     return (
-      <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-5">
-        <Loader2 className="w-4 h-4 text-[#755B18] animate-spin mx-auto" />
+      <div className="glass-card rounded-lg border border-dtc-line/40 p-5">
+        <Loader2 className="w-4 h-4 text-dtc-gold animate-spin mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
-      <h2 className="text-sm font-heading font-bold text-[#16233A]">Images des cartes d&apos;activité (accueil)</h2>
-      <p className="text-[11px] text-[#5C6672]">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
+      <h2 className="text-sm font-heading font-bold text-dtc-ink">Images des cartes d&apos;activité (accueil)</h2>
+      <p className="text-[11px] text-dtc-inkMuted">
         Choisissez pour chaque carte une image publiée dans la galerie. « Par défaut » garde
         l&apos;image actuelle du site.
       </p>
@@ -277,11 +277,11 @@ function ActivityImagesCard() {
           const value = images.value[card.key] ?? "";
           const preview = value || card.fallback;
           return (
-            <div key={card.key} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/60 border border-[#DCD7CB]/40">
+            <div key={card.key} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/60 border border-dtc-line/40">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={preview} alt="" className="w-16 h-12 rounded-lg object-cover border border-[#DCD7CB]/50 shrink-0" />
+              <img src={preview} alt="" className="w-16 h-12 rounded-lg object-cover border border-dtc-line/50 shrink-0" />
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-[#16233A] truncate">{card.label}</p>
+                <p className="text-[11px] font-bold text-dtc-ink truncate">{card.label}</p>
                 <label className="sr-only" htmlFor={`card-img-${card.key}`}>
                   Image de la carte {card.label}
                 </label>
@@ -307,7 +307,7 @@ function ActivityImagesCard() {
         })}
       </div>
       {gallery.length === 0 && (
-        <p className="text-[11px] text-[#755B18] bg-[#755B18]/10 border border-[#755B18]/30 rounded-lg px-3 py-2">
+        <p className="text-[11px] text-dtc-gold bg-dtc-gold/10 border border-dtc-gold/30 rounded-lg px-3 py-2">
           Aucune image dans la galerie — publiez d&apos;abord des images dans l&apos;onglet Galerie.
         </p>
       )}
@@ -345,20 +345,20 @@ function WallToggleCard() {
   };
 
   return (
-    <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-2">
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-2">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="min-w-0">
-          <h2 className="text-sm font-heading font-bold text-[#16233A]">
+          <h2 className="text-sm font-heading font-bold text-dtc-ink">
             Accès public du site {wallOpen ? "(ouvert)" : "(réservé au bureau)"}
           </h2>
-          <p className="text-[11px] text-[#5C6672] leading-relaxed mt-0.5">
+          <p className="text-[11px] text-dtc-inkMuted leading-relaxed mt-0.5">
             {wallOpen
               ? "Le site principal est visible de tous. Basculer pour le refermer."
               : "Seul le formulaire /candidature est public ; le reste du site exige un compte bureau ou admin."}
           </p>
         </div>
         {!loaded ? (
-          <Loader2 className="w-4 h-4 text-[#755B18] animate-spin shrink-0" />
+          <Loader2 className="w-4 h-4 text-dtc-gold animate-spin shrink-0" />
         ) : (
           <button
             onClick={toggle}
@@ -367,7 +367,7 @@ function WallToggleCard() {
             aria-checked={wallOpen}
             aria-label="Ouvrir le site au public"
             className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
-              wallOpen ? "bg-emerald-600" : "bg-[#16233A]"
+              wallOpen ? "bg-emerald-600" : "bg-dtc-ink"
             } disabled:opacity-50`}
           >
             <span
@@ -390,8 +390,8 @@ function WallToggleCard() {
 export default function HomeTab() {
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-1.5 text-xs text-[#5C6672]">
-        <Home className="w-4 h-4 text-[#755B18]" />
+      <div className="flex items-center gap-1.5 text-xs text-dtc-inkMuted">
+        <Home className="w-4 h-4 text-dtc-gold" />
         <p>Contenu éditorial de l&apos;accueil et de l&apos;en-tête — champ vide = valeur par défaut du site.</p>
       </div>
       <WallToggleCard />

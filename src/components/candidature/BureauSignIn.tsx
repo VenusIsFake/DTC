@@ -18,7 +18,7 @@ export default function BureauSignIn() {
     <div className="flex justify-center pt-1">
       <button
         onClick={() => openAuth("signin")}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-semibold text-[#5C6672] border border-[#DCD7CB]/60 hover:text-[#755B18] hover:border-[#755B18]/40 transition-colors"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-semibold text-dtc-inkMuted border border-dtc-line/60 hover:text-dtc-gold hover:border-dtc-gold/40 transition-colors"
       >
         <KeyRound className="w-3 h-3" />
         <span>Connexion bureau</span>

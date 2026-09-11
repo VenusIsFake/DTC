@@ -182,7 +182,7 @@ export default function IdeasBoard({
     <div className="space-y-4 sm:space-y-5">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/80 border border-[#DCD7CB]/40">
+        <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/80 border border-dtc-line/40">
           {(
             [
               { id: "top", label: "Top votes" },
@@ -194,7 +194,7 @@ export default function IdeasBoard({
               onClick={() => setSort(option.id)}
               aria-pressed={sort === option.id}
               className={`px-3 py-1.5 rounded-md text-[11px] font-semibold transition-all ${
-                sort === option.id ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30" : "text-[#5C6672] hover:text-[#16233A]"
+                sort === option.id ? "bg-dtc-wash text-dtc-gold border border-dtc-gold/30" : "text-dtc-inkMuted hover:text-dtc-ink"
               }`}
             >
               {option.label}
@@ -204,7 +204,7 @@ export default function IdeasBoard({
             onClick={() => setWeekOnly((v) => !v)}
             aria-pressed={weekOnly}
             className={`px-3 py-1.5 rounded-md text-[11px] font-semibold transition-all ${
-              weekOnly ? "bg-[#EFECE4] text-[#755B18] border border-[#755B18]/30" : "text-[#5C6672] hover:text-[#16233A]"
+              weekOnly ? "bg-dtc-wash text-dtc-gold border border-dtc-gold/30" : "text-dtc-inkMuted hover:text-dtc-ink"
             }`}
           >
             Cette semaine
@@ -214,7 +214,7 @@ export default function IdeasBoard({
         {user && (
           <button
             onClick={() => setPitchOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-[#755B18] text-[#F7F5F0] hover:brightness-110 shadow-md shadow-[#755B18]/20 transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 shadow-md shadow-dtc-gold/20 transition-all active:scale-95"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Proposer une idée</span>
@@ -229,12 +229,12 @@ export default function IdeasBoard({
       )}
 
       {visible.length === 0 && (
-        <div className="glass-card rounded-lg border border-[#DCD7CB]/40 p-8 sm:p-12 text-center space-y-2">
-          <Lightbulb className="w-8 h-8 text-[#DCD7CB] mx-auto" />
-          <p className="text-sm font-semibold text-[#16233A]">
+        <div className="glass-card rounded-lg border border-dtc-line/40 p-8 sm:p-12 text-center space-y-2">
+          <Lightbulb className="w-8 h-8 text-dtc-line mx-auto" />
+          <p className="text-sm font-semibold text-dtc-ink">
             {weekOnly ? "Aucune idée cette semaine" : "Aucune idée pour le moment"}
           </p>
-          <p className="text-xs text-[#5C6672]">
+          <p className="text-xs text-dtc-inkMuted">
             {user
               ? "Lancez le mouvement : proposez la première idée du club !"
               : "Connectez-vous pour proposer la première idée et voter."}
@@ -248,7 +248,7 @@ export default function IdeasBoard({
         const meta = STATUS_META[item.status];
         const isExpanded = expanded === item.id;
         return (
-          <article key={item.id} className="glass-card rounded-lg border border-[#DCD7CB]/40 p-4 sm:p-5 space-y-3">
+          <article key={item.id} className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
             <div className="flex items-start gap-3 sm:gap-4">
               {/* Vote column */}
               <div className="flex flex-col items-center gap-1 shrink-0">
@@ -259,8 +259,8 @@ export default function IdeasBoard({
                   aria-pressed={voted}
                   className={`flex flex-col items-center justify-center w-11 h-12 rounded-xl border transition-all active:scale-95 disabled:opacity-60 ${
                     voted
-                      ? "bg-[#755B18]/20 border-[#755B18] text-[#755B18]"
-                      : "bg-white border-[#DCD7CB]/50 text-[#5C6672] hover:text-[#755B18] hover:border-[#755B18]/50"
+                      ? "bg-dtc-gold/20 border-dtc-gold text-dtc-gold"
+                      : "bg-white border-dtc-line/50 text-dtc-inkMuted hover:text-dtc-gold hover:border-dtc-gold/50"
                   }`}
                 >
                   {voted ? <Check className="w-4 h-4" /> : <ArrowBigUp className="w-4.5 h-4.5 w-5 h-5" />}
@@ -270,22 +270,22 @@ export default function IdeasBoard({
 
               <div className="flex-1 min-w-0 space-y-1.5">
                 <div className="flex items-start justify-between gap-2 flex-wrap">
-                  <h2 className="text-sm sm:text-base font-heading font-bold text-[#16233A] leading-snug">{item.title}</h2>
+                  <h2 className="text-sm sm:text-base font-heading font-bold text-dtc-ink leading-snug">{item.title}</h2>
                   <Badge tone={meta.tone}>{meta.label}</Badge>
                 </div>
                 {item.description && (
-                  <p className="text-xs sm:text-sm text-[#3D4A58] leading-relaxed whitespace-pre-line line-clamp-4">
+                  <p className="text-xs sm:text-sm text-dtc-lineDark leading-relaxed whitespace-pre-line line-clamp-4">
                     {item.description}
                   </p>
                 )}
-                <div className="flex items-center gap-2 flex-wrap text-[11px] text-[#5C6672] pt-0.5">
+                <div className="flex items-center gap-2 flex-wrap text-[11px] text-dtc-inkMuted pt-0.5">
                   <UserAvatar name={item.author_name} src={item.author_avatar} size={20} />
                   <span className="font-medium">{item.author_name ?? "Membre"}</span>
                   <span suppressHydrationWarning>· {formatRelative(item.created_at)}</span>
                   <button
                     onClick={() => setExpanded(isExpanded ? null : item.id)}
                     aria-expanded={isExpanded}
-                    className="flex items-center gap-1 ml-auto font-semibold text-[#755B18] hover:text-[#755B18] transition-colors"
+                    className="flex items-center gap-1 ml-auto font-semibold text-dtc-gold hover:text-dtc-gold transition-colors"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>{item.comment_count}</span>
@@ -311,7 +311,7 @@ export default function IdeasBoard({
                       <button
                         onClick={() => removeIdea(item)}
                         aria-label="Supprimer l'idée"
-                        className="text-[#5F6774] hover:text-red-700 transition-colors"
+                        className="text-dtc-inkSoft hover:text-red-700 transition-colors"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -327,8 +327,8 @@ export default function IdeasBoard({
       })}
 
       {!user && items.length > 0 && (
-        <p className="text-center text-xs text-[#5F6774]">
-          <button onClick={() => openAuth()} className="text-[#755B18] font-semibold hover:underline underline-offset-2">
+        <p className="text-center text-xs text-dtc-inkSoft">
+          <button onClick={() => openAuth()} className="text-dtc-gold font-semibold hover:underline underline-offset-2">
             Connectez-vous
           </button>{" "}
           pour voter, commenter et proposer vos idées.
