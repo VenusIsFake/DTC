@@ -1,0 +1,44 @@
+name: Supabase keep-alive
+
+# Free-tier Supabase projects pause after 7 days without API traffic.
+# While the site wall is closed (pre-launch), public pages are mostly
+# static, so the project's REST API can see zero requests for a week and
+# the project would pause — logins and the console break until manually
+# restored. This pings the REST API daily to register activity.
+#
+# Runs at 04:17 UTC (off the :00 peak so GitHub scheduling is more
+# reliable; daily gives a 7x margin against delayed or skipped runs —
+# GitHub scheduled workflows are best-effort, see backup-db.yml).
+#
+# Secrets needed (repo → Settings → Secrets and variables → Actions):
+#   SUPABASE_URL             e.g. https://<ref>.supabase.co
+#   SUPABASE_PUBLISHABLE_KEY sb_publishable_... key (safe: designed to be
+#                            public; only reads RLS-allowed rows)
+#
+# Target endpoint: GET /rest/v1/site_settings?select=key&limit=1
+# Verified 2026-09-12: returns 200 with the publishable key.
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -sS -o /dev/null -w "%{http_code}" \
+              -H "apikey: $SUPABASE_KEY" \
+              -H "Authorization: Bearer $SUPABASE_KEY" \
+              "$SUPABASE_URL/rest/v1/site_settings?select=key&limit=1")
+            echo "attempt $i -> HTTP $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 30
+          done
+          echo "ERROR: Supabase keep-alive ping failed after 3 attempts"
+          exit 1
