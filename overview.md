@@ -19,8 +19,8 @@ Founded in **November 2024**, Dentalk Club FMDC is the premier student organizat
 ## 🌐 Live Production Platform & DNS
 
 * **Primary Branded Domain:** **[https://dentalkclubfmdc.com](https://dentalkclubfmdc.com)** — acheté 2026-09-11 chez Spaceship (auto-renew ON, WHOIS privacy incluse) ; nameservers `ns1/ns2.vercel-dns.com` (Vercel gère le DNS) ; `NEXT_PUBLIC_SITE_URL=https://dentalkclubfmdc.com` en prod.
-* **Backstage Host (page secrète Easter egg):** `https://dentalkclub-fmdc.vercel.app` — sert `/secret` uniquement sur ce host (middleware), aucune redirection.
-* **Short Domain Alias:** **[https://dtc-fmdc.vercel.app](https://dtc-fmdc.vercel.app)** — 308 vers le domaine principal.
+* **Backstage Host (page secrète Easter egg, illisible, sans chrome):** `https://vx72kq9.dentalkclubfmdc.com` — sous-domaine non devinable ; sert `/secret` uniquement sur ce host (middleware).
+* **Hosts morts / redirigés :** `dentalkclub-fmdc.vercel.app` = **retiré du projet + 404 middleware (ne sert plus rien, voulu)** ; `dtc-fmdc.vercel.app` et `dtc-lilac.vercel.app` = 308 vers le domaine principal.
 
 ---
 
