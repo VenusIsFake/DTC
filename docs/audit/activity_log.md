@@ -519,3 +519,16 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **Fix :** `sw.js` `VERSION` → `2026-09-11.1` (activate purge les vieux caches) ; navbar + footer `src="/logo.png?v=2026"` (cache-key miss immédiat) ; `og-image.jpg` renommé `og-image-2026.jpg` + refs layout mises à jour (les plateformes sociales respotent fraîchement).
 - **Pièges diagnostic :** page d'accueil = mur 307 → /candidature CHROMELESS (zéro navbar) → grepper le HTML loggué-out ne prouve rien ; `next/image` encode les query (`%3F`) → grep littéral muet ; `curl size_download` varie selon l'encodage transfer — comparer en md5. Preuve de déploiement frais : `og-image-2026.jpg` dans le head de /candidature + `sw.js` VERSION servi.
 - tsc 0, deploy vert.
+
+## 2026-09-11 (soir) — v2.9.4 « audit swarm sweep » (8945ca4, prod dtc-ffged3cyo)
+
+**4 agents en lecture seule (sécurité / hygiène repo / prod live / SEO). Puis « fix all » de Venus.**
+
+- **Icônes :** conventions fichier (`src/app/favicon.ico|icon.png|apple-icon.png`) supprimées → `metadata.icons` avec URLs bustables `?v=2026c` (+ `public/favicon.ico` miroir). `apple-icon.png` portait encore le badge bleu 2025 (raté en 82d4e39) — corrigé via 69bff7a puis remplacé par le nouveau système. `public/logo.svg` (orphelin) supprimé. **Futur changement de logo = bump `?v=` dans `layout.tsx`.**
+- **Mur :** `/robots.txt` + `/sitemap.xml` exemptés (PUBLIC_PATHS) — crawlurs + GSC fonctionnent avant l'ouverture. Live : robots 200, sitemap 200.
+- **Domaines morts :** fallback `email-broadcast` → apex ; `.env.example` ; `supabase/config.toml` (site_url + redirects). Scan src/public : zéro ref morte hors kill-switch volontaire.
+- **Upload :** `.vercelignore` + `.env`/`.env.*` (l'upload n'est PAS gouverné par .gitignore — preuve : media/ ships alors que gitignore l'ignore).
+- **Sécurité :** middleware ÉCRASE `x-secret-page: 0` (spoof client fermé) ; migration `20260911_settings_public_read_scope.sql` fournie (anon → 7 clés publiques, membership_* caché ; site_wall_open reste anon-readable VOLONTAIRE — le middleware le lit en anon fail-closed) — **à faire courir par Venus dans le SQL editor** ; **« Confirm email » à ACTIVER côté dashboard (Venus)** — P1 : signup sans confirmation = imposteur possible dans la file d'approbation guests. deployment.md corrigé (disait « disable »).
+- **SEO/UX :** tagline FR («Que ta voix résonne en échos sans fin.»), titre /candidature `absolute` (double marque corrigée), JSON-LD WebSite ajouté, layout galerie dupliqué supprimé.
+- **Docs :** README + deployment.md → apex comme domaine primaire (aliases 308 notés, dentalkclub-fmdc = mort) ; club-platform-plan : `fast-deploy` (script fantôme) → `npm run deploy`.
+- tsc 0 (après purge `.next/types` stale), lint 0, deploy vert, live checks : robots/sitemap 200, `<link>` icônes `?v=2026c`, favicon.ico servi = bytes frais, titre candidature simple.
