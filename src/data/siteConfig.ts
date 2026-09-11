@@ -8,7 +8,7 @@ export const siteConfig = {
   acronym: "DTC",
   tagline: "Let your voice be heard with endless echoes.",
   description: "Club d'éloquence, débats et événements académiques de la Faculté de Médecine Dentaire de Casablanca (FMDC - UH2C).",
-  siteUrl: "https://dentalkclub-fmdc.vercel.app",
+  siteUrl: "https://dentalkclubfmdc.com",
   foundingDate: "Novembre 2024",
   university: "Université Hassan II de Casablanca",
   faculty: "Faculté de Médecine Dentaire de Casablanca",

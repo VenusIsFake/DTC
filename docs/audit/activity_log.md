@@ -485,3 +485,16 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 
 
 
+
+## 2026-09-11 (1) — domaine personnalisé `dentalkclubfmdc.com` + page secrète backstage (v2.9.2)
+
+**Venus achète le domaine sur Spaceship ($2.90 an 1 via `COMPROS`, renouvellement $9.98, auto-renew ON, privacy WHOIS gratuite). L'agent branche tout le reste : domaine Vercel, DNS, env, déploiement, vérification.**
+
+- **Achat :** code promo `COMPROS` trouvé par recherche web (essais cart : COM67/COMPROS/ANDRII50/SPSR86) ; upsells Unbox (Spacemail/Alf/Web Hosting/EasyWP = trials payants après 30 j) déclinés.
+- **DNS — route nameservers Vercel :** après un premier veto (« discard the dns that vercel gives ») puis explication ownership-vs-pointing, Venus choisit `ns1/ns2.vercel-dns.com` ; flip fait dans son dashboard Spaceship, propagation vérifiée au dig (NS + SOA), Vercel v4 verify confirme les NS.
+- **Vercel wiring (CLI + API, token auth.json) :** apex = domaine primaire projet, `www` 308→apex, `dtc-fmdc.vercel.app` 308→apex, `NEXT_PUBLIC_SITE_URL=https://dentalkclubfmdc.com` en prod env, `npm run deploy` final (bake du nouveau siteUrl).
+- **Page secrète (demande Venus : « stop forwarding and make it a jumble, i always wanted a secret page ») :** `dentalkclub-fmdc.vercel.app` ne redirige plus — middleware réécrit ce host vers `/secret` (page jumble noindex, animation CSS pure) ; `/secret` sur tout autre host → réécrit vers l'accueil (invisible) ; redirect 308 posé puis annulé via API (`{"redirect":null}`).
+- **Canonical refresh :** `siteConfig.siteUrl` → `https://dentalkclubfmdc.com` (metadataBase, sitemap, robots, JSON-LD, share URL) ; overview.md section DNS mise à jour.
+- **Vérifs live :** apex 307→/candidature (mur, comportement attendu) puis 200 ; jumble 200 sur le host backstage ; `/secret` absent du domaine principal ; juge agent 2/2 pass (landing + secret, captures headless-chrome).
+- **Caveat www :** certificat émis (CN=www… vérifié par test `--resolve` forcé) et DNS correct (CNAME `www → ac3db467f330eef2.vercel-dns-017.com` posé pour contourner le wildcard `.65`), mais l'edge Vercel ne sert le SNI www que sur une partie des clusters anycast (timeouts TCP depuis vantage local ET datacenter) — warmup interne Vercel, auto-résolutif ; apex = canonique, sain partout. À re-vérifier prochaine session.
+- **Reste :** build URLs `dtc-<hash>-venus55.vercel.app` exposent toujours le site réel (intrinsèque Vercel, non protégeable sans SSO qui tuerait aussi la page secrète) — accepté (obscurité, pas un coffre).
