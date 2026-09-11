@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
+import { headers } from "next/headers";
 import "@/styles/globals.css";
 import SiteChrome from "@/components/SiteChrome";
 import AuthProvider from "@/components/auth/AuthProvider";
@@ -93,6 +94,9 @@ export default async function RootLayout({
   // entirely (redirect + de-index happen in the page itself).
   const settings = await getSiteSettings();
   const navItems = siteConfig.getNavItems(settings.events_visible);
+  // Secret backstage host: strip chrome server-side (client usePathname
+  // sees the pre-rewrite URL, so it can't detect middleware rewrites).
+  const isSecretPage = (await headers()).get("x-secret-page") === "1";
 
   return (
     <html lang="fr" className={`${inter.variable} ${display.variable}`}>
@@ -110,6 +114,7 @@ export default async function RootLayout({
             tagline={settings.hero_tagline}
             sponsor={settings.sponsor}
             partnerClub={settings.partner_club}
+            forceChromeless={isSecretPage}
           >
             {children}
           </SiteChrome>

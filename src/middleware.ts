@@ -1,12 +1,21 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
 
-const SECRET_HOST = 'dentalkclub-fmdc.vercel.app'
+const SECRET_HOST = 'vx72kq9.dentalkclubfmdc.com'
+const DEAD_HOST = 'dentalkclub-fmdc.vercel.app'
 
 export async function middleware(request: NextRequest) {
   const host = request.headers.get('host')
+  if (host === DEAD_HOST) {
+    // retired host — owner asked it dead, serve nothing
+    return new Response(null, { status: 404 })
+  }
   if (host === SECRET_HOST) {
-    return NextResponse.rewrite(new URL('/secret', request.url))
+    const headers = new Headers(request.headers)
+    headers.set('x-secret-page', '1')
+    return NextResponse.rewrite(new URL('/secret', request.url), {
+      request: { headers },
+    })
   }
   if (request.nextUrl.pathname.startsWith('/secret')) {
     // secret page only lives on the backstage host — main domain gets nothing

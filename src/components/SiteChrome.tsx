@@ -18,19 +18,24 @@ export default function SiteChrome({
   tagline,
   sponsor,
   partnerClub,
+  forceChromeless = false,
   children,
 }: {
   navItems: NavItem[];
   tagline?: string;
   sponsor?: PartnerCard;
   partnerClub?: PartnerCard;
+  /** server-side override (middleware header) — client pathname misses rewrites */
+  forceChromeless?: boolean;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
   const chromeless =
+    forceChromeless ||
     pathname.startsWith("/candidature") ||
     pathname === "/invitation" ||
-    pathname.startsWith("/invitation/");
+    pathname.startsWith("/invitation/") ||
+    pathname.startsWith("/secret");
   if (chromeless) {
     return <>{children}</>;
   }
