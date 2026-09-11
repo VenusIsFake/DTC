@@ -1,7 +1,17 @@
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
 
+const SECRET_HOST = 'dentalkclub-fmdc.vercel.app'
+
 export async function middleware(request: NextRequest) {
+  const host = request.headers.get('host')
+  if (host === SECRET_HOST) {
+    return NextResponse.rewrite(new URL('/secret', request.url))
+  }
+  if (request.nextUrl.pathname.startsWith('/secret')) {
+    // secret page only lives on the backstage host — main domain gets nothing
+    return NextResponse.rewrite(new URL('/', request.url))
+  }
   return await updateSession(request)
 }
 
