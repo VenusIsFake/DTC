@@ -28,7 +28,7 @@ export default async function CandidaturePage() {
       <div className="flex items-center justify-center gap-2.5">
         <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#DCD7CB] shrink-0">
           <Image
-            src="/logo.png"
+            src="/logo.png?v=2026c"
             alt="Dentalk Club FMDC"
             fill
             sizes="36px"

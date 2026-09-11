@@ -28,7 +28,7 @@ const organizationJsonLd = {
   name: siteConfig.name,
   alternateName: siteConfig.acronym,
   url: siteConfig.siteUrl,
-  logo: `${siteConfig.siteUrl}/logo.png`,
+  logo: `${siteConfig.siteUrl}/logo.png?v=2026c`,
   foundingDate: "2024-11",
   description: siteConfig.description,
   sameAs: [siteConfig.instagramUrl, siteConfig.youtubeChannelUrl],

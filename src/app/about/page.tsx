@@ -84,7 +84,7 @@ export default async function AboutPage() {
               <div className="relative w-36 h-36 sm:w-72 sm:h-72 rounded-full p-1.5 border border-[#DCD7CB]">
                 <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#755B18]/50">
                   <Image
-                    src="/logo.png"
+                    src="/logo.png?v=2026c"
                     alt="DTC Logo"
                     fill
                     sizes="(max-width: 640px) 144px, 288px"
