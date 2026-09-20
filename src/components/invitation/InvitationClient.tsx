@@ -356,19 +356,6 @@ export default function InvitationClient({
               {error}
             </p>
           )}
-
-          {/* Non-blocking stand mini-game preview */}
-          <div className="pt-4 border-t border-dtc-line/30 space-y-3">
-            <div className="text-center space-y-0.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-dtc-goldDark">
-                En attendant ton email 🎲
-              </span>
-              <p className="text-xs text-dtc-inkMuted">
-                Commence le mini-jeu pour briser la glace avec le bureau devant toi !
-              </p>
-            </div>
-            <StandIcebreakerGame compact={true} />
-          </div>
         </div>
       </div>
     );
