@@ -59,7 +59,13 @@ export default function MemberQrCodeCard() {
       });
       setQrDataUrl(url);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Chargement impossible.");
+      const msg =
+        err && typeof err === "object" && "message" in err
+          ? String((err as { message: unknown }).message)
+          : err instanceof Error
+          ? err.message
+          : "Chargement impossible.";
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -78,22 +84,21 @@ export default function MemberQrCodeCard() {
       return;
     }
     setRotating(true);
+    setError(null);
     try {
       const supabase = getSupabaseBrowserClient();
       if (!supabase) throw new Error("Base de données indisponible.");
-      // Revoke old multi-use link if any
-      if (data?.id) {
-        await supabase.rpc("revoke_invite_link", { link_id: data.id });
-      }
-      // Create new multi-use member link
-      const { error: createErr } = await supabase.rpc("create_invite_link", {
-        new_role: "member",
-        p_multi_use: true,
-      });
-      if (createErr) throw createErr;
+      const { error: rotErr } = await supabase.rpc("rotate_member_qr_link");
+      if (rotErr) throw rotErr;
       await loadQrLink();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Échec de rotation.");
+      const msg =
+        err && typeof err === "object" && "message" in err
+          ? String((err as { message: unknown }).message)
+          : err instanceof Error
+          ? err.message
+          : "Échec de rotation.";
+      setError(msg);
     } finally {
       setRotating(false);
     }

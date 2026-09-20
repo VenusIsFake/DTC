@@ -10,6 +10,9 @@
 alter table public.invite_links add column if not exists is_multi_use boolean not null default false;
 alter table public.invite_links add column if not exists uses_count integer not null default 0;
 
+-- Drop single-argument overload to avoid PostgREST ambiguity
+drop function if exists public.create_invite_link(text);
+
 create or replace function public.create_invite_link(new_role text default 'bureau', p_multi_use boolean default false)
 returns text
 language plpgsql security definer set search_path = ''
@@ -28,7 +31,7 @@ begin
   if new_role = 'admin' and caller_role <> 'admin' then
     raise exception 'Seul un administrateur peut créer un lien admin';
   end if;
-  fresh_token := encode(gen_random_bytes(32), 'hex');
+  fresh_token := encode(extensions.gen_random_bytes(32), 'hex');
   insert into public.invite_links (token, role, created_by, is_multi_use, expires_at)
   values (
     fresh_token,
@@ -125,10 +128,10 @@ begin
     raise exception 'Accès réservé au bureau';
   end if;
 
-  select * into active_row
-  from public.invite_links
-  where role = 'member' and is_multi_use = true and expires_at > now()
-  order by created_at desc
+  select l.* into active_row
+  from public.invite_links l
+  where l.role = 'member' and l.is_multi_use = true and l.expires_at > now()
+  order by l.created_at desc
   limit 1;
 
   if active_row.id is not null then
@@ -145,6 +148,32 @@ end;
 $$;
 revoke execute on function public.get_or_create_member_qr_link() from public, anon;
 grant execute on function public.get_or_create_member_qr_link() to authenticated;
+
+-- Rotate member QR link (atomic revocation of old + creation of fresh)
+create or replace function public.rotate_member_qr_link()
+returns table (id uuid, token text, uses_count int, created_at timestamptz, expires_at timestamptz)
+language plpgsql security definer set search_path = ''
+as $$
+declare
+  new_token text;
+begin
+  if not public.is_bureau_or_admin() then
+    raise exception 'Accès réservé au bureau';
+  end if;
+
+  update public.invite_links l
+  set expires_at = now()
+  where l.role = 'member' and l.is_multi_use = true and l.expires_at > now();
+
+  new_token := public.create_invite_link('member', true);
+  return query
+    select l.id, l.token, l.uses_count, l.created_at, l.expires_at
+    from public.invite_links l
+    where l.token = new_token;
+end;
+$$;
+revoke execute on function public.rotate_member_qr_link() from public, anon;
+grant execute on function public.rotate_member_qr_link() to authenticated;
 
 -- 2. Returning members whitelist (67 WhatsApp members -> 80 DH discount)
 create table if not exists public.returning_members_whitelist (
