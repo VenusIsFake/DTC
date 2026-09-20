@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Lightbulb, X } from "lucide-react";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -14,6 +15,11 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
   const [description, setDescription] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -55,18 +61,18 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label="Proposer une idée"
-      className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-lg glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-7 space-y-4 shadow-lg">
+      <div className="relative z-10 w-full max-w-lg max-h-[90dvh] overflow-y-auto glass-card rounded-2xl border border-dtc-line/50 p-5 sm:p-7 space-y-4 shadow-2xl">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 text-lg font-heading font-bold text-dtc-ink">
             <Lightbulb className="w-5 h-5 text-dtc-gold" />
@@ -118,7 +124,7 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
             </p>
           )}
 
-          <div className="flex justify-end gap-2 pt-1">
+          <div className="flex justify-end gap-2 pt-2 sticky bottom-0 bg-dtc-paper/95 -mx-5 sm:-mx-7 -mb-5 sm:-mb-7 p-4 border-t border-dtc-line/40 rounded-b-2xl backdrop-blur-md z-10">
             <GhostButton type="button" onClick={onClose}>
               Annuler
             </GhostButton>
@@ -128,6 +134,7 @@ export default function PitchModal({ isOpen, onClose, onSaved }: { isOpen: boole
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

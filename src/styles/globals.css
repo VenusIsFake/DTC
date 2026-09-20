@@ -100,7 +100,8 @@
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: none;
+  will-change: auto;
 }
 
 /* Overlays: card scales up a touch, menus drop in */

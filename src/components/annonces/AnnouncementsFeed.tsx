@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Pin, PinOff, Pencil, Trash2, Users, X, CalendarDays, MapPin, Plus } from "lucide-react";
 import type { Announcement, AnnouncementBoardItem } from "@/lib/types";
@@ -33,6 +34,11 @@ function AttendeesModal({
   const dialogRef = useOverlayDialog<HTMLDivElement>(Boolean(announcement), onClose);
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!announcement) return;
@@ -54,15 +60,15 @@ function AttendeesModal({
     };
   }, [announcement]);
 
-  if (!announcement) return null;
+  if (!announcement || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label={`Participants — ${announcement.title}`}
-      className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
     >
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
       <div className="relative z-10 w-full max-w-md glass-card rounded-lg border border-dtc-line/50 p-5 sm:p-6 space-y-4 shadow-lg">
@@ -101,7 +107,8 @@ function AttendeesModal({
           ))}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
