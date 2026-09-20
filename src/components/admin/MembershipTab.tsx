@@ -362,7 +362,7 @@ export default function MembershipTab() {
             label="Second compte bancaire (optionnel)"
             hint="Offre un deuxième choix de banque (ex. CIH / Attijariwafa) aux étudiants."
             multiline
-            placeholder={"RIB : 230 780 0000 1234 5678 9012 34\nTitulaire : LABZAI NEAMA (Trésorière)\nBanque : CIH Bank"}
+            placeholder={"RIB : 230 780 6065299211021800 68\nTitulaire : NEAMA LABZAI\nBanque : CIH Bank (Casa Mly Abdellah)\nIBAN : MA64 2307 8060 6529 9211 0218 0068"}
           />
         </div>
         <div className="space-y-4">

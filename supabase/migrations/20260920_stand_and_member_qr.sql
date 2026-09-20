@@ -249,5 +249,5 @@ on conflict (phone_normalized) do nothing;
 
 -- 3. Dual Bank Details seed
 insert into public.site_settings (key, value)
-values ('membership_bank_details_2', '"RIB : 230 780 0000 1234 5678 9012 34\nTitulaire : LABZAI NEAMA (Trésorière)\nBanque : CIH Bank"')
+values ('membership_bank_details_2', '"RIB : 230 780 6065299211021800 68\nTitulaire : NEAMA LABZAI\nBanque : CIH Bank (Casa Mly Abdellah)\nIBAN : MA64 2307 8060 6529 9211 0218 0068"')
 on conflict (key) do nothing;

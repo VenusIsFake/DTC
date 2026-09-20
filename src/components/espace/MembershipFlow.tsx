@@ -33,17 +33,17 @@ export default function MembershipFlow({
 }) {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>(profile.membership_status === "pending" ? "pending" : "intro");
-  const [fullName, setFullName] = useState(profile.full_name);
+  const [fullName, setFullName] = useState(profile.full_name ?? "");
   const [promo, setPromo] = useState(profile.promo ? String(profile.promo) : "");
-  const [phone, setPhone] = useState(profile.phone);
-  const [bio, setBio] = useState(profile.bio);
+  const [phone, setPhone] = useState(profile.phone ?? "");
+  const [bio, setBio] = useState(profile.bio ?? "");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [returningInfo, setReturningInfo] = useState<ReturningMemberCheck | null>(null);
   const [copiedAccount, setCopiedAccount] = useState<number | null>(null);
 
   useEffect(() => {
-    const clean = phone.replace(/[^0-9]/g, "");
+    const clean = (phone || "").replace(/[^0-9]/g, "");
     if (clean.length < 8) {
       setReturningInfo(null);
       return;

@@ -19,11 +19,11 @@ export default function ProfileEditor({
   settings: SiteSettings;
 }) {
   const { user, refreshProfile, profile: liveProfile } = useAuth();
-  const [fullName, setFullName] = useState(profile.full_name);
+  const [fullName, setFullName] = useState(profile.full_name ?? "");
   const [promo, setPromo] = useState<string>(profile.promo ? String(profile.promo) : "");
   const [committeeId, setCommitteeId] = useState(profile.committee_id ?? "");
-  const [bio, setBio] = useState(profile.bio);
-  const [phone, setPhone] = useState(profile.phone);
+  const [bio, setBio] = useState(profile.bio ?? "");
+  const [phone, setPhone] = useState(profile.phone ?? "");
   const [avatarVersion, setAvatarVersion] = useState(0);
   const [saving, setSaving] = useState(false);
   const [cropModalOpen, setCropModalOpen] = useState(false);
