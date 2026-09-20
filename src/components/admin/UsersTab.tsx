@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { Check, Copy, KeyRound, Link2, Loader2, ShieldOff, ShieldCheck, Search, Trash2, UserCheck, UserPlus, X } from "lucide-react";
+import { Check, Copy, KeyRound, Link2, Loader2, QrCode, ShieldOff, ShieldCheck, Search, Trash2, UserCheck, UserPlus, X } from "lucide-react";
+import QRCode from "qrcode";
 import type { AdminProfileRow, Role } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { formatDate, formatRelative } from "@/lib/format";
 import { Badge, Field, GhostButton, PrimaryButton, inputClass } from "@/components/ui/form";
 import UserAvatar from "@/components/UserAvatar";
 import { useOverlayDialog } from "@/hooks/useOverlayDialog";
+import MemberQrCodeCard from "@/components/admin/MemberQrCodeCard";
 
 const ROLE_LABELS: Record<Role, string> = {
   guest: "Invité",
@@ -59,9 +61,12 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
   const [creatingLink, setCreatingLink] = useState(false);
   const [linkError, setLinkError] = useState<string | null>(null);
   const [createdUrl, setCreatedUrl] = useState<string | null>(null);
+  const [createdQr, setCreatedQr] = useState<string | null>(null);
   const [copiedUrl, setCopiedUrl] = useState(false);
   const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
   const [revokingLinkId, setRevokingLinkId] = useState<string | null>(null);
+  const [linkMultiUse, setLinkMultiUse] = useState(false);
+  const [memberQrModalOpen, setMemberQrModalOpen] = useState(false);
   const linkDialogRef = useOverlayDialog<HTMLDivElement>(linkModalOpen, () => setLinkModalOpen(false));
   const inviteDialogRef = useOverlayDialog<HTMLDivElement>(inviteOpen, () => setInviteOpen(false));
 
@@ -122,9 +127,17 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       if (!supabase) throw new Error("Base de données indisponible.");
       const { data, error: rpcError } = await supabase.rpc("create_invite_link", {
         new_role: linkRole,
+        p_multi_use: linkMultiUse,
       });
       if (rpcError || typeof data !== "string") throw new Error(rpcError?.message ?? "Création impossible.");
-      setCreatedUrl(`${window.location.origin}/invitation/${data}`);
+      const full = `${window.location.origin}/invitation/${data}`;
+      setCreatedUrl(full);
+      try {
+        const qr = await QRCode.toDataURL(full, { width: 300, margin: 2, color: { dark: "#0B132B", light: "#FFFFFF" } });
+        setCreatedQr(qr);
+      } catch {
+        setCreatedQr(null);
+      }
       setCopiedUrl(false);
       setLinkModalOpen(false);
       await loadLinks();
@@ -359,13 +372,23 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             />
           </div>
           <button
+            onClick={() => setMemberQrModalOpen(true)}
+            title="Afficher le QR Code réutilisable d'adhésion pour les membres"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold border border-dtc-gold/40 text-dtc-gold hover:bg-dtc-gold/10 transition-all active:scale-95"
+          >
+            <QrCode className="w-3.5 h-3.5" />
+            <span>QR Code Membres</span>
+          </button>
+          <button
             onClick={() => {
               setLinkError(null);
               setCreatedUrl(null);
+              setCreatedQr(null);
               setLinkRole("bureau");
+              setLinkMultiUse(false);
               setLinkModalOpen(true);
             }}
-            title="Créer un lien d'invitation à usage unique (fonctionne même site fermé)"
+            title="Créer un lien d'invitation (usage unique ou réutilisable)"
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-bold border border-dtc-gold/40 text-dtc-gold hover:bg-dtc-gold/10 transition-all active:scale-95"
           >
             <Link2 className="w-3.5 h-3.5" />
@@ -422,29 +445,43 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       )}
 
       {createdUrl && (
-        <div role="status" className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-2">
+        <div role="status" className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-3">
           <p className="text-xs font-bold text-emerald-800">
-            Lien d&apos;invitation créé — à usage unique, envoi direct (WhatsApp, mail…) :
+            Lien d&apos;invitation créé — envoi direct ou scan QR :
           </p>
-          <div className="flex flex-wrap items-center gap-2.5">
-            <code className="px-3 py-2 rounded-lg bg-white border border-dtc-line/60 text-[11px] font-semibold text-dtc-ink select-all break-all max-w-full">
-              {createdUrl}
-            </code>
-            <GhostButton onClick={() => copyUrl(createdUrl, setCopiedUrl)} className="!py-1.5 !text-[11px]">
-              {copiedUrl ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-              <span>{copiedUrl ? "Copié ✓" : "Copier"}</span>
-            </GhostButton>
-            <button
-              onClick={() => setCreatedUrl(null)}
-              className="text-[10px] font-semibold text-dtc-inkMuted hover:text-dtc-ink"
-            >
-              Fermer
-            </button>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            {createdQr && (
+              <div className="p-2 bg-white rounded-lg border border-emerald-600/30 shrink-0 shadow-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={createdQr} alt="QR Code d'invitation" className="w-24 h-24 object-contain" />
+              </div>
+            )}
+            <div className="space-y-2 flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <code className="px-3 py-2 rounded-lg bg-white border border-dtc-line/60 text-[11px] font-semibold text-dtc-ink select-all break-all max-w-full">
+                  {createdUrl}
+                </code>
+                <GhostButton onClick={() => copyUrl(createdUrl, setCopiedUrl)} className="!py-1.5 !text-[11px]">
+                  {copiedUrl ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                  <span>{copiedUrl ? "Copié ✓" : "Copier"}</span>
+                </GhostButton>
+                <button
+                  onClick={() => {
+                    setCreatedUrl(null);
+                    setCreatedQr(null);
+                  }}
+                  className="text-[10px] font-semibold text-dtc-inkMuted hover:text-dtc-ink"
+                >
+                  Fermer
+                </button>
+              </div>
+              <p className="text-[10px] text-dtc-inkMuted">
+                {linkMultiUse
+                  ? "Lien réutilisable (multi-usage) : les membres peuvent scanner le QR code sans limitation du nombre d'inscriptions."
+                  : "Lien à usage unique : la personne accède au site dès son inscription, le lien meurt après utilisation."}
+              </p>
+            </div>
           </div>
-          <p className="text-[10px] text-dtc-inkMuted">
-            La personne crée son compte via ce lien (même pendant que le site est fermé) et reçoit
-            directement le rôle choisi. Le lien meurt après une seule utilisation.
-          </p>
         </div>
       )}
 
@@ -762,9 +799,26 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                   {isAdmin && <option value="admin">Administrateur</option>}
                 </select>
               </Field>
+
+              <label className="flex items-center gap-2.5 cursor-pointer p-2.5 rounded-lg border border-dtc-line/40 bg-white/60 hover:bg-white transition-colors">
+                <input
+                  type="checkbox"
+                  checked={linkMultiUse}
+                  onChange={(e) => setLinkMultiUse(e.target.checked)}
+                  className="rounded border-dtc-line text-dtc-gold focus:ring-dtc-gold h-4 w-4"
+                />
+                <div className="text-left">
+                  <p className="text-xs font-bold text-dtc-ink">Lien réutilisable (multi-usage)</p>
+                  <p className="text-[10px] text-dtc-inkMuted">
+                    Idéal pour stands, affiches ou groupe WhatsApp : le lien ne meurt pas après la première inscription.
+                  </p>
+                </div>
+              </label>
+
               <p className="text-[10px] text-dtc-inkMuted leading-relaxed">
-                Le lien est à usage unique et fonctionne même pendant que le site est fermé — la
-                personne accédera au site dès son inscription.
+                {linkMultiUse
+                  ? "Le lien reste actif et scannable indéfiniment (365 jours) et fonctionne même pendant que le site est fermé."
+                  : "Le lien est à usage unique et expire après une inscription."}
               </p>
               {linkError && (
                 <p role="alert" className="text-xs text-red-700 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
@@ -780,6 +834,28 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
                 </PrimaryButton>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {memberQrModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
+        >
+          <div className="absolute inset-0" onClick={() => setMemberQrModalOpen(false)} aria-hidden="true" />
+          <div className="relative z-10 w-full max-w-2xl max-h-[92dvh] overflow-y-auto space-y-3">
+            <div className="flex justify-end">
+              <button
+                onClick={() => setMemberQrModalOpen(false)}
+                aria-label="Fermer"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-dtc-inkMuted hover:text-dtc-ink shadow-md"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <MemberQrCodeCard />
           </div>
         </div>
       )}

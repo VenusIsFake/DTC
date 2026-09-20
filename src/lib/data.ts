@@ -122,6 +122,7 @@ const FALLBACK_MEMBERSHIP: MembershipSettings = {
   feeLabel: "",
   bankEnabled: false,
   bankDetails: "",
+  bankDetails2: "",
   inPersonEnabled: false,
   inPersonText: "",
   whatsappNumber: "",
@@ -158,6 +159,9 @@ async function fetchMembershipSettings(): Promise<MembershipSettings> {
           break;
         case "membership_bank_details":
           settings.bankDetails = text;
+          break;
+        case "membership_bank_details_2":
+          settings.bankDetails2 = text;
           break;
         case "membership_inperson_text":
           settings.inPersonText = text;

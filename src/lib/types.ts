@@ -176,11 +176,31 @@ export interface MembershipSettings {
   feeLabel: string;
   bankEnabled: boolean;
   bankDetails: string;
+  bankDetails2: string;
   inPersonEnabled: boolean;
   inPersonText: string;
   whatsappNumber: string;
   whatsappMessage: string;
   pendingText: string;
+}
+
+export interface ReturningMemberCheck {
+  is_returning: boolean;
+  fee_amount: number;
+  standard_fee: number;
+  discount_label: string;
+}
+
+export interface InviteLinkItem {
+  id: string;
+  token: string;
+  role: Role;
+  created_at: string;
+  expires_at: string;
+  used_at: string | null;
+  used_by_name: string;
+  is_multi_use?: boolean;
+  uses_count?: number;
 }
 
 export interface Mandate {

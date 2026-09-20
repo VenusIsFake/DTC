@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { HandCoins, Loader2, MessageCircle, ExternalLink } from "lucide-react";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Field, PrimaryButton, inputClass } from "@/components/ui/form";
+import MemberQrCodeCard from "@/components/admin/MemberQrCodeCard";
 
 // ---------------------------------------------------------------------------
 // site_settings plumbing (same pattern as HomeTab — kept local so each
@@ -291,7 +292,9 @@ function WhatsAppCard() {
 
 export default function MembershipTab() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
+      <MemberQrCodeCard />
+
       <div className="flex items-center gap-1.5 text-xs text-dtc-inkMuted">
         <HandCoins className="w-4 h-4 text-dtc-gold" />
         <p>
@@ -316,13 +319,25 @@ export default function MembershipTab() {
           multiline
           placeholder="Rejoignez le club : votes, idées, RSVP aux ateliers…"
         />
-        <TextCard
-          title="Cotisation à afficher"
-          settingKey="membership_fee_label"
-          label="Montant tel qu'affiché"
-          hint="Texte libre, ex. « 500 DH / an » ou « 300 DH (promo 2028) »."
-          placeholder="500 DH / an"
-        />
+        <div className="space-y-4">
+          <TextCard
+            title="Cotisation standard à afficher"
+            settingKey="membership_fee_label"
+            label="Montant tel qu'affiché"
+            hint="Texte libre, ex. « 100 DH / an »."
+            placeholder="100 DH / an"
+          />
+          <div className="glass-card rounded-lg border border-dtc-gold/30 bg-dtc-gold/5 p-4 space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <h3 className="text-xs font-heading font-bold text-dtc-ink">Tarif Réduit Anciens Membres (80 DH)</h3>
+            </div>
+            <p className="text-[11px] text-dtc-inkMuted leading-relaxed">
+              67 anciens membres de la saison passée (groupe WhatsApp DTC 26/27) sont enregistrés dans la liste de fidélité.
+              Dès qu&apos;ils saisissent leur numéro de téléphone, le montant de 80 DH est appliqué automatiquement.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -334,12 +349,20 @@ export default function MembershipTab() {
             description="Affiche la section « Par virement / versement bancaire » sur la page de paiement."
           />
           <TextCard
-            title="Coordonnées bancaires"
+            title="Coordonnées bancaires — Compte 1"
             settingKey="membership_bank_details"
-            label="Une ligne par information (RIB, titulaire, banque…)"
+            label="Compte bancaire principal (RIB, titulaire, banque…)"
             hint="Rendues sélectionnables pour copier-coller. Vérifiez chaque caractère."
             multiline
             placeholder={"RIB : 011 780 0000 1234 5678 9012 34\nTitulaire : Dentalk Club FMDC\nBanque : Attijariwafa Bank"}
+          />
+          <TextCard
+            title="Coordonnées bancaires — Compte 2"
+            settingKey="membership_bank_details_2"
+            label="Second compte bancaire (optionnel)"
+            hint="Offre un deuxième choix de banque (ex. CIH / Attijariwafa) aux étudiants."
+            multiline
+            placeholder={"RIB : 230 780 0000 1234 5678 9012 34\nTitulaire : LABZAI NEAMA (Trésorière)\nBanque : CIH Bank"}
           />
         </div>
         <div className="space-y-4">

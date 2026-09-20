@@ -1,19 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   BadgeCheck,
   Banknote,
+  Check,
   CircleAlert,
+  Copy,
   HandCoins,
   Loader2,
   MessageCircle,
   PenLine,
   Send,
+  Sparkles,
   XCircle,
 } from "lucide-react";
-import type { MembershipSettings, Profile, SiteSettings } from "@/lib/types";
+import type { MembershipSettings, Profile, ReturningMemberCheck, SiteSettings } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Field, PrimaryButton, GhostButton, inputClass } from "@/components/ui/form";
 
@@ -36,6 +39,40 @@ export default function MembershipFlow({
   const [bio, setBio] = useState(profile.bio);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [returningInfo, setReturningInfo] = useState<ReturningMemberCheck | null>(null);
+  const [copiedAccount, setCopiedAccount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const clean = phone.replace(/[^0-9]/g, "");
+    if (clean.length < 8) {
+      setReturningInfo(null);
+      return;
+    }
+    let active = true;
+    const checkPhone = async () => {
+      const supabase = getSupabaseBrowserClient();
+      if (!supabase) return;
+      const { data } = await supabase.rpc("check_returning_member", { p_phone: phone });
+      if (active && data) {
+        setReturningInfo(data as ReturningMemberCheck);
+      }
+    };
+    const timer = setTimeout(checkPhone, 300);
+    return () => {
+      active = false;
+      clearTimeout(timer);
+    };
+  }, [phone]);
+
+  const copyDetails = async (text: string, index: number) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedAccount(index);
+      setTimeout(() => setCopiedAccount(null), 2000);
+    } catch {
+      // Clipboard blocked
+    }
+  };
 
   const whatsappHref =
     settings.whatsappNumber.length >= 8
@@ -183,6 +220,17 @@ export default function MembershipFlow({
               />
             </Field>
           </div>
+          {returningInfo?.is_returning && (
+            <div className="flex items-start gap-2.5 p-3 rounded-xl border border-dtc-gold/40 bg-dtc-gold/10 text-dtc-ink animate-fadeIn">
+              <Sparkles className="w-4 h-4 text-dtc-gold shrink-0 mt-0.5" />
+              <div className="text-xs space-y-0.5">
+                <p className="font-bold text-dtc-gold">✨ Ancien membre reconnu !</p>
+                <p className="text-dtc-inkMuted text-[11px] leading-relaxed">
+                  Votre numéro figure sur la liste des membres 2025–2026. Vous bénéficiez du tarif réduit de fidélité de <strong>80 DH / an</strong> (au lieu de 100 DH).
+                </p>
+              </div>
+            </div>
+          )}
           <Field label="Bio (facultatif)" htmlFor="membership-bio" hint="Quelques mots sur vous (parcours, passions…).">
             <textarea
               id="membership-bio"
@@ -232,26 +280,70 @@ export default function MembershipFlow({
           </div>
 
           <div className="glass-card rounded-lg border border-dtc-line/40 p-5 sm:p-6 space-y-4">
-            {settings.feeLabel && (
-              <div className="flex items-center justify-between gap-3 flex-wrap rounded-xl bg-dtc-wash border border-dtc-gold/30 px-4 py-3">
-                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-dtc-inkMuted">
-                  <Banknote className="w-4 h-4 text-dtc-gold" />
-                  Montant à payer
-                </span>
-                <span className="text-lg font-heading font-bold text-dtc-ink">{settings.feeLabel}</span>
+            <div className="flex items-center justify-between gap-3 flex-wrap rounded-xl bg-dtc-wash border border-dtc-gold/30 px-4 py-3">
+              <span className="flex items-center gap-1.5 text-[11px] font-semibold text-dtc-inkMuted">
+                <Banknote className="w-4 h-4 text-dtc-gold" />
+                Montant à régler
+              </span>
+              <div className="text-right">
+                {returningInfo?.is_returning ? (
+                  <div className="flex items-center gap-2">
+                    <span className="line-through text-xs text-dtc-inkMuted font-medium">100 DH</span>
+                    <span className="text-lg font-heading font-bold text-emerald-800">80 DH</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600/20 text-emerald-800 border border-emerald-600/30">
+                      Tarif Ancien Membre
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-lg font-heading font-bold text-dtc-ink">{settings.feeLabel || "100 DH / an"}</span>
+                )}
               </div>
-            )}
+            </div>
 
-            {settings.bankEnabled && settings.bankDetails && (
-              <div className="space-y-2">
-                <p className="text-[11px] font-bold text-dtc-gold">Par virement / versement bancaire</p>
-                <div className="rounded-xl bg-white/70 border border-dtc-line/50 px-4 py-3">
-                  {settings.bankDetails.split("\n").map((line, i) =>
-                    line.trim() ? (
-                      <p key={i} className="text-xs text-dtc-ink font-mono select-all break-all leading-relaxed">
-                        {line}
-                      </p>
-                    ) : null
+            {settings.bankEnabled && (settings.bankDetails || settings.bankDetails2) && (
+              <div className="space-y-2.5">
+                <p className="text-[11px] font-bold text-dtc-gold uppercase tracking-wider">
+                  Par virement ou versement bancaire
+                </p>
+                <div className={`grid grid-cols-1 ${settings.bankDetails && settings.bankDetails2 ? "md:grid-cols-2" : ""} gap-3`}>
+                  {settings.bankDetails && (
+                    <div className="rounded-xl bg-white/80 border border-dtc-line/60 p-4 space-y-2.5 shadow-sm">
+                      <div className="flex items-center justify-between gap-2 border-b border-dtc-line/40 pb-2">
+                        <span className="text-xs font-bold text-dtc-ink">Compte 1 (Attijariwafa Bank)</span>
+                        <GhostButton
+                          onClick={() => copyDetails(settings.bankDetails, 1)}
+                          className="!py-1 !px-2.5 !text-[11px]"
+                        >
+                          {copiedAccount === 1 ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                          <span>{copiedAccount === 1 ? "Copié !" : "Copier"}</span>
+                        </GhostButton>
+                      </div>
+                      <div className="space-y-1 font-mono text-xs text-dtc-ink select-all break-all leading-relaxed">
+                        {settings.bankDetails.split("\n").map((line, i) =>
+                          line.trim() ? <p key={i}>{line}</p> : null
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {settings.bankDetails2 && (
+                    <div className="rounded-xl bg-white/80 border border-dtc-line/60 p-4 space-y-2.5 shadow-sm">
+                      <div className="flex items-center justify-between gap-2 border-b border-dtc-line/40 pb-2">
+                        <span className="text-xs font-bold text-dtc-ink">Compte 2 (CIH Bank)</span>
+                        <GhostButton
+                          onClick={() => copyDetails(settings.bankDetails2, 2)}
+                          className="!py-1 !px-2.5 !text-[11px]"
+                        >
+                          {copiedAccount === 2 ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                          <span>{copiedAccount === 2 ? "Copié !" : "Copier"}</span>
+                        </GhostButton>
+                      </div>
+                      <div className="space-y-1 font-mono text-xs text-dtc-ink select-all break-all leading-relaxed">
+                        {settings.bankDetails2.split("\n").map((line, i) =>
+                          line.trim() ? <p key={i}>{line}</p> : null
+                        )}
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
