@@ -57,6 +57,7 @@ async function withFallback<T>(fetcher: () => Promise<T>, fallback: T): Promise<
 
 const FALLBACK_SETTINGS: SiteSettings = {
   events_visible: true,
+  gallery_visible: true,
   promo_years: [2024, 2025, 2026],
 };
 
@@ -71,6 +72,9 @@ async function fetchSiteSettings(): Promise<SiteSettings> {
       const entry = row as { key: string; value: unknown };
       if (entry.key === "events_visible" && typeof entry.value === "boolean") {
         settings.events_visible = entry.value;
+      }
+      if (entry.key === "gallery_visible" && typeof entry.value === "boolean") {
+        settings.gallery_visible = entry.value;
       }
       if (
         entry.key === "promo_years" &&

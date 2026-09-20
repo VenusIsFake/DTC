@@ -243,7 +243,7 @@ export default function HomeContent({
               href={siteConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-6 sm:px-8 py-2.5 sm:py-3 rounded-md font-bold text-xs sm:text-sm bg-dtc-goldBright text-dtc-ink hover:bg-[#E3C45B] transition-colors"
+              className="inline-flex items-center gap-1.5 px-6 sm:px-8 py-2.5 sm:py-3 rounded-md font-bold text-xs sm:text-sm bg-dtc-goldBright text-dtc-ink hover:bg-amber-400 transition-all active:scale-95 shadow-md shadow-dtc-goldBright/20"
             >
               <span>Rejoindre via Instagram</span>
               <ExternalLink className="w-3.5 h-3.5" />

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Eye, EyeOff, ImagePlus, Loader2, Pencil, Plus, Trash2, Upload } from "lucide-react";
+import { Eye, EyeOff, ImagePlus, Images, Loader2, Pencil, Plus, Trash2, Upload } from "lucide-react";
 import type { GalleryImageRow } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { uploadClubImage, clubUploadErrorMessage } from "@/lib/mediaUpload";
@@ -263,6 +263,69 @@ function EditorModal({
   );
 }
 
+function GalleryVisibilityCard() {
+  const [visible, setVisible] = useState<boolean | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    supabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "gallery_visible")
+      .maybeSingle()
+      .then(({ data }) => setVisible(data ? Boolean((data as { value: boolean }).value) : true));
+  }, []);
+
+  const toggle = async () => {
+    if (visible === null) return;
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    setSaving(true);
+    const { error } = await supabase
+      .from("site_settings")
+      .upsert({ key: "gallery_visible", value: !visible }, { onConflict: "key" });
+    if (error) window.alert(`Impossible de changer la visibilité : ${error.message}`);
+    else setVisible(!visible);
+    setSaving(false);
+  };
+
+  return (
+    <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
+          <Images className="w-4 h-4 text-dtc-gold" />
+          Visibilité de la section « Galerie Média »
+        </h2>
+        <p className="text-[11px] text-dtc-inkMuted mt-0.5">
+          Masquer retire le lien de navigation, redirige /gallery vers l&apos;accueil et l&apos;exclut du
+          sitemap — la section disparaît réellement.
+        </p>
+      </div>
+      <button
+        onClick={toggle}
+        disabled={visible === null || saving}
+        aria-pressed={visible === true}
+        className={`flex items-center gap-1.5 px-4 py-2.5 rounded-md text-xs font-bold transition-all active:scale-95 disabled:opacity-50 ${
+          visible
+            ? "bg-emerald-600/10 text-emerald-700 border border-emerald-600/40"
+            : "bg-slate-500/10 text-slate-600 border border-slate-500/40"
+        }`}
+      >
+        {saving ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : visible ? (
+          <Eye className="w-4 h-4" />
+        ) : (
+          <EyeOff className="w-4 h-4" />
+        )}
+        <span>{visible === null ? "…" : visible ? "Visible" : "Masquée"}</span>
+      </button>
+    </div>
+  );
+}
+
 export default function GalleryTab() {
   const [items, setItems] = useState<GalleryImageRow[] | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
@@ -310,7 +373,9 @@ export default function GalleryTab() {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
+      <GalleryVisibilityCard />
+
       <div className="flex items-center justify-between gap-2.5">
         <p className="text-xs text-dtc-inkMuted">La galerie publique — images, affiches, moments du club.</p>
         <button

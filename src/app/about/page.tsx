@@ -4,7 +4,7 @@ import InfographicViewer from "@/components/InfographicViewer";
 import { siteConfig } from "@/data/siteConfig";
 import { getAboutSections, getMandates, getSiteSettings } from "@/lib/data";
 import type { MandateWithMembers } from "@/lib/types";
-import { Award, Heart, Crown } from "lucide-react";
+import { Award, Heart, Crown, ChevronDown } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import UserAvatar from "@/components/UserAvatar";
 
@@ -214,12 +214,15 @@ export default async function AboutPage() {
 function ArchivedMandate({ mandate }: { mandate: MandateWithMembers }) {
   return (
     <details className="glass-card rounded-lg border border-dtc-line/30 overflow-hidden group">
-      <summary className="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer list-none">
+      <summary className="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer list-none select-none">
         <div className="flex items-center gap-2.5">
           <Crown className="w-4 h-4 text-dtc-inkMuted" />
           <span className="text-sm sm:text-base font-heading font-bold text-dtc-ink">{mandate.year_label}</span>
         </div>
-        <span className="text-[11px] text-dtc-inkMuted">{mandate.members.length} membres</span>
+        <div className="flex items-center gap-2 text-dtc-inkMuted">
+          <span className="text-[11px]">{mandate.members.length} membres</span>
+          <ChevronDown className="w-4 h-4 transition-transform duration-200 group-open:rotate-180" />
+        </div>
       </summary>
       <div className="px-4 sm:px-5 pb-5 space-y-3">
         {mandate.infographic_url && (

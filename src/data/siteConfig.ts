@@ -47,10 +47,10 @@ export const siteConfig = {
 
   /**
    * Club-platform navigation (server components call this with the live
-   * `events_visible` setting so a hidden section disappears from the nav
-   * entirely instead of being CSS-hidden).
+   * `events_visible` and `gallery_visible` settings so a hidden section
+   * disappears from the nav entirely instead of being CSS-hidden).
    */
-  getNavItems(eventsVisible: boolean): NavItem[] {
+  getNavItems(eventsVisible: boolean = true, galleryVisible: boolean = true): NavItem[] {
     const items: NavItem[] = [
       { label: "Accueil", href: "/" },
       { label: "Annonces & Idées", href: "/annonces" },
@@ -58,11 +58,11 @@ export const siteConfig = {
     if (eventsVisible) {
       items.push({ label: "TEDx & Débats", href: "/events" });
     }
-    items.push(
-      { label: "Let's Talk Podcast", href: "/podcast" },
-      { label: "Galerie Média", href: "/gallery" },
-      { label: "À Propos", href: "/about" }
-    );
+    items.push({ label: "Let's Talk Podcast", href: "/podcast" });
+    if (galleryVisible) {
+      items.push({ label: "Galerie Média", href: "/gallery" });
+    }
+    items.push({ label: "À Propos", href: "/about" });
     return items;
   },
   stats: [

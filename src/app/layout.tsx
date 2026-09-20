@@ -102,6 +102,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#F7F5F0",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({
@@ -112,7 +115,7 @@ export default async function RootLayout({
   // Nav is settings-aware: a hidden section disappears from the navigation
   // entirely (redirect + de-index happen in the page itself).
   const settings = await getSiteSettings();
-  const navItems = siteConfig.getNavItems(settings.events_visible);
+  const navItems = siteConfig.getNavItems(settings.events_visible, settings.gallery_visible);
   // Secret backstage host: strip chrome server-side (client usePathname
   // sees the pre-rewrite URL, so it can't detect middleware rewrites).
   const isSecretPage = (await headers()).get("x-secret-page") === "1";

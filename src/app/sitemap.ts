@@ -8,9 +8,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [settings, eventSlugs] = await Promise.all([getSiteSettings(), getPublishedEventSlugs()]);
 
   // /idees intentionally absent — that route redirects to /annonces?tab=idees.
-  const routes = ["", "/annonces", "/podcast", "/gallery", "/about"];
+  const routes = ["", "/annonces", "/podcast", "/about"];
   if (settings.events_visible) {
     routes.push("/events");
+  }
+  if (settings.gallery_visible) {
+    routes.push("/gallery");
   }
 
   const entries: MetadataRoute.Sitemap = routes.map((route) => ({

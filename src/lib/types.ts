@@ -150,6 +150,7 @@ export interface PartnerCard {
 
 export interface SiteSettings {
   events_visible: boolean;
+  gallery_visible: boolean;
   promo_years: number[];
   marquee_line?: string;
   hero_tagline?: string;

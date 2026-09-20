@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import GalleryClient from "@/components/gallery/GalleryClient";
-import { getGalleryImages } from "@/lib/data";
+import { getGalleryImages, getSiteSettings } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Galerie Média",
@@ -10,8 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default async function GalleryPage() {
-  // DB-driven with static fallback (see src/lib/data.ts) — the gallery can
-  // now be curated from the /admin console without a deploy.
-  const items = await getGalleryImages();
+  const [settings, items] = await Promise.all([getSiteSettings(), getGalleryImages()]);
+  if (!settings.gallery_visible) {
+    redirect("/");
+  }
   return <GalleryClient initialItems={items} />;
 }

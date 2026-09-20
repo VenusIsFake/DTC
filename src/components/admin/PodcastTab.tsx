@@ -465,7 +465,7 @@ export default function PodcastTab() {
       {/* Import box */}
       <div className="glass-card rounded-lg border border-dtc-line/40 p-4 sm:p-5 space-y-3">
         <h2 className="flex items-center gap-1.5 text-sm font-heading font-bold text-dtc-ink">
-          <Youtube className="w-4 h-4 text-[#FF0000]" aria-hidden="true" />
+          <Youtube className="w-4 h-4 text-red-600" aria-hidden="true" />
           Importer depuis YouTube
         </h2>
         <p className="text-[11px] text-dtc-inkMuted leading-relaxed">

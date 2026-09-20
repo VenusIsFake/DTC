@@ -101,6 +101,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`relative text-[13px] transition-colors pb-0.5 -mb-px border-b ${
                   isActive
                     ? "text-dtc-ink font-semibold border-dtc-gold"
@@ -217,7 +218,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2.5 -m-1 rounded-md text-dtc-ink hover:bg-dtc-wash transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-dtc-gold"
+            className="lg:hidden w-11 h-11 flex items-center justify-center rounded-md text-dtc-ink hover:bg-dtc-wash transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-dtc-gold"
             aria-label={isOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
@@ -231,7 +232,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
       {isOpen && (
         <div
           id="mobile-nav"
-          className="lg:hidden bg-dtc-paper border-b border-dtc-line px-4 pt-2 pb-5 space-y-0.5 shadow-lg max-h-[80dvh] overflow-y-auto animate-drop-in"
+          className="lg:hidden bg-dtc-paper border-b border-dtc-line px-4 pt-2 pb-5 space-y-1 shadow-lg max-h-[80dvh] overflow-y-auto animate-drop-in"
         >
           {navItems.map((item) => {
             const isActive =
@@ -241,8 +242,9 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2.5 rounded-md text-sm transition-colors ${
+                className={`flex items-center min-h-[44px] px-3 py-2 rounded-md text-sm transition-colors ${
                   isActive
                     ? "bg-dtc-wash text-dtc-ink font-semibold border-l-2 border-dtc-gold"
                     : "text-dtc-lineDark hover:bg-dtc-wash hover:text-dtc-ink border-l-2 border-transparent"
@@ -252,7 +254,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               </Link>
             );
           })}
-          <div className="pt-2 border-t border-dtc-line mt-2 space-y-0.5">
+          <div className="pt-2 border-t border-dtc-line mt-2 space-y-1">
             {user ? (
               <>
                 {accountLinks.map((link) => (
@@ -260,7 +262,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-dtc-lineDark hover:bg-dtc-wash hover:text-dtc-ink transition-colors"
+                    className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-md text-sm font-medium text-dtc-lineDark hover:bg-dtc-wash hover:text-dtc-ink transition-colors"
                   >
                     <link.icon className="w-4 h-4 text-dtc-gold" />
                     <span>{link.label}</span>
@@ -271,7 +273,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
                     setIsOpen(false);
                     signOut();
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-dtc-inkMuted hover:bg-red-50 hover:text-red-700 transition-colors"
+                  className="w-full flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-md text-sm font-medium text-dtc-inkMuted hover:bg-red-50 hover:text-red-700 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Déconnexion</span>
@@ -282,7 +284,7 @@ export default function Navbar({ navItems }: { navItems: NavItem[] }) {
               href={siteConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-md text-xs font-semibold border border-dtc-line text-dtc-lineDark hover:border-dtc-gold hover:text-dtc-gold transition-colors"
+              className="flex items-center justify-center gap-2 w-full min-h-[44px] px-4 py-2.5 rounded-md text-xs font-semibold border border-dtc-line text-dtc-lineDark hover:border-dtc-gold hover:text-dtc-gold transition-colors"
             >
               <Instagram className="w-4 h-4" />
               <span>@dentalkclub_fmdc</span>

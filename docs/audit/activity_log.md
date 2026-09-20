@@ -532,3 +532,38 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
 - **SEO/UX :** tagline FR («Que ta voix résonne en échos sans fin.»), titre /candidature `absolute` (double marque corrigée), JSON-LD WebSite ajouté, layout galerie dupliqué supprimé.
 - **Docs :** README + deployment.md → apex comme domaine primaire (aliases 308 notés, dentalkclub-fmdc = mort) ; club-platform-plan : `fast-deploy` (script fantôme) → `npm run deploy`.
 - tsc 0 (après purge `.next/types` stale), lint 0, deploy vert, live checks : robots/sitemap 200, `<link>` icônes `?v=2026c`, favicon.ico servi = bytes frais, titre candidature simple.
+
+## 2026-09-20 — Frontend Visual & UX Audit, Judge Agent Signoff, Gallery Toggle
+
+**Audit exhaustif du frontend (visuel, accessibilité, ergonomie mobile, WebKit) sous mode `/goal` + revue indépendante par agent juge + ajout du killswitch d'affichage de la galerie.**
+
+- **Remédiations Frontend & Accessibilité (WCAG 2.1 AA) :**
+  - `globals.css` : Anneau `:focus-visible` global haut contraste (`2px solid #755b18`, offset 2px) ; reset universel `@media (prefers-reduced-motion: reduce)` avec `!important` sur animations et transitions.
+  - `layout.tsx` : Métadonnées `viewport` enrichies avec `viewportFit: "cover"`, `width: "device-width"`, `initialScale: 1` pour affichage plein écran iOS Safari sans découpe d'encoche.
+  - `PodcastPlayer.tsx` : Bouton lecture contrasté sur vignette vidéo sombre (`text-white` sur pastille `bg-black/40` + scale) ; `aria-current={isCurrent ? "true" : undefined}` sur sélecteurs d'épisodes.
+  - `HomeContent.tsx` : Remplacement du hex or dur `#E3C45B` par la classe Tailwind `hover:bg-amber-400 active:scale-95 shadow-md shadow-dtc-goldBright/20`.
+  - `AnnoncesIdeesHub.tsx` : Implémentation du pattern WAI-ARIA tablist complet (`role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls`, `role="tabpanel"`, `aria-labelledby`).
+  - `AnnouncementsFeed.tsx` & `IdeasBoard.tsx` : Nettoyage des classes sans effet (`hover:text-dtc-ink`), normalisation des zones tactiles boutons admin (>= 44x44px mobile), correction d'une classe dupliquée sur l'icône upvote.
+  - `ProfileEditor.tsx` : Suppression de l'utilitaire Tailwind invalide `!w-18 !h-18` sur `UserAvatar`.
+  - `about/page.tsx` : Ajout d'une icône `ChevronDown` animée sur l'élément `<details><summary>` du mandat archivé.
+  - `UsersTab.tsx` : Ajout de `flex-wrap` et champs adaptatifs `w-full sm:w-auto` / `w-full sm:w-52` pour éviter le débordement horizontal sur écran mobile étroit.
+  - `PodcastTab.tsx` : Remplacement du hex dur `#FF0000` par `text-red-600`.
+  - `EspaceClient.tsx` : `aria-label="Annuaire des membres"` sur le lien avec libellé masqué sur mobile.
+  - `Navbar.tsx` & `Footer.tsx` : `aria-current="page"` sur liens actifs, hauteurs d'éléments et paddings tactiles agrandis à 44px min.
+- **Vérification Agent Juge Indépendant :**
+  - Sous-agent juge dédié a audité la totalité du diff, du code source, de la conformité WCAG 2.1 AA et des invariants WebKit/Safari.
+  - Scorecard : **10/10 PASS** (Visual Polish, UX Flow, A11y, Mobile, WebKit Safety, Test/Lint/Build).
+  - Renforcements appliqués : `MemberQrCodeCard.tsx` (portal dialog container, autofocus, escape listener, aria-labelledby) et `UsersTab.tsx` (aria-label sur sélecteur de rôle).
+- **Killswitch Galerie (`gallery_visible`) :**
+  - `types.ts` : Ajout de `gallery_visible: boolean` à l'interface `SiteSettings`.
+  - `data.ts` : Ajout du fallback `gallery_visible: true` et parsing depuis la table `site_settings`.
+  - `siteConfig.ts` : Paramétrage dynamique de `getNavItems(eventsVisible, galleryVisible)` pour exclure `/gallery` si désactivée.
+  - `layout.tsx` : Transmission de `settings.gallery_visible` aux composants de navigation.
+  - `gallery/page.tsx` : Vérification serveur de `settings.gallery_visible` avec redirection immédiate vers `/` (`redirect("/")`) si désactivée.
+  - `sitemap.ts` : Exclusion de la route `/gallery` du sitemap XML quand la galerie est désactivée.
+  - `GalleryTab.tsx` : Carte d'administration `GalleryVisibilityCard` permettant aux admins de basculer la visibilité de la galerie en temps réel via Supabase.
+- **Validation :**
+  - Tests Vitest : 22/22 pass.
+  - ESLint : 0 warning, 0 error.
+  - Next.js Production Build : 100% réussi.
+

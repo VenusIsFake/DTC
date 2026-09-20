@@ -77,12 +77,19 @@ export default function AnnoncesIdeesHub({
 
       {/* Dynamic Segmented Tab Switcher with Active Expansion */}
       <div className="flex items-center justify-center">
-        <div className="bg-dtc-wash/90 p-1.5 rounded-2xl border border-dtc-line/60 inline-flex items-center gap-1.5 shadow-sm">
+        <div
+          role="tablist"
+          aria-label="Sections du hub communautaire"
+          className="bg-dtc-wash/90 p-1.5 rounded-2xl border border-dtc-line/60 inline-flex items-center gap-1.5 shadow-sm"
+        >
           {/* Annonces & Ateliers Tab */}
           <button
             type="button"
+            role="tab"
+            id="tab-annonces"
+            aria-selected={activeTab === "annonces"}
+            aria-controls="panel-annonces"
             onClick={() => handleTabChange("annonces")}
-            aria-pressed={activeTab === "annonces"}
             className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "annonces"
                 ? "bg-white text-dtc-ink font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-dtc-line/70 scale-[1.02] z-10"
@@ -115,8 +122,11 @@ export default function AnnoncesIdeesHub({
           {/* Boîte à Idées Tab */}
           <button
             type="button"
+            role="tab"
+            id="tab-idees"
+            aria-selected={activeTab === "idees"}
+            aria-controls="panel-idees"
             onClick={() => handleTabChange("idees")}
-            aria-pressed={activeTab === "idees"}
             className={`flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl transition-all duration-300 ease-out cursor-pointer ${
               activeTab === "idees"
                 ? "bg-white text-dtc-ink font-bold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm shadow-md border border-dtc-line/70 scale-[1.02] z-10"
@@ -152,7 +162,7 @@ export default function AnnoncesIdeesHub({
       <Reveal>
         <div className="pt-2">
           {activeTab === "annonces" ? (
-            <div className="space-y-6">
+            <div id="panel-annonces" role="tabpanel" aria-labelledby="tab-annonces" className="space-y-6">
               <AnnouncementsFeed initialItems={initialAnnouncements} onCountChange={setAnnouncementsCount} />
               <p className="flex items-center justify-center gap-1.5 text-[11px] text-dtc-inkSoft pt-2">
                 <CalendarDays className="w-3.5 h-3.5" />
@@ -162,7 +172,9 @@ export default function AnnoncesIdeesHub({
               </p>
             </div>
           ) : (
-            <IdeasBoard initialItems={initialIdeas} onCountChange={setIdeasCount} />
+            <div id="panel-idees" role="tabpanel" aria-labelledby="tab-idees">
+              <IdeasBoard initialItems={initialIdeas} onCountChange={setIdeasCount} />
+            </div>
           )}
         </div>
       </Reveal>

@@ -263,7 +263,7 @@ export default function IdeasBoard({
                       : "bg-white border-dtc-line/50 text-dtc-inkMuted hover:text-dtc-gold hover:border-dtc-gold/50"
                   }`}
                 >
-                  {voted ? <Check className="w-4 h-4" /> : <ArrowBigUp className="w-4.5 h-4.5 w-5 h-5" />}
+                  {voted ? <Check className="w-4 h-4" /> : <ArrowBigUp className="w-5 h-5" />}
                   <span className="text-xs font-semibold leading-none pt-0.5">{item.vote_count}</span>
                 </button>
               </div>
@@ -285,7 +285,7 @@ export default function IdeasBoard({
                   <button
                     onClick={() => setExpanded(isExpanded ? null : item.id)}
                     aria-expanded={isExpanded}
-                    className="flex items-center gap-1 ml-auto font-semibold text-dtc-gold hover:text-dtc-gold transition-colors"
+                    className="flex items-center gap-1 ml-auto font-semibold text-dtc-gold hover:text-dtc-ink transition-colors"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>{item.comment_count}</span>

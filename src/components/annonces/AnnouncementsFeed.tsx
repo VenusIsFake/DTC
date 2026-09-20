@@ -394,28 +394,28 @@ export default function AnnouncementsFeed({
                 )}
               </div>
               {isBureau && (
-                <div className="flex items-center gap-1 shrink-0">
+                <div className="flex items-center gap-1.5 shrink-0">
                   <button
                     onClick={() => togglePin(item)}
                     aria-label={item.is_pinned ? "Désépingler" : "Épingler"}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
+                    className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
                   >
-                    {item.is_pinned ? <PinOff className="w-3.5 h-3.5" /> : <Pin className="w-3.5 h-3.5" />}
+                    {item.is_pinned ? <PinOff className="w-4 h-4 sm:w-3.5 sm:h-3.5" /> : <Pin className="w-4 h-4 sm:w-3.5 sm:h-3.5" />}
                   </button>
                   <button
                     onClick={() => openComposer(item)}
                     aria-label="Modifier"
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
+                    className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors"
                   >
-                    <Pencil className="w-3.5 h-3.5" />
+                    <Pencil className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                   </button>
                   {isAdmin && (
                     <button
                       onClick={() => remove(item)}
                       aria-label="Supprimer"
-                      className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
+                      className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Trash2 className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                     </button>
                   )}
                 </div>
@@ -484,7 +484,7 @@ export default function AnnouncementsFeed({
                 {isBureau && isAtelier && item.rsvp_count > 0 && (
                   <button
                     onClick={() => setAttendeesFor(item)}
-                    className="flex items-center gap-1 text-[11px] font-semibold text-dtc-gold hover:text-dtc-gold transition-colors"
+                    className="flex items-center gap-1 text-[11px] font-semibold text-dtc-gold hover:text-dtc-ink transition-colors"
                   >
                     <Users className="w-3.5 h-3.5" />
                     <span>Liste</span>

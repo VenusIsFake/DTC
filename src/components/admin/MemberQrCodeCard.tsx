@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import QRCode from "qrcode";
 import {
   Check,
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { PrimaryButton, GhostButton } from "@/components/ui/form";
+import { useOverlayDialog } from "@/hooks/useOverlayDialog";
 
 interface MemberQrLinkData {
   id: string;
@@ -34,6 +36,12 @@ export default function MemberQrCodeCard() {
   const [copied, setCopied] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [rotating, setRotating] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const dialogRef = useOverlayDialog<HTMLDivElement>(modalOpen, () => setModalOpen(false));
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const loadQrLink = useCallback(async () => {
     setLoading(true);
@@ -237,16 +245,19 @@ export default function MemberQrCodeCard() {
       </div>
 
       {/* Stand Presentation Modal (Full screen booth presentation) */}
-      {modalOpen && qrDataUrl && (
+      {modalOpen && qrDataUrl && mounted && createPortal(
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
+          aria-label="Présentation Stand QR Code"
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setModalOpen(false)} />
           <div className="relative z-10 w-full max-w-sm glass-card rounded-2xl border-2 border-dtc-gold/60 p-6 sm:p-8 space-y-5 bg-white text-center shadow-2xl">
             <button
               onClick={() => setModalOpen(false)}
+              data-autofocus
               className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-dtc-wash text-dtc-inkMuted hover:text-dtc-ink"
               aria-label="Fermer"
             >
@@ -290,7 +301,8 @@ export default function MemberQrCodeCard() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

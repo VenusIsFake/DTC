@@ -120,6 +120,7 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
               <button
                 key={ep.id}
                 onClick={() => setSelectedEp(ep)}
+                aria-current={isCurrent ? "true" : undefined}
                 className={`text-left p-2.5 sm:p-4 rounded-xl sm:rounded-lg border transition-all duration-200 flex items-center gap-3 group ${
                   isCurrent
                     ? "bg-dtc-wash border-dtc-gold shadow-lg shadow-dtc-gold/10"
@@ -141,8 +142,8 @@ export default function PodcastPlayer({ episodes }: { episodes: PodcastEpisode[]
                       }
                     }}
                   />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <Play className="w-4 h-4 text-dtc-ink fill-current opacity-80" />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <Play className="w-4 h-4 text-white fill-current opacity-90 group-hover:scale-110 transition-transform" />
                   </div>
                 </div>
 

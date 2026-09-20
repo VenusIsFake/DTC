@@ -68,7 +68,7 @@ export default function Footer({
             <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="inline-flex items-center py-1.5 hover:text-dtc-goldBright transition-colors">
+                  <Link href={item.href} className="inline-flex items-center py-2 hover:text-dtc-goldBright transition-colors">
                     {item.label}
                   </Link>
                 </li>
@@ -126,7 +126,7 @@ export default function Footer({
                   href={siteConfig.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-dtc-navy-surface text-dtc-paper hover:text-dtc-goldBright border border-dtc-lineDark text-xs font-medium transition-colors"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-dtc-navy-surface text-dtc-paper hover:text-dtc-goldBright border border-dtc-lineDark text-xs font-medium transition-colors"
                 >
                   <Instagram className="w-3.5 h-3.5" />
                   <span>Instagram</span>
@@ -137,7 +137,7 @@ export default function Footer({
                   href={siteConfig.youtubeChannelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-dtc-navy-surface text-dtc-paper hover:text-dtc-goldBright border border-dtc-lineDark text-xs font-medium transition-colors"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-dtc-navy-surface text-dtc-paper hover:text-dtc-goldBright border border-dtc-lineDark text-xs font-medium transition-colors"
                 >
                   <Youtube className="w-3.5 h-3.5" />
                   <span>YouTube</span>

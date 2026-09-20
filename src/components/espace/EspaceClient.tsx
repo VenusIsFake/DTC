@@ -65,6 +65,7 @@ export default function EspaceClient({
         ))}
         <Link
           href="/espace/annuaire"
+          aria-label="Annuaire des membres"
           className="flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-[11px] sm:text-xs font-semibold text-dtc-inkMuted hover:text-dtc-ink transition-colors"
         >
           <Users className="w-3.5 h-3.5" />

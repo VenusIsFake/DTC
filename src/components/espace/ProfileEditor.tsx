@@ -109,7 +109,6 @@ export default function ProfileEditor({
             name={fullName}
             src={liveProfile?.avatar_url ?? profile.avatar_url}
             size={72}
-            className="!w-18 !h-18"
           />
         </div>
         <div className="space-y-1.5">

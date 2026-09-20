@@ -69,6 +69,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
   const [memberQrModalOpen, setMemberQrModalOpen] = useState(false);
   const linkDialogRef = useOverlayDialog<HTMLDivElement>(linkModalOpen, () => setLinkModalOpen(false));
   const inviteDialogRef = useOverlayDialog<HTMLDivElement>(inviteOpen, () => setInviteOpen(false));
+  const qrDialogRef = useOverlayDialog<HTMLDivElement>(memberQrModalOpen, () => setMemberQrModalOpen(false));
 
   const load = React.useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
@@ -347,19 +348,19 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             ` · ${users.filter((u) => u.role === "guest" && u.membership_status === "pending").length} dossier(s) d'adhésion reçu(s)`}
           {isAdmin ? " — rôles, bannissements et coordonnées." : ""}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <label htmlFor="users-sort" className="sr-only">Trier les comptes</label>
           <select
             id="users-sort"
             value={sort}
             onChange={(e) => setSort(e.target.value as SortMode)}
-            className={`${inputClass} !py-1.5 !px-2 !text-[11px] w-auto`}
+            className={`${inputClass} !py-1.5 !px-2 !text-[11px] w-full sm:w-auto`}
           >
             <option value="role">Tri : Rôle (Admin → Bureau → Membre → Invité)</option>
             <option value="recent">Tri : Récents</option>
             <option value="name">Tri : Nom A→Z</option>
           </select>
-          <div className="relative">
+          <div className="relative w-full sm:w-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-dtc-inkSoft" aria-hidden="true" />
             <label htmlFor="users-search" className="sr-only">Rechercher un compte</label>
             <input
@@ -368,7 +369,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Nom ou email…"
-              className={`${inputClass} pl-9 !py-1.5 !text-xs w-52`}
+              className={`${inputClass} pl-9 !py-1.5 !text-xs w-full sm:w-52`}
             />
           </div>
           <button
@@ -840,8 +841,10 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
 
       {memberQrModalOpen && (
         <div
+          ref={qrDialogRef}
           role="dialog"
           aria-modal="true"
+          aria-label="QR Code d'adhésion membre"
           className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
         >
           <div className="absolute inset-0" onClick={() => setMemberQrModalOpen(false)} aria-hidden="true" />
