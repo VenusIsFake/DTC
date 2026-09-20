@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { Check, Copy, KeyRound, Link2, Loader2, QrCode, ShieldOff, ShieldCheck, Search, Trash2, UserCheck, UserPlus, X } from "lucide-react";
+import { Check, Copy, KeyRound, Link2, Loader2, QrCode, RefreshCw, ShieldOff, ShieldCheck, Search, Trash2, UserCheck, UserPlus, X } from "lucide-react";
 import QRCode from "qrcode";
 import type { AdminProfileRow, Role } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -18,7 +18,8 @@ const ROLE_LABELS: Record<Role, string> = {
   admin: "Administrateur",
 };
 
-const ROLE_RANK: Record<Role, number> = { admin: 0, bureau: 1, member: 2, guest: 3 };
+// Guests to be approved are ranked #0 (top priority)
+const ROLE_RANK: Record<Role, number> = { guest: 0, admin: 1, bureau: 2, member: 3 };
 
 type SortMode = "role" | "recent" | "name";
 
@@ -71,9 +72,13 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
   const inviteDialogRef = useOverlayDialog<HTMLDivElement>(inviteOpen, () => setInviteOpen(false));
   const qrDialogRef = useOverlayDialog<HTMLDivElement>(memberQrModalOpen, () => setMemberQrModalOpen(false));
 
+  const [refreshing, setRefreshing] = useState(false);
+  const [sectionFilter, setSectionFilter] = useState<"all" | "pending" | "bureau" | "members">("all");
+
   const load = React.useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
+    setRefreshing(true);
     // bureau_list_profiles now carries role/is_banned/created_at — same row
     // shape as the admin RPC, minus the admin-only write actions.
     const { data, error: rpcError } = await supabase.rpc(
@@ -81,6 +86,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
     );
     if (rpcError) setError(rpcError.message);
     setUsers((data as AdminProfileRow[] | null) ?? []);
+    setRefreshing(false);
   }, [isAdmin]);
 
   const loadLinks = React.useCallback(async () => {
@@ -90,6 +96,27 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
     if (rpcError) setError(rpcError.message);
     setInviteLinks((data as InviteLinkRow[] | null) ?? []);
   }, []);
+
+  // Realtime subscription: whenever a new member registers or updates, auto-refresh!
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+
+    const channel = supabase
+      .channel("users-realtime-profiles-sync")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "profiles" },
+        () => {
+          load();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [load]);
 
   useEffect(() => {
     load();
@@ -316,10 +343,18 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       : (users ?? []);
     const sorted = [...list];
     if (sort === "role") {
-      sorted.sort(
-        (a, b) =>
-          ROLE_RANK[a.role] - ROLE_RANK[b.role] || a.full_name.localeCompare(b.full_name, "fr")
-      );
+      sorted.sort((a, b) => {
+        // Guests (awaiting approval) at the very top, sorted newest first
+        if (a.role === "guest" && b.role === "guest") {
+          return b.created_at.localeCompare(a.created_at);
+        }
+        if (a.role === "guest") return -1;
+        if (b.role === "guest") return 1;
+
+        const rankDiff = ROLE_RANK[a.role] - ROLE_RANK[b.role];
+        if (rankDiff !== 0) return rankDiff;
+        return a.full_name.localeCompare(b.full_name, "fr");
+      });
     } else if (sort === "name") {
       sorted.sort((a, b) => a.full_name.localeCompare(b.full_name, "fr"));
     } else {
@@ -327,6 +362,10 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
     }
     return sorted;
   }, [users, query, sort]);
+
+  const pendingUsers = useMemo(() => filtered.filter((u) => u.role === "guest"), [filtered]);
+  const bureauUsers = useMemo(() => filtered.filter((u) => u.role === "admin" || u.role === "bureau"), [filtered]);
+  const memberUsers = useMemo(() => filtered.filter((u) => u.role === "member"), [filtered]);
 
   if (users === null) {
     return (
@@ -337,18 +376,150 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
     );
   }
 
+  const renderUserRow = (u: AdminProfileRow) => (
+    <div
+      key={u.id}
+      className={`glass-card rounded-xl border p-3 sm:p-4 flex flex-wrap items-center gap-3 transition-colors ${
+        u.is_banned
+          ? "border-red-500/30 opacity-75"
+          : u.role === "guest"
+          ? "border-amber-500/50 bg-amber-500/5 shadow-sm"
+          : "border-dtc-line/40"
+      }`}
+    >
+      <UserAvatar name={u.full_name} src={u.avatar_url} size={38} />
+      <div className="flex-1 min-w-[150px]">
+        <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate">
+          {u.full_name || "(sans nom)"}
+          {u.role === "guest" && (
+            <Badge tone="gold" className="ml-2">
+              Invité — en attente
+            </Badge>
+          )}
+          {u.role === "guest" && u.membership_status === "pending" && (
+            <Badge tone="green" className="ml-2">
+              Dossier d&apos;adhésion reçu
+            </Badge>
+          )}
+          {u.is_banned && (
+            <Badge tone="red" className="ml-2">
+              Banni
+            </Badge>
+          )}
+        </p>
+        <p className="text-[11px] text-dtc-inkMuted truncate">
+          {u.email}
+          {u.phone ? ` · ${u.phone}` : ""}
+          {u.promo ? ` · Promo ${u.promo}` : ""}
+          {u.committee ? ` · ${u.committee}` : ""}
+        </p>
+        <p className="text-[10px] text-dtc-inkSoft">Inscrit {formatRelative(u.created_at)}</p>
+      </div>
+      <div className="flex items-center gap-2 shrink-0">
+        {busyId === u.id ? (
+          <Loader2 className="w-4 h-4 text-dtc-gold animate-spin" />
+        ) : u.role === "guest" ? (
+          <>
+            <button
+              onClick={() => approveGuest(u, true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold bg-emerald-700 text-white hover:brightness-110 transition-all active:scale-95 shadow-sm"
+            >
+              <UserCheck className="w-3.5 h-3.5" />
+              <span>Approuver</span>
+            </button>
+            <button
+              onClick={() => approveGuest(u, false)}
+              aria-label={`Refuser et supprimer le compte de ${u.full_name || u.email}`}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold border border-red-500/40 text-red-700 hover:bg-red-500/10 transition-all active:scale-95"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>Refuser</span>
+            </button>
+          </>
+        ) : isAdmin ? (
+          <>
+            <label className="sr-only" htmlFor={`role-${u.id}`}>
+              Rôle de {u.full_name}
+            </label>
+            <select
+              id={`role-${u.id}`}
+              value={u.role}
+              onChange={(e) => setRole(u, e.target.value as Role)}
+              className={`${inputClass} !w-auto !py-1.5 !px-2 !text-[11px]`}
+            >
+              <option value="member">Membre</option>
+              <option value="bureau">Bureau</option>
+              <option value="admin">Admin</option>
+              <option value="guest">Invité (lecture seule)</option>
+            </select>
+            <button
+              onClick={() => setBanned(u, !u.is_banned)}
+              aria-label={u.is_banned ? "Réactiver le compte" : "Bannir le compte"}
+              title={u.is_banned ? "Réactiver" : "Bannir"}
+              className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
+                u.is_banned
+                  ? "text-emerald-700 hover:bg-emerald-600/10"
+                  : "text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10"
+              }`}
+            >
+              {u.is_banned ? <ShieldCheck className="w-4 h-4" /> : <ShieldOff className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => resetPassword(u)}
+              aria-label={`Réinitialiser le mot de passe de ${u.full_name || u.email}`}
+              title="Mot de passe temporaire"
+              disabled={serviceReady === false}
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors disabled:opacity-40"
+            >
+              <KeyRound className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => deleteAccount(u)}
+              aria-label={`Supprimer le compte de ${u.full_name || u.email}`}
+              title="Supprimer le compte"
+              disabled={serviceReady === false}
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </>
+        ) : (
+          <span className="text-[11px] text-dtc-inkSoft">{ROLE_LABELS[u.role]}</span>
+        )}
+      </div>
+    </div>
+  );
+
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
+      {/* Top Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-2.5">
         <p className="text-xs text-dtc-inkMuted">
           {users.length} compte{users.length > 1 ? "s" : ""}
-          {users.some((u) => u.role === "guest") &&
-            ` — dont ${users.filter((u) => u.role === "guest").length} invité(s) en attente`}
+          {pendingUsers.length > 0 && (
+            <span className="text-amber-800 font-semibold">
+              {" "}· {pendingUsers.length} à approuver
+            </span>
+          )}
           {users.filter((u) => u.role === "guest" && u.membership_status === "pending").length > 0 &&
-            ` · ${users.filter((u) => u.role === "guest" && u.membership_status === "pending").length} dossier(s) d'adhésion reçu(s)`}
+            ` · ${users.filter((u) => u.role === "guest" && u.membership_status === "pending").length} dossier(s) d'adhésion`}
           {isAdmin ? " — rôles, bannissements et coordonnées." : ""}
         </p>
+
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          {/* Refresh Button */}
+          <button
+            type="button"
+            onClick={() => load()}
+            disabled={refreshing}
+            title="Actualiser la liste des comptes"
+            aria-label="Actualiser la liste"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold border border-dtc-line/60 bg-dtc-cream/60 hover:bg-dtc-cream text-dtc-ink transition-all active:scale-95 disabled:opacity-50"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin text-dtc-gold" : ""}`} />
+            <span className="hidden sm:inline">Actualiser</span>
+          </button>
+
           <label htmlFor="users-sort" className="sr-only">Trier les comptes</label>
           <select
             id="users-sort"
@@ -356,10 +527,11 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
             onChange={(e) => setSort(e.target.value as SortMode)}
             className={`${inputClass} !py-1.5 !px-2 !text-[11px] w-full sm:w-auto`}
           >
-            <option value="role">Tri : Rôle (Admin → Bureau → Membre → Invité)</option>
+            <option value="role">Tri : Priorité (En attente → Bureau → Membres)</option>
             <option value="recent">Tri : Récents</option>
             <option value="name">Tri : Nom A→Z</option>
           </select>
+
           <div className="relative w-full sm:w-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-dtc-inkSoft" aria-hidden="true" />
             <label htmlFor="users-search" className="sr-only">Rechercher un compte</label>
@@ -372,6 +544,7 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
               className={`${inputClass} pl-9 !py-1.5 !text-xs w-full sm:w-52`}
             />
           </div>
+
           <button
             onClick={() => setMemberQrModalOpen(true)}
             title="Afficher le QR Code réutilisable d'adhésion pour les membres"
@@ -419,6 +592,60 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
         </p>
       )}
 
+      {/* Section Filter Pills */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar">
+        <button
+          type="button"
+          onClick={() => setSectionFilter("all")}
+          className={`px-3 py-1.5 rounded-lg font-medium transition-all shrink-0 ${
+            sectionFilter === "all"
+              ? "bg-dtc-ink text-dtc-paper shadow-sm font-semibold"
+              : "bg-dtc-cream/70 text-dtc-inkMuted hover:bg-dtc-cream border border-dtc-line/40"
+          }`}
+        >
+          Tous ({filtered.length})
+        </button>
+
+        {pendingUsers.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setSectionFilter("pending")}
+            className={`px-3 py-1.5 rounded-lg font-medium transition-all shrink-0 flex items-center gap-1.5 ${
+              sectionFilter === "pending"
+                ? "bg-amber-600 text-white shadow-sm font-semibold"
+                : "bg-amber-500/15 text-amber-900 hover:bg-amber-500/25 border border-amber-500/40"
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+            <span>À approuver ({pendingUsers.length})</span>
+          </button>
+        )}
+
+        <button
+          type="button"
+          onClick={() => setSectionFilter("bureau")}
+          className={`px-3 py-1.5 rounded-lg font-medium transition-all shrink-0 ${
+            sectionFilter === "bureau"
+              ? "bg-dtc-gold text-dtc-paper font-semibold shadow-sm"
+              : "bg-dtc-cream/70 text-dtc-inkMuted hover:bg-dtc-cream border border-dtc-line/40"
+          }`}
+        >
+          Bureau & Admins ({bureauUsers.length})
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setSectionFilter("members")}
+          className={`px-3 py-1.5 rounded-lg font-medium transition-all shrink-0 ${
+            sectionFilter === "members"
+              ? "bg-emerald-700 text-white shadow-sm font-semibold"
+              : "bg-dtc-cream/70 text-dtc-inkMuted hover:bg-dtc-cream border border-dtc-line/40"
+          }`}
+        >
+          Membres ({memberUsers.length})
+        </button>
+      </div>
+
       {passwordResult && (
         <div role="status" className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-2">
           <p className="text-xs font-bold text-emerald-800">
@@ -448,7 +675,8 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
       {createdUrl && (
         <div role="status" className="glass-card rounded-lg border border-emerald-600/40 bg-emerald-600/5 p-4 space-y-3">
           <p className="text-xs font-bold text-emerald-800">
-            Lien d&apos;invitation créé — envoi direct ou scan QR :
+            Lien d&apos;invitation créé ({ROLE_LABELS[linkRole]}
+            {linkMultiUse ? " · multi-usage" : " · usage unique"}) :
           </p>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             {createdQr && (
@@ -492,116 +720,66 @@ export default function UsersTab({ viewerRole }: { viewerRole?: Role }) {
         </p>
       )}
 
-      <div className="space-y-2">
-        {filtered.map((u) => (
-          <div
-            key={u.id}
-            className={`glass-card rounded-xl border p-3 sm:p-4 flex flex-wrap items-center gap-3 ${
-              u.is_banned ? "border-red-500/30 opacity-75" : "border-dtc-line/40"
-            }`}
-          >
-            <UserAvatar name={u.full_name} src={u.avatar_url} size={38} />
-            <div className="flex-1 min-w-[150px]">
-              <p className="text-xs sm:text-sm font-bold text-dtc-ink truncate">
-                {u.full_name || "(sans nom)"}
-                {u.role === "guest" && (
-                  <Badge tone="gold" className="ml-2">
-                    Invité — en attente
-                  </Badge>
-                )}
-                {u.role === "guest" && u.membership_status === "pending" && (
-                  <Badge tone="green" className="ml-2">
-                    Dossier d&apos;adhésion reçu
-                  </Badge>
-                )}
-                {u.is_banned && (
-                  <Badge tone="red" className="ml-2">
-                    Banni
-                  </Badge>
-                )}
-              </p>
-              <p className="text-[11px] text-dtc-inkMuted truncate">
-                {u.email}
-                {u.phone ? ` · ${u.phone}` : ""}
-                {u.promo ? ` · Promo ${u.promo}` : ""}
-                {u.committee ? ` · ${u.committee}` : ""}
-              </p>
-              <p className="text-[10px] text-dtc-inkSoft">Inscrit {formatRelative(u.created_at)}</p>
+      {/* Users List Grouped or Filtered */}
+      <div className="space-y-6">
+        {/* Section 1: Pending approvals (SORTED TO THE TOP!) */}
+        {(sectionFilter === "all" || sectionFilter === "pending") && pendingUsers.length > 0 && (
+          <div className="space-y-2.5 p-3.5 sm:p-4 rounded-xl border-2 border-amber-500/40 bg-amber-500/5 shadow-sm">
+            <div className="flex items-center justify-between gap-2 pb-1">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
+                <h3 className="text-xs font-heading font-bold text-amber-900 uppercase tracking-wide">
+                  En attente d&apos;approbation ({pendingUsers.length})
+                </h3>
+              </div>
+              <span className="text-[11px] text-amber-800 font-medium hidden sm:inline">
+                Nouveaux inscrits à valider pour accès membre
+              </span>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
-              {busyId === u.id ? (
-                <Loader2 className="w-4 h-4 text-dtc-gold animate-spin" />
-              ) : u.role === "guest" ? (
-                <>
-                  <button
-                    onClick={() => approveGuest(u, true)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold bg-emerald-700 text-white hover:brightness-110 transition-all active:scale-95"
-                  >
-                    <UserCheck className="w-3.5 h-3.5" />
-                    <span>Approuver</span>
-                  </button>
-                  <button
-                    onClick={() => approveGuest(u, false)}
-                    aria-label={`Refuser et supprimer le compte de ${u.full_name || u.email}`}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold border border-red-500/40 text-red-700 hover:bg-red-500/10 transition-all active:scale-95"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                    <span>Refuser</span>
-                  </button>
-                </>
-              ) : isAdmin ? (
-                <>
-                  <label className="sr-only" htmlFor={`role-${u.id}`}>
-                    Rôle de {u.full_name}
-                  </label>
-                  <select
-                    id={`role-${u.id}`}
-                    value={u.role}
-                    onChange={(e) => setRole(u, e.target.value as Role)}
-                    className={`${inputClass} !w-auto !py-1.5 !px-2 !text-[11px]`}
-                  >
-                    <option value="member">Membre</option>
-                    <option value="bureau">Bureau</option>
-                    <option value="admin">Admin</option>
-                    <option value="guest">Invité (lecture seule)</option>
-                  </select>
-                  <button
-                    onClick={() => setBanned(u, !u.is_banned)}
-                    aria-label={u.is_banned ? "Réactiver le compte" : "Bannir le compte"}
-                    title={u.is_banned ? "Réactiver" : "Bannir"}
-                    className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
-                      u.is_banned
-                        ? "text-emerald-700 hover:bg-emerald-600/10"
-                        : "text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10"
-                    }`}
-                  >
-                    {u.is_banned ? <ShieldCheck className="w-4 h-4" /> : <ShieldOff className="w-4 h-4" />}
-                  </button>
-                  <button
-                    onClick={() => resetPassword(u)}
-                    aria-label={`Réinitialiser le mot de passe de ${u.full_name || u.email}`}
-                    title="Mot de passe temporaire"
-                    disabled={serviceReady === false}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-dtc-gold hover:bg-dtc-wash transition-colors disabled:opacity-40"
-                  >
-                    <KeyRound className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => deleteAccount(u)}
-                    aria-label={`Supprimer le compte de ${u.full_name || u.email}`}
-                    title="Supprimer le compte"
-                    disabled={serviceReady === false}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-dtc-inkMuted hover:text-red-700 hover:bg-red-500/10 transition-colors disabled:opacity-40"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </>
-              ) : (
-                <span className="text-[11px] text-dtc-inkSoft">{ROLE_LABELS[u.role]}</span>
-              )}
+            <div className="space-y-2">
+              {pendingUsers.map(renderUserRow)}
             </div>
           </div>
-        ))}
+        )}
+
+        {/* Section 2: Bureau & Administration (SEPARATED!) */}
+        {(sectionFilter === "all" || sectionFilter === "bureau") && bureauUsers.length > 0 && (
+          <div className="space-y-2.5">
+            {sectionFilter === "all" && (
+              <div className="flex items-center justify-between pb-1.5 border-b border-dtc-line/40">
+                <h3 className="text-xs font-heading font-bold text-dtc-ink uppercase tracking-wide flex items-center gap-2">
+                  <span>Bureau Exécutif & Administration</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-dtc-gold/20 text-dtc-ink font-semibold">
+                    {bureauUsers.length}
+                  </span>
+                </h3>
+              </div>
+            )}
+            <div className="space-y-2">
+              {bureauUsers.map(renderUserRow)}
+            </div>
+          </div>
+        )}
+
+        {/* Section 3: Club Members */}
+        {(sectionFilter === "all" || sectionFilter === "members") && memberUsers.length > 0 && (
+          <div className="space-y-2.5">
+            {sectionFilter === "all" && (
+              <div className="flex items-center justify-between pb-1.5 border-b border-dtc-line/40">
+                <h3 className="text-xs font-heading font-bold text-dtc-ink uppercase tracking-wide flex items-center gap-2">
+                  <span>Membres du Club</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 font-semibold">
+                    {memberUsers.length}
+                  </span>
+                </h3>
+              </div>
+            )}
+            <div className="space-y-2">
+              {memberUsers.map(renderUserRow)}
+            </div>
+          </div>
+        )}
+
         {filtered.length === 0 && (
           <p className="text-xs text-dtc-inkMuted text-center py-6">Aucun compte ne correspond.</p>
         )}
