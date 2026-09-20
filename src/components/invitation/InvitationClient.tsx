@@ -6,6 +6,7 @@ import { CheckCircle2, Loader2, LogIn, MailX, ShieldCheck } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Field, PrimaryButton, GhostButton, inputClass } from "@/components/ui/form";
+import StandIcebreakerGame from "@/components/game/StandIcebreakerGame";
 
 const ROLE_LABELS: Record<string, string> = {
   member: "Membre",
@@ -131,40 +132,70 @@ export default function InvitationClient({
 
   if (phase === "done") {
     const already = result === "already";
-    return wrap(
-      <>
-        <div className="flex justify-center">
-          <div className={`p-3 rounded-lg ${already ? "bg-dtc-gold/15 text-dtc-gold" : "bg-emerald-600/15 text-emerald-700"}`}>
-            {already ? <ShieldCheck className="w-6 h-6" /> : <CheckCircle2 className="w-6 h-6" />}
+    return (
+      <div className="pt-6 sm:pt-10 pb-16 px-4 max-w-lg mx-auto">
+        <div className="glass-card rounded-2xl border border-dtc-line/40 p-5 sm:p-7 space-y-5">
+          {/* Welcome status banner */}
+          <div className="flex items-center justify-between pb-4 border-b border-dtc-line/30 gap-3">
+            <div className="flex items-center gap-3">
+              <div
+                className={`p-2.5 rounded-xl shrink-0 ${
+                  already
+                    ? "bg-dtc-gold/15 text-dtc-gold"
+                    : "bg-emerald-600/15 text-emerald-700"
+                }`}
+              >
+                {already ? (
+                  <ShieldCheck className="w-5 h-5" />
+                ) : (
+                  <CheckCircle2 className="w-5 h-5" />
+                )}
+              </div>
+              <div>
+                <h1 className="text-base sm:text-lg font-heading font-semibold text-dtc-ink">
+                  {already ? "Accès déjà validé" : "Compte activé avec succès ✓"}
+                </h1>
+                <p className="text-xs text-dtc-inkMuted">
+                  {already
+                    ? "Votre compte dispose déjà de l'accès membre."
+                    : `Bienvenue au DTC ! Rôle « ${ROLE_LABELS[result] ?? result} » actif.`}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              {(result === "bureau" ||
+                result === "admin" ||
+                (already && (profile?.role === "bureau" || profile?.role === "admin"))) && (
+                <Link
+                  href="/admin"
+                  className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 transition-all"
+                >
+                  Console
+                </Link>
+              )}
+              <Link
+                href="/"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-dtc-gold/50 text-dtc-gold hover:bg-dtc-gold/10 transition-all"
+              >
+                Aller au site →
+              </Link>
+            </div>
+          </div>
+
+          {/* Stand Icebreaker Mini-Game */}
+          <StandIcebreakerGame compact={true} />
+
+          <div className="pt-2 text-center border-t border-dtc-line/20">
+            <p className="text-[11px] text-dtc-inkMuted">
+              Retrouve ce jeu à tout moment au stand sur{" "}
+              <Link href="/game" className="underline font-medium text-dtc-goldDark hover:text-dtc-gold">
+                dentalkclubfmdc.com/game
+              </Link>
+            </p>
           </div>
         </div>
-        <h1 className="text-xl font-heading font-semibold text-dtc-ink text-center">
-          {already ? "Vous avez déjà accès" : "Invitation activée ✓"}
-        </h1>
-        <p className="text-xs sm:text-sm text-dtc-inkMuted leading-relaxed text-center">
-          {already
-            ? "Votre compte dispose déjà de ce niveau d'accès (ou plus) — le lien reste utilisable par son véritable destinataire."
-            : `Bienvenue au DTC ! Votre compte dispose maintenant de l'accès « ${ROLE_LABELS[result] ?? result} ». Vous pouvez quitter cette page et vous connecter au site normalement.`}
-        </p>
-        <div className="flex flex-wrap justify-center gap-2">
-          {(result === "bureau" ||
-            result === "admin" ||
-            (already && (profile?.role === "bureau" || profile?.role === "admin"))) && (
-            <Link
-              href="/admin"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md text-xs font-bold bg-dtc-gold text-dtc-paper hover:brightness-110 transition-all"
-            >
-              Ouvrir la console
-            </Link>
-          )}
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md text-xs font-bold border border-dtc-gold/50 text-dtc-gold hover:bg-dtc-gold/10 transition-all"
-          >
-            Aller au site
-          </Link>
-        </div>
-      </>
+      </div>
     );
   }
 

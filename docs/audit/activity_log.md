@@ -567,3 +567,33 @@ Audit UI rapide : 9 pages SSR 200 + titres OK ; crop viewport fixe 280px (OK ≥
   - ESLint : 0 warning, 0 error.
   - Next.js Production Build : 100% réussi.
 
+## 2026-09-20 (soir) — Stand Icebreaker Mini-Game (100 Questions)
+
+**Création du mini-jeu interactif d'accueil pour le stand DTC FMDC : 100 cartes brise-glace pour animer l'échange entre les nouveaux membres qui scannent le QR code et les membres du bureau présents.**
+
+- **Jeu de données (`src/data/icebreakerQuestions.ts`) :**
+  - Exactement 100 questions réparties sur 5 catégories équilibrées (20 par catégorie) :
+    1. *Dentisterie Fun & Débutant* (dilemmes brossage, spécialités, phobies, TP prothèse, mythes bucco-dentaires).
+    2. *Vie Étudiante & FMDC* (spots révision Casa, nuits blanches, matières clés, mascottes, partiels).
+    3. *Débats & Dilemmes Légers* (IA soignant, horaires, ponctualité marocaine, équipe vs solo, réseaux).
+    4. *Culture, Société & Réflexion* (philosophie, leadership associatif, transmission, podcasts, valeurs).
+    5. *Défis Bureau Spécial Stand* (anecdotes bureau, gaffes d'événements, devinettes de rythme de sommeil, vote express).
+  - Typage strict TypeScript (`IcebreakerQuestion`, `IcebreakerCategory`), métadonnées visuelles (emojis, classes tailwind), sélecteur aléatoire avec exclusion des cartes déjà vues (`getRandomIcebreakerQuestion`).
+- **Composant Interactif (`src/components/game/StandIcebreakerGame.tsx`) :**
+  - Cartes animées aux design tokens DTC (`--dtc-gold`, `--dtc-navy`, glassmorphism).
+  - Filtres par catégorie en pilules scrollables + mode aléatoire complet.
+  - Conseil de stand interactif (encadré 💡).
+  - Boutons de verdict minute avec le bureau (🤝 D'accord, 🔥 Débat chaud, 🤯 Hilarant).
+  - Bouton de tirage aléatoire et bouton de copie/partage de la question.
+  - Compteur de cartes explorées (x/100).
+- **Intégration Flux QR Code (`src/components/invitation/InvitationClient.tsx`) :**
+  - Intégré directement dans l'état `phase === "done"` affiché immédiatement après la création/activation du compte membre via le QR code du stand.
+- **Route Autonome Stand (`src/app/game/page.tsx`) & Mur Middleware :**
+  - Route dédiée `/game` optimisée mobile pour les tablettes du stand ou accès direct.
+  - Exemptée du mur de pré-lancement dans `src/utils/supabase/middleware.ts` (`PUBLIC_PATHS`) pour fonctionner sans accroc quel que soit l'état de `site_wall_open`.
+- **Tests & Validation :**
+  - 6 nouveaux tests unitaires Vitest (`src/data/icebreakerQuestions.test.ts`) : 28/28 tests pass.
+  - ESLint : 0 warning, 0 error.
+  - Next.js build : 14/14 routes compilées avec succès.
+
+

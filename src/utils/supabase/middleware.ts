@@ -53,11 +53,9 @@ function securityContext(request: NextRequest) {
 // ---------------------------------------------------------------------------
 
 // /candidature = standalone application form; /invitation = one-time invite
-// links (account creation + bureau access while the wall is up).
-// /robots.txt + /sitemap.xml stay crawlable while walled: the site is
-// noindex anyway, but crawlers must be able to read the directives and the
-// launch-day GSC sitemap submit shouldn't have to race the wall toggle.
-const PUBLIC_PATHS = ["/candidature", "/invitation", "/robots.txt", "/sitemap.xml"];
+// links; /game = stand icebreaker mini-game (accessible during club stand events).
+// /robots.txt + /sitemap.xml stay crawlable while walled.
+const PUBLIC_PATHS = ["/candidature", "/invitation", "/game", "/robots.txt", "/sitemap.xml"];
 
 // The wall key is one tiny row read on EVERY request — cache it briefly per
 // instance so the wall decision costs no extra DB round trip. 10s staleness
