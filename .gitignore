@@ -35,3 +35,5 @@ graphify-out/
 
 !.env.example
 tsconfig.tsbuildinfo
+whatsapp/auth_info/
+archive/

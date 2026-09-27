@@ -1,0 +1,65 @@
+{
+  "archivedAt": "2026-09-26T11:49:35.644Z",
+  "count": 8,
+  "reason": "Seen broadcast message without reply. Conversations deleted from WhatsApp per President instruction. Kept in project archive.",
+  "candidates": [
+    {
+      "name": "Al Batoul El Rhassir",
+      "phone": "0693035863",
+      "jid": "212693035863@s.whatsapp.net",
+      "lid": "87475649298454@lid",
+      "email": "elrhassiralbatoul@gmail.com",
+      "notes": "Broadcast received & seen. No reply."
+    },
+    {
+      "name": "Fadoua Moutayannice",
+      "phone": "0774125509",
+      "jid": "212774125509@s.whatsapp.net",
+      "lid": "209470269468830@lid",
+      "notes": "Broadcast received & seen. No reply."
+    },
+    {
+      "name": "Jalil Yasmine",
+      "phone": "0619894323",
+      "jid": "212619894323@s.whatsapp.net",
+      "lid": "88433443745856@lid",
+      "notes": "Broadcast received & seen. No reply."
+    },
+    {
+      "name": "Khaoula Nidbella",
+      "phone": "0605445733",
+      "jid": "212605445733@s.whatsapp.net",
+      "lid": "246042117287972@lid",
+      "notes": "Broadcast received & seen. No reply."
+    },
+    {
+      "name": "Lamkaidam Salma",
+      "phone": "0619201668",
+      "jid": "212619201668@s.whatsapp.net",
+      "lid": "25482108133487@lid",
+      "email": "salmasulli9@gmail.com",
+      "notes": "Broadcast received & seen. No reply."
+    },
+    {
+      "name": "Meryem Tarlamani",
+      "phone": "0716661118",
+      "jid": "212716661118@s.whatsapp.net",
+      "lid": "21071730311320@lid",
+      "notes": "Broadcast received & seen. No reply."
+    },
+    {
+      "name": "Nassima Elhor",
+      "phone": "0620101960",
+      "jid": "212620101960@s.whatsapp.net",
+      "lid": "158291221061847@lid",
+      "notes": "Broadcast received & seen. Blank reaction only."
+    },
+    {
+      "name": "Wissal Zakaria",
+      "phone": "0710258956",
+      "jid": "212710258956@s.whatsapp.net",
+      "lid": "143164581101707@lid",
+      "notes": "Broadcast received & seen. No reply."
+    }
+  ]
+}

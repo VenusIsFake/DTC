@@ -85,3 +85,55 @@ The app ships a hand-rolled service worker (`public/sw.js`, registered by `src/c
 - **Any change to `sw.js` logic requires bumping `VERSION`** in that file so old caches are dropped on activate.
 - `next.config.mjs` also sets `Cache-Control: public, max-age=86400, stale-while-revalidate=604800` on `/media/*` and icon files — keep server headers and SW strategy aligned when tuning.
 - Serverless functions run in `dub1` (`vercel.json → regions`) to sit in the same region as Supabase (eu-west-1) and close to Moroccan visitors — don't remove this.
+
+---
+
+## 11. Official Administrative Letters & PDF Format Standards
+When generating official letters, requests, or administrative documents for the DenTalk Club (DTC):
+- **Page Specification:** Strictly single-page A4 portrait (`@page { size: A4 portrait; margin: 18mm 20mm 18mm 20mm; }`).
+- **Header Layout:**
+  - **Top-Left Logo:** Official combined vector logo `assets/logos/fmdc_uh2c_logo.svg` (height ~60px). Contains UH2C crest, separator, FMDC bold acronym, and university subtitle.
+  - **Top-Right Logo:** Official transparent DenTalk Club emblem `assets/logos/dtc_logo.png` (height ~66px).
+  - **Header Divider:** 2-tone border rule: solid `#004A81` base with gradient accent overlay (`linear-gradient(90deg, #004A81 0%, #1D939C 50%, #004A81 100%)`).
+- **Palette & Typography:**
+  - **Primary Academic Blue:** `#004A81` (titles, roles, accents)
+  - **Institutional Teal:** `#1D939C` (accent highlights)
+  - **Body Text:** `#1a202c` on `#ffffff`, 10.3pt–10.5pt, line-height 1.58–1.62, text-align justified with 1.8em paragraph indents.
+  - **Font Stack:** `'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif`.
+- **Key Sections:**
+  - **Expéditeur:** Houssam Fakhout, Président du DenTalk Club, Faculté de Médecine Dentaire de Casablanca (with phone & email).
+  - **Destinataire:** Right-aligned header block with date & city underneath (`Casablanca, le [Date]`).
+  - **Objet:** Framed callout box (`background: #f8fafc; border-left: 4px solid #004A81;`).
+  - **Signature:** Right-aligned centered block with signature clearance (`height: 52px;`).
+  - **Footer:** Two-column subtle institutional tagline separated by top rule (`#e2e8f0`).
+- **Compilation Tool:** Use Google Chrome headless to compile HTML to PDF:
+  ```bash
+  google-chrome --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=<dest.pdf> file:///<abs-path-to-html>
+  ```
+
+---
+
+## 12. WhatsApp Automation & Project Boundary Invariants
+- **Strict Project & Account Isolation:** The DTC WhatsApp subsystem must strictly and exclusively operate in `/home/venus/Projects/DTC/whatsapp` using its dedicated `whatsapp/auth_info/` directory. **NEVER** inspect, read, kill, or access `/home/venus/Projects/Whatsapp Agent`, and **NEVER** access user browser profiles, Firefox/Chrome LevelDB stores, or personal WhatsApp Web sessions.
+- **Outbox Idempotency & Pre-Flight Exclusion:** Before any bulk messaging or broadcast, verify recipient lists against sent databases, Supabase statuses, and archived chats. Never re-message confirmed, declined, or already-contacted candidates. Always display a recipient diff and wait for explicit confirmation.
+- **Semantic Evaluation over Naive Regex:** Never use simple Python string search (`"merci"`, `"non"`) to classify candidate intent. Always pass full conversational context to an LLM pass to distinguish between confirmations, questions, and polite refusals.
+- **Mobile Export Standards:** When exporting contact rosters for manual mobile import, always generate formatted `.vcf` (vCard) files (`dtc + [number/name]`) alongside any CSVs.
+
+---
+
+## 13. Visual Proofing & Standalone Artifact Portability
+- **Mandatory Visual Verification:** Never declare a UI change, presentation slide, poster, or PDF document "done" based solely on build success. Always render to PNG (via headless Chrome / `pdftoppm`) and inspect the output using `view_file` to verify alignment, contrast, typography, and layout.
+- **Portable Presentation Bundles:** When generating presentation HTML (`presentation.html`) intended for projection or transfer to another PC, inline all critical graphic assets (base64 Data URIs or inline SVG) so the document functions standalone with zero local server or filesystem dependencies.
+
+---
+
+## 14. Physical Stand Onboarding & Campus NAT Invariants
+- **Progressive Onboarding:** Never block students in line at an in-person stand behind a rigid email verification wall. Keep new signups logged in in a pending state, display live registration queues, and unlock the payment/mini-game flow upon verification.
+- **Campus NAT Rate Limiting:** At physical university events, students share a single public Wi-Fi NAT IP. Never enforce IP-based rate limiting or banning on auth endpoints; rate-limit strictly per target email or user identity.
+
+---
+
+## 15. Vector-First Assets & Workspace Hygiene
+- **Vector-First Sourcing:** Treat user-uploaded screenshots as search cues, never production assets. Sourced institutional logos must be authentic vector SVGs (from `vector.ma`, Wikimedia, or official portals), trimmed of excess viewBox whitespace.
+- **Container Egress Routing:** Shell `curl` and `urllib` commands time out inside container subshells. Always use `read_url_content` for remote web fetches and REST queries.
+- **Project Root Cleanliness:** Never leave test screenshots, intermediate cropped SVGs, or ad-hoc data dumps in the project root. Transient artifacts must be written to scratch directories or removed immediately; persistent campaign dumps belong in `archive/data/`.

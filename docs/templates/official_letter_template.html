@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{{TITLE}} - DenTalk Club</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 20mm 18mm 20mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1a202c;
+      background: #ffffff;
+      line-height: 1.58;
+      font-size: 10.5pt;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      display: flex;
+      flex-direction: column;
+      min-height: 258mm;
+      justify-content: space-between;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #004A81;
+      position: relative;
+    }
+    .header-bar-accent {
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #004A81 0%, #1D939C 50%, #004A81 100%);
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    .header-left img.logo-fmdc-uh2c {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .header-right img.logo-dtc {
+      height: 66px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* METADATA BLOCK */
+    .meta-block {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .sender-info {
+      font-size: 9.8pt;
+      line-height: 1.45;
+      color: #334155;
+    }
+    .sender-info .name {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .sender-info .role {
+      font-weight: 600;
+      color: #004A81;
+    }
+    .sender-info .institution {
+      color: #475569;
+    }
+    .sender-info .contact-detail {
+      margin-top: 4px;
+      color: #64748b;
+      font-size: 9.2pt;
+    }
+
+    .recipient-info {
+      text-align: right;
+      font-size: 10.5pt;
+      line-height: 1.45;
+      color: #0f172a;
+      max-width: 330px;
+    }
+    .recipient-info .recipient-title {
+      font-weight: 700;
+      color: #004A81;
+    }
+    .recipient-info .recipient-sub {
+      color: #334155;
+      font-size: 10pt;
+    }
+    .date-location {
+      margin-top: 14px;
+      text-align: right;
+      font-size: 10pt;
+      color: #475569;
+      font-style: italic;
+    }
+
+    /* OBJET */
+    .object-container {
+      margin-top: 20px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-left: 4px solid #004A81;
+      border-radius: 0 4px 4px 0;
+      font-size: 10.5pt;
+      color: #1e293b;
+    }
+    .object-container strong {
+      color: #004A81;
+      font-weight: 700;
+    }
+
+    /* BODY */
+    .body-content {
+      margin-top: 22px;
+      font-size: 10.3pt;
+      line-height: 1.62;
+      color: #1e293b;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .salutation {
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .body-content p {
+      margin-bottom: 12px;
+      text-indent: 1.8em;
+    }
+    .body-content p.no-indent {
+      text-indent: 0;
+    }
+
+    /* SIGNATURE */
+    .signature-wrap {
+      margin-top: 28px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .signature-block {
+      text-align: center;
+      min-width: 230px;
+    }
+    .signature-block .sig-name {
+      font-weight: 700;
+      font-size: 11pt;
+      color: #0f172a;
+    }
+    .signature-block .sig-role {
+      font-weight: 600;
+      font-size: 9.8pt;
+      color: #004A81;
+    }
+    .signature-block .sig-space {
+      height: 52px;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8pt;
+      color: #94a3b8;
+    }
+    .footer-left {
+      font-weight: 500;
+    }
+    .footer-right {
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-content">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-left">
+          <img src="../../assets/logos/fmdc_uh2c_logo.svg" alt="Faculté de Médecine Dentaire de Casablanca - Université Hassan II" class="logo-fmdc-uh2c">
+        </div>
+        <div class="header-right">
+          <img src="../../assets/logos/dtc_logo.png" alt="DenTalk Club" class="logo-dtc">
+        </div>
+        <div class="header-bar-accent"></div>
+      </div>
+
+      <!-- SENDER & RECIPIENT -->
+      <div class="meta-block">
+        <div class="sender-info">
+          <div class="name">Houssam Fakhout</div>
+          <div class="role">Président du DenTalk Club</div>
+          <div class="institution">Faculté de Médecine Dentaire de Casablanca</div>
+          <div class="contact-detail">
+            Tél : +212 6 35 32 10 03<br>
+            Email : houssamfakhout2007@gmail.com
+          </div>
+        </div>
+        <div>
+          <div class="recipient-info">
+            <div class="recipient-title">À l'attention de {{RECIPIENT_TITLE}}</div>
+            <div class="recipient-sub">Faculté de Médecine Dentaire de Casablanca</div>
+            <div class="recipient-sub">Université Hassan II de Casablanca</div>
+          </div>
+          <div class="date-location">
+            Casablanca, le {{DATE}}
+          </div>
+        </div>
+      </div>
+
+      <!-- OBJET -->
+      <div class="object-container">
+        <strong>Objet :</strong> {{OBJECT}}
+      </div>
+
+      <!-- LETTER BODY -->
+      <div class="body-content">
+        <div class="salutation">{{SALUTATION}},</div>
+
+        {{BODY_PARAGRAPHS}}
+
+        <p class="no-indent">
+          {{CLOSING_FORMULA}}
+        </p>
+      </div>
+
+      <!-- SIGNATURE -->
+      <div class="signature-wrap">
+        <div class="signature-block">
+          <div class="sig-name">Houssam Fakhout</div>
+          <div class="sig-role">Président du DenTalk Club</div>
+          <div class="sig-space"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">DenTalk Club • Faculté de Médecine Dentaire de Casablanca</div>
+      <div class="footer-right">UH2C — Année Universitaire 2026/2027</div>
+    </div>
+  </div>
+</body>
+</html>

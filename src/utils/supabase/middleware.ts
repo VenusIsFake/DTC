@@ -53,9 +53,10 @@ function securityContext(request: NextRequest) {
 // ---------------------------------------------------------------------------
 
 // /candidature = standalone application form; /invitation = one-time invite
-// links; /game = stand icebreaker mini-game (accessible during club stand events).
+// links; /game = stand icebreaker mini-game (accessible during club stand events);
+// /presentation = auto-looping projector presentation; /rejoindre = direct short link to member adhesion.
 // /robots.txt + /sitemap.xml stay crawlable while walled.
-const PUBLIC_PATHS = ["/candidature", "/invitation", "/game", "/robots.txt", "/sitemap.xml"];
+const PUBLIC_PATHS = ["/candidature", "/invitation", "/game", "/presentation", "/rejoindre", "/robots.txt", "/sitemap.xml"];
 
 // The wall key is one tiny row read on EVERY request — cache it briefly per
 // instance so the wall decision costs no extra DB round trip. 10s staleness

@@ -39,6 +39,6 @@ export const config = {
      * - sw.js (service worker — served verbatim, no session/CSP work needed)
      * - images / media / assets / raw media files
      */
-    '/((?!_next/static|_next/image|favicon.ico|sw\\.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4|webm|mov|ico|webmanifest)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|sw\\.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4|webm|mov|ico|webmanifest|html)$).*)',
   ],
 }

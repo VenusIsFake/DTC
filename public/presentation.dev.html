@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dentalk Club FMDC — Présentation 1ère Année</title>
+  
+  <!-- Google Fonts: Source Serif 4 (DTC Display) & Inter (DTC Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       DTC DESIGN TOKENS (Sourced directly from tailwind.config.ts & globals.css)
+       ========================================================================== */
+    :root {
+      /* Typography */
+      --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+      
+      /* DTC Brand Accents */
+      --gold-primary: #755B18;
+      --gold-bright: #D4AF37;
+      --gold-muted: #8A6D1F;
+      --gold-border: rgba(212, 175, 55, 0.4);
+      --red-accent: #DC2626;
+
+      /* Dark Theme (Amphi Projector Mode — Default) */
+      --bg-canvas: #0B132B;
+      --bg-surface: #16233A;
+      --bg-surface-elevated: #1E2E47;
+      --bg-wash: rgba(30, 46, 71, 0.6);
+      --border-line: #2D3D54;
+      --border-line-gold: rgba(212, 175, 55, 0.35);
+      --text-ink: #F7F5F0;
+      --text-muted: #A0ABC0;
+      --text-dim: #718096;
+      --badge-bg: rgba(212, 175, 55, 0.12);
+      --badge-border: rgba(212, 175, 55, 0.35);
+      --badge-text: #D4AF37;
+      --card-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Light Theme (Signature DTC Paper & Ink Mode) */
+    html[data-theme="light"] {
+      --bg-canvas: #F7F5F0;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #EDEAE1;
+      --bg-wash: #EFECE4;
+      --border-line: #DCD7CB;
+      --border-line-gold: rgba(117, 91, 24, 0.4);
+      --text-ink: #16233A;
+      --text-muted: #5C6672;
+      --text-dim: #8E99A8;
+      --badge-bg: #EFECE4;
+      --badge-border: #DCD7CB;
+      --badge-text: #755B18;
+      --card-shadow: 0 4px 20px rgba(22, 35, 58, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-ink);
+      font-family: var(--font-sans);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Architectural Grid Background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, var(--border-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-line) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Presentation Viewport (16:9 locked presentation safe-area) */
+    .deck-viewport {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      max-width: 177.78vh; /* 16:9 ratio */
+      max-height: 56.25vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      padding: clamp(24px, 4vh, 60px) clamp(24px, 4vw, 70px);
+    }
+
+    /* Slide Elements */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.98) translateY(10px);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.45s;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       DTC EDITORIAL TYPOGRAPHY & HEADER LOCKUPS
+       ========================================================================== */
+    .marquee-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: clamp(8px, 1.4vh, 16px);
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .marquee-rule {
+      width: 40px;
+      height: 1px;
+      background-color: var(--gold-bright);
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+
+    .marquee-text {
+      font-family: var(--font-mono);
+      font-size: clamp(10.5px, 1.1vw, 13px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--gold-bright);
+    }
+
+    .slide-headline {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4.4vw, 62px);
+      font-weight: 600;
+      line-height: 1.14;
+      color: var(--text-ink);
+      letter-spacing: -0.015em;
+      margin-bottom: clamp(6px, 1.2vh, 14px);
+      max-width: 1120px;
+    }
+
+    .slide-headline em {
+      font-style: italic;
+      color: var(--gold-bright);
+    }
+
+    .slide-subhead {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(16px, 1.8vw, 24px);
+      color: var(--text-muted);
+      max-width: 940px;
+      line-height: 1.45;
+      margin-bottom: clamp(14px, 2.2vh, 26px);
+    }
+
+    /* Editorial Tag / Pill */
+    .dtc-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 16px;
+      border-radius: 4px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: var(--badge-text);
+      font-family: var(--font-mono);
+      font-size: clamp(10.5px, 1vw, 12.5px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: clamp(10px, 1.5vh, 18px);
+    }
+
+    /* ==========================================================================
+       DTC SIGNATURE CARDS (Hairline borders, rich padding, authentic shadows)
+       ========================================================================== */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 2vw, 28px);
+      width: 100%;
+      max-width: 1240px;
+      margin-top: clamp(8px, 1.6vh, 20px);
+    }
+
+    .dtc-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      position: relative;
+    }
+
+    .dtc-card-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .dtc-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .dtc-card-media .media-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(11, 19, 43, 0.88);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-bright);
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    .dtc-card-body {
+      padding: clamp(14px, 1.6vw, 22px);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .dtc-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 1.6vw, 24px);
+      font-weight: 700;
+      color: var(--text-ink);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .dtc-card-desc {
+      font-size: clamp(13.5px, 1.15vw, 16px);
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .dtc-card-footer {
+      border-top: 1px solid var(--border-line);
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--gold-bright);
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    /* ==========================================================================
+       SLIDE 1: PRESTIGIOUS BRAND COVER
+       ========================================================================== */
+    .hero-crest-box {
+      width: clamp(110px, 13vw, 170px);
+      height: clamp(110px, 13vw, 170px);
+      border-radius: 50%;
+      border: 2px solid var(--gold-border);
+      padding: 6px;
+      margin-bottom: clamp(14px, 2vh, 22px);
+      background: var(--bg-surface);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.18);
+    }
+
+    .hero-crest-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid var(--border-line);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 5.8vw, 84px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-ink);
+      margin-bottom: clamp(8px, 1.4vh, 16px);
+    }
+
+    .hero-title span {
+      color: var(--gold-bright);
+    }
+
+    .hero-affiliations {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: clamp(16px, 2.2vh, 28px);
+      padding: 10px 24px;
+      border-top: 1px solid var(--border-line);
+      border-bottom: 1px solid var(--border-line);
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 1.1vw, 14px);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hero-affiliations span {
+      color: var(--gold-bright);
+    }
+
+
+    /* ==========================================================================
+       SLIDE 4: MEDIA MOSAIC GRID
+       ========================================================================== */
+    .mosaic-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(12px, 1.6vw, 24px);
+      width: 100%;
+      max-width: 1240px;
+      margin-top: clamp(10px, 1.8vh, 22px);
+    }
+
+    .mosaic-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--border-line);
+      box-shadow: var(--card-shadow);
+      background: #000;
+    }
+
+    .mosaic-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mosaic-caption {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 12px 14px;
+      background: linear-gradient(to top, rgba(11, 19, 43, 0.95) 20%, transparent);
+      text-align: left;
+    }
+
+    .mosaic-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold-bright);
+      margin-bottom: 3px;
+    }
+
+    .mosaic-title {
+      font-size: clamp(12.5px, 1.1vw, 15px);
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    /* Metrics Strip */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 1240px;
+      margin-top: clamp(14px, 2.2vh, 26px);
+      padding: 14px 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      border-radius: 10px;
+    }
+
+    .stat-box {
+      text-align: center;
+      border-right: 1px solid var(--border-line);
+    }
+    .stat-box:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.6vw, 38px);
+      font-weight: 700;
+      color: var(--gold-bright);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       SLIDE 6: QR CODE ADHESION (Prestige Poster Treatment)
+       ========================================================================== */
+    .qr-showcase {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+      width: 100%;
+      max-width: 1180px;
+      margin-top: clamp(12px, 1.8vh, 24px);
+      text-align: left;
+    }
+
+    .qr-poster-card {
+      background: #FFFFFF;
+      padding: clamp(22px, 2.6vw, 36px);
+      border-radius: 16px;
+      border: 3px solid var(--gold-bright);
+      box-shadow: 0 0 50px rgba(212, 175, 55, 0.3), 0 20px 40px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .qr-poster-card img {
+      width: clamp(270px, 30vw, 390px);
+      height: clamp(270px, 30vw, 390px);
+      display: block;
+      border-radius: 6px;
+    }
+
+    .qr-poster-badge {
+      margin-top: 14px;
+      background: #0B132B;
+      color: #D4AF37;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 6px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .qr-steps-col {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(14px, 1.8vh, 22px);
+    }
+
+    .qr-step-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      border-radius: 10px;
+      padding: clamp(14px, 1.6vw, 20px) clamp(18px, 2vw, 24px);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .step-idx {
+      width: clamp(36px, 3.4vw, 46px);
+      height: clamp(36px, 3.4vw, 46px);
+      border-radius: 8px;
+      background: var(--gold-bright);
+      color: #0B132B;
+      font-family: var(--font-mono);
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 700;
+      color: var(--text-ink);
+      margin-bottom: 3px;
+    }
+
+    .step-desc {
+      font-size: clamp(13px, 1.15vw, 15.5px);
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       TOP PROGRESS BAR & MINIMAL CORNER BRAND
+       ========================================================================== */
+    .top-timeline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      z-index: 100;
+    }
+
+    .top-timeline-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gold-bright);
+      box-shadow: 0 0 12px var(--gold-bright);
+      transition: width 0.08s linear;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Architectural Grid Background -->
+  <div class="bg-grid"></div>
+
+  <!-- Top Timer / Auto-advance Progress Bar -->
+  <div class="top-timeline">
+    <div class="top-timeline-fill" id="timelineFill"></div>
+  </div>
+
+
+  <!-- Main Viewport -->
+  <main class="deck-viewport">
+
+    <!-- ==================================================================== -->
+    <!-- SLIDE 1: PRESTIGIOUS BRAND COVER                                     -->
+    <!-- ==================================================================== -->
+    <section class="slide active" data-slide="1">
+      <div class="hero-crest-box">
+        <img src="logo.png" alt="Dentalk Club Crest" />
+      </div>
+
+      <div class="marquee-line">
+        <span class="marquee-rule"></span>
+        <span class="marquee-text">Faculté de Médecine Dentaire de Casablanca</span>
+        <span class="marquee-rule"></span>
+      </div>
+
+      <h1 class="hero-title">
+        DENTALK <span>CLUB</span> FMDC
+      </h1>
+
+      <p class="slide-subhead">
+        « Que ta voix résonne en échos sans fin. »
+      </p>
+
+      <div class="hero-affiliations">
+        <div>Université Hassan II</div>
+        <span>•</span>
+        <div>Art Oratoire &amp; Éloquence Médicale</div>
+        <span>•</span>
+        <div>Bienvenue Promo 2026</div>
+      </div>
+
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SLIDE 2: PHILOSOPHY & THREE CORE PILLARS                            -->
+    <!-- ==================================================================== -->
+    <section class="slide" data-slide="2">
+      <div class="marquee-line">
+        <span class="marquee-rule"></span>
+        <span class="marquee-text">Vision Académique &amp; Humaine</span>
+        <span class="marquee-rule"></span>
+      </div>
+
+      <h2 class="slide-headline">
+        L'Excellence est Clinique.<br />
+        <em>La Puissance est dans la Parole.</em>
+      </h2>
+
+      <p class="slide-subhead">
+        Un grand praticien ne se limite pas au geste technique : il sait écouter, convaincre et rassurer.
+      </p>
+
+      <div class="grid-3">
+        <!-- Pillar 1: Eloquence -->
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/events/eloquence_keynote_stage.jpg" alt="Scène d'éloquence" />
+            <div class="media-badge">Ateliers Hebdo</div>
+          </div>
+          <div class="dtc-card-body">
+            <h3 class="dtc-card-title">Art Oratoire &amp; Voix</h3>
+            <p class="dtc-card-desc">
+              Dominez le trac, apprenez la posture scénique et capturez l'attention d'un amphithéâtre complet.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Salle Vésale</span>
+              <span>Technique Vocale</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pillar 2: Medical Debates -->
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/events/debate_roundtable.jpg" alt="Table de débats" />
+            <div class="media-badge">3 Langues (FR·EN·AR)</div>
+          </div>
+          <div class="dtc-card-body">
+            <h3 class="dtc-card-title">Débats Cliniques &amp; Éthique</h3>
+            <p class="dtc-card-desc">
+              Joutes parlementaires sur les choix thérapeutiques controversés et les questions de santé publique.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Joutes Amphi</span>
+              <span>Esprit Critique</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pillar 3: Community & Mentorship (Replaced old mandate chart with authentic retreat photo) -->
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/team/outdoor_retreat.jpg" alt="Communauté et membres DTC" />
+            <div class="media-badge">Communauté &amp; Réseau</div>
+          </div>
+          <div class="dtc-card-body">
+            <h3 class="dtc-card-title">Esprit d'Équipe &amp; Parrainage</h3>
+            <p class="dtc-card-desc">
+              Rejoignez une famille d'étudiants bienveillants et engagés pour vous guider, vous parrainer et réussir ensemble.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Parrainage direct</span>
+              <span>Entraide FMDC</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SLIDE 3: FLAGSHIP INITIATIVES (TEDx, Podcast, Gala)                  -->
+    <!-- ==================================================================== -->
+    <section class="slide" data-slide="3">
+      <div class="marquee-line">
+        <span class="marquee-rule"></span>
+        <span class="marquee-text">Écosystème &amp; Réalisations Majeures</span>
+        <span class="marquee-rule"></span>
+      </div>
+
+      <h2 class="slide-headline">
+        Une Scène Professionnelle <em>à la FMDC</em>
+      </h2>
+
+      <p class="slide-subhead">
+        Des projets d'envergure universitaire portés et réalisés par les étudiants de notre faculté.
+      </p>
+
+      <div class="grid-3">
+        <!-- Project 1: TEDxFMDC -->
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/events/tedx_fmdc_auditorium.jpg" alt="Auditorium TEDxFMDC" />
+            <div class="media-badge">Édition Historique</div>
+          </div>
+          <div class="dtc-card-body">
+            <h3 class="dtc-card-title">TEDxFMDC</h3>
+            <p class="dtc-card-desc">
+              8 orateurs étudiants sous les projecteurs du grand amphithéâtre devant plus de 500 spectateurs.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Grand Amphi</span>
+              <span>8 Talks Archivés</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Podcast Studio -->
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/podcasts/podcast_ep4_prof_bouzoubaa.jpg" alt="Let's Talk Podcast" />
+            <div class="media-badge">Studio Broadcast</div>
+          </div>
+          <div class="dtc-card-body">
+            <h3 class="dtc-card-title">Let's Talk Podcast</h3>
+            <p class="dtc-card-desc">
+              Interviews de professeurs émérites (Pr. Bouzoubaa, Pr. Haitami, Pr. Chafii, Pr. Dhaimy) et spécialistes.
+            </p>
+            <div class="dtc-card-footer">
+              <span>YouTube Pro</span>
+              <span>4 Épisodes Diffusés</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Tournois & Gala -->
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/awards/grand_finale_group.jpg" alt="Cérémonie et finale" />
+            <div class="media-badge">Gala &amp; Trophées</div>
+          </div>
+          <div class="dtc-card-body">
+            <h3 class="dtc-card-title">Tournois &amp; Trophées</h3>
+            <p class="dtc-card-desc">
+              Compétitions d'art oratoire, cérémonies de remise de prix et passations solennelles de mandats.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Trophées Or</span>
+              <span>Grand Jury FMDC</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SLIDE 4: PHOTO MOSAIC & COMMUNITY IMPACT                             -->
+    <!-- ==================================================================== -->
+    <section class="slide" data-slide="4">
+      <div class="marquee-line">
+        <span class="marquee-rule"></span>
+        <span class="marquee-text">Médiathèque &amp; Vie de Club</span>
+        <span class="marquee-rule"></span>
+      </div>
+
+      <h2 class="slide-headline">
+        L'Énergie d'un <em>Collectif Engagé</em>
+      </h2>
+
+      <p class="slide-subhead">
+        Des amphis pleins, une énergie contagieuse et une communauté soudée tout au long du cursus.
+      </p>
+
+      <div class="mosaic-grid">
+        <div class="mosaic-item">
+          <img src="media/events/tedx_fmdc_auditorium.jpg" alt="TEDx Auditorium comble" />
+          <div class="mosaic-caption">
+            <div class="mosaic-tag">Amphithéâtre</div>
+            <div class="mosaic-title">500+ Étudiants Réunis</div>
+          </div>
+        </div>
+
+        <div class="mosaic-item">
+          <img src="media/events/debate_table_session.jpg" alt="Session débats" />
+          <div class="mosaic-caption">
+            <div class="mosaic-tag">Débats Parlementaires</div>
+            <div class="mosaic-title">Joutes Cliniques</div>
+          </div>
+        </div>
+
+        <div class="mosaic-item">
+          <img src="media/podcasts/studio_bts_viewfinder.jpg" alt="Régie studio" />
+          <div class="mosaic-caption">
+            <div class="mosaic-tag">Studio Broadcast</div>
+            <div class="mosaic-title">Coulisses &amp; Micros</div>
+          </div>
+        </div>
+
+        <div class="mosaic-item">
+          <img src="media/events/eloquence_workshop.jpg" alt="Atelier d'éloquence" />
+          <div class="mosaic-caption">
+            <div class="mosaic-tag">Formation Pratique</div>
+            <div class="mosaic-title">Ateliers &amp; Coaching</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Verified Numbers Strip -->
+      <div class="stats-strip">
+        <div class="stat-box">
+          <div class="stat-num">1 500+</div>
+          <div class="stat-label">Étudiants &amp; Membres</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">8</div>
+          <div class="stat-label">Talks TEDx Officiels</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Grands Podcasts Vidéo</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Membres au Bureau</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SLIDE 5: WHY FIRST YEARS (1ÈRE ANNÉE — PROMO 2026)                    -->
+    <!-- ==================================================================== -->
+    <section class="slide" data-slide="5">
+      <div class="marquee-line">
+        <span class="marquee-rule"></span>
+        <span class="marquee-text">Recrutement Spécial 1A — Promo 2026</span>
+        <span class="marquee-rule"></span>
+      </div>
+
+      <h2 class="slide-headline">
+        Votre Place est <em>Déjà Marquée</em>
+      </h2>
+
+      <p class="slide-subhead">
+        Pourquoi attendre les années supérieures ? C'est dès le premier semestre que votre trajectoire se décide.
+      </p>
+
+      <div class="grid-3">
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/events/eloquence_workshop.jpg" alt="Atelier d'éloquence bienveillant" />
+            <div class="media-badge">Formation Pas à Pas</div>
+          </div>
+          <div class="dtc-card-body">
+            <div class="dtc-tag">Pédagogie Positive</div>
+            <h3 class="dtc-card-title">Zéro Prérequis Requis</h3>
+            <p class="dtc-card-desc">
+              Vous n'avez jamais pris la parole devant un amphi ? Parfait. Le club est le sanctuaire bienveillant où l'on apprend à oser sans jamais être jugé.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Coaching personnalisé</span>
+              <span>100% Bienveillance</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/team/organizing_committee_stage.jpg" alt="Comité organisateur sur scène" />
+            <div class="media-badge">Dès le Premier Mois</div>
+          </div>
+          <div class="dtc-card-body">
+            <div class="dtc-tag">Responsabilité Réelle</div>
+            <h3 class="dtc-card-title">Aux Commandes Dès le S1</h3>
+            <p class="dtc-card-desc">
+              Micro en main, modération, régie de diffusion, montage vidéo ou logistique événementielle : les 1ères années s'investissent directement dans les projets.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Pôles actifs ouverts</span>
+              <span>Action concrète</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dtc-card">
+          <div class="dtc-card-media">
+            <img src="media/awards/trophy_aya_zizi.jpg" alt="Trophée et soutien aînés" />
+            <div class="media-badge">Parrainage FMDC</div>
+          </div>
+          <div class="dtc-card-body">
+            <div class="dtc-tag">Réussite Universitaire</div>
+            <h3 class="dtc-card-title">Avantage Décisif</h3>
+            <p class="dtc-card-desc">
+              Une aisance totale lors des soutenances orales d'anatomie et d'histologie, une assurance naturelle en stage et un parrainage solide avec vos aînés.
+            </p>
+            <div class="dtc-card-footer">
+              <span>Soutien académique</span>
+              <span>Parrainage aînés</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SLIDE 6: OFFICIAL ADHESION QR CODE POSTER                            -->
+    <!-- ==================================================================== -->
+    <section class="slide" data-slide="6">
+      <div class="marquee-line">
+        <span class="marquee-rule"></span>
+        <span class="marquee-text">Inscription Immédiate • Stand Faculté</span>
+        <span class="marquee-rule"></span>
+      </div>
+
+      <h2 class="slide-headline">
+        Rejoignez <em>Dentalk Club FMDC</em>
+      </h2>
+
+      <p class="slide-subhead">
+        Scannez le QR Code officiel pour créer votre compte membre et valider votre adhésion.
+      </p>
+
+      <div class="qr-showcase">
+        <!-- High-Resolution PNG QR Poster Card -->
+        <div class="qr-poster-card">
+          <img src="media/qr-adhesion.png" alt="QR Code d'adhésion officielle Dentalk Club FMDC" />
+          <div class="qr-poster-badge">Scannez avec votre Téléphone</div>
+        </div>
+
+        <!-- 3 Sequential Steps -->
+        <div class="qr-steps-col">
+          <div class="qr-step-box">
+            <div class="step-idx">1</div>
+            <div>
+              <div class="step-title">Pointez votre Appareil Photo</div>
+              <div class="step-desc">Ouvrez l'appareil photo de votre smartphone vers le QR Code.</div>
+            </div>
+          </div>
+
+          <div class="qr-step-box">
+            <div class="step-idx">2</div>
+            <div>
+              <div class="step-title">Complétez votre Profil</div>
+              <div class="step-desc">Indiquez votre nom, WhatsApp et sélectionnez <strong>1ère année (Promo 2026)</strong>.</div>
+            </div>
+          </div>
+
+          <div class="qr-step-box">
+            <div class="step-idx">3</div>
+            <div>
+              <div class="step-title">Retrouvez-nous au Stand DTC !</div>
+              <div class="step-desc">Présentez-vous auprès de Neama Labzai (trésorière) dans le hall pour finaliser.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Slide Dwell Durations:
+    // Slides 1 to 5 get 7 seconds (crisp, dynamic pace).
+    // Slide 6 gets 45 seconds (generous scanning window for students).
+    function getSlideDuration(index) {
+      return index === 5 ? 45000 : 7000;
+    }
+
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const timelineFill = document.getElementById('timelineFill');
+
+    let currentSlide = 0;
+    let isPlaying = true;
+    let progressStartTime = Date.now();
+    let remainingTime = getSlideDuration(0);
+    let animationFrameId = null;
+
+    // Check URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    if (urlParams.get('autoplay') === '0' || urlParams.get('pause') === '1') {
+      isPlaying = false;
+    }
+
+    // Direct Hash Navigation support (#1, #2, ... #6) or ?slide=N
+    function parseHashSlide() {
+      const slideParam = urlParams.get('slide');
+      if (slideParam) {
+        const s = parseInt(slideParam, 10);
+        if (!isNaN(s) && s >= 1 && s <= totalSlides) return s - 1;
+      }
+      const hash = window.location.hash.replace('#', '');
+      const num = parseInt(hash, 10);
+      if (!isNaN(num) && num >= 1 && num <= totalSlides) {
+        return num - 1;
+      }
+      return 0;
+    }
+
+    function updateUI() {
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentSlide);
+      });
+      window.location.hash = `#${currentSlide + 1}`;
+    }
+
+    function goToSlide(index) {
+      currentSlide = (index + totalSlides) % totalSlides;
+      updateUI();
+      resetProgress();
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    function resetProgress() {
+      progressStartTime = Date.now();
+      remainingTime = getSlideDuration(currentSlide);
+      if (timelineFill) timelineFill.style.width = '0%';
+    }
+
+    function step() {
+      if (isPlaying) {
+        const duration = getSlideDuration(currentSlide);
+        const elapsed = Date.now() - progressStartTime;
+        const progress = Math.min((elapsed / duration) * 100, 100);
+        if (timelineFill) timelineFill.style.width = `${progress}%`;
+
+        if (elapsed >= duration) {
+          nextSlide();
+        }
+      }
+      animationFrameId = requestAnimationFrame(step);
+    }
+
+    function togglePlayPause() {
+      isPlaying = !isPlaying;
+      const duration = getSlideDuration(currentSlide);
+      if (isPlaying) {
+        progressStartTime = Date.now() - (duration - remainingTime);
+      } else {
+        remainingTime = duration - (Date.now() - progressStartTime);
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    }
+
+    // Keyboard controls (Clean, zero HUD needed)
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      else if (e.key === ' ' || e.key === 'k') { e.preventDefault(); togglePlayPause(); }
+      else if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      else if (e.key === 't' || e.key === 'T') toggleTheme();
+      else if (e.key >= '1' && e.key <= '6') {
+        goToSlide(parseInt(e.key, 10) - 1);
+      }
+    });
+
+    // Touch swipe support for wireless remotes & tablets
+    let touchStartX = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      const diffX = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX < 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    // Initial launch
+    currentSlide = parseHashSlide();
+    updateUI();
+    resetProgress();
+    animationFrameId = requestAnimationFrame(step);
+  </script>
+</body>
+</html>
